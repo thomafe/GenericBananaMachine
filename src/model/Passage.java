@@ -14,5 +14,19 @@ public class Passage {
 		// TODO check for correct place, return target place
 		return null;
 	}
+
+	/**
+	 * if this has an Obstacle, return true, else return false.
+	 *
+	 * @return boolean
+	 */
+	public boolean hasObstacle () {
+
+		if(obstacle != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 }
