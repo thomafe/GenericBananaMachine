@@ -1,11 +1,18 @@
 package control;
 
 import model.Character;
+import model.Item;
+import model.Obstacle;
 import model.Place;
+import view.Input;
+import view.Output;
 import model.Passage;
 import model.GameObject;
 
 public class Control {
+	
+	private Input in;
+	private Output out;
 
     private Character character = null;
     private Place activePlace = character.getCurrentPlace();
@@ -16,7 +23,7 @@ public class Control {
     public Control () {
 
     }
-
+    
     /**
      * check if passage is successable. If an Obstacle is included, return false.
      * If Passage does not include an Obstacle, Character can move to connected Room -> return true and move Character.
@@ -24,17 +31,23 @@ public class Control {
      * @param destinationPassage
      * @return boolean
      */
-    public boolean canMoveCharacter (Passage destinationPassage) {
-
+    public boolean canMoveCharacter (String passageName) {
+    	boolean passageClear = true;
+    	Passage destinationPassage = findPassage(passageName);
+    	
+    	if(destinationPassage == null) {
+    		return false;
+    	}
+    	
         if(this.checkForObstacle(destinationPassage)) {
-            // Passage has Obstacle
-
-            return false;
+            passageClear = interactWithObstacle(destinationPassage.getObstacle());
+        }
+        
+        if(passageClear) {
+        	character.move(destinationPassage);
+        	return true;
         } else {
-            // Passage has no Obstacle
-            character.move(destinationPassage);
-
-            return true;
+        	return false;
         }
 
     }
@@ -47,18 +60,38 @@ public class Control {
      * @return boolean
      */
     public boolean checkForObstacle (Passage destinationPassage) {
-
-        if(destinationPassage.hasObstacle()) {
-            // Passage has Obstacle
-            return true;
-        } else {
-            // Passage has no Obstacle
-            return false;
-        }
+        return destinationPassage.hasObstacle();
     }
 
-    public void interactWithObstacle () {
-
+    /**
+     * Allows the character to interact with an obstacle. Loops as long as the character tries to use items on the obstacle.
+     * If the obstacle gets resolved the item is consumed and the character moves through the passage.
+     * If the character stops trying items the interaction ends and the character stays in that room.
+     * 
+     * @return whether the character resolved the obstacle or not
+     */
+    public boolean interactWithObstacle (Obstacle currentObstacle) {
+    	boolean obstacleResolved = false;
+    	boolean continueInteraction = true;
+    	Item itemToTry = null;
+    	
+    	while(true) {
+    		out.listOptionsObstacleInteraction(currentObstacle);
+    		
+    		
+    		if(itemToTry == null) {
+    			break;
+    		}
+    		
+    		if(currentObstacle.tryToUseItem(itemToTry)) {
+    			itemToTry.consume();
+    			// resolute obstacle
+    			obstacleResolved = true;
+    			break;
+    		}
+    	}
+    	
+    	return obstacleResolved;
     }
 
     public boolean pickUpItem (String itemName) {
@@ -86,6 +119,23 @@ public class Control {
     public String lookAtGameObject (GameObject gameObject) {
 
         return gameObject.getDescription();
+    }
+    
+    private Passage findPassage(String passageName) {
+    	Passage foundPassage = null;
+    	
+    	for (Passage passage : character.getCurrentPlace().getPassages()) {
+			if(passage.getName().equals(passageName)) {
+				foundPassage = passage;
+				break;
+			}
+		}
+    	
+    	return foundPassage;
+    }
+    
+    public Character getCharacter() {
+    	return character;
     }
 
 }
