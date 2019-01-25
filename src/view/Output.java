@@ -1,7 +1,9 @@
 package view;
-import model.GameObject;
+import control.Control;
 
 public class Output {
+
+    Control control = null;
 
     //Introduction for the player at the start of the game
     public void Greeting(){
@@ -12,7 +14,11 @@ public class Output {
         System.out.println("An event happend! Wow!");
     }
 
-    public void describe(GameObject object){
-        System.out.println(object.getDescription());
+    public void describePlace(){
+        System.out.println(control.lookAtCurrentPlace());
+    }
+
+    public void describePassage(int number){
+        //System.out.println(control.lookAtPassage(number));
     }
 }
