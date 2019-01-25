@@ -1,22 +1,24 @@
 package view;
 import java.util.Scanner;
+import view.Output;
 
 public class Input {
     Scanner scan = new Scanner(System.in);
     String patternTakeKey = ".*[tT]ake.*[kK]ey.*";
-    String patternUseDoor = ".*[uU]se.*[dD]oor.*";
     String patternUsePassage = ".*[uU]se.*[pP]assage.*";
+    String patternLookAtPassage = ".*[lL]ook.*at.*[pP]assage.*";
+    Output out = new Output();
 
-    public String inputReader(String input){
+    public String inputReader(){
 
         String userInput = scan.nextLine();
 
-        if(userInput.matches(patternTakeKey)) {
+        if(userInput.matches(patternTakeKey)){
             return "takeKey";
-        }else if (userInput.matches(patternUseDoor)) {
-            return "useDoor";
         }else if (userInput.matches(patternUsePassage)){
             return "usePassage";
+        }else if (userInput.matches(patternLookAtPassage)){
+            out.descriptionPassage();
         }else{
             return "invalidInput";
         }
