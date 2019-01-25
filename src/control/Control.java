@@ -105,8 +105,9 @@ public class Control {
      *
      * @return String description
      */
+    @Deprecated
     public String lookAtCurrentPlace () {
-
+    	// TODO will be done in Output
         return character.getCurrentPlace().getDescription();
     }
 
@@ -117,7 +118,7 @@ public class Control {
      * @return String description
      */
     public String lookAtGameObject (GameObject gameObject) {
-
+    	// TODO call methods in Output
         return gameObject.getDescription();
     }
     

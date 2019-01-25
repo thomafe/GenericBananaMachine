@@ -3,13 +3,14 @@ import control.Control;
 import model.Item;
 import model.Obstacle;
 import model.Passage;
+import model.Place;
 
 public class Output {
 
     Control control = null;
     
 //    private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory", "Go through"};
-    private final static String[] ACTIONS = {"Look at someting", "Look into Inventory", "Go through a passage"};
+    private final static String[] ACTIONS = {"Look at someting", "Look into Inventory", "Go through a passage", "List Actions"};
 
     //Introduction for the player at the start of the game
     public void Greeting(){
@@ -38,7 +39,7 @@ public class Output {
     		options.append(" - " + action + "\n");
     	}
     	
-    	System.out.println(options.toString());
+    	doOutput(options.toString());
     }
     
     /**
@@ -53,7 +54,7 @@ public class Output {
     		itemsInPlace.append(" - " + item.getName() + "\n");
     	}
     	
-    	System.out.println(itemsInPlace.toString());
+    	doOutput(itemsInPlace.toString());
     }
     
     /**
@@ -68,7 +69,7 @@ public class Output {
     		itemsInInventory.append(" - " + item.getName() + "\n");
     	}
     	
-    	System.out.println(itemsInInventory.toString());
+    	doOutput(itemsInInventory.toString());
     }
     
     /**
@@ -83,23 +84,52 @@ public class Output {
     		passages.append(" - " + passage.getName() + "\n");
     	}
     	
-    	System.out.println(passages.toString());
+    	doOutput(passages.toString());
     	
     }
     
+    /**
+     * List the options to interact with an obstacle
+     * 
+     * @param obstacle
+     */
     public void listOptionsObstacleInteraction(Obstacle obstacle) {
     	StringBuilder obstacleOptions = new StringBuilder();
     	
     	obstacleOptions.append(obstacle.getDescription() + "\n");
     	obstacleOptions.append("What item do you want to use? (Enter nothing to return to the previous place");
     	listInventory();
+    	
+    	doOutput(obstacleOptions.toString());
     }
 
-    public void describePlace(){
-        System.out.println(control.lookAtCurrentPlace());
+    /**
+     * Look at the currentPlace
+     * 
+     */
+    public void lookAtCurrentPlace(){
+        StringBuilder placeDescription = new StringBuilder();
+        
+        Place currentPlace = control.getCharacter().getCurrentPlace();
+        
+        placeDescription.append("You are in " + currentPlace.getName() + "\n");
+        placeDescription.append(currentPlace.getDescription());
+        
+       doOutput(placeDescription.toString());
     }
-
+    
+    // TODO do we give this strings or does control resolve that?
+//    public void lookAtGameObject()
+    
+    /**
+     * 
+     * @param number
+     */
     public void describePassage(int number){
         //System.out.println(control.lookAtPassage(number));
+    }
+    
+    public void doOutput(String message) {
+    	
     }
 }
