@@ -117,9 +117,8 @@ public class Control {
      * @param gameObject
      * @return String description
      */
-    public String lookAtGameObject (GameObject gameObject) {
-    	// TODO call methods in Output
-        return gameObject.getDescription();
+    public GameObject findGameObject(String objectName) {
+    	return null;
     }
     
     private Passage findPassage(String passageName) {
