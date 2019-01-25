@@ -72,11 +72,12 @@ public class Control {
      */
     public boolean interactWithObstacle (Obstacle currentObstacle) {
     	boolean obstacleResolved = false;
-    	boolean continueInteraction = true;
+    	
     	Item itemToTry = null;
     	
     	while(true) {
     		out.listOptionsObstacleInteraction(currentObstacle);
+
     		
     		
     		if(itemToTry == null) {
