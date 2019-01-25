@@ -72,10 +72,11 @@ public class Control {
      */
     public boolean interactWithObstacle (Obstacle currentObstacle) {
     	boolean obstacleResolved = false;
+    	boolean continueTrying = true;
     	
     	GameObject chosenObject = null;
     	
-    	while(true) {
+    	while(continueTrying) {
     		out.listOptionsObstacleInteraction(currentObstacle);
 
     		chosenObject = findGameObject(in.doInput());
@@ -89,7 +90,7 @@ public class Control {
     			((Item)chosenObject).consume();
     			// resolute obstacle
     			obstacleResolved = true;
-    			break;
+    			continueTrying = false;
     		} else {
     			out.doOutput("That doesn't work");
     		}
