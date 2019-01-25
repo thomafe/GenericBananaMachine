@@ -9,7 +9,6 @@ public class Input {
         String patternTakeKey = ".*[tT]ake.*[kK]ey.*";
         String patternUseDoor = ".*[uU]se.*[dD]oor.*";
         String patternUsePassage = ".*[uU]se.*[pP]assage.*";
-        String patternUse
 
         String userInput = scan.nextLine();
 
