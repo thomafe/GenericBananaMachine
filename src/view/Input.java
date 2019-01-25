@@ -77,6 +77,7 @@ public class Input {
         //if NOTHING matches
         }else{
             out.doOutput("You can't do that!");
+            out.listOptions();
         }
     }
     public String doInput(){
