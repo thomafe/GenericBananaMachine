@@ -55,4 +55,19 @@ public class Passage {
 	public Place[] getConnectingRooms() {
 		return connectingRooms;
 	}
+
+	/**
+	 * if this has an Obstacle, return true, else return false.
+	 *
+	 * @return boolean
+	 */
+	public boolean hasObstacle () {
+
+		if(obstacle != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 }
