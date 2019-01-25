@@ -1,6 +1,9 @@
 package control;
 
 import model.*;
+import view.Output;
+
+import java.util.Scanner;
 
 public class GameController {
 
@@ -8,9 +11,13 @@ public class GameController {
 
         // initialize basic game settings
         initGame();
+
+        Output output = new Output();
+        output.greeting();
     }
 
     private static void initGame () {
+        Scanner scanner = new Scanner(System.in);
 
         Control ctrl = new Control();
 
