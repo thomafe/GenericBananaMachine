@@ -1,4 +1,5 @@
 package view;
+import view.Input;
 
 public class Output {
 
@@ -9,5 +10,9 @@ public class Output {
 
     public void ordinaryEvent(){
         System.out.println("An event happend! Wow!");
+    }
+
+    public void descriptionPassage(){
+        
     }
 }
