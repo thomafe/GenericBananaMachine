@@ -32,9 +32,9 @@ public class Input {
         }else if (matcherLookAtPassage.find()) {
             out.describePassage(Integer.parseInt(matcherLookAtPassage.group(1)));
         }else if (userInput.matches(patternLookAtPlace)) {
-            out.describePlace();
+            out.lookAtCurrentPlace();
         }else if (matcherLookAtItem.find()){
-            out.
+            //TODO add method from Output
         }else{
             System.out.println("You can't do that!");
         }
