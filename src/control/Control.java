@@ -3,6 +3,7 @@ package control;
 import model.Character;
 import model.Place;
 import model.Passage;
+import model.GameObject;
 
 public class Control {
 
@@ -68,14 +69,23 @@ public class Control {
 
     /**
      * Return the currents Place's description.
+     *
+     * @return String description
      */
     public String lookAtCurrentPlace () {
 
         return character.getCurrentPlace().getDescription();
     }
 
-    public void lookAtItem () {
+    /**
+     * Return the chosen item's description.
+     *
+     * @param gameObject
+     * @return String description
+     */
+    public String lookAtGameObject (GameObject gameObject) {
 
+        return gameObject.getDescription();
     }
 
 }
