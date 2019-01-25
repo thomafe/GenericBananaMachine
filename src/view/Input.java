@@ -8,7 +8,7 @@ public class Input {
     String patternUsePassage = ".*[uU]se.*[pP]assage.*";
     String patternLookAtPassage = ".*[lL]ook.*at.*[pP]assage.*";
     String patternLookAtPlace = ".*[lL]ook.*around.*";
-    String patternLookAtItem = ".*[lL]ook.*at."
+    String patternLookAtItem = ".*[lL]ook.*at.*";
     Output out = null;
 
     public String inputReader(){
@@ -19,10 +19,8 @@ public class Input {
             return "takeKey";
         }else if (userInput.matches(patternUsePassage)){
             return "usePassage";
-        }else if (userInput.matches(patternLookAtPassage)) {
-            //out.describePassage();
-        }else if (userInput.matches(patternLookAtPlace)) {
-            //out.describePlace();
+        }else if (userInput.matches(patternLookAtPassage)||userInput.matches(patternLookAtPlace)) {
+            //out.describe();
         }else{
             return "invalidInput";
         }

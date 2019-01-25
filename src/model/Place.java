@@ -3,24 +3,36 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Place extends GameObject{
+public class Place {
 
 
 
 	// Attribute
+	public String description;
+
+
+
 	public List<Passage> passages;
 	private List<Item> itemsOnTheFloor;
-
-	// noch ein constructor für place mit inhalt diesmal
-	public Place(String name, String description) {
-		super(name, description);
-		
+	
+	public Place() {
 		passages = new ArrayList<>();
 		itemsOnTheFloor = new ArrayList<>();
+	}
+
+	// noch ein constructor für place mit inhalt diesmal
+	public Place(String description) {
+		this();
+		this.description= description;
 
 		// TODO set passages
 	}
-	
+
+	// getter description
+	public String getDescription() {
+		return description;
+	}
+
 	// getter für passages
 	public List<Passage> getPassages() {
 		return passages;
@@ -32,7 +44,25 @@ public class Place extends GameObject{
 	}
 
 	public void setItemsOnTheFloor(List<Item> itemsOnTheFloor) {
-		this.itemsOnTheFloor = itemsOnTheFloor;
+		this.itemsOnTheFloor = itemsOnTheFloor;n
 	}
 
+	/**
+	 * Getter for description.
+	 *
+	 * @return String
+	 */
+	public String getDescription() {
+
+		return description;
+	}
+
+	/**
+	 * Getter for Items on the floor
+	 * 
+	 * @return itemsOnTheFloor
+	 */
+	public List<Item> getItemsOnTheFloor() {
+		return itemsOnTheFloor;
+	}
 }
