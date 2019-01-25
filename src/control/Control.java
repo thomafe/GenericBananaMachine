@@ -1,10 +1,17 @@
 package control;
 
 import model.Character;
+import model.Item;
+import model.Obstacle;
 import model.Place;
+import view.Input;
+import view.Output;
 import model.Passage;
 
 public class Control {
+	
+	private Input in;
+	private Output out;
 
     private Character character = null;
     private Place activePlace = character.getCurrentPlace();
@@ -24,16 +31,17 @@ public class Control {
      * @return boolean
      */
     public boolean canMoveCharacter (Passage destinationPassage) {
-
+    	boolean passageClear = true;
+    	
         if(this.checkForObstacle(destinationPassage)) {
-            // Passage has Obstacle
-
-            return false;
+            passageClear = interactWithObstacle();
+        }
+        
+        if(passageClear) {
+        	character.move(destinationPassage);
+        	return true;
         } else {
-            // Passage has no Obstacle
-            character.move(destinationPassage);
-
-            return true;
+        	return false;
         }
 
     }
@@ -46,18 +54,27 @@ public class Control {
      * @return boolean
      */
     public boolean checkForObstacle (Passage destinationPassage) {
-
-        if(destinationPassage.hasObstacle()) {
-            // Passage has Obstacle
-            return true;
-        } else {
-            // Passage has no Obstacle
-            return false;
-        }
+        return destinationPassage.hasObstacle();
     }
 
-    public void interactWithObstacle () {
-
+    /**
+     * 
+     * 
+     * @return
+     */
+    public boolean interactWithObstacle (Obstacle currentObstacle) {
+    	boolean continueInteraction = true;
+    	Item itemToTry = null;
+    	
+    	while(continueInteraction) {
+    		// TODO tell out to promt the user to try any item or quit
+    		// Item = out.whatItemToUseOnObstacle()
+    		if(currentObstacle.tryToUseItem(itemToTry)) {
+    			return true;
+    		}
+    	}
+    	
+    	return false;
     }
 
     public boolean pickUpItem (String itemName) {
