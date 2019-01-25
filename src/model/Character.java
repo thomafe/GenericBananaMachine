@@ -8,11 +8,8 @@ public class Character {
 	private Place currentPlace = null;
 	private List<Item> itemsInInventory = new ArrayList<>();
 	
-	public Character() {
-		itemsInInventory = new ArrayList<>();
-	}
-	
 	public Character(Place startingPlace) {
+		itemsInInventory = new ArrayList<>();
 		currentPlace = startingPlace;
 	}
 
