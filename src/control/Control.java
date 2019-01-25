@@ -15,7 +15,7 @@ public class Control {
      */
     public Control () {}
 
-    public boolean moveCharacter (String direction) {
+    public boolean moveCharacter (String directon) {
 
         return true;
     }
@@ -29,8 +29,10 @@ public class Control {
 
     }
 
-    public boolean pickUpItem () {
-
+    public boolean pickUpItem (String itemName) {
+    	
+    	character.getCurrentPlace().getItemsOnTheFloor();
+    	
         return true;
     }
 

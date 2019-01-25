@@ -38,5 +38,14 @@ public class Character {
 
 		return currentPlace;
 	}
+	
+	/**
+	 * Getter for items.
+	 * 
+	 * @return itemsInInventory
+	 */
+	public List<Item> getItemsInInventory() {
+		return itemsInInventory;
+	}
 
 }

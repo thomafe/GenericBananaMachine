@@ -7,7 +7,7 @@ public class Place {
 	
 	public String description;
 	public List<Passage> passages;
-	public List<Item> itemsOnTheFloor;
+	private List<Item> itemsOnTheFloor;
 	
 	public Place() {
 		passages = new ArrayList<>();
@@ -19,4 +19,12 @@ public class Place {
 		// TODO set description and passages
 	}
 
+	/**
+	 * Getter for Items on the floor
+	 * 
+	 * @return itemsOnTheFloor
+	 */
+	public List<Item> getItemsOnTheFloor() {
+		return itemsOnTheFloor;
+	}
 }
