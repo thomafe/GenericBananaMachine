@@ -50,4 +50,8 @@ public class Place extends GameObject{
 	public List<Item> getItemsOnTheFloor() {
 		return itemsOnTheFloor;
 	}
+
+	public void addPassage(Passage pPassage){
+		passages.add(pPassage);
+	}
 }
