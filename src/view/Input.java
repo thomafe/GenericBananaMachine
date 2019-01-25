@@ -3,12 +3,11 @@ import java.util.Scanner;
 
 public class Input {
     Scanner scan = new Scanner(System.in);
+    String patternTakeKey = ".*[tT]ake.*[kK]ey.*";
+    String patternUseDoor = ".*[uU]se.*[dD]oor.*";
+    String patternUsePassage = ".*[uU]se.*[pP]assage.*";
 
     public String inputReader(String input){
-
-        String patternTakeKey = ".*[tT]ake.*[kK]ey.*";
-        String patternUseDoor = ".*[uU]se.*[dD]oor.*";
-        String patternUsePassage = ".*[uU]se.*[pP]assage.*";
 
         String userInput = scan.nextLine();
 
