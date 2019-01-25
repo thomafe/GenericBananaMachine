@@ -25,14 +25,12 @@ public class Input {
     Output out = null;
     Control control = null;
 
-    public void readInput(){
-
     /**
      * reads the user input and matches it with the patterns
      * calls methods from Output or Control
      *
      */
-    public void inputReader(){
+    public void readInput(){
 
         String userInput = scan.nextLine();
 
