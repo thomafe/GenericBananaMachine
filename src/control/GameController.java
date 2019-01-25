@@ -19,6 +19,7 @@ public class GameController {
     }
 
     private static void initGame () {
+
         Scanner scanner = new Scanner(System.in);
 
 
@@ -26,6 +27,15 @@ public class GameController {
         Place secondRoom = new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
 
         Character character = new Character(entrance);
+
+        Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed", entrance, secondRoom);
+        Item item1 = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
+        Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
+        entrance.addItemOnTheFloor(item1);
+        secondRoom.addItemOnTheFloor(item2);
+
+
+
         Control ctrl = new Control(character);
 
         // TODO output describe place
@@ -40,20 +50,19 @@ public class GameController {
          // TODO input take
 
         Input input = new Input(output);
-        input.readInput();
+
+        while (true){
+            input.readInput();
+        }
 
 
-        Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed", entrance, secondRoom);
 
-        Item item1 = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
-        Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
-        entrance.addItemOnTheFloor(item1);
-        secondRoom.addItemOnTheFloor(item2);
+        /*
 
         // character tries to take item from floor
         character.takeItem(item1);
 
-        /* // character calls List of Inventory
+         // character calls List of Inventory
         for(Item item: character.getItemsInInventory()) {
 
             System.out.println(item.getName());
