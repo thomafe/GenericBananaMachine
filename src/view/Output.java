@@ -11,7 +11,7 @@ public class Output {
     Control control = null;
     
 //    private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory", "Go through"};
-    private final static String[] ACTIONS = {"Look at someting", "Look into Inventory", "Go through a passage", "List Actions"};
+    private static final String[] ACTIONS = {"Look at <someting>", "Use <Passage Name>", "Inventory", "Actions"};
 
     //Introduction for the player at the start of the game
     public void greeting(){

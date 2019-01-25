@@ -57,7 +57,8 @@ public class Input {
 
         //if NOTHING matches
         }else{
-            System.out.println("You can't do that!");
+            out.doOutput("You can't do that");
+            out.listOptions();
         }
     }
 
