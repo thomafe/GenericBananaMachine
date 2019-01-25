@@ -25,6 +25,14 @@ public class Place extends GameObject{
 		return passages;
 	}
 
+	/**
+	 * Add a single item to the item list.
+	 *
+	 * @param item
+	 */
+	public void addItemOnTheFloor (Item item) {
+		itemsOnTheFloor.add(item);
+	}
 
 	public void setItemsOnTheFloor(List<Item> itemsOnTheFloor) {
 		this.itemsOnTheFloor = itemsOnTheFloor;

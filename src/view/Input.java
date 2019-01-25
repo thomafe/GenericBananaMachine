@@ -1,30 +1,43 @@
 package view;
 import java.util.Scanner;
-import view.Output;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import control.Control;
 
 public class Input {
     Scanner scan = new Scanner(System.in);
-    String patternTakeKey = ".*[tT]ake.*[kK]ey.*";
-    String patternUsePassage = ".*[uU]se.*[pP]assage.*";
-    String patternLookAtPassage = ".*[lL]ook.*at.*[pP]assage.*";
-    String patternLookAtPlace = ".*[lL]ook.*around.*";
-    String patternLookAtItem = ".*[lL]ook.*at.";
-    Output out = null;
 
-    public String inputReader(){
+    Pattern patternLookAtPassage = Pattern.compile("[a-z\\s]*look\\s[a-z\\s]*at\\s[a-z\\s]*passage\\s[a-z\\s]*(\\d)");
+    Pattern patternTakeItem = Pattern.compile("[a-z\\s]*take\\s([a-z\\s]*)");
+    Pattern patternUsePassage = Pattern.compile("[a-z\\s]*use\\s[a-z\\s]*passage\\s[a-z\\s]*(\\d)");
+    String patternLookAtPlace = "[a-z\\s]*look\\s[a-z\\s]*around\\s[a-z\\s]*";
+    Pattern patternLookAtItem = Pattern.compile("[a-z\\s]*look\\s[a-z\\s]*at\\s([a-z]*)");
+
+    Output out = null;
+    Control control = null;
+
+    public void inputReader(){
 
         String userInput = scan.nextLine();
 
-        if(userInput.matches(patternTakeKey)){
-            return "takeKey";
-        }else if (userInput.matches(patternUsePassage)){
-            return "usePassage";
-        }else if (userInput.matches(patternLookAtPassage)||userInput.matches(patternLookAtPlace)) {
-            //out.describe();
+        Matcher matcherLookAtPassage = patternLookAtPassage.matcher(userInput);
+        Matcher matcherTakeItem = patternTakeItem.matcher(userInput);
+        Matcher matcherUsePassage = patternUsePassage.matcher(userInput);
+        Matcher matcherLookAtItem = patternLookAtItem.matcher(userInput);
+
+        if(matcherTakeItem.find()){
+            control.pickUpItem(matcherTakeItem.group(1));
+        }else if (matcherUsePassage.find()){
+            control.canMoveCharacter(matcherUsePassage.group(1));
+        }else if (matcherLookAtPassage.find()) {
+            out.describePassage(Integer.parseInt(matcherLookAtPassage.group(1)));
+        }else if (userInput.matches(patternLookAtPlace)) {
+            out.describePlace();
+        }else if (matcherLookAtItem.find()){
+            out.
         }else{
-            return "invalidInput";
+            System.out.println("You can't do that!");
         }
-        return null;
     }
 
 }
