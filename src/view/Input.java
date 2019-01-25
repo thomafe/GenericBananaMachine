@@ -34,9 +34,9 @@ public class Input {
         }else if (userInput.matches(patternLookAtPlace)) {
             out.describePlace();
         }else if (matcherLookAtItem.find()){
-            //TODO
+            out.
         }else{
-            //TODO Method for invalid input
+            System.out.println("You can't do that!");
         }
     }
 
