@@ -25,11 +25,6 @@ public class Obstacle extends GameObject{
 
 	}
 
-   // getter description
-	public String getDescription() {
-		return description;
-	}
-
 	//getter resolution
 	public String getResolution() {
 		return resolution;
