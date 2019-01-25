@@ -15,18 +15,30 @@ public class Character {
 	public Character(Place startingPlace) {
 		this();
 	}
-	
+
+	// bei gang durch passage wird current place zum neuen place
 	public void move(Passage passage) {
-		
+		currentPlace= passage.usePassage(currentPlace);
+
 	}
 	
-	public void takeItem(Item itemOnFloor) {
-		// TODO check if that item is in this room
-		// TODO remove from room, put into inventory
+	public void takeItem(Item itemToPickUp) {
+		// check if item is in the room and remove from inventory
+
+		List<Item> itemsOnTheFloor = currentPlace.getItemsOnTheFloor();
+
+	for (int i=0; i< itemsOnTheFloor.size(); i++){
+
+		itemsOnTheFloor.get(i);
+		if (itemToPickUp.equals(itemsOnTheFloor.get(i))){
+			itemsInInventory.add(itemToPickUp);
+			currentPlace.removeItemFromPlace(itemsOnTheFloor.get(i));
+
+		}
+	}
 	}
 	
 	public void useItem(Item item) {
-		
 	}
 
 	/**
