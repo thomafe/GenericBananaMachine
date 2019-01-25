@@ -19,4 +19,14 @@ public class Place {
 		// TODO set description and passages
 	}
 
+	/**
+	 * Getter for description.
+	 *
+	 * @return String
+	 */
+	public String getDescription() {
+
+		return description;
+	}
+
 }

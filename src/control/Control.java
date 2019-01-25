@@ -65,8 +65,12 @@ public class Control {
         return true;
     }
 
-    public void lookAtCurrentPlace () {
+    /**
+     * Return the currents Place's description.
+     */
+    public String lookAtCurrentPlace () {
 
+        return character.getCurrentPlace().getDescription();
     }
 
     public void lookAtItem () {
