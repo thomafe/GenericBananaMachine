@@ -22,10 +22,6 @@ public class Output {
     public void greeting(){
         System.out.println("Hello fellow Player, welcome to your gobsmacking adventure!");
     }
-
-    public void ordinaryEvent(){
-        System.out.println("An event happend! Wow!");
-    }
     
     
     // TODO replace "room" in all the strings with currentPlace.getName()
