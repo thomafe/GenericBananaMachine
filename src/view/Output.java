@@ -1,5 +1,6 @@
 package view;
 import control.Control;
+import model.GameObject;
 import model.Item;
 import model.Obstacle;
 import model.Passage;
@@ -125,11 +126,18 @@ public class Output {
      * 
      * @param number
      */
-    public void describePassage(int number){
-        //System.out.println(control.lookAtPassage(number));
+    public void lookAtGameObject(String objectName) {
+    	StringBuilder gameObjectDescription = new StringBuilder();
+    	
+    	GameObject object = control.findGameObject(objectName);
+    	
+    	gameObjectDescription.append("You look at " + object.getName() + "\n");
+    	gameObjectDescription.append(object.getDescription());
+    	
+    	doOutput(gameObjectDescription.toString());
     }
     
     public void doOutput(String message) {
-    	
+    	System.out.println(message);
     }
 }
