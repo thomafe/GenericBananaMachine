@@ -56,6 +56,8 @@ public class Input {
         //matching witch LOOK AT CURRENT PLACE
         }else if (userInput.matches(patternLookAtPlace)) {
             out.lookAtCurrentPlace();
+            out.listItemsInPlace();
+            out.listPassages();
 
         //matching with LOOK AT
         }else if (matcherLookAt.find()) {
@@ -66,7 +68,7 @@ public class Input {
             out.listInventory();
 
         //matching with ACTIONS
-        }else if (matcherActions.find()){
+        }else if (matcherActions.find()) {
             out.listOptions();
 
         //if NOTHING matches
@@ -74,5 +76,7 @@ public class Input {
             out.doOutput("You can't do that!");
         }
     }
-
+    public String doInput(){
+        return scan.nextLine();
+    }
 }
