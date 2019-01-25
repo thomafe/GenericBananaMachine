@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import control.Control;
 
 public class Input {
-    
+
     Scanner scan = new Scanner(System.in);
 
     //Pattern for TAKE ITEM

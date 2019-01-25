@@ -12,16 +12,6 @@ public class Output {
     
 //    private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory", "Go through"};
     private final static String[] ACTIONS = {"Look at someting", "Look into Inventory", "Go through a passage", "List Actions"};
-
-    //Introduction for the player at the start of the game
-    public void Greeting(){
-        System.out.println("Hello fellow Player, welcome to your gobsmacking adventure!");
-    }
-
-    public void ordinaryEvent(){
-        System.out.println("An event happend! Wow!");
-    }
-    
     
     // TODO replace "room" in all the strings with currentPlace.getName()
     /**
