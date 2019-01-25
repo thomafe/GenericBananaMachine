@@ -35,7 +35,7 @@ public class Control {
     	boolean passageClear = true;
     	
         if(this.checkForObstacle(destinationPassage)) {
-            passageClear = interactWithObstacle();
+            passageClear = interactWithObstacle(destinationPassage.getObstacle());
         }
         
         if(passageClear) {
@@ -59,11 +59,14 @@ public class Control {
     }
 
     /**
+     * Allows the character to interact with an obstacle. Loops as long as the character tries to use items on the obstacle.
+     * If the obstacle gets resolved the item is consumed and the character moves through the passage.
+     * If the character stops trying items the interaction ends and the character stays in that room.
      * 
-     * 
-     * @return
+     * @return whether the character resolved the obstacle or not
      */
     public boolean interactWithObstacle (Obstacle currentObstacle) {
+    	boolean obstacleResolved = false;
     	boolean continueInteraction = true;
     	Item itemToTry = null;
     	
@@ -71,11 +74,14 @@ public class Control {
     		// TODO tell out to promt the user to try any item or quit
     		// Item = out.whatItemToUseOnObstacle()
     		if(currentObstacle.tryToUseItem(itemToTry)) {
-    			return true;
+    			itemToTry.consume();
+    			// resolute obstacle
+    			obstacleResolved = true;
+    			break;
     		}
     	}
     	
-    	return false;
+    	return obstacleResolved;
     }
 
     public boolean pickUpItem (String itemName) {

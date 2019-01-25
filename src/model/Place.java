@@ -8,7 +8,7 @@ public class Place extends GameObject{
 
 
 	// Attribute
-	public List<Passage> passages;
+	private List<Passage> passages;
 	private List<Item> itemsOnTheFloor;
 
 	// noch ein constructor für place mit inhalt diesmal
