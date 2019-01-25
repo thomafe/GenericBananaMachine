@@ -39,7 +39,7 @@ public class GameController {
 
          // TODO input take
 
-        Input input = new Input();
+        Input input = new Input(output);
         input.readInput();
 
 
