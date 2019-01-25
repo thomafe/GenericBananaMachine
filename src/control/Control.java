@@ -23,7 +23,7 @@ public class Control {
     public Control () {
 
     }
-
+    
     /**
      * check if passage is successable. If an Obstacle is included, return false.
      * If Passage does not include an Obstacle, Character can move to connected Room -> return true and move Character.
@@ -31,8 +31,13 @@ public class Control {
      * @param destinationPassage
      * @return boolean
      */
-    public boolean canMoveCharacter (Passage destinationPassage) {
+    public boolean canMoveCharacter (String passageName) {
     	boolean passageClear = true;
+    	Passage destinationPassage = findPassage(passageName);
+    	
+    	if(destinationPassage == null) {
+    		return false;
+    	}
     	
         if(this.checkForObstacle(destinationPassage)) {
             passageClear = interactWithObstacle(destinationPassage.getObstacle());
@@ -70,9 +75,14 @@ public class Control {
     	boolean continueInteraction = true;
     	Item itemToTry = null;
     	
-    	while(continueInteraction) {
-    		// TODO tell out to promt the user to try any item or quit
-    		// Item = out.whatItemToUseOnObstacle()
+    	while(true) {
+    		out.listOptionsObstacleInteraction(currentObstacle);
+    		
+    		
+    		if(itemToTry == null) {
+    			break;
+    		}
+    		
     		if(currentObstacle.tryToUseItem(itemToTry)) {
     			itemToTry.consume();
     			// resolute obstacle
@@ -109,6 +119,23 @@ public class Control {
     public String lookAtGameObject (GameObject gameObject) {
 
         return gameObject.getDescription();
+    }
+    
+    private Passage findPassage(String passageName) {
+    	Passage foundPassage = null;
+    	
+    	for (Passage passage : character.getCurrentPlace().getPassages()) {
+			if(passage.getName().equals(passageName)) {
+				foundPassage = passage;
+				break;
+			}
+		}
+    	
+    	return foundPassage;
+    }
+    
+    public Character getCharacter() {
+    	return character;
     }
 
 }
