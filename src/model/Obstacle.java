@@ -1,15 +1,14 @@
 package model;
 
-public class Obstacle {
+public class Obstacle extends GameObject{
 	
-	public String description;
 	public String resolution;
 	public boolean resolved = false;
 	
 	private Item requiredItem;
 	
-	public Obstacle(String description, Item requiredItem) {
-		this.description = description;
+	public Obstacle(String name, String description, Item requiredItem) {
+		super(name, description);
 		this.requiredItem = requiredItem;
 	}
 	

@@ -1,22 +1,18 @@
 package model;
 
 // class mit name passage
-public class Passage {
+public class Passage extends GameObject{
 
 
 
 	// attribute
-	public String description;
-
-
-
 	public Place[] connectingRooms = new Place[2];
 
 	public Obstacle obstacle = null;
 
 	// constructor, kein rückgabewert, name so wie klasse, initialisiert classenattribute
-	public Passage(Place place1, Place place2, String description) {
-		this.description = description;
+	public Passage(String name, String description, Place place1, Place place2) {
+		super(name, description);
 		this.connectingRooms[0] = place1;
 		this.connectingRooms[1]= place2;
 
@@ -38,10 +34,6 @@ public class Passage {
 
 	}
 
-	// getter für discription
-	public String getDescription() {
-		return description;
-	}
 
 	// getter and setter for obstacle
 	public Obstacle getObstacle() {

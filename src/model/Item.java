@@ -1,27 +1,16 @@
 package model;
 
-public class Item {
+public class Item extends GameObject {
 
 
 
 	// Attribute
-	private String description;
-
-
-
-
 	private boolean consumed = false;
 
 	// constructor (zum objekte erstellen)
-	public Item(String description) {
+	public Item(String name, String description) {
+		super(name, description);
 
-		this.description = description;
-
-
-	}
-	// getter, public methode gibt attribut zurück
-	public String getDescription() {
-		return description;
 	}
 
 	public boolean isConsumed() {

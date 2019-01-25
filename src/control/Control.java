@@ -15,7 +15,7 @@ public class Control {
     public Control () {}
 
     public boolean moveCharacter (String directon) {
-
+    	
     }
 
     /**
@@ -63,7 +63,6 @@ public class Control {
     }
 
     public boolean pickUpItem (String itemName) {
-    	
     	character.getCurrentPlace().getItemsOnTheFloor();
     	
         return true;
