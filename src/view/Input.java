@@ -32,7 +32,7 @@ public class Input {
      */
     public void readInput(){
 
-        String userInput = scan.nextLine();
+        String userInput = readInSingleLine();
 
         Matcher matcherTakeItem = patternTakeItem.matcher(userInput);
         Matcher matcherUsePassage = patternUsePassage.matcher(userInput);
@@ -76,7 +76,7 @@ public class Input {
             out.listOptions();
         }
     }
-    public String doInput(){
+    public String readInSingleLine(){
         return scan.nextLine();
     }
 }

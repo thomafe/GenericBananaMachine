@@ -79,7 +79,7 @@ public class Control {
     	while(continueTrying) {
     		out.listOptionsObstacleInteraction(currentObstacle);
 
-    		chosenObject = findGameObject(in.doInput());
+    		chosenObject = findGameObject(in.readInSingleLine());
     		
     		if(chosenObject == null) {
     			out.doOutput("You go back");
