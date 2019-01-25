@@ -30,6 +30,10 @@ public class Place extends GameObject{
 		this.itemsOnTheFloor = itemsOnTheFloor;
 	}
 
+	public void removeItemFromPlace(Item itemToRemove){
+		this.itemsOnTheFloor.remove(itemToRemove);
+	}
+
 	/**
 	 * Getter for Items on the floor
 	 * 
