@@ -5,45 +5,49 @@ import java.util.List;
 
 public class Place {
 
-
-
-	// Attribute
-	public String description;
-
-
-
-	public List<Passage> passages;
+	/**
+	 * Attributes
+	 */
+	private String description;
+	private List<Passage> passages;
 	private List<Item> itemsOnTheFloor;
-	
+
+	/**
+	 * Construct
+	 */
 	public Place() {
 		passages = new ArrayList<>();
 		itemsOnTheFloor = new ArrayList<>();
 	}
 
-	// noch ein constructor für place mit inhalt diesmal
+	/**
+	 * Construct
+	 *
+	 * @param description
+	 */
 	public Place(String description) {
-		this();
-		this.description= description;
+
+		this.description = description;
 
 		// TODO set passages
 	}
 
-	// getter description
-	public String getDescription() {
-		return description;
-	}
-
-	// getter für passages
+	/**
+	 * Getter for Passages.
+	 *
+	 * @return passages
+	 */
 	public List<Passage> getPassages() {
 		return passages;
 	}
 
-	// getter and setter für items on the floor
-	public List<Item> getItemsOnTheFloor() {
-		return itemsOnTheFloor;
-	}
-
+	/**
+	 * Setter for items in the current Place.
+	 * 
+	 * @param itemsOnTheFloor
+	 */
 	public void setItemsOnTheFloor(List<Item> itemsOnTheFloor) {
+
 		this.itemsOnTheFloor = itemsOnTheFloor;
 	}
 

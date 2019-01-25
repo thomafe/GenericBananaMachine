@@ -12,9 +12,7 @@ public class Control {
     /**
      * Construct for Control
      */
-    public Control () {}
-
-    public boolean moveCharacter (String directon) {
+    public Control () {
 
     }
 
