@@ -33,30 +33,12 @@ public class Place {
 	}
 
 	/**
-	 * Getter for description.
-	 *
-	 * @return String
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
 	 * Getter for Passages.
 	 *
 	 * @return passages
 	 */
 	public List<Passage> getPassages() {
 		return passages;
-	}
-
-	/**
-	 * Getter for Items available in the current Place.
-	 * @return items
-	 */
-	public List<Item> getItemsOnTheFloor() {
-
-		return itemsOnTheFloor;
 	}
 
 	/**
@@ -69,4 +51,22 @@ public class Place {
 		this.itemsOnTheFloor = itemsOnTheFloor;
 	}
 
+	/**
+	 * Getter for description.
+	 *
+	 * @return String
+	 */
+	public String getDescription() {
+
+		return description;
+	}
+
+	/**
+	 * Getter for Items on the floor
+	 * 
+	 * @return itemsOnTheFloor
+	 */
+	public List<Item> getItemsOnTheFloor() {
+		return itemsOnTheFloor;
+	}
 }

@@ -12,7 +12,9 @@ public class Control {
     /**
      * Construct for Control
      */
-    public Control () {
+    public Control () {}
+
+    public boolean moveCharacter (String directon) {
 
     }
 
@@ -60,8 +62,10 @@ public class Control {
 
     }
 
-    public boolean pickUpItem () {
-
+    public boolean pickUpItem (String itemName) {
+    	
+    	character.getCurrentPlace().getItemsOnTheFloor();
+    	
         return true;
     }
 
