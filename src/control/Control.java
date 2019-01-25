@@ -15,20 +15,20 @@ public class Control {
 	private Output out;
 
     private Character character = null;
-    private Place activePlace = character.getCurrentPlace();
 
     /**
      * Construct for Control
      */
-    public Control () {
+    public Control (Character pCharacter) {
 
+        character = pCharacter;
     }
     
     /**
      * check if passage is successable. If an Obstacle is included, return false.
      * If Passage does not include an Obstacle, Character can move to connected Room -> return true and move Character.
      *
-     * @param destinationPassage
+     * @param passageName
      * @return boolean
      */
     public boolean canMoveCharacter (String passageName) {
