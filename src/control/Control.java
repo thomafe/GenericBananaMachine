@@ -73,22 +73,25 @@ public class Control {
     public boolean interactWithObstacle (Obstacle currentObstacle) {
     	boolean obstacleResolved = false;
     	
-    	Item itemToTry = null;
+    	GameObject chosenObject = null;
     	
     	while(true) {
     		out.listOptionsObstacleInteraction(currentObstacle);
 
+    		chosenObject = findGameObject(in.doInput());
     		
-    		
-    		if(itemToTry == null) {
+    		if(chosenObject == null) {
+    			out.doOutput("You go back");
     			break;
     		}
     		
-    		if(currentObstacle.tryToUseItem(itemToTry)) {
-    			itemToTry.consume();
+    		if(chosenObject instanceof Item && currentObstacle.tryToUseItem((Item)chosenObject)) {
+    			((Item)chosenObject).consume();
     			// resolute obstacle
     			obstacleResolved = true;
     			break;
+    		} else {
+    			out.doOutput("That doesn't work");
     		}
     	}
     	
