@@ -8,7 +8,7 @@ public class Character {
 	private Place currentPlace = null;
 	private List<Item> itemsInInventory = null;
 	
-	private Character() {
+	public Character() {
 		itemsInInventory = new ArrayList<>();
 	}
 	
@@ -27,6 +27,16 @@ public class Character {
 	
 	public void useItem(Item item) {
 		
+	}
+
+	/**
+	 * Getter for current Place.
+	 *
+	 * @return Place
+	 */
+	public Place getCurrentPlace () {
+
+		return currentPlace;
 	}
 
 }
