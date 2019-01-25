@@ -1,9 +1,7 @@
 package view;
-import view.Input;
-import model.
+import model.GameObject;
 
 public class Output {
-    Input inp = new Input();
 
     //Introduction for the player at the start of the game
     public void Greeting(){
@@ -14,7 +12,7 @@ public class Output {
         System.out.println("An event happend! Wow!");
     }
 
-    public void describe(){
-        System.out.println("");
+    public void describe(GameObject object){
+        System.out.println(object.getDescription());
     }
 }
