@@ -50,14 +50,4 @@ public class Place {
 		this.itemsOnTheFloor = itemsOnTheFloor;
 	}
 
-	/**
-	 * Getter for description.
-	 *
-	 * @return String
-	 */
-	public String getDescription() {
-
-		return description;
-	}
-
 }
