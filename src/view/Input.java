@@ -21,7 +21,7 @@ public class Input {
     Output out = null;
     Control control = null;
 
-    public void inputReader(){
+    public void readInput(){
 
         String userInput = scan.nextLine();
 

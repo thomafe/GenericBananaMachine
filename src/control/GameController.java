@@ -1,8 +1,10 @@
 package control;
 
 import model.*;
-import view.Output;
+import view.*;
 
+
+import model.Character;
 import java.util.Scanner;
 
 public class GameController {
@@ -12,18 +14,34 @@ public class GameController {
         // initialize basic game settings
         initGame();
 
-        Output output = new Output();
-        output.greeting();
+
+
     }
 
     private static void initGame () {
         Scanner scanner = new Scanner(System.in);
 
-        Control ctrl = new Control();
 
         Place entrance = new Place("Entrance", "This is your starting area.");
         Place secondRoom = new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
-        model.Character character = new model.Character(entrance);
+
+        Character character = new Character(entrance);
+        Control ctrl = new Control(character);
+
+        // TODO output describe place
+        Output output= new Output(ctrl);
+
+        output.greeting();
+        output.lookAtCurrentPlace();
+
+        // TODO output list options
+         output.listOptions();
+
+         // TODO input take
+
+        Input input = new Input();
+        input.readInput();
+
 
         Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed", entrance, secondRoom);
 
@@ -35,11 +53,12 @@ public class GameController {
         // character tries to take item from floor
         character.takeItem(item1);
 
-        // character calls List of Inventory
+        /* // character calls List of Inventory
         for(Item item: character.getItemsInInventory()) {
 
             System.out.println(item.getName());
         }
+        */
 
         // character tries to move
         // TODO: character tries to move and if success he moves to the next place.

@@ -8,7 +8,12 @@ import model.Place;
 
 public class Output {
 
-    Control control = null;
+    private Control control;
+
+    public Output(Control contoller){
+
+        control= contoller;
+    }
     
 //    private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory", "Go through"};
     private final static String[] ACTIONS = {"Look at someting", "Look into Inventory", "Go through a passage", "List Actions"};
