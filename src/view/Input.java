@@ -22,8 +22,12 @@ public class Input {
     Pattern patternActions = Pattern.compile("[a-z\\s]*actions\\s*[a-z\\s]*");
 
     //Creating Output and Control object for referencing
-    Output out = null;
+    Output out;
     Control control = null;
+
+    public Input (Output output) {
+        out = output;
+    }
 
     /**
      * reads the user input and matches it with the patterns
