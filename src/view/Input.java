@@ -21,6 +21,12 @@ public class Input {
     Output out = null;
     Control control = null;
 
+
+    /**
+     * reads the user input and matches it with the patterns
+     * calls methods from Output or Control
+     *
+     */
     public void inputReader(){
 
         String userInput = scan.nextLine();
@@ -29,11 +35,15 @@ public class Input {
         Matcher matcherUsePassage = patternUsePassage.matcher(userInput);
         Matcher matcherLookAt = patternLookAt.matcher(userInput);
 
-        //matching with TAKE ITEM
+        /**
+         * matches the user input with the patterns
+         *
+         */
+        //matching with TAKE ITEM NAME
         if(matcherTakeItem.find()){
             control.pickUpItem(matcherTakeItem.group(1));
 
-        //matching with USE PASSAGE
+        //matching with USE PASSAGE NAME
         }else if (matcherUsePassage.find()){
             control.canMoveCharacter(matcherUsePassage.group(1));
 
