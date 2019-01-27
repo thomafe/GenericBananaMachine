@@ -14,8 +14,6 @@ public class GameController {
         // initialize basic game settings
         initGame();
 
-
-
     }
 
     private static void initGame () {
