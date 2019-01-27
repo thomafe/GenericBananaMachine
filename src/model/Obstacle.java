@@ -2,8 +2,8 @@ package model;
 
 public class Obstacle extends GameObject{
 	
-	public String resolution;
-	public boolean resolved = false;
+	private String resolution;
+	private boolean resolved = false;
 	
 	private Item requiredItem;
 
