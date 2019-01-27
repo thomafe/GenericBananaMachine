@@ -28,8 +28,7 @@ public class Passage extends GameObject{
 
 	/**
 	 * Returns next Place after accessing the passage.
-	 * TODO: Wird der richtige Raum hier zurückgegeben?
-	 * TODO: 	-> Wenn ich von connectingRiims[0] komme, ist der nächste Raum doch connectingRooms[1] ?!
+	 *
 	 *
 	 * @param comingFromPlace Place
 	 * @return Object
@@ -37,10 +36,10 @@ public class Passage extends GameObject{
 	public Place usePassage(Place comingFromPlace) {
 		// zurückgeben in welchem raum man ist
 		if (comingFromPlace.equals(connectingRooms[0])) {
-			return connectingRooms[0];
+			return connectingRooms[1];
 		}
 		else if (comingFromPlace.equals(connectingRooms[1])) {
-			return connectingRooms[1];
+			return connectingRooms[0];
 		}
 		else {
 			return null;
