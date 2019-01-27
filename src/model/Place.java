@@ -5,22 +5,24 @@ import java.util.List;
 
 public class Place extends GameObject{
 
-
-
 	// Attribute
 	private List<Passage> passages;
 	private List<Item> itemsOnTheFloor;
 
-	// noch ein constructor für place mit inhalt diesmal
+	/**
+	 * COnstructor.
+	 *
+	 * @param name String
+	 * @param description String
+	 */
 	public Place(String name, String description) {
+		// noch ein constructor für place mit inhalt diesmal
 		super(name, description);
 		passages = new ArrayList<>();
 		itemsOnTheFloor = new ArrayList<>();
 
 		// TODO set passages
 	}
-
-
 
 	/**
 	 * Getter for connected Passages to this Place.
