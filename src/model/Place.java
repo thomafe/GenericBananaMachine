@@ -20,24 +20,41 @@ public class Place extends GameObject{
 		// TODO set passages
 	}
 
-	// getter für passages
+
+
+	/**
+	 * Getter for connected Passages to this Place.
+	 *
+	 * @return Passage List
+	 */
 	public List<Passage> getPassages() {
+		// getter for passages
 		return passages;
 	}
 
 	/**
 	 * Add a single item to the item list.
 	 *
-	 * @param item
+	 * @param item Item
 	 */
 	public void addItemOnTheFloor (Item item) {
 		itemsOnTheFloor.add(item);
 	}
 
+	/**
+	 * Setter for including Item which can be found in this Place.
+	 *
+	 * @param itemsOnTheFloor Item List
+	 */
 	public void setItemsOnTheFloor(List<Item> itemsOnTheFloor) {
 		this.itemsOnTheFloor = itemsOnTheFloor;
 	}
 
+	/**
+	 * Removes Item from this Place.
+	 *
+	 * @param itemToRemove Item
+	 */
 	public void removeItemFromPlace(Item itemToRemove){
 		this.itemsOnTheFloor.remove(itemToRemove);
 	}
@@ -51,6 +68,11 @@ public class Place extends GameObject{
 		return itemsOnTheFloor;
 	}
 
+	/**
+	 * Connect a committed Passage to this Place.
+	 *
+	 * @param pPassage Passage
+	 */
 	public void addPassage(Passage pPassage){
 		passages.add(pPassage);
 	}
