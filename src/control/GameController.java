@@ -65,7 +65,7 @@ public class GameController {
 
 		Control ctrl = new Control(character);
 
-		// TODO output describe place
+
 		Output output = new Output(ctrl);
 		Input input = new Input(output, ctrl);
 
