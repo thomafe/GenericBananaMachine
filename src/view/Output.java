@@ -11,166 +11,158 @@ import model.Place;
 
 public class Output {
 
-	private Control control;
+  private Control control;
 
-	// private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory",
-	// "Go through"};
-	private static final String[] ACTIONS = { "Look at <something>", "Look around", "Use <Passage Name>",
-			"Take <Item Name>", "Inventory", "Actions" };
+  // private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory",
+  // "Go through"};
+  private static final String[] ACTIONS = {"Look at <something>", "Look around",
+      "Use <Passage Name>",
+      "Take <Item Name>", "Inventory", "Actions"};
 
-	/**
-	 * Constructor.
-	 *
-	 * @param contoller
-	 *            Control
-	 */
-	public Output(Control contoller) {
-		control = contoller;
-	}
+  /**
+   * Constructor.
+   *
+   * @param contoller Control
+   */
+  public Output(Control contoller) {
+    control = contoller;
+  }
 
-	/**
-	 * Introduction for the player at the start of the game.
-	 *
-	 */
-	public void greeting() {
-		doOutput("Hello fellow Player, welcome to your gobsmacking adventure!");
-	}
+  /**
+   * Introduction for the player at the start of the game.
+   */
+  public void greeting() {
+    doOutput("Hello fellow Player, welcome to your gobsmacking adventure!");
+  }
 
-	// TODO replace "room" in all the strings with currentPlace.getName()
-	/**
-	 * List all things the character can do. - Look at something - Look into
-	 * Inventory - Go through passage - Look at room
-	 * 
-	 */
-	public void listOptions() {
-		StringBuilder options = new StringBuilder();
+  // TODO replace "room" in all the strings with currentPlace.getName()
 
-		options.append("You can do these things:\n");
-		for (int i = 0; i < ACTIONS.length; i++) {
-			options.append(ACTIONS[i]);
-			if (i != ACTIONS.length - 1) {
-				options.append(" | ");
-			}
-		}
+  /**
+   * List all things the character can do. - Look at something - Look into Inventory - Go through
+   * passage - Look at room
+   */
+  public void listOptions() {
+    StringBuilder options = new StringBuilder();
 
-		doOutput(options.toString());
-	}
+    options.append("You can do these things:\n");
+    for (int i = 0; i < ACTIONS.length; i++) {
+      options.append(ACTIONS[i]);
+      if (i != ACTIONS.length - 1) {
+        options.append(" | ");
+      }
+    }
 
-	/**
-	 * Lists all items in the room (on the floor).
-	 * 
-	 */
-	public void listItemsInPlace() {
-		List<Item> itemsInPlace = control.getCharacter().getCurrentPlace().getItemsOnTheFloor();
+    doOutput(options.toString());
+  }
 
-		if (itemsInPlace.isEmpty()) {
-			doOutput("There are no items here.");
-		} else {
-			StringBuilder itemsOutput = new StringBuilder();
+  /**
+   * Lists all items in the room (on the floor).
+   */
+  public void listItemsInPlace() {
+    List<Item> itemsInPlace = control.getCharacter().getCurrentPlace().getItemsOnTheFloor();
 
-			itemsOutput.append("These items are in the room:\n");
-			for (Item item : itemsInPlace) {
-				itemsOutput.append(" - " + item.getName() + "\n");
-			}
+    if (itemsInPlace.isEmpty()) {
+      doOutput("There are no items here.");
+    } else {
+      StringBuilder itemsOutput = new StringBuilder();
 
-			doOutput(itemsOutput.toString());
-		}
-	}
+      itemsOutput.append("These items are in the room:\n");
+      for (Item item : itemsInPlace) {
+        itemsOutput.append(" - " + item.getName() + "\n");
+      }
 
-	/**
-	 * Lists all items in characters inventory.
-	 * 
-	 */
-	public void listInventory() {
-		StringBuilder itemsInInventory = new StringBuilder();
+      doOutput(itemsOutput.toString());
+    }
+  }
 
-		itemsInInventory.append("These items are in your inventory:\n");
-		for (Item item : control.getCharacter().getItemsInInventory()) {
-			itemsInInventory.append(" - " + item.getName() + "\n");
-		}
+  /**
+   * Lists all items in characters inventory.
+   */
+  public void listInventory() {
+    StringBuilder itemsInInventory = new StringBuilder();
 
-		doOutput(itemsInInventory.toString());
-	}
+    itemsInInventory.append("These items are in your inventory:\n");
+    for (Item item : control.getCharacter().getItemsInInventory()) {
+      itemsInInventory.append(" - " + item.getName() + "\n");
+    }
 
-	/**
-	 * Lists all passages in the current room.
-	 * 
-	 */
-	public void listPassages() {
-		StringBuilder passages = new StringBuilder();
+    doOutput(itemsInInventory.toString());
+  }
 
-		passages.append("These passages lead out of the room:\n");
-		for (Passage passage : control.getCharacter().getCurrentPlace().getPassages()) {
-			passages.append(" - " + passage.getName() + "\n");
-		}
+  /**
+   * Lists all passages in the current room.
+   */
+  public void listPassages() {
+    StringBuilder passages = new StringBuilder();
 
-		doOutput(passages.toString());
+    passages.append("These passages lead out of the room:\n");
+    for (Passage passage : control.getCharacter().getCurrentPlace().getPassages()) {
+      passages.append(" - " + passage.getName() + "\n");
+    }
 
-	}
+    doOutput(passages.toString());
 
-	/**
-	 * List the options to interact with an obstacle
-	 * 
-	 * @param obstacle
-	 */
-	public void listOptionsObstacleInteraction(Obstacle obstacle) {
-		StringBuilder obstacleOptions = new StringBuilder();
+  }
 
-		obstacleOptions.append(obstacle.getDescription() + "\n");
-		obstacleOptions.append("What item do you want to use? (Enter nothing to return to the previous place");
-		listInventory();
+  /**
+   * List the options to interact with an obstacle
+   */
+  public void listOptionsObstacleInteraction(Obstacle obstacle) {
+    StringBuilder obstacleOptions = new StringBuilder();
 
-		doOutput(obstacleOptions.toString());
-	}
+    obstacleOptions.append(obstacle.getDescription() + "\n");
+    obstacleOptions
+        .append("What item do you want to use? (Enter nothing to return to the previous place");
+    listInventory();
 
-	/**
-	 * Look at the currentPlace.
-	 *
-	 */
-	public void lookAtCurrentPlace() {
-		Place currentPlace = control.getCharacter().getCurrentPlace();
+    doOutput(obstacleOptions.toString());
+  }
 
-		StringBuilder placeDescription = new StringBuilder();
+  /**
+   * Look at the currentPlace.
+   */
+  public void lookAtCurrentPlace() {
+    Place currentPlace = control.getCharacter().getCurrentPlace();
 
-		placeDescription.append("You are in " + currentPlace.getName() + "\n");
-		placeDescription.append(currentPlace.getDescription());
+    StringBuilder placeDescription = new StringBuilder();
 
-		doOutput(placeDescription.toString());
-	}
+    placeDescription.append("You are in " + currentPlace.getName() + "\n");
+    placeDescription.append(currentPlace.getDescription());
 
-	// TODO do we give this strings or does control resolve that?
-	// public void lookAtGameObject()
+    doOutput(placeDescription.toString());
+  }
 
-	/**
-	 * Shows GameObject's name / description in console or gives User an Exception
-	 * if no such item exists.
-	 *
-	 * @param objectName
-	 *            String
-	 */
-	public void lookAtGameObject(String objectName) {
-		GameObject object = control.findGameObject(objectName);
+  // TODO do we give this strings or does control resolve that?
+  // public void lookAtGameObject()
 
-		if (object == null) {
-			doOutput("There is no " + objectName + "here.");
-		} else {
-			StringBuilder gameObjectDescription = new StringBuilder();
+  /**
+   * Shows GameObject's name / description in console or gives User an Exception if no such item
+   * exists.
+   *
+   * @param objectName String
+   */
+  public void lookAtGameObject(String objectName) {
+    GameObject object = control.findGameObject(objectName);
 
-			gameObjectDescription.append("You look at " + object.getName() + "\n");
-			gameObjectDescription.append(object.getDescription());
+    if (object == null) {
+      doOutput("There is no " + objectName + "here.");
+    } else {
+      StringBuilder gameObjectDescription = new StringBuilder();
 
-			doOutput(gameObjectDescription.toString());
-		}
-	}
+      gameObjectDescription.append("You look at " + object.getName() + "\n");
+      gameObjectDescription.append(object.getDescription());
 
-	/**
-	 * Output a committed message in console.
-	 *
-	 * @param message
-	 *            String
-	 */
-	public void doOutput(String message) {
-		System.out.println(message);
-	}
+      doOutput(gameObjectDescription.toString());
+    }
+  }
+
+  /**
+   * Output a committed message in console.
+   *
+   * @param message String
+   */
+  public void doOutput(String message) {
+    System.out.println(message);
+  }
 
 }
