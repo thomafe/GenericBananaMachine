@@ -15,7 +15,7 @@ public class Output {
     
 	// private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory",
 	// "Go through"};
-	private static final String[] ACTIONS = { "Look at <someting>", "Look around", "Use <Passage Name>", "Inventory",
+	private static final String[] ACTIONS = { "Look at <something>", "Look around", "Use <Passage Name>", "Inventory",
 			"Actions" };
 
 	/**
