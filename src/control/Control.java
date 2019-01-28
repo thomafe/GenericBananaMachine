@@ -123,13 +123,30 @@ public class Control {
     }
 
     /**
-     * Return the chosen item's description.
+     * Looks for a object with the given name in the players inventory or in the current place.
      *
      * @param objectName String
      * @return String description
      */
-    // TODO: Do something here but not returning null.
     public GameObject findGameObject(String objectName) {
+    	for (Passage passage : character.getCurrentPlace().getPassages()) {
+			if(passage.getName().equals(objectName)) {
+				return passage;
+			}
+		}
+    	
+    	for (Item item : character.getCurrentPlace().getItemsOnTheFloor()) {
+    		if(item.getName().equals(objectName)) {
+    			return item;
+    		}
+		}
+    	
+    	for (Item item2 : character.getItemsInInventory()) {
+			if(item2.getName().equals(objectName)) {
+				return item2;
+			}
+		}
+    	
     	return null;
     }
 
