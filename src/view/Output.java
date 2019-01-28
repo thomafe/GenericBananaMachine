@@ -95,7 +95,7 @@ public class Output {
   public void listPassages() {
     StringBuilder passages = new StringBuilder();
 
-    passages.append("These passages lead out of the room:\n");
+    passages.append("These passages lead out of "+ control.getCharacter().getCurrentPlace().getName()+":\n");
     for (Passage passage : control.getCharacter().getCurrentPlace().getPassages()) {
       passages.append(" - " + passage.getName() + "\n");
     }
