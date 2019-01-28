@@ -56,6 +56,7 @@ public class Input {
         //matching with TAKE ITEM NAME
         if(matcherTakeItem.find()){
             control.pickUpItem(matcherTakeItem.group(1));
+            out.doOutput("You have successfully picked up " + matcherTakeItem.group(1));
 
         //matching with USE PASSAGE NAME
         }else if (matcherUsePassage.find()){

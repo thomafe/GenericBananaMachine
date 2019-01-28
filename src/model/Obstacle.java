@@ -28,7 +28,6 @@ public class Obstacle extends GameObject{
 	 * @return boolean
 	 */
 	public boolean tryToUseItem(Item itemToTry) {
-		// TODO check for correct Item, return correct value
 		// return true if correct item
 		if (requiredItem.equals(itemToTry)){
 			return true;
