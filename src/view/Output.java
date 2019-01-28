@@ -45,8 +45,11 @@ public class Output {
 		StringBuilder options = new StringBuilder();
 
 		options.append("You can do these things:\n");
-		for (String action : ACTIONS) {
-			options.append(" - " + action + "\n");
+		for (int i = 0 ; i < ACTIONS.length ; i++) {
+			options.append(ACTIONS[i]);
+			if(i != ACTIONS.length - 1) {
+				options.append(" | ");
+			}
 		}
 
 		doOutput(options.toString());
