@@ -108,15 +108,14 @@ public class Control {
 	public boolean pickUpItem (String itemName) {
 		boolean success = false;
 		
-		GameObject itemToPickUp = findGameObject(itemName);
+		Item itemToPickUp = findItem(itemName);
 		
-		if(itemToPickUp instanceof Item) {
-			// TODO duplicate check for the item itself
+		if(itemToPickUp != null) {
 			character.takeItem((Item)itemToPickUp);
-			
+
 			success = true;
 		}
-    	
+			
         return success;
     }
 
@@ -129,6 +128,7 @@ public class Control {
     public GameObject findGameObject(String objectName) {
     	for (Passage passage : character.getCurrentPlace().getPassages()) {
 			if(passage.getName().equals(objectName)) {
+				// TODO refactor to its own passage
 				return passage;
 			}
 		}
@@ -146,6 +146,18 @@ public class Control {
 		}
     	
     	return null;
+    }
+    
+    private Item findItem(String itemName) {
+		Item foundItem = null;
+    	
+    	for (Item item : character.getCurrentPlace().getItemsOnTheFloor()) {
+			if(item.getName().equalsIgnoreCase(itemName)) {
+				foundItem = item;
+			}
+		}
+    	
+    	return foundItem;
     }
 
 	/**

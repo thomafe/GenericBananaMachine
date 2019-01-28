@@ -42,7 +42,7 @@ public class Character {
 		for (int i=0; i< itemsOnTheFloor.size(); i++){
 
 			itemsOnTheFloor.get(i);
-
+			
 			if (itemToPickUp.equals(itemsOnTheFloor.get(i))){
 
 				itemsInInventory.add(itemToPickUp);
