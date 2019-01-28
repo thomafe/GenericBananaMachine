@@ -100,36 +100,51 @@ public class Control {
     }
 
 	/**
-	 * TODO: Get specific item by itemName parameter and return something but not boolean.
+	 * Tells the character to pick up an item
 	 *
 	 * @param itemName String
 	 * @return boolean
 	 */
 	public boolean pickUpItem (String itemName) {
-    	character.getCurrentPlace().getItemsOnTheFloor();
+		boolean success = false;
+		
+		GameObject itemToPickUp = findGameObject(itemName);
+		
+		if(itemToPickUp instanceof Item) {
+			// TODO duplicate check for the item itself
+			character.takeItem((Item)itemToPickUp);
+			
+			success = true;
+		}
     	
-        return true;
+        return success;
     }
 
     /**
-     * Return the currents Place's description.
-     *
-     * @return String description
-     */
-    @Deprecated
-    public String lookAtCurrentPlace () {
-    	// TODO will be done in Output
-        return character.getCurrentPlace().getDescription();
-    }
-
-    /**
-     * Return the chosen item's description.
+     * Looks for a object with the given name in the players inventory or in the current place.
      *
      * @param objectName String
      * @return String description
      */
-    // TODO: Do something here but not returning null.
     public GameObject findGameObject(String objectName) {
+    	for (Passage passage : character.getCurrentPlace().getPassages()) {
+			if(passage.getName().equals(objectName)) {
+				return passage;
+			}
+		}
+    	
+    	for (Item item : character.getCurrentPlace().getItemsOnTheFloor()) {
+    		if(item.getName().equals(objectName)) {
+    			return item;
+    		}
+		}
+    	
+    	for (Item item2 : character.getItemsInInventory()) {
+			if(item2.getName().equals(objectName)) {
+				return item2;
+			}
+		}
+    	
     	return null;
     }
 
@@ -143,7 +158,7 @@ public class Control {
     	Passage foundPassage = null;
     	
     	for (Passage passage : character.getCurrentPlace().getPassages()) {
-			if(passage.getName().equals(passageName)) {
+			if(passage.getName().equalsIgnoreCase(passageName)) {
 				foundPassage = passage;
 				break;
 			}

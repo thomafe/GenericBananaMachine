@@ -11,7 +11,7 @@ public class Input {
     //Pattern for TAKE ITEM
     Pattern patternTakeItem = Pattern.compile("[a-z\\s]*take\\s([a-z\\s]+)");
     //Pattern for USE PASSAGE NAME
-    Pattern patternUsePassage = Pattern.compile("[a-z\\s]*use\\s([a-z]+)");
+    Pattern patternUsePassage = Pattern.compile("[a-z\\s]*use\\s([a-z\\s]+)");
     //Pattern for LOOK AT PLACE
     Pattern patternLookAtPlace = Pattern.compile("[a-z\\s]*look\\s[a-z\\s]*around\\s*[a-z\\s]*");
     //Pattern for LOOK AT anything
@@ -30,8 +30,9 @@ public class Input {
      *
      * @param output Output
      */
-    public Input (Output output) {
+    public Input (Output output, Control control) {
         out = output;
+        this.control = control;
     }
 
     /**

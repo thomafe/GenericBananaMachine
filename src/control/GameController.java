@@ -3,7 +3,6 @@ package control;
 import model.*;
 import view.*;
 
-
 import model.Character;
 import java.util.Scanner;
 
@@ -16,67 +15,87 @@ public class GameController {
 
     }
 
-    private static void initGame () {
+//    private static void initGame () {
+//
+//        Scanner scanner = new Scanner(System.in);
+//
+//
+//        Place entrance = new Place("Entrance", "This is your starting area.");
+//        Place secondRoom = new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
+//        Place thirdRoom = new Place("Lighthouse", "You can't see anything in here because the light is blinding.");
+//
+//        Character character = new Character(entrance);
+//
+//        Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed", entrance, secondRoom);
+//        Passage pas2 = new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom, thirdRoom);
+//        Item item1 = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
+//        Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
+//        entrance.addItemOnTheFloor(item1);
+//        secondRoom.addItemOnTheFloor(item2);
+//
+//        entrance.addPassage(pas1);
+//        secondRoom.addPassage(pas2);
+//
+//		// initialize basic game settings
+//		initGame();
+//
+//	}
 
-        Scanner scanner = new Scanner(System.in);
+	private static void initGame() {
 
+		Scanner scanner = new Scanner(System.in);
 
-        Place entrance = new Place("Entrance", "This is your starting area.");
-        Place secondRoom = new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
-        Place thirdRoom = new Place("Lighthouse", "You can't see anything in here because the light is blinding.");
+		Place entrance = new Place("Entrance", "This is your starting area.");
+		Place secondRoom = new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
+		Place thirdRoom = new Place("Lighthouse", "You can't see anything in here because the light is blinding.");
 
-        Character character = new Character(entrance);
+		Character character = new Character(entrance);
 
-        Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed", entrance, secondRoom);
-        Passage pas2 = new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom, thirdRoom);
-        Item item1 = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
-        Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
-        entrance.addItemOnTheFloor(item1);
-        secondRoom.addItemOnTheFloor(item2);
+		Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed", entrance, secondRoom);
+		Passage pas2 = new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom,
+				thirdRoom);
+		Item item1 = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
+		Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
+		entrance.addItemOnTheFloor(item1);
+		secondRoom.addItemOnTheFloor(item2);
 
-        entrance.addPassage(pas1);
-        secondRoom.addPassage(pas2);
+		entrance.addPassage(pas1);
+		secondRoom.addPassage(pas1);
+		secondRoom.addPassage(pas2);
 
-        Control ctrl = new Control(character);
+		Control ctrl = new Control(character);
 
-        // TODO output describe place
-        Output output= new Output(ctrl);
+		// TODO output describe place
+		Output output = new Output(ctrl);
+		Input input = new Input(output, ctrl);
 
-        output.greeting();
-        output.lookAtCurrentPlace();
+		output.greeting();
+		do {
+			output.lookAtCurrentPlace();
 
-        // TODO output list options
-         output.listOptions();
+			// TODO output list options
+			output.listOptions();
 
-         // TODO input take
+			// TODO input take
 
-        Input input = new Input(output);
+			input.readInput();
 
-        while (true){
-            input.readInput();
-        }
+		} while (true);
 
+		/*
+		 * 
+		 * // character tries to take item from floor character.takeItem(item1);
+		 * 
+		 * // character calls List of Inventory for(Item item:
+		 * character.getItemsInInventory()) {
+		 * 
+		 * System.out.println(item.getName()); }
+		 */
 
+		// character tries to move
+		// TODO: character tries to move and if success he moves to the next place.
 
-        /*
-
-        // character tries to take item from floor
-        character.takeItem(item1);
-
-         // character calls List of Inventory
-        for(Item item: character.getItemsInInventory()) {
-
-            System.out.println(item.getName());
-        }
-        */
-
-        // character tries to move
-        // TODO: character tries to move and if success he moves to the next place.
-
-
-
-
-        // TODO: create further objects and connections between Places and Obstacles
-    }
+		// TODO: create further objects and connections between Places and Obstacles
+	}
 
 }
