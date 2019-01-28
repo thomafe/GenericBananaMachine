@@ -63,9 +63,6 @@ public class GameController {
 		entrance.addItemOnTheFloor(item1);
 		secondRoom.addItemOnTheFloor(item2);
 
-		entrance.addPassage(pas1);
-		secondRoom.addPassage(pas2);
-
 		Control ctrl = new Control(character);
 		
 		// TODO do all this IN control to avoid this weird constructor mess?
