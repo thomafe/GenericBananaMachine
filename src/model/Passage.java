@@ -6,9 +6,9 @@ public class Passage extends GameObject{
 
 
 	// attribute
-	public Place[] connectingRooms = new Place[2];
+	private Place[] connectingRooms = new Place[2];
 
-	public Obstacle obstacle = null;
+	private Obstacle obstacle = null;
 
 
 	/**
