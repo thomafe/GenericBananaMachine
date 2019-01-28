@@ -100,26 +100,24 @@ public class Control {
     }
 
 	/**
-	 * TODO: Get specific item by itemName parameter and return something but not boolean.
+	 * Tells the character to pick up an item
 	 *
 	 * @param itemName String
 	 * @return boolean
 	 */
 	public boolean pickUpItem (String itemName) {
-    	character.getCurrentPlace().getItemsOnTheFloor();
+		boolean success = false;
+		
+		GameObject itemToPickUp = findGameObject(itemName);
+		
+		if(itemToPickUp instanceof Item) {
+			// TODO duplicate check for the item itself
+			character.takeItem((Item)itemToPickUp);
+			
+			success = true;
+		}
     	
-        return true;
-    }
-
-    /**
-     * Return the currents Place's description.
-     *
-     * @return String description
-     */
-    @Deprecated
-    public String lookAtCurrentPlace () {
-    	// TODO will be done in Output
-        return character.getCurrentPlace().getDescription();
+        return success;
     }
 
     /**
