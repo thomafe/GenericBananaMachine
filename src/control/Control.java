@@ -74,20 +74,20 @@ public class Control {
     	boolean obstacleResolved = false;
     	boolean continueTrying = true;
     	
-    	GameObject chosenObject = null;
+    	Item choosenItem = null;
     	
     	while(continueTrying) {
     		out.listOptionsObstacleInteraction(currentObstacle);
 
-    		chosenObject = findGameObject(in.readInSingleLine());
+    		choosenItem = findItemInInventory(in.readInSingleLine());
     		
-    		if(chosenObject == null) {
+    		if(choosenItem == null) {
     			out.doOutput("You go back");
     			break;
     		}
     		
-    		if(chosenObject instanceof Item && currentObstacle.tryToUseItem((Item)chosenObject)) {
-    			((Item)chosenObject).consume();
+    		if(currentObstacle.tryToUseItem(choosenItem)) {
+    			((Item)choosenItem).consume();
     			// resolute obstacle
     			obstacleResolved = true;
     			continueTrying = false;
@@ -108,7 +108,7 @@ public class Control {
 	public boolean pickUpItem (String itemName) {
 		boolean success = false;
 		
-		Item itemToPickUp = findItem(itemName);
+		Item itemToPickUp = findItemOnTheFloor(itemName);
 		
 		if(itemToPickUp != null) {
 			character.takeItem((Item)itemToPickUp);
@@ -148,10 +148,34 @@ public class Control {
     	return null;
     }
     
-    private Item findItem(String itemName) {
+    /**
+     * Look for an item on the floor of the current room.
+     * 
+     * @param itemName
+     * @return
+     */
+    private Item findItemOnTheFloor(String itemName) {
 		Item foundItem = null;
     	
     	for (Item item : character.getCurrentPlace().getItemsOnTheFloor()) {
+			if(item.getName().equalsIgnoreCase(itemName)) {
+				foundItem = item;
+			}
+		}
+    	
+    	return foundItem;
+    }
+    
+    /**
+     * Look for item in characters inventory.
+     * 
+     * @param itemName
+     * @return
+     */
+    private Item findItemInInventory(String itemName) {
+		Item foundItem = null;
+    	
+    	for (Item item : character.getItemsInInventory()) {
 			if(item.getName().equalsIgnoreCase(itemName)) {
 				foundItem = item;
 			}
@@ -187,5 +211,21 @@ public class Control {
 	public Character getCharacter() {
     	return character;
     }
+	
+	/**
+	 * Setter for Output.
+	 * @param out
+	 */
+	public void setOutput(Output out) {
+		this.out = out;
+	}
+	
+	/**
+	 * Setter for Input.
+	 * @param in
+	 */
+	public void setInput(Input in) {
+		this.in = in;
+	}
 
 }
