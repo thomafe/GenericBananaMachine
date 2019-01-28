@@ -14,7 +14,7 @@ public class Obstacle extends GameObject{
 	 * @param description String
 	 * @param requiredItem Item
 	 */
-	public Obstacle(String name, String description, Item requiredItem) {
+	public Obstacle(String name, String description, String resolution, Item requiredItem) {
 		super(name, description);
 		this.requiredItem = requiredItem;
 		this.resolution = resolution;

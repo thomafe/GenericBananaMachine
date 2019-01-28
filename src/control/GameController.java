@@ -56,7 +56,7 @@ public class GameController {
 		Item item1 = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
 		Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
 		
-		Obstacle obstacle = new Obstacle("Blastdoor", "A thick blast door that blocks the way", item1);
+		Obstacle obstacle = new Obstacle("Blastdoor", "A thick blast door that blocks the way", "You melt through the door with your lightsaber!", item1);
 		
 		pas1.setObstacle(obstacle);
 		

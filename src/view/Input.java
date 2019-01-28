@@ -61,6 +61,7 @@ public class Input {
         //matching with USE PASSAGE NAME
         }else if (matcherUsePassage.find()){
             control.canMoveCharacter(matcherUsePassage.group(1));
+            out.lookAtCurrentPlace();
 
         //matching witch LOOK AT CURRENT PLACE
         }else if (matcherLookAtPlace.find()) {
