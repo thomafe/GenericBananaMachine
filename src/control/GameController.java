@@ -70,11 +70,12 @@ public class GameController {
 		Input input = new Input(output, ctrl);
 
 		output.greeting();
-		do {
-			output.lookAtCurrentPlace();
+        output.listOptions();
+        output.lookAtCurrentPlace();
 
+		do {
 			// TODO output list options
-			output.listOptions();
+
 
 			// TODO input take
 

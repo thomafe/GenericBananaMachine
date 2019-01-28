@@ -9,17 +9,17 @@ public class Input {
     Scanner scan = new Scanner(System.in);
 
     //Pattern for TAKE ITEM
-    Pattern patternTakeItem = Pattern.compile("[a-z\\s]*take\\s([a-z\\s]+)");
+    Pattern patternTakeItem = Pattern.compile("[a-zA-Z\\s]*[tT]ake\\s([a-zA-Z\\s]+)");
     //Pattern for USE PASSAGE NAME
-    Pattern patternUsePassage = Pattern.compile("[a-z\\s]*use\\s([a-z\\s]+)");
+    Pattern patternUsePassage = Pattern.compile("[a-zA-Z\\s]*[uU]se\\s([a-zA-Z\\s]+)");
     //Pattern for LOOK AT PLACE
-    Pattern patternLookAtPlace = Pattern.compile("[a-z\\s]*look\\s[a-z\\s]*around\\s*[a-z\\s]*");
+    Pattern patternLookAtPlace = Pattern.compile("[a-zA-Z\\s]*[lL]ook\\s[a-zA-Z\\s]*[aA]round\\s*[a-zA-Z\\s]*");
     //Pattern for LOOK AT anything
-    Pattern patternLookAt = Pattern.compile("[a-z\\s]*look\\s[a-z\\s]*at\\s([a-z]*)");
+    Pattern patternLookAt = Pattern.compile("[a-zA-Z\\s]*[lL]ook\\s[a-zA-Z\\s]*[aT]t\\s([a-zA-Z]*)");
     //Pattern for looking into INVENTORY
-    Pattern patternInventory = Pattern.compile("[a-z\\s]*inventory\\s*[a-z]*");
+    Pattern patternInventory = Pattern.compile("[a-zA-Z\\s]*[iI]nventory\\s*[a-zA-Z]*");
     //Pattern for getting a list of possible actions
-    Pattern patternActions = Pattern.compile("[a-z\\s]*actions\\s*[a-z\\s]*");
+    Pattern patternActions = Pattern.compile("[a-zA-Z\\s]*[aA]ctions\\s*[a-zA-Z\\s]*");
 
     //Creating Output and Control object for referencing
     Output out;
