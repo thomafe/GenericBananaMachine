@@ -4,81 +4,79 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Character {
-	
-	private Place currentPlace = null;
-	private List<Item> itemsInInventory = new ArrayList<>();
 
-	/**
-	 * Constructor.
-	 *
-	 * @param startingPlace Place
-	 */
-	public Character(Place startingPlace) {
-		itemsInInventory = new ArrayList<>();
-		currentPlace = startingPlace;
-	}
+  private Place currentPlace = null;
+  private List<Item> itemsInInventory = new ArrayList<>();
 
-	/**
-	 * Sets current Place to connected Place by passing a Passage.
-	 *
-	 * @param passage Passage
-	 */
-	// bei gang durch passage wird current place zum neuen place
-	public void move(Passage passage) {
-		currentPlace = passage.usePassage(currentPlace);
-	}
+  /**
+   * Constructor.
+   *
+   * @param startingPlace Place
+   */
+  public Character(Place startingPlace) {
+    itemsInInventory = new ArrayList<>();
+    currentPlace = startingPlace;
+  }
 
-	/**
-	 * Check if item is on the floor, if yes, take item and add to the item list. Picked up Item on the floor will be
-	 * removed from the floor.
-	 *
-	 * @param itemToPickUp Item
-	 */
-	public void takeItem(Item itemToPickUp) {
-		// check if item is in the room and remove from inventory
+  /**
+   * Sets current Place to connected Place by passing a Passage.
+   *
+   * @param passage Passage
+   */
+  // bei gang durch passage wird current place zum neuen place
+  public void move(Passage passage) {
+    currentPlace = passage.usePassage(currentPlace);
+  }
 
-		List<Item> itemsOnTheFloor = currentPlace.getItemsOnTheFloor();
+  /**
+   * Check if item is on the floor, if yes, take item and add to the item list. Picked up Item on
+   * the floor will be removed from the floor.
+   *
+   * @param itemToPickUp Item
+   */
+  public void takeItem(Item itemToPickUp) {
+    // check if item is in the room and remove from inventory
 
-		for (int i=0; i< itemsOnTheFloor.size(); i++){
+    List<Item> itemsOnTheFloor = currentPlace.getItemsOnTheFloor();
 
-			itemsOnTheFloor.get(i);
-			
-			if (itemToPickUp.equals(itemsOnTheFloor.get(i))){
+    for (int i = 0; i < itemsOnTheFloor.size(); i++) {
 
-				itemsInInventory.add(itemToPickUp);
-				currentPlace.removeItemFromPlace(itemsOnTheFloor.get(i));
+      itemsOnTheFloor.get(i);
 
-			} else {
-				// TODO: Output that no item is on the floor
-			}
-		}
-	}
+      if (itemToPickUp.equals(itemsOnTheFloor.get(i))) {
 
-	/**
-	 * Use Item to solve Obstocle.
-	 *
-	 * @param item
-	 */
-	public void useItem(Item item) {
-	}
+        itemsInInventory.add(itemToPickUp);
+        currentPlace.removeItemFromPlace(itemsOnTheFloor.get(i));
 
-	/**
-	 * Getter for current Place.
-	 *
-	 * @return Place
-	 */
-	public Place getCurrentPlace () {
+      } else {
+        // TODO: Output that no item is on the floor
+      }
+    }
+  }
 
-		return currentPlace;
-	}
-	
-	/**
-	 * Getter for items.
-	 * 
-	 * @return itemsInInventory
-	 */
-	public List<Item> getItemsInInventory() {
-		return itemsInInventory;
-	}
+  /**
+   * Use Item to solve Obstocle.
+   */
+  public void useItem(Item item) {
+  }
+
+  /**
+   * Getter for current Place.
+   *
+   * @return Place
+   */
+  public Place getCurrentPlace() {
+
+    return currentPlace;
+  }
+
+  /**
+   * Getter for items.
+   *
+   * @return itemsInInventory
+   */
+  public List<Item> getItemsInInventory() {
+    return itemsInInventory;
+  }
 
 }
