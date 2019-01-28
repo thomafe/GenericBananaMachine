@@ -71,10 +71,9 @@ public class GameController {
 
 		output.greeting();
         output.listOptions();
-        
-		do {
-			output.lookAtCurrentPlace();
+        output.lookAtCurrentPlace();
 
+		do {
 			// TODO output list options
 
 
