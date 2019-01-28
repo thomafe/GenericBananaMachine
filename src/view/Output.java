@@ -11,21 +11,22 @@ import model.Place;
 
 public class Output {
 
-    private Control control;
-    
+	private Control control;
+
 	// private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory",
 	// "Go through"};
-	private static final String[] ACTIONS = { "Look at <someting>", "Look around", "Use <Passage Name>", "Inventory",
-			"Actions" };
+	private static final String[] ACTIONS = { "Look at <someting>", "Look around", "Use <Passage Name>",
+			"Take <Item Name>", "Inventory", "Actions" };
 
 	/**
 	 * Constructor.
 	 *
-	 * @param contoller Control
+	 * @param contoller
+	 *            Control
 	 */
-    public Output(Control contoller){
-        control= contoller;
-    }
+	public Output(Control contoller) {
+		control = contoller;
+	}
 
 	/**
 	 * Introduction for the player at the start of the game.
@@ -45,9 +46,9 @@ public class Output {
 		StringBuilder options = new StringBuilder();
 
 		options.append("You can do these things:\n");
-		for (int i = 0 ; i < ACTIONS.length ; i++) {
+		for (int i = 0; i < ACTIONS.length; i++) {
 			options.append(ACTIONS[i]);
-			if(i != ACTIONS.length - 1) {
+			if (i != ACTIONS.length - 1) {
 				options.append(" | ");
 			}
 		}
@@ -141,9 +142,11 @@ public class Output {
 	// public void lookAtGameObject()
 
 	/**
-	 * Shows GameObject's name / description in console or gives User an Exception if no such item exists.
+	 * Shows GameObject's name / description in console or gives User an Exception
+	 * if no such item exists.
 	 *
-	 * @param objectName String
+	 * @param objectName
+	 *            String
 	 */
 	public void lookAtGameObject(String objectName) {
 		GameObject object = control.findGameObject(objectName);
@@ -163,10 +166,11 @@ public class Output {
 	/**
 	 * Output a committed message in console.
 	 *
-	 * @param message String
+	 * @param message
+	 *            String
 	 */
 	public void doOutput(String message) {
 		System.out.println(message);
 	}
-    
+
 }
