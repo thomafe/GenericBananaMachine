@@ -14,14 +14,64 @@ public class Control {
 	private Input in;
 	private Output out;
 
-    private Character character = null;
+  public static void main (String[] args) {
+
+    // initialize basic game settings
+    initGame();
+  }
+
+  private static void initGame() {
+
+    Place entrance = new Place("Entrance", "This is your starting area.");
+    Place secondRoom = new Place("Hall of Doom",
+        "This is the final Boss Room...not. It just sounds cool.");
+    Place thirdRoom = new Place("Lighthouse",
+        "You can't see anything in here because the light is blinding.");
+
+    Character character = new Character(entrance);
+
+    Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed",
+        entrance, secondRoom);
+    Passage pas2 = new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz",
+        secondRoom,
+        thirdRoom);
+
+    Item item1 = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
+    Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
+
+    Obstacle obstacle = new Obstacle("Blastdoor", "A thick blast door that blocks the way",
+        "You melt through the door with your lightsaber!", item1);
+
+    pas1.setObstacle(obstacle);
+
+    entrance.addItemOnTheFloor(item1);
+    secondRoom.addItemOnTheFloor(item2);
+
+    Control ctrl = new Control(character);
+    ctrl.gameStart();
+
+    do {
+
+      ctrl.getInput().readInput();
+
+    } while (true);
+
+  }
+
+      private Character character = null;
 
     /**
      * Construct for Control
      */
     public Control (Character pCharacter) {
 
-        character = pCharacter;
+      character = pCharacter;
+      Output output = new Output(this);
+      Input input = new Input(output, this);
+
+      this.setOutput(output);
+      this.setInput(input);
+
     }
     
     /**
@@ -191,17 +241,23 @@ public class Control {
 	 * @return Passage
 	 */
 	private Passage findPassage(String passageName) {
-    	Passage foundPassage = null;
+	  Passage foundPassage = null;
     	
-    	for (Passage passage : character.getCurrentPlace().getPassages()) {
-			if(passage.getName().equalsIgnoreCase(passageName)) {
-				foundPassage = passage;
+	  for (Passage passage : character.getCurrentPlace().getPassages()) {
+	    if(passage.getName().equalsIgnoreCase(passageName)) {
+	      foundPassage = passage;
 				break;
 			}
 		}
-    	
     	return foundPassage;
     }
+
+  public void gameStart(){
+    this.getOutput().greeting();
+    this.getOutput().listOptions();
+    this.getOutput().lookAtCurrentPlace();
+
+  }
 
 	/**
 	 * Getter for Character.
@@ -219,6 +275,14 @@ public class Control {
 	public void setOutput(Output out) {
 		this.out = out;
 	}
+
+  /**
+   * Getter for Output
+   * @return out
+   */
+	public Output getOutput(){
+	  return out;
+  }
 	
 	/**
 	 * Setter for Input.
@@ -227,5 +291,13 @@ public class Control {
 	public void setInput(Input in) {
 		this.in = in;
 	}
+
+  /**
+   * Getter for Input
+   * @return in
+   */
+	public Input getInput(){
+	  return in;
+  }
 
 }
