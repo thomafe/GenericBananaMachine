@@ -32,7 +32,7 @@ public class Output {
 	 *
 	 */
 	public void greeting() {
-		System.out.println("Hello fellow Player, welcome to your gobsmacking adventure!");
+		doOutput("Hello fellow Player, welcome to your gobsmacking adventure!");
 	}
 
 	// TODO replace "room" in all the strings with currentPlace.getName()
