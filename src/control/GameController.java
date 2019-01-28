@@ -64,7 +64,6 @@ public class GameController {
 		secondRoom.addItemOnTheFloor(item2);
 
 		entrance.addPassage(pas1);
-		secondRoom.addPassage(pas1);
 		secondRoom.addPassage(pas2);
 
 		Control ctrl = new Control(character);
