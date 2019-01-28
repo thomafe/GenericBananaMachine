@@ -68,7 +68,7 @@ public class Output {
 		} else {
 			StringBuilder itemsOutput = new StringBuilder();
 
-			itemsOutput.append("These items are in the room:\n");
+			itemsOutput.append("These items are"  + control.getCharacter().getCurrentPlace().getName() +": \n");
 			for (Item item : itemsInPlace) {
 				itemsOutput.append(" - " + item.getName() + "\n");
 			}
