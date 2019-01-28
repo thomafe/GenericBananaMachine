@@ -81,10 +81,7 @@ public class GameController {
         output.lookAtCurrentPlace();
 
 		do {
-			// TODO output list options
 
-
-			// TODO input take
 
 			input.readInput();
 
@@ -101,9 +98,7 @@ public class GameController {
 		 */
 
 		// character tries to move
-		// TODO: character tries to move and if success he moves to the next place.
-
-		// TODO: create further objects and connections between Places and Obstacles
+		
 	}
 
 }
