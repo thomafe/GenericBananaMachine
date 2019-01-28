@@ -68,7 +68,11 @@ public class Output {
 		} else {
 			StringBuilder itemsOutput = new StringBuilder();
 
+<<<<<<< HEAD
 			itemsOutput.append("These items are"  + control.getCharacter().getCurrentPlace().getName() +": \n");
+=======
+			itemsOutput.append("These items are in the room:\n");
+>>>>>>> parent of 6b5c28c... code style and changes to control
 			for (Item item : itemsInPlace) {
 				itemsOutput.append(" - " + item.getName() + "\n");
 			}
@@ -172,6 +176,7 @@ public class Output {
 	public void doOutput(String message) {
 		System.out.println(message);
 	}
+<<<<<<< HEAD
   private Control control;
 
   // private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory",
@@ -325,5 +330,7 @@ public class Output {
   public void doOutput(String message) {
     System.out.println(message);
   }
+=======
+>>>>>>> parent of 6b5c28c... code style and changes to control
 
 }
