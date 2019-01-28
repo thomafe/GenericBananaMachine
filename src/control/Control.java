@@ -130,7 +130,7 @@ public class Control {
     	Passage foundPassage = null;
     	
     	for (Passage passage : character.getCurrentPlace().getPassages()) {
-			if(passage.getName().equals(passageName)) {
+			if(passage.getName().equalsIgnoreCase(passageName)) {
 				foundPassage = passage;
 				break;
 			}
