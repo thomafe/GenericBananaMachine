@@ -69,7 +69,11 @@ public class Output {
 			StringBuilder itemsOutput = new StringBuilder();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			itemsOutput.append("These items are"  + control.getCharacter().getCurrentPlace().getName() +": \n");
+=======
+			itemsOutput.append("These items are in the room:\n");
+>>>>>>> parent of 6b5c28c... code style and changes to control
 =======
 			itemsOutput.append("These items are in the room:\n");
 >>>>>>> parent of 6b5c28c... code style and changes to control
@@ -176,6 +180,7 @@ public class Output {
 	public void doOutput(String message) {
 		System.out.println(message);
 	}
+<<<<<<< HEAD
 <<<<<<< HEAD
   private Control control;
 
@@ -330,6 +335,8 @@ public class Output {
   public void doOutput(String message) {
     System.out.println(message);
   }
+=======
+>>>>>>> parent of 6b5c28c... code style and changes to control
 =======
 >>>>>>> parent of 6b5c28c... code style and changes to control
 
