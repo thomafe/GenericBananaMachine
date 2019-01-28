@@ -34,8 +34,7 @@ public class Output {
   public void greeting() {
     doOutput("Hello fellow Player, welcome to your gobsmacking adventure!");
   }
-
-  // TODO replace "room" in all the strings with currentPlace.getName()
+  
 
   /**
    * List all things the character can do. - Look at something - Look into Inventory - Go through
