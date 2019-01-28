@@ -28,7 +28,7 @@ public class Control {
      * check if passage is successable. If an Obstacle is included, return false.
      * If Passage does not include an Obstacle, Character can move to connected Room -> return true and move Character.
      *
-     * @param passageName
+     * @param passageName String
      * @return boolean
      */
     public boolean canMoveCharacter (String passageName) {
@@ -56,7 +56,7 @@ public class Control {
      * Check if destinated Passage has Obstacle in it.
      * If yes, return true, else false.
      *
-     * @param destinationPassage
+     * @param destinationPassage Passage
      * @return boolean
      */
     public boolean checkForObstacle (Passage destinationPassage) {
@@ -99,7 +99,13 @@ public class Control {
     	return obstacleResolved;
     }
 
-    public boolean pickUpItem (String itemName) {
+	/**
+	 * TODO: Get specific item by itemName parameter and return something but not boolean.
+	 *
+	 * @param itemName String
+	 * @return boolean
+	 */
+	public boolean pickUpItem (String itemName) {
     	character.getCurrentPlace().getItemsOnTheFloor();
     	
         return true;
@@ -119,14 +125,21 @@ public class Control {
     /**
      * Return the chosen item's description.
      *
-     * @param gameObject
+     * @param objectName String
      * @return String description
      */
+    // TODO: Do something here but not returning null.
     public GameObject findGameObject(String objectName) {
     	return null;
     }
-    
-    private Passage findPassage(String passageName) {
+
+	/**
+	 * Returns found Passage after searching it in the current Place where the Character currently is inside.
+	 *
+	 * @param passageName String
+	 * @return Passage
+	 */
+	private Passage findPassage(String passageName) {
     	Passage foundPassage = null;
     	
     	for (Passage passage : character.getCurrentPlace().getPassages()) {
@@ -138,8 +151,13 @@ public class Control {
     	
     	return foundPassage;
     }
-    
-    public Character getCharacter() {
+
+	/**
+	 * Getter for Character.
+	 *
+	 * @return Character
+	 */
+	public Character getCharacter() {
     	return character;
     }
 

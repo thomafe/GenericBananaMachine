@@ -25,14 +25,19 @@ public class Input {
     Output out;
     Control control = null;
 
-    public Input (Output output, Control control) {
+    /**
+     * Constructor.
+     *
+     * @param output Output
+     */
+    public Input (Output output) {
         out = output;
         this.control = control;
     }
 
     /**
-     * reads the user input and matches it with the patterns
-     * calls methods from Output or Control
+     * Reads the user input and matches it with the patterns.
+     * Calls methods from Output or Control.
      *
      */
     public void readInput(){
@@ -46,10 +51,8 @@ public class Input {
         Matcher matcherActions = patternActions.matcher(userInput);
         Matcher matcherLookAtPlace = patternLookAtPlace.matcher(userInput);
 
-        /**
-         * matches the user input with the patterns
-         *
-         */
+        // matches the user input with the patterns
+
         //matching with TAKE ITEM NAME
         if(matcherTakeItem.find()){
             control.pickUpItem(matcherTakeItem.group(1));
@@ -82,6 +85,12 @@ public class Input {
             out.listOptions();
         }
     }
+
+    /**
+     * Returns Scanner new Line method.
+     *
+     * @return Scanner
+     */
     public String readInSingleLine(){
         return scan.nextLine();
     }

@@ -18,12 +18,19 @@ public class Output {
 	private static final String[] ACTIONS = { "Look at <someting>", "Look around", "Use <Passage Name>", "Inventory",
 			"Actions" };
 
+	/**
+	 * Constructor.
+	 *
+	 * @param contoller Control
+	 */
     public Output(Control contoller){
-
         control= contoller;
     }
 
-	// Introduction for the player at the start of the game
+	/**
+	 * Introduction for the player at the start of the game.
+	 *
+	 */
 	public void greeting() {
 		System.out.println("Hello fellow Player, welcome to your gobsmacking adventure!");
 	}
@@ -113,8 +120,8 @@ public class Output {
 	}
 
 	/**
-	 * Look at the currentPlace
-	 * 
+	 * Look at the currentPlace.
+	 *
 	 */
 	public void lookAtCurrentPlace() {
 		Place currentPlace = control.getCharacter().getCurrentPlace();
@@ -131,8 +138,9 @@ public class Output {
 	// public void lookAtGameObject()
 
 	/**
-	 * 
-	 * @param number
+	 * Shows GameObject's name / description in console or gives User an Exception if no such item exists.
+	 *
+	 * @param objectName String
 	 */
 	public void lookAtGameObject(String objectName) {
 		GameObject object = control.findGameObject(objectName);
@@ -149,6 +157,11 @@ public class Output {
 		}
 	}
 
+	/**
+	 * Output a committed message in console.
+	 *
+	 * @param message String
+	 */
 	public void doOutput(String message) {
 		System.out.println(message);
 	}
