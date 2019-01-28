@@ -30,7 +30,7 @@ public class Input {
      *
      * @param output Output
      */
-    public Input (Output output) {
+    public Input (Output output, Control control) {
         out = output;
         this.control = control;
     }
