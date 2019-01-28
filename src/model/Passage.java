@@ -24,6 +24,8 @@ public class Passage extends GameObject{
 		super(name, description);
 		this.connectingRooms[0] = place1;
 		this.connectingRooms[1]= place2;
+		place1.addPassage(this);
+		place2.addPassage(this);
 	}
 
 	/**
