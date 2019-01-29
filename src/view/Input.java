@@ -17,7 +17,7 @@ public class Input {
   Pattern patternLookAtPlace =
       Pattern.compile("[a-zA-Z\\s]*[lL]ook\\s[a-zA-Z\\s]*[aA]round\\s*[a-zA-Z\\s]*");
   // Pattern for LOOK AT anything
-  Pattern patternLookAt = Pattern.compile("[a-zA-Z\\s]*[lL]ook\\s[a-zA-Z\\s]*[aT]t\\s([a-zA-Z]*)");
+  Pattern patternLookAt = Pattern.compile("[a-zA-Z\\s]*[lL]ook\\s[a-zA-Z\\s]*[aT]t\\s([a-zA-Z\\s]*)");
   // Pattern for looking into INVENTORY
   Pattern patternInventory = Pattern.compile("[a-zA-Z\\s]*[iI]nventory\\s*[a-zA-Z]*");
   // Pattern for getting a list of possible actions
@@ -56,8 +56,13 @@ public class Input {
 
     // matching with TAKE ITEM NAME
     if (matcherTakeItem.find()) {
-      control.pickUpItem(matcherTakeItem.group(1));
-      out.doOutput("You have successfully picked up " + matcherTakeItem.group(1));
+      if(control.pickUpItem(matcherTakeItem.group(1))) {
+        out.doOutput("You have successfully picked up " + matcherTakeItem.group(1));
+      } else {
+        // TODO make a method for this output - and others like it
+        out.doOutput("That doesn't work");
+      }
+
 
       // matching with USE PASSAGE NAME
     } else if (matcherUsePassage.find()) {

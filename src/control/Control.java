@@ -58,8 +58,10 @@ public class Control {
 
   }
 
+  /**
+   * Contains the main game loop
+   */
   private void runGame() {
-
     gameIntroduction();
 
     // Game Loop
@@ -82,8 +84,13 @@ public class Control {
     boolean passageClear = false;
 
     Passage destinationPassage = findPassage(passageName);
+    
+    if(destinationPassage == null) {
+      out.doOutput("There is no passage called " + passageName);
+      return passageClear;
+    }
 
-    if (destinationPassage != null && this.checkForObstacle(destinationPassage)) {
+    if (this.checkForObstacle(destinationPassage)) {
       passageClear = interactWithObstacle(destinationPassage.getObstacle());
     }
 
@@ -94,16 +101,6 @@ public class Control {
       return false;
     }
 
-  }
-
-  /**
-   * Check if destinated Passage has Obstacle in it. If yes, return true, else false.
-   *
-   * @param destinationPassage Passage
-   * @return boolean
-   */
-  public boolean checkForObstacle(Passage destinationPassage) {
-    return destinationPassage.hasObstacle();
   }
 
   /**
@@ -197,7 +194,7 @@ public class Control {
    * @param passageName String
    * @return Passage
    */
-  public Passage findPassage(String passageName) {
+  private Passage findPassage(String passageName) {
     Passage foundPassage = null;
 
     for (Passage passage : character.getCurrentPlace().getPassages()) {
@@ -215,7 +212,7 @@ public class Control {
    * @param itemName
    * @return the found item or null if there was no such item
    */
-  public Item findItemOnTheFloor(String itemName) {
+  private Item findItemOnTheFloor(String itemName) {
     Item foundItem = null;
 
     for (Item item : character.getCurrentPlace().getItemsOnTheFloor()) {
@@ -234,7 +231,7 @@ public class Control {
    * @param itemName
    * @return the found item or null if there was no such item
    */
-  public Item findItemInInventory(String itemName) {
+  private Item findItemInInventory(String itemName) {
     Item foundItem = null;
 
     for (Item item : character.getItemsInInventory()) {
@@ -246,12 +243,22 @@ public class Control {
 
     return foundItem;
   }
+  
+  /**
+   * Check if destinated Passage has Obstacle in it. If yes, return true, else false.
+   *
+   * @param destinationPassage Passage
+   * @return boolean
+   */
+  private boolean checkForObstacle(Passage destinationPassage) {
+    return destinationPassage.hasObstacle();
+  }
 
   /**
    * Is run once at game start to introduce the player to the game.
    *
    */
-  public void gameIntroduction() {
+  private void gameIntroduction() {
     out.greeting();
     out.listOptions();
     out.lookAtCurrentPlace();

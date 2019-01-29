@@ -143,7 +143,7 @@ public class Output {
     GameObject object = control.findGameObject(objectName);
 
     if (object == null) {
-      doOutput("There is no " + objectName + "here.");
+      doOutput("There is no " + objectName + " here.");
     } else {
       StringBuilder gameObjectDescription = new StringBuilder();
 
