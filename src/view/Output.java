@@ -33,8 +33,7 @@ public class Output {
   public void greeting() {
     doOutput("Hello fellow Player, welcome to your gobsmacking adventure!");
   }
-
-  // TODO replace "room" in all the strings with currentPlace.getName()
+  
 
   /**
    * List all things the character can do. - Look at something - Look into Inventory - Go through
@@ -65,7 +64,7 @@ public class Output {
     } else {
       StringBuilder itemsOutput = new StringBuilder();
 
-      itemsOutput.append("These items are in the room:\n");
+      itemsOutput.append("These items are in "+control.getCharacter().getCurrentPlace().getName() +": \n");
       for (Item item : itemsInPlace) {
         itemsOutput.append(" - " + item.getName() + "\n");
       }
@@ -94,7 +93,7 @@ public class Output {
   public void listPassages() {
     StringBuilder passages = new StringBuilder();
 
-    passages.append("These passages lead out of the room:\n");
+    passages.append("These passages lead out of "+ control.getCharacter().getCurrentPlace().getName()+":\n");
     for (Passage passage : control.getCharacter().getCurrentPlace().getPassages()) {
       passages.append(" - " + passage.getName() + "\n");
     }
