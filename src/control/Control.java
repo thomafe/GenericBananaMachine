@@ -260,9 +260,18 @@ public class Control {
    */
   private void gameIntroduction() {
     out.greeting();
-    out.listOptions();
-    out.lookAtCurrentPlace();
+		out.lookAtCurrentPlace();
+		out.listOptions();
+
   }
+
+	/**
+	 * Is run at the end of the game
+	 */
+
+	private void gameEnding(){
+  	out.ending();
+	}
 
   /**
    * Getter for Character.
