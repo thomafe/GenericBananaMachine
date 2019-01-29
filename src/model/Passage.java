@@ -83,11 +83,7 @@ public class Passage extends GameObject {
    */
   public boolean hasObstacle() {
 
-    if (obstacle != null) {
-      return true;
-    } else {
-      return false;
-    }
+    return obstacle != null;
   }
 
 }

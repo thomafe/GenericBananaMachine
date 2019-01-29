@@ -70,7 +70,10 @@ public class Obstacle extends GameObject {
   /**
    * Sets state of obstacle to true.
    */
-  public void resolved() {
+  public void resolve(Item itemToResolve) {
     this.resolved = true;
+    
+    itemToResolve.consume();
   }
+  
 }

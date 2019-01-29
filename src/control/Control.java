@@ -27,14 +27,12 @@ public class Control {
    * 
    */
   private void initGame() {
-
+    // Game World
     Place entrance = new Place("Entrance", "This is your starting area.");
     Place secondRoom =
         new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
     Place thirdRoom =
         new Place("Lighthouse", "You can't see anything in here because the light is blinding.");
-
-    Character character = new Character(entrance);
 
     Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed",
         entrance, secondRoom);
@@ -51,6 +49,9 @@ public class Control {
 
     entrance.addItemOnTheFloor(item1);
     secondRoom.addItemOnTheFloor(item2);
+    
+    // Other objects
+    character = new Character(entrance);
 
     out = new Output(this);
     in = new Input(out, this);
@@ -77,10 +78,12 @@ public class Control {
    * @param destinationPassage
    * @return whether the character moved r not
    */
-  public boolean tryToMoveThroughPassage(Passage destinationPassage) {
+  public boolean tryToMoveThroughPassage(String passageName) {
     boolean passageClear = false;
 
-    if (this.checkForObstacle(destinationPassage)) {
+    Passage destinationPassage = findPassage(passageName);
+
+    if (destinationPassage != null && this.checkForObstacle(destinationPassage)) {
       passageClear = interactWithObstacle(destinationPassage.getObstacle());
     }
 
@@ -117,24 +120,28 @@ public class Control {
 
     Item choosenItem = null;
 
-    while (continueTrying) {
-      out.listOptionsObstacleInteraction(currentObstacle);
+    if (currentObstacle.isResolved()) {
+      obstacleResolved = true;
+    } else {
 
-      choosenItem = findItemInInventory(in.readInSingleLine());
+      while (continueTrying) {
+        out.listOptionsObstacleInteraction(currentObstacle);
 
-      if (choosenItem == null) {
-        out.doOutput("You go back");
-        break;
-      }
+        choosenItem = findItemInInventory(in.readInSingleLine());
 
-      if (currentObstacle.tryToUseItem(choosenItem)) {
-        ((Item) choosenItem).consume();
-        currentObstacle.resolved();
-        out.doOutput(currentObstacle.getResolution());
-        obstacleResolved = true;
-        continueTrying = false;
-      } else {
-        out.doOutput("That doesn't work");
+        if (choosenItem == null) {
+          out.doOutput("You go back to " + character.getCurrentPlace().getName());
+          break;
+        }
+
+        if (currentObstacle.tryToUseItem(choosenItem)) {
+          currentObstacle.resolve(choosenItem);
+          out.doOutput(currentObstacle.getResolution());
+          obstacleResolved = true;
+          continueTrying = false;
+        } else {
+          out.doOutput("That doesn't work");
+        }
       }
     }
 
