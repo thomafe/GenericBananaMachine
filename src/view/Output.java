@@ -38,10 +38,15 @@ public class Output {
   }
 
   /**
-   * Ending sequence when the game is done
+   * Ending sequence when the game is done, either because of succeed or because of death
    */
-  public void ending(){
+  public void goodEnding(){
     doOutput("Congraltulations, you've made it\n consider yourself a hero now");
+  }
+
+  public void badEnding(){
+    doOutput("You failed\n Sudden death stroke you \n do you want to play again? ");
+    // TODO implement play again
   }
 
   /**
