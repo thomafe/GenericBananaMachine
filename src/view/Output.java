@@ -36,7 +36,13 @@ public class Output {
     +"Look for things along the way that might help you and you may stand a chance");
 
   }
-  
+
+  /**
+   * Ending sequence when the game is done
+   */
+  public void ending(){
+    doOutput("Congraltulations, you've made it\n consider yourself a hero now");
+  }
 
   /**
    * List all things the character can do. - Look at something - Look into Inventory - Go through
