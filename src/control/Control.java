@@ -269,8 +269,11 @@ public class Control {
 	 * Is run at the end of the game
 	 */
 
-	private void gameEnding(){
-  	out.ending();
+	private void goodEnding(){
+  	out.goodEnding();
+	}
+	private void badEnding(){
+		out.badEnding();
 	}
 
   /**
