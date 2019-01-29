@@ -31,7 +31,10 @@ public class Output {
    * Introduction for the player at the start of the game.
    */
   public void greeting() {
-    doOutput("Hello fellow Player, welcome to your gobsmacking adventure!");
+    doOutput("Hello fellow Player, welcome to your gobsmacking adventure!/n" 
+        + " In this glorious adventure game you can proove your bravery and smartness, by passing the many obstacles that will come in your way/n"
+    +"Look for things along the way that might help you and you may stand a chance");
+
   }
   
 
