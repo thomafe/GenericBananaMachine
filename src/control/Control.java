@@ -11,26 +11,34 @@ import model.GameObject;
 
 public class Control {
 
-  public static void main (String[] args) {
+  private Character character = null;
+  private Input in = null;
+  private Output out = null;
 
-    // initialize basic game settings
+  /**
+   * Default constructor. Initializes the game.
+   */
+  public Control() {
     initGame();
   }
 
-  private static void initGame() {
+  /**
+   * Initializes the game world and all other required objects.
+   * 
+   */
+  private void initGame() {
 
     Place entrance = new Place("Entrance", "This is your starting area.");
-    Place secondRoom = new Place("Hall of Doom",
-        "This is the final Boss Room...not. It just sounds cool.");
-    Place thirdRoom = new Place("Lighthouse",
-        "You can't see anything in here because the light is blinding.");
+    Place secondRoom =
+        new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
+    Place thirdRoom =
+        new Place("Lighthouse", "You can't see anything in here because the light is blinding.");
 
     Character character = new Character(entrance);
 
     Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed",
         entrance, secondRoom);
-    Passage pas2 = new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz",
-        secondRoom,
+    new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom,
         thirdRoom);
 
     Item item1 = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
@@ -44,29 +52,33 @@ public class Control {
     entrance.addItemOnTheFloor(item1);
     secondRoom.addItemOnTheFloor(item2);
 
-    Control ctrl = new Control(character);
-    ctrl.gameStart();
+    out = new Output(this);
+    in = new Input(out, this);
 
+  }
+
+  private void runGame() {
+
+    gameIntroduction();
+
+    // Game Loop
     do {
-
-      ctrl.getInput().readInput();
+      in.readInput();
 
     } while (true);
 
   }
 
-      private Character character = null;
-
-  private Character character = null;
-
-      character = pCharacter;
-      Output output = new Output(this);
-      Input input = new Input(output, this);
-
-      this.setOutput(output);
-      this.setInput(input);
-
-    }
+  /**
+   * Tries to move the character through a passage. If there is an obstacle in the way the character
+   * first interacts with that obstacle. If there is no obstacle or the obstacle gets resolved the
+   * character moves to the next room.
+   * 
+   * @param destinationPassage
+   * @return whether the character moved r not
+   */
+  public boolean tryToMoveThroughPassage(Passage destinationPassage) {
+    boolean passageClear = false;
 
     if (this.checkForObstacle(destinationPassage)) {
       passageClear = interactWithObstacle(destinationPassage.getObstacle());
@@ -156,89 +168,105 @@ public class Control {
    * @return String description
    */
   public GameObject findGameObject(String objectName) {
+    GameObject foundObject = null;
+
+    foundObject = findPassage(objectName);
+
+    if (foundObject == null) {
+      foundObject = findItemOnTheFloor(objectName);
+    }
+
+    if (foundObject == null) {
+      foundObject = findItemInInventory(objectName);
+    }
+
+    return foundObject;
+  }
+
+  /**
+   * Returns found Passage after searching it in the current Place where the Character currently is
+   * inside.
+   *
+   * @param passageName String
+   * @return Passage
+   */
+  public Passage findPassage(String passageName) {
+    Passage foundPassage = null;
+
     for (Passage passage : character.getCurrentPlace().getPassages()) {
-      if (passage.getName().equals(objectName)) {
-        // TODO refactor to its own passage
-        return passage;
+      if (passage.getName().equalsIgnoreCase(passageName)) {
+        foundPassage = passage;
+        break;
       }
     }
+    return foundPassage;
+  }
+
+  /**
+   * Looks for an item on the floor of the current room.
+   * 
+   * @param itemName
+   * @return the found item or null if there was no such item
+   */
+  public Item findItemOnTheFloor(String itemName) {
+    Item foundItem = null;
 
     for (Item item : character.getCurrentPlace().getItemsOnTheFloor()) {
-      if (item.getName().equals(objectName)) {
-        return item;
+      if (item.getName().equalsIgnoreCase(itemName)) {
+        foundItem = item;
+        break;
       }
     }
 
-    for (Item item2 : character.getItemsInInventory()) {
-      if (item2.getName().equals(objectName)) {
-        return item2;
+    return foundItem;
+  }
+
+  /**
+   * Looks for an item in the characters inventory.
+   * 
+   * @param itemName
+   * @return the found item or null if there was no such item
+   */
+  public Item findItemInInventory(String itemName) {
+    Item foundItem = null;
+
+    for (Item item : character.getItemsInInventory()) {
+      if (item.getName().equalsIgnoreCase(itemName)) {
+        foundItem = item;
+        break;
       }
     }
 
-	/**
-	 * Returns found Passage after searching it in the current Place where the Character currently is inside.
-	 *
-	 * @param passageName String
-	 * @return Passage
-	 */
-	private Passage findPassage(String passageName) {
-	  Passage foundPassage = null;
-    	
-	  for (Passage passage : character.getCurrentPlace().getPassages()) {
-	    if(passage.getName().equalsIgnoreCase(passageName)) {
-	      foundPassage = passage;
-				break;
-			}
-		}
-    	return foundPassage;
-    }
-
-  public void gameStart(){
-    this.getOutput().greeting();
-    this.getOutput().listOptions();
-    this.getOutput().lookAtCurrentPlace();
-
+    return foundItem;
   }
-
-	/**
-	 * Getter for Character.
-	 *
-	 * @return Character
-	 */
-	public Character getCharacter() {
-    	return character;
-    }
-	
-	/**
-	 * Setter for Output.
-	 * @param out
-	 */
-	public void setOutput(Output out) {
-		this.out = out;
-	}
 
   /**
-   * Getter for Output
-   * @return out
+   * Is run once at game start to introduce the player to the game.
+   *
    */
-	public Output getOutput(){
-	  return out;
+  public void gameIntroduction() {
+    out.greeting();
+    out.listOptions();
+    out.lookAtCurrentPlace();
   }
-	
-	/**
-	 * Setter for Input.
-	 * @param in
-	 */
-	public void setInput(Input in) {
-		this.in = in;
-	}
 
   /**
-   * Getter for Input
-   * @return in
+   * Getter for Character.
+   *
+   * @return Character
    */
-	public Input getInput(){
-	  return in;
+  public Character getCharacter() {
+    return character;
   }
+
+  // Main Method
+
+  public static void main(String[] args) {
+
+    Control control = new Control();
+
+    control.runGame();
+  }
+
 
 }
