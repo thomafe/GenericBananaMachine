@@ -77,7 +77,7 @@ public class Control {
    * first interacts with that obstacle. If there is no obstacle or the obstacle gets resolved the
    * character moves to the next room.
    * 
-   * @param destinationPassage
+   * @param passageName String
    * @return whether the character moved r not
    */
   public boolean tryToMoveThroughPassage(String passageName) {
