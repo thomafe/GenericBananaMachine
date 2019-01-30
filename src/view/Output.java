@@ -124,7 +124,7 @@ public class Output {
 
     obstacleOptions.append(obstacle.getDescription() + "\n");
     obstacleOptions
-        .append("What item do you want to use? (Enter nothing to return to the previous place");
+        .append("Which item do you want to use? (Enter nothing to return to the previous place");
     listInventory();
 
     doOutput(obstacleOptions.toString());

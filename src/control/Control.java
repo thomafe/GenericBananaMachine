@@ -212,7 +212,7 @@ public class Control {
     boolean obstacleResolved = false;
     boolean continueTrying = true;
 
-    Item choosenItem = null;
+    Item chosenItem = null;
 
     if (currentObstacle.isResolved()) {
       obstacleResolved = true;
@@ -221,15 +221,16 @@ public class Control {
       while (continueTrying) {
         out.listOptionsObstacleInteraction(currentObstacle);
 
-        choosenItem = findItemInInventory(in.readInSingleLine());
+        //TODO make input flexible
+        chosenItem = findItemInInventory(in.readItemForObstacle());
 
-        if (choosenItem == null) {
+        if (chosenItem == null) {
           out.doOutput("You go back to " + character.getCurrentPlace().getName());
           break;
         }
 
-        if (currentObstacle.tryToUseItem(choosenItem)) {
-          currentObstacle.resolve(choosenItem);
+        if (currentObstacle.tryToUseItem(chosenItem)) {
+          currentObstacle.resolve(chosenItem);
           out.doOutput(currentObstacle.getResolution());
           obstacleResolved = true;
           continueTrying = false;
@@ -359,7 +360,6 @@ public class Control {
     out.greeting();
 		out.lookAtCurrentPlace();
 		out.listOptions();
-
   }
 
 	/**
