@@ -23,7 +23,7 @@ public class Input {
   // Pattern for getting a list of possible actions
   Pattern patternActions = Pattern.compile("[a-zA-Z\\s]*[aA]ctions\\s*[a-zA-Z\\s]*");
   // Pattern for using an item at an obstacle
-  Pattern patternUseItemObstacle = Pattern.compile("[uU]se\\s*[a-zA-Z]*\\s([a-zA-Z]+)\\s*[a-zA-Z\\s]*");
+  Pattern patternUseItemObstacle = Pattern.compile("[uUse]*\\s*([a-zA-Z]+)\\s*[a-zA-Z\\s]*");
 
   // Creating Output and Control object for referencing
   Output out;
