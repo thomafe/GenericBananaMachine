@@ -73,9 +73,11 @@ public class Place extends GameObject {
   /**
    * Connect a committed Passage to this Place.
    *
-   * @param pPassage Passage
+   * @param newPassage Passage
    */
-  public void addPassage(Passage pPassage) {
-    passages.add(pPassage);
+  public void addPassage(Passage newPassage) {
+    if (!passages.contains(newPassage)) {
+      passages.add(newPassage);
+    }
   }
 }
