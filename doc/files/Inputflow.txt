@@ -1,0 +1,48 @@
+Explanation for the Inputflow:
+
+The method "readInput()" reads in a whole line from the user
+It then proceeds from the first case to the last case
+to try to match the given pattern with the input.
+If one pattern matches the input then it returns the specific value
+and stops matching.
+So if you box commands inside each other, then the command will be executed,
+which is the first to be compared to the input.
+<any other command> can be either "take <item>"; "use <passage>"; "look around"; "look at <item/passage>";
+"inventory"; "actions"
+
+The commands are being checked in the following order:
+1. take <item>
+2. use <passage>
+3. look around
+4. look at <item/passage>
+5. inventory
+6. actions
+
+If you type in multiple commands or box commands, then it will execute the command that comes first.
+1. Example: look at take <item> -> take <item>
+2. Example: use inventory -> use passage called inventory
+
+Possible boxings:
+
+-"take <something>" -> control tries to pick up <something>
+-"take <any other command>" -> control tries to pick up an item called like the other command
+
+-"use <something>" -> control checks whether the character can move to a passage called <something>
+!-"use take <something>" -> tries to take <something>
+-"use <any other command>" -> control checks whether the character can move to a passage called <any other command>
+
+-"look around" -> output prints the description of the current place
+!-"look around <take/use> <something>" -> tries to take/use <something>
+-"look around <any other command>" -> the same as the first
+
+-"look at <something>" -> output prints the description of an item or a passage called <something>
+-"look at <take/use/(look) around"> <something> -> tries to take/use <something> or to look around
+-"look at <any other command>" -> tries to look at an item or a passage called <any other command>
+
+-"inventory" -> shows the contents of the users inventory
+-"inventory <take/use/look around/look at> <something>" -> tries to take/use/look at <something> or to look around
+-"inventory <any other command>" -> same as the first
+
+-"actions" -> shows the possible actions for the user
+-"actions <take/use/look around/look at/inventory> <something>" -> tries to take/use/look at <something>
+  or to look around/calling inventory
