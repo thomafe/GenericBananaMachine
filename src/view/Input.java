@@ -19,9 +19,9 @@ public class Input {
   // Pattern for LOOK AT anything
   Pattern patternLookAt = Pattern.compile("[lL]ook\\s[a-zA-Z\\s]*[aT]t\\s([a-zA-Z\\s]*)");
   // Pattern for looking into INVENTORY
-  Pattern patternInventory = Pattern.compile("[iI]nventory\\s*[a-zA-Z]*");
+  Pattern patternInventory = Pattern.compile("[iI]nventory");
   // Pattern for getting a list of possible actions
-  Pattern patternActions = Pattern.compile("[aA]ctions\\s*[a-zA-Z\\s]*");
+  Pattern patternActions = Pattern.compile("[aA]ctions");
   // Pattern for using an item at an obstacle
   Pattern patternUseItemObstacle = Pattern.compile("[uU]se\\s([a-zA-Z\\s]*)");
 
@@ -47,12 +47,13 @@ public class Input {
 
     String userInput = readInSingleLine();
 
+    //The order in which the input is being matched
     Matcher matcherTakeItem = patternTakeItem.matcher(userInput);
     Matcher matcherUsePassage = patternUsePassage.matcher(userInput);
+    Matcher matcherLookAtPlace = patternLookAtPlace.matcher(userInput);
     Matcher matcherLookAt = patternLookAt.matcher(userInput);
     Matcher matcherInventory = patternInventory.matcher(userInput);
     Matcher matcherActions = patternActions.matcher(userInput);
-    Matcher matcherLookAtPlace = patternLookAtPlace.matcher(userInput);
 
     // matches the user input with the patterns
 
@@ -118,7 +119,7 @@ public class Input {
     String decision = null;
     if (matcherUseItemObstacle.find()) {
       decision = matcherUseItemObstacle.group(1);
-    } else if (matcherUseItemObstacle.group(1).matches("[lL]eave")){
+    } else if (input.matches("[lL]eave")){
       decision = "leave";
     }
     return decision;
