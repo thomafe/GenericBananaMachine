@@ -221,12 +221,13 @@ public class Control {
       while (continueTrying) {
         out.listOptionsObstacleInteraction(currentObstacle);
 
-        //TODO make input flexible
         chosenItem = findItemInInventory(in.readItemForObstacle());
 
-        if (chosenItem == null) {
-          out.doOutput("You go back to " + character.getCurrentPlace().getName());
-          break;
+        if (chosenItem == "leave") {
+          if(chosenItem == null) {
+            out.doOutput("You go back to " + character.getCurrentPlace().getName());
+            break;
+          }
         }
 
         if (currentObstacle.tryToUseItem(chosenItem)) {
