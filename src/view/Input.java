@@ -23,7 +23,7 @@ public class Input {
   // Pattern for getting a list of possible actions
   Pattern patternActions = Pattern.compile("[a-zA-Z\\s]*[aA]ctions\\s*[a-zA-Z\\s]*");
   // Pattern for using an item at an obstacle
-  Pattern patternUseItemObstacle = Pattern.compile("[uUse]*\\s*([a-zA-Z]+)\\s*[a-zA-Z\\s]*");
+  Pattern patternUseItemObstacle = Pattern.compile("[uUse\\s]*(\\w+)");
 
   // Creating Output and Control object for referencing
   Output out;
@@ -98,18 +98,26 @@ public class Input {
 
   /**
    * Returns Scanner new Line method.
-   *
+   * !Not recommended to se outside of this class!
    * @return Scanner
    */
   public String readInSingleLine() {
     return scan.nextLine();
   }
 
+  /**
+   * Reads nextLine and returns the name of an item or otherwise input
+   * @return String
+   */
   public String readItemForObstacle(){
     Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher((this.readInSingleLine()));
     String chosenItem = null;
     if (matcherUseItemObstacle.find()){
-      chosenItem = matcherUseItemObstacle.group(1);
+      if (matcherUseItemObstacle.group(1).matches("[lL]eave")){
+        chosenItem = "leave";
+      } else {
+        chosenItem = matcherUseItemObstacle.group(1);
+      }
     }
     return chosenItem;
   }

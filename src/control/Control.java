@@ -223,6 +223,7 @@ public class Control {
   public boolean interactWithObstacle(Obstacle currentObstacle) {
     boolean obstacleResolved = false;
     boolean continueTrying = true;
+    String answerString = null;
 
     Item chosenItem = null;
 
@@ -232,16 +233,15 @@ public class Control {
 
       while (continueTrying) {
         out.listOptionsObstacleInteraction(currentObstacle);
+        answerString = in.readItemForObstacle();
+        chosenItem = findItemInInventory(answerString);
 
-        //TODO make input flexible
-        chosenItem = findItemInInventory(in.readItemForObstacle());
-
-        if (chosenItem == null) {
-          out.doOutput("You go back to " + character.getCurrentPlace().getName());
+        if (answerString == "leave") {
+          out.doOutput("You decided to go back to " + character.getCurrentPlace().getName());
           break;
-        }
-
-        if (currentObstacle.tryToUseItem(chosenItem)) {
+        } else if (chosenItem == null) {
+            out.doOutput("You don't have this item!");
+        } else if (currentObstacle.tryToUseItem(chosenItem)) {
           out.doOutput(currentObstacle.getResolution());
           character.removeItem(chosenItem);
           
