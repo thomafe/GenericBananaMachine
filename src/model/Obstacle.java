@@ -22,19 +22,21 @@ public class Obstacle extends GameObject {
 
   /**
    * Receive item and checks if it's equal to the required item to solve the obstacle. Returns true
-   * if the item matches the requirement, else false.
+   * if the item matches the requirement, else false. If the correct item was tried, the obstacle gets resolved.
    *
    * @param itemToTry Item
    * @return boolean
    */
   public boolean tryToUseItem(Item itemToTry) {
-    // return true if correct item
+    boolean obstacleResolved = false;
+
     if (requiredItem.equals(itemToTry)) {
-      return true;
-    } else {
-      return false;
+      resolve(itemToTry);
+
+      obstacleResolved = true;
     }
 
+    return obstacleResolved;
   }
 
   /**
@@ -70,10 +72,10 @@ public class Obstacle extends GameObject {
   /**
    * Sets state of obstacle to true.
    */
-  public void resolve(Item itemToResolve) {
+  private void resolve(Item itemToResolve) {
     this.resolved = true;
-    
+
     itemToResolve.consume();
   }
-  
+
 }
