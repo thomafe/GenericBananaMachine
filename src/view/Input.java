@@ -62,7 +62,7 @@ public class Input {
         out.doOutput("You have successfully picked up " + matcherTakeItem.group(1));
       } else {
         // TODO make a method for this output - and others like it
-        out.doOutput("That doesn't work");
+        out.doOutput("There is no item called: " + matcherTakeItem.group(1));
       }
 
 
@@ -98,7 +98,7 @@ public class Input {
 
   /**
    * Returns Scanner new Line method.
-   * !Not recommended to se outside of this class!
+   * !Not recommended to use outside of this class!
    * @return Scanner
    */
   public String readInSingleLine() {
