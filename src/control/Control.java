@@ -29,73 +29,96 @@ public class Control {
   private void initGame() {
 
     // TODO: Adapt Ending to different ending Places (Places: room7, room8) which kill you.
-    //    TODO: No need of system.out, just end game when entering the killing Places. Place description can tell Player that he died!
-    
-    // Scenario: "Shipwrecked"
-    Place room0 = new Place("Beach", "You look around and see a bunch of equipment stuff laying on the ground.");
-    Place room1 =
-        new Place("Coast", "You enter a barren Coast which borders on a deep Jungle.");
-    Place room2 =
-        new Place("Jungle", "You got lost in the downs of the deep Jungle. You can't orientate yourself.");
-    Place room3 =
-        new Place("Cave", "You enter a dark cave. You can hear a drumming noise from the deeper inside.");
-    Place room4 =
-        new Place("Outback", "After you followed the signed path, you enter the jungle's outback, which is less deep as the upper lands.");
-    Place room5 =
-        new Place("Beach at the other side", "You found a way out of the jungle and enter the beach at the other side of the island. In the distance you can see the silhouette of a ship.");
-    Place room6 =
-        new Place("Ship of Coastguard", "You are saved by the coastguard. Just in the moment you feel saved and rescued, you realize that it is not the coastguard but pirates who seem to use you as their new slave.");
-    Place room7 =
-        new Place("Bad Ending", "The wood is old and rotten. It instantly breaks after you tried to walk on it and you fall to death.");
-    Place room8 =
-        new Place("Another Bad Ending", "After you fired your Signal Rocket, you are hit by arrows. An unfriendly civilization of Indians found another human meal.");
+    // TODO: No need of system.out, just end game when entering the killing Places. Place
+    // description can tell Player that he died!
 
-    Passage pass1 = new Passage("High Cliff", "This is a very sharp and high cliff. You need something to climb it.",
-        room0, room1);
-    Passage pass2 = new Passage("Underwood", "The vegetation is blocking your way through. You need something to cut a pass through.",
+    // Scenario: "Shipwrecked"
+    Place room0 = new Place("Beach",
+        "You look around and see a bunch of equipment stuff laying on the ground.");
+    Place room1 = new Place("Coast", "You enter a barren Coast which borders on a deep Jungle.");
+    Place room2 = new Place("Jungle",
+        "You got lost in the downs of the deep Jungle. You can't orientate yourself.");
+    Place room3 = new Place("Cave",
+        "You enter a dark cave. You can hear a drumming noise from the deeper inside.");
+    Place room4 = new Place("Outback",
+        "After you followed the signed path, you enter the jungle's outback, which is less deep as the upper lands.");
+    Place room5 = new Place("Beach at the other side",
+        "You found a way out of the jungle and enter the beach at the other side of the island. In the distance you can see the silhouette of a ship.");
+    Place room6 = new Place("Ship of Coastguard",
+        "You are saved by the coastguard. Just in the moment you feel saved and rescued, you realize that it is not the coastguard but pirates who seem to use you as their new slave.");
+    Place room7 = new Place("Bad Ending",
+        "The wood is old and rotten. It instantly breaks after you tried to walk on it and you fall to death.");
+    Place room8 = new Place("Another Bad Ending",
+        "After you fired your Signal Rocket, you are hit by arrows. An unfriendly civilization of Indians found another human meal.");
+
+    Passage pass1 = new Passage("High Cliff",
+        "This is a very sharp and high cliff. You need something to climb it.", room0, room1);
+    Passage pass2 = new Passage("Underwood",
+        "The vegetation is blocking your way through. You need something to cut a pass through.",
         room1, room2);
-    Passage pass3 = new Passage("Cave Entrance", "You stand in front of an impressive cave entrance. You seem to be attracted by the darkness which comes from inside. You need something to light up your way.",
+    Passage pass3 = new Passage("Cave Entrance",
+        "You stand in front of an impressive cave entrance. You seem to be attracted by the darkness which comes from inside. You need something to light up your way.",
         room2, room3);
-    Passage pass4 = new Passage("Dirty Signpost", "You look at a very dirty and old signpost. You can't read it because it's so dirty. You need something to clean it.",
+    Passage pass4 = new Passage("Dirty Signpost",
+        "You look at a very dirty and old signpost. You can't read it because it's so dirty. You need something to clean it.",
         room2, room4);
-    Passage pass5 = new Passage("Hole in the Ground", "You stand in front of a small but unbreachable hole. You need something to get over it.",
+    Passage pass5 = new Passage("Hole in the Ground",
+        "You stand in front of a small but unbreachable hole. You need something to get over it.",
         room3, room7);
-    Passage pass6 = new Passage("Tunnel Entrance", "You light inside but can't see anything. It seems that something inside is attracting you.",
+    Passage pass6 = new Passage("Tunnel Entrance",
+        "You light inside but can't see anything. It seems that something inside is attracting you.",
         room3, room3);
-    Passage pass7 = new Passage("Path to voices", "You can hear human voices in the distance. You think about calling someones attention.",
+    Passage pass7 = new Passage("Path to voices",
+        "You can hear human voices in the distance. You think about calling someones attention.",
         room4, room8);
-    Passage pass8 = new Passage("Path away", "You can hear human voices in the distance. You think about not to call attention and follow the other path.",
+    Passage pass8 = new Passage("Path away",
+        "You can hear human voices in the distance. You think about not to call attention and follow the other path.",
         room4, room5);
-    Passage pass9 = new Passage("Shore", "You enter the shore, the broken waves plash on your legs. You need something to call attention.",
+    Passage pass9 = new Passage("Shore",
+        "You enter the shore, the broken waves plash on your legs. You need something to call attention.",
         room5, room6);
 
-    Item item1 = new Item("Machete", "This is a sharp meele weapon which can also be used to cut plants.");
-    Item item2 = new Item("Flashlight", "The battery is on low charge but a small light is better than no light.");
-    Item item3 = new Item("Rope", "This is a long rope which has an iron hook at the end which can be used to climb.");
-    Item item4 = new Item("Cloth", "This is a part of a cloth which can be used as a bandage or to clean yourself or something else.");
+    Item item1 =
+        new Item("Machete", "This is a sharp meele weapon which can also be used to cut plants.");
+    Item item2 = new Item("Flashlight",
+        "The battery is on low charge but a small light is better than no light.");
+    Item item3 = new Item("Rope",
+        "This is a long rope which has an iron hook at the end which can be used to climb.");
+    Item item4 = new Item("Cloth",
+        "This is a part of a cloth which can be used as a bandage or to clean yourself or something else.");
     Item item5 = new Item("Plank", "This is a wooden plank which lied in the water at the beach.");
     Item item6 = new Item("Stone", "This is a sharp stone.");
-    Item item7 = new Item("Compass", "The needle always sign to north. Now you can orientate yourself in the jungle.");
-    Item item8 = new Item("Signal Rocket", "There is one missile left which can be used to call someones attention.");
+    Item item7 = new Item("Compass",
+        "The needle always sign to north. Now you can orientate yourself in the jungle.");
+    Item item8 = new Item("Signal Rocket",
+        "There is one missile left which can be used to call someones attention.");
 
     Obstacle obs1 = new Obstacle("Way upstairs", "You need to find a way to climb the cliff.",
         "You used the rope to climb the cliff.", item3);
-    Obstacle obs2 = new Obstacle("Blocking vegetation", "You need to cut a way through the vegetation which blocks you.",
+    Obstacle obs2 = new Obstacle("Blocking vegetation",
+        "You need to cut a way through the vegetation which blocks you.",
         "You used the machete to cut through.", item1);
-    Obstacle obs3 = new Obstacle("Darkness in the cave", "You can't see anything. You need to light up your way.",
+    Obstacle obs3 = new Obstacle("Darkness in the cave",
+        "You can't see anything. You need to light up your way.",
         "You used the flashlight to light up your way.", item2);
     Obstacle obs4 = new Obstacle("Dirt", "You need to remove the dirt from the signpost.",
-        "You used the cloth to clean the signpost. You can hear human voices in the distance.", item4);
+        "You used the cloth to clean the signpost. You can hear human voices in the distance.",
+        item4);
     Obstacle obs5 = new Obstacle("Hole", "You need to pass the hole.",
         "You used the wooden plank to build a custom bridge.", item5);
-    Obstacle obs6 = new Obstacle("Darkness in the tunnel", "Your flashlight is too low for this darkness. You need something to check if there is anything.",
-        "You threw the stone in the tunnel but you are instantly hit by the same stone. Is this a portal back to the entrance?", item6);
+    Obstacle obs6 = new Obstacle("Darkness in the tunnel",
+        "Your flashlight is too low for this darkness. You need something to check if there is anything.",
+        "You threw the stone in the tunnel but you are instantly hit by the same stone. Is this a portal back to the entrance?",
+        item6);
     Obstacle obs7 = new Obstacle("Attention", "You need to call attention of the humans you hear.",
         "You fired your missile of signal rockets to call attention.", item8);
-    Obstacle obs8 = new Obstacle("Path away from voices", "You need something to orientate not to get lost on the path.",
-        "You used the compass to find the way to south which guides you away from the human voices.", item7);
+    Obstacle obs8 = new Obstacle("Path away from voices",
+        "You need something to orientate not to get lost on the path.",
+        "You used the compass to find the way to south which guides you away from the human voices.",
+        item7);
     Obstacle obs9 = new Obstacle("Rescue", "You need something to call attention for rescue.",
-        "You used the missile of the sign rocket to call attention of the ship. It answered and took you on board.", item8);
+        "You used the missile of the sign rocket to call attention of the ship. It answered and took you on board.",
+        item8);
 
     pass1.setObstacle(obs1); // High cliff -> way upstairs
     pass2.setObstacle(obs2); // Underwood -> blocking vegetation
@@ -156,8 +179,7 @@ public class Control {
   }
 
   /**
-   * Contains the main game loop
-   * Every time check if game might end!
+   * Contains the main game loop Every time check if game might end!
    */
   private void runGame() {
     gameIntroduction();
@@ -165,13 +187,14 @@ public class Control {
     // Game Loop
     do {
 
-      // TODO: tidy up Code, include replay question in seperated method not to have code but game loop and methods!
-      if(character.getCurrentPlace().getName().equals("Bad Ending")
+      // TODO: tidy up Code, include replay question in seperated method not to have code but game
+      // loop and methods!
+      if (character.getCurrentPlace().getName().equals("Bad Ending")
           || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
         // TODO: Include this stuff to output method badEnding().
         out.doOutput("Your Character unfortunately died. Wanna play again? Please enter YES or NO");
         // Replay question
-        if(in.readInSingleLine().equals("YES")) {
+        if (in.readInSingleLine().equals("YES")) {
           Control control = new Control();
           control.runGame();
         } else {
@@ -183,7 +206,7 @@ public class Control {
         out.doOutput("Congratulations, you successfully completed the game!");
         out.doOutput("Wanna play again? Please enter YES or NO");
         // Replay question
-        if(in.readInSingleLine().equals("YES")) {
+        if (in.readInSingleLine().equals("YES")) {
           Control control = new Control();
           control.runGame();
         } else {
@@ -210,8 +233,8 @@ public class Control {
     boolean passageClear = false;
 
     Passage destinationPassage = findPassage(passageName);
-    
-    if(destinationPassage == null) {
+
+    if (destinationPassage == null) {
       out.doOutput("There is no passage called " + passageName);
       return passageClear;
     }
@@ -257,11 +280,11 @@ public class Control {
           out.doOutput("You decided to go back to " + character.getCurrentPlace().getName());
           break;
         } else if (chosenItem == null) {
-            out.doOutput("You don't have this item!");
+          out.doOutput("You don't have this item!");
         } else if (currentObstacle.tryToUseItem(chosenItem)) {
           out.doOutput(currentObstacle.getResolution());
           character.removeItem(chosenItem);
-          
+
           obstacleResolved = true;
           continueTrying = false;
         } else {
@@ -371,7 +394,7 @@ public class Control {
 
     return foundItem;
   }
-  
+
   /**
    * Check if destinated Passage has Obstacle in it. If yes, return true, else false.
    *
@@ -388,20 +411,21 @@ public class Control {
    */
   private void gameIntroduction() {
     out.greeting();
-		out.lookAtCurrentPlace();
-		out.listOptions();
+    out.lookAtCurrentPlace();
+    out.listOptions();
   }
 
-	/**
-	 * Is run at the end of the game
-	 */
+  /**
+   * Is run at the end of the game
+   */
 
-	private void goodEnding(){
-  	out.goodEnding();
-	}
-	private void badEnding(){
-		out.badEnding();
-	}
+  private void goodEnding() {
+    out.goodEnding();
+  }
+
+  private void badEnding() {
+    out.badEnding();
+  }
 
   /**
    * Getter for Character.
