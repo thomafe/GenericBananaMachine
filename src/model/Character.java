@@ -53,6 +53,15 @@ public class Character {
       }
     }
   }
+  
+  /**
+   * Removes an item from the characters inventory. If that item isn't in the players inventory, nothing happens.
+   * 
+   * @param itemToRemove - The item to be removed from the characters inventory
+   */
+  public void removeItem(Item itemToRemove) {
+    itemsInInventory.remove(itemToRemove);
+  }
 
   /**
    * Use Item to solve Obstocle.

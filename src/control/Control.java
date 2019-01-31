@@ -132,8 +132,9 @@ public class Control {
         }
 
         if (currentObstacle.tryToUseItem(choosenItem)) {
-          currentObstacle.resolve(choosenItem);
           out.doOutput(currentObstacle.getResolution());
+          character.removeItem(choosenItem);
+          
           obstacleResolved = true;
           continueTrying = false;
         } else {
@@ -235,7 +236,7 @@ public class Control {
     Item foundItem = null;
 
     for (Item item : character.getItemsInInventory()) {
-      if (item.getName().equalsIgnoreCase(itemName)) {
+      if (item.getName().equalsIgnoreCase(itemName) && !item.isConsumed()) {
         foundItem = item;
         break;
       }
