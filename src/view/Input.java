@@ -22,6 +22,8 @@ public class Input {
   Pattern patternInventory = Pattern.compile("[a-zA-Z\\s]*[iI]nventory\\s*[a-zA-Z]*");
   // Pattern for getting a list of possible actions
   Pattern patternActions = Pattern.compile("[a-zA-Z\\s]*[aA]ctions\\s*[a-zA-Z\\s]*");
+  // Pattern for using an item at an obstacle
+  Pattern patternUseItemObstacle = Pattern.compile("[uUse]*\\s*([a-zA-Z]+)\\s*[a-zA-Z\\s]*");
 
   // Creating Output and Control object for referencing
   Output out;
@@ -101,5 +103,14 @@ public class Input {
    */
   public String readInSingleLine() {
     return scan.nextLine();
+  }
+
+  public String readItemForObstacle(){
+    Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher((this.readInSingleLine()));
+    String chosenItem = null;
+    if (matcherUseItemObstacle.find()){
+      chosenItem = matcherUseItemObstacle.group(1);
+    }
+    return chosenItem;
   }
 }

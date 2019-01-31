@@ -31,9 +31,23 @@ public class Output {
    * Introduction for the player at the start of the game.
    */
   public void greeting() {
-    doOutput("Hello fellow Player, welcome to your gobsmacking adventure!");
+    doOutput("Hello fellow Player, welcome to your gobsmacking adventure!\n"
+        + " In this glorious adventure game you can proove your bravery and smartness\n by passing the many obstacles that will come in your way\n"
+    +"Look for things along the way that might help you and you may stand a chance");
+
   }
-  
+
+  /**
+   * Ending sequence when the game is done, either because of succeed or because of death
+   */
+  public void goodEnding(){
+    doOutput("Congraltulations, you've made it\n consider yourself a hero now");
+  }
+
+  public void badEnding(){
+    doOutput("You failed\n Sudden death stroke you \n do you want to play again? ");
+    // TODO implement play again
+  }
 
   /**
    * List all things the character can do. - Look at something - Look into Inventory - Go through
@@ -110,7 +124,7 @@ public class Output {
 
     obstacleOptions.append(obstacle.getDescription() + "\n");
     obstacleOptions
-        .append("What item do you want to use? (Enter nothing to return to the previous place");
+        .append("Which item do you want to use? (Enter nothing to return to the previous place");
     listInventory();
 
     doOutput(obstacleOptions.toString());
