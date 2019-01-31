@@ -163,6 +163,18 @@ public class Control {
 
     // Game Loop
     do {
+      if(character.getCurrentPlace().getName().equals("Bad Ending")
+          || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
+        // TODO: Include this stuff to output method badEnding().
+        out.doOutput("Your Character unfortunately died. Wanna play again? Please enter YES or NO");
+        if(in.readInSingleLine().equals("YES")) {
+          Control control = new Control();
+          control.runGame();
+        } else {
+          out.doOutput("Thanks for playing! See you later.");
+          System.exit(0);
+        }
+      }
       in.readInput();
 
     } while (true);
