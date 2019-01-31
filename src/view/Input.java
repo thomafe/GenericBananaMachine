@@ -10,20 +10,20 @@ public class Input {
   Scanner scan = new Scanner(System.in);
 
   // Pattern for TAKE ITEM
-  Pattern patternTakeItem = Pattern.compile("[a-zA-Z\\s]*[tT]ake\\s([a-zA-Z\\s]+)");
+  Pattern patternTakeItem = Pattern.compile("[tT]ake\\s([a-zA-Z\\s]+)");
   // Pattern for USE PASSAGE NAME
-  Pattern patternUsePassage = Pattern.compile("[a-zA-Z\\s]*[uU]se\\s([a-zA-Z\\s]+)");
+  Pattern patternUsePassage = Pattern.compile("[uU]se\\s([a-zA-Z\\s]+)");
   // Pattern for LOOK AT PLACE
   Pattern patternLookAtPlace =
-      Pattern.compile("[a-zA-Z\\s]*[lL]ook\\s[a-zA-Z\\s]*[aA]round\\s*[a-zA-Z\\s]*");
+      Pattern.compile("[lL]ook\\s[a-zA-Z\\s]*[aA]round\\s*[a-zA-Z\\s]*");
   // Pattern for LOOK AT anything
-  Pattern patternLookAt = Pattern.compile("[a-zA-Z\\s]*[lL]ook\\s[a-zA-Z\\s]*[aT]t\\s([a-zA-Z\\s]*)");
+  Pattern patternLookAt = Pattern.compile("[lL]ook\\s[a-zA-Z\\s]*[aT]t\\s([a-zA-Z\\s]*)");
   // Pattern for looking into INVENTORY
-  Pattern patternInventory = Pattern.compile("[a-zA-Z\\s]*[iI]nventory\\s*[a-zA-Z]*");
+  Pattern patternInventory = Pattern.compile("[iI]nventory\\s*[a-zA-Z]*");
   // Pattern for getting a list of possible actions
-  Pattern patternActions = Pattern.compile("[a-zA-Z\\s]*[aA]ctions\\s*[a-zA-Z\\s]*");
+  Pattern patternActions = Pattern.compile("[aA]ctions\\s*[a-zA-Z\\s]*");
   // Pattern for using an item at an obstacle
-  Pattern patternUseItemObstacle = Pattern.compile("[uUse\\s]*(\\w+)");
+  Pattern patternUseItemObstacle = Pattern.compile("[uU]se\\s([a-zA-Z\\s]*)");
 
   // Creating Output and Control object for referencing
   Output out;
@@ -106,19 +106,21 @@ public class Input {
   }
 
   /**
-   * Reads nextLine and returns the name of an item or otherwise input
+   * Reads nextLine and searches for an decision
+   * searches for "use <item>" and returns <item>
+   * else it searches for "leave" and returns "leave"
+   * if nothing matches it returns null
    * @return String
    */
   public String readItemForObstacle(){
-    Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher((this.readInSingleLine()));
-    String chosenItem = null;
-    if (matcherUseItemObstacle.find()){
-      if (matcherUseItemObstacle.group(1).matches("[lL]eave")){
-        chosenItem = "leave";
-      } else {
-        chosenItem = matcherUseItemObstacle.group(1);
-      }
+    String input = this.readInSingleLine();
+    Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher((input));
+    String decision = null;
+    if (matcherUseItemObstacle.find()) {
+      decision = matcherUseItemObstacle.group(1);
+    } else if (matcherUseItemObstacle.group(1).matches("[lL]eave")){
+      decision = "leave";
     }
-    return chosenItem;
+    return decision;
   }
 }
