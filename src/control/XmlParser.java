@@ -24,7 +24,9 @@ public class XmlParser {
 
       doc.getDocumentElement().normalize();
       System.out.println("Chosen entity: " + doc.getDocumentElement().getNodeName());
+
       NodeList placeList = doc.getElementsByTagName("place");
+      NodeList passageList = doc.getElementsByTagName("passage");
 
       // parse all existing Places
       for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
@@ -49,13 +51,48 @@ public class XmlParser {
             System.out.println("- - Name: " + itemElement.getElementsByTagName("name").item(0).getTextContent());
             System.out.println("- - Description: " + itemElement.getElementsByTagName("description").item(0).getTextContent());
 
-
           }
-
         }
       }
+
+      // parse all existing passages
+      for (int passageCounter = 0; passageCounter < placeList.getLength(); passageCounter++) {
+        Node passageNode = passageList.item(passageCounter);
+        System.out.println("\nCurrent Element: " + passageNode.getNodeName());
+
+        if (passageNode.getNodeType() == Node.ELEMENT_NODE) {
+          Element passageElement = (Element) passageNode;
+
+          System.out.println("- id: " + passageElement.getAttribute("id"));
+          System.out.println("- Name: " + passageElement.getElementsByTagName("name").item(0).getTextContent());
+          System.out.println("- Description: " + passageElement.getElementsByTagName("description").item(0).getTextContent());
+          System.out.println("- Comes from: " + passageElement.getElementsByTagName("comeFrom").item(0).getTextContent());
+          System.out.println("- Connects to: " + passageElement.getElementsByTagName("connectTo").item(0).getTextContent());
+          // TODO: Verweise auf connectete Places, gehe über ID und erhalte Place Name!
+
+          // parse all existing Passage Obstacles
+          NodeList obstacleList = passageElement.getElementsByTagName("obstacle");
+
+          for (int obstacleCounter = 0; obstacleCounter < obstacleList.getLength(); obstacleCounter++) {
+            Node obstacleNode = obstacleList.item(obstacleCounter);
+            Element obstacleElement = (Element) obstacleNode;
+
+            System.out.println("- Obstacle" + obstacleCounter + ":");
+            System.out.println("- - Description: " + obstacleElement.getElementsByTagName("description").item(0).getTextContent());
+            System.out.println("- - Resolution: " + obstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
+            System.out.println("- - Required Item: " + obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
+
+          }
+        }
+      }
+
     } catch (Exception e) {
       e.printStackTrace();
     }
+
+
+
+
+
   }
 }

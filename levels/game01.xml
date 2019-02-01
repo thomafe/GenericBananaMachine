@@ -75,16 +75,16 @@
 
   <passages>
 
-    <passage>
+    <passage id="0">
       <name>High Cliff</name>
       <description>This is a very sharp and high cliff. You need something to climb it.</description>
+      <comeFrom>0</comeFrom>
+      <connectTo>1</connectTo>
       <obstacle>
         <description>You need to find a way to climb the cliff.</description>
         <resolution>You used the rope to climb the cliff.</resolution>
         <requiredItem>2</requiredItem>
       </obstacle>
-      <entrancePlace>0</entrancePlace>
-      <exitPlace>1</exitPlace>
     </passage>
 
 
