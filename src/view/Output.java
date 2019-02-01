@@ -41,11 +41,11 @@ public class Output {
    * Ending sequence when the game is done, either because of succeed or because of death
    */
   public void goodEnding(){
-    doOutput("Congraltulations, you've made it\n consider yourself a hero now");
+    doOutput("Congraltulations, you've made it\n You reached the end of the game \n passing many obstacles you fought your way through the world \nconsider yourself a hero now");
   }
 
   public void badEnding(){
-    doOutput("You failed\n ");
+    doOutput("You failed\n This is the end of the game \n This place brought death to you");
     // TODO implement play again
   }
 
