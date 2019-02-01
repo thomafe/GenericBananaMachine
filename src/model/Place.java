@@ -7,10 +7,13 @@ public class Place extends GameObject {
 
   // Attribute
   private List<Passage> passages;
+  
+  private List<GameObject> thingsInTheRoom = null;
+  
   private List<Item> itemsOnTheFloor;
 
   /**
-   * COnstructor.
+   * Constructor.
    *
    * @param name String
    * @param description String
@@ -20,6 +23,8 @@ public class Place extends GameObject {
     super(name, description);
     passages = new ArrayList<>();
     itemsOnTheFloor = new ArrayList<>();
+    
+    thingsInTheRoom = new ArrayList<>();
 
     // TODO set passages
   }
@@ -30,6 +35,8 @@ public class Place extends GameObject {
    * @return Passage List
    */
   public List<Passage> getPassages() {
+//    thingsInTheRoom.stream().filter(o -> o instanceof Passage).collect(collector);
+    
     // getter for passages
     return passages;
   }

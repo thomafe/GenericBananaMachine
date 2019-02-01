@@ -7,7 +7,7 @@ public class Obstacle extends GameObject {
   private boolean consumed = false;
   private boolean requireAnswer = false;
   private Item requiredItem;
-  private Item secondItem;
+  private Item secondRequiredItem;
   private String riddleAnswer;
 
   /**
@@ -37,7 +37,7 @@ public class Obstacle extends GameObject {
   public boolean tryToUseItem(Item itemToTry) {
     boolean obstacleResolved = false;
 
-    if (secondItem == null) {
+    if (secondRequiredItem == null) {
       if (requiredItem.equals(itemToTry)) {
         resolve(itemToTry);
 
@@ -46,7 +46,7 @@ public class Obstacle extends GameObject {
     }
     else {
 
-      if (secondItem.equals(itemToTry)) {
+      if (secondRequiredItem.equals(itemToTry)) {
         if (requiredItem.equals(itemToTry)) {
           resolve(itemToTry);
 
