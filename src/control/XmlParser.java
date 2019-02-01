@@ -34,21 +34,18 @@ public class XmlParser {
         if (placeNode.getNodeType() == Node.ELEMENT_NODE) {
           Element placeElement = (Element) placeNode;
 
-          System.out.println("Place id: " + placeElement.getAttribute("id"));
-          System.out.println("Place Name: " + placeElement.getElementsByTagName("name").item(0).getTextContent());
-          System.out.println("Place Description: " + placeElement.getElementsByTagName("description").item(0).getTextContent());
+          System.out.println("- id: " + placeElement.getAttribute("id"));
+          System.out.println("- Name: " + placeElement.getElementsByTagName("name").item(0).getTextContent());
+          System.out.println("- Description: " + placeElement.getElementsByTagName("description").item(0).getTextContent());
 
           // parse all existing Place Items
-          NodeList placeItemList = doc.getElementsByTagName("items");
+          NodeList itemList = placeElement.getElementsByTagName("item");
 
-          for(int placeItemCounter = 0; placeItemCounter < placeItemList.getLength(); placeItemCounter++) {
-            Node placeItemNode = placeItemList.item(placeItemCounter);
 
-            if (placeItemNode.getNodeType() == Node.ELEMENT_NODE) {
-              Element placeItemElement = (Element) placeNode;
+          for (int itemCounter = 0; itemCounter < itemList.getLength(); itemCounter++) {
+            System.out.println("- Item List: " + itemList.item(itemCounter).getTextContent());
+            //System.out.println("- - Item" + itemCounter + ": " + itemList.item(itemCounter).getTextContent());
 
-              System.out.println("Place Item" + placeItemCounter +": " + placeItemElement.getElementsByTagName("item").item(0).getTextContent());
-            }
 
           }
 
