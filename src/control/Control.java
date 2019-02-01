@@ -184,10 +184,12 @@ public class Control {
   private void runGame() {
     gameIntroduction();
 
+
     // Game Loop
     do {
 
-
+      checkForBadEnding();
+      checkForGoodEnding();
       in.readInput();
 
     } while (true);
