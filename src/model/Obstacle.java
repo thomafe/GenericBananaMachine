@@ -4,7 +4,7 @@ public class Obstacle extends GameObject {
 
   private String resolution;
   private boolean resolved = false;
-  private boolean consumable = false;
+  private boolean consumesItem = false;
   private Item requiredItem;
   private Item secondItem;
   private String riddleAnswer;
@@ -102,13 +102,13 @@ public class Obstacle extends GameObject {
 
   /**
    * Set state of obstacle to true, when item has been used and needs to be consumed.
-   *
+   * Item can either be consumed or not when resolving obstacle
    * @param itemToResolve Item
    */
   private void resolve(Item itemToResolve) {
     this.resolved = true;
 
-    if (consumable == true){
+    if (consumesItem == true){
       itemToResolve.consume();
     }
 
