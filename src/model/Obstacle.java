@@ -8,6 +8,7 @@ public class Obstacle extends GameObject {
   private Item requiredItem;
   private Item secondItem;
   private String riddleAnswer;
+  // TODO Item merken das schon da war, Methode muss nochmal aufgerufen werden für zweites Item versuchen 
 
   /**
    * Constructor.
