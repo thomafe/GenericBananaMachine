@@ -32,7 +32,7 @@ public class Output {
    */
   public void greeting() {
     doOutput("Hello fellow Player, welcome to your gobsmacking adventure!\n"
-        + " In this glorious adventure game you can proove your bravery and smartness\n by passing the many obstacles that will come in your way\n"
+        + " In this glorious adventure game you can prove your bravery and smartness\n by passing the many obstacles that will come in your way\n"
     +"Look for things along the way that might help you and you may stand a chance");
 
   }
