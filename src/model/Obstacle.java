@@ -4,8 +4,7 @@ public class Obstacle extends GameObject {
 
   private String resolution;
   private boolean resolved = false;
-  private boolean consumed = false;
-  private boolean requireAnswer = false;
+  private boolean consumable = false;
   private Item requiredItem;
   private Item secondItem;
   private String riddleAnswer;
@@ -109,7 +108,10 @@ public class Obstacle extends GameObject {
   private void resolve(Item itemToResolve) {
     this.resolved = true;
 
-    itemToResolve.consume();
+    if (consumable == true){
+      itemToResolve.consume();
+    }
+
   }
 
 }
