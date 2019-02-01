@@ -17,6 +17,7 @@ public class Control {
 
   /**
    * Default constructor. Initializes the game.
+   * 
    */
   public Control() {
     initGame();
