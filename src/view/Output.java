@@ -45,7 +45,7 @@ public class Output {
   }
 
   public void badEnding(){
-    doOutput("You failed\n do you want to play again? ");
+    doOutput("You failed\n ");
     // TODO implement play again
   }
 
