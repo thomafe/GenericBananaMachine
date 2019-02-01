@@ -187,33 +187,6 @@ public class Control {
     // Game Loop
     do {
 
-      // TODO: tidy up Code, include replay question in seperated method not to have code but game
-      // loop and methods!
-      if (character.getCurrentPlace().getName().equals("Bad Ending")
-          || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
-        // TODO: Include this stuff to output method badEnding().
-        out.doOutput("Your Character unfortunately died. Wanna play again? Please enter YES or NO");
-        // Replay question
-        if (in.readInSingleLine().equals("YES")) {
-          Control control = new Control();
-          control.runGame();
-        } else {
-          out.doOutput("Thanks for playing! See you later.");
-          System.exit(0);
-        }
-      } else if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
-        // TODO: Include this stuff to output method goodEnding().
-        out.doOutput("Congratulations, you successfully completed the game!");
-        out.doOutput("Wanna play again? Please enter YES or NO");
-        // Replay question
-        if (in.readInSingleLine().equals("YES")) {
-          Control control = new Control();
-          control.runGame();
-        } else {
-          out.doOutput("Thanks for playing! See you later.");
-          System.exit(0);
-        }
-      }
 
       in.readInput();
 
@@ -419,36 +392,37 @@ public class Control {
    * Is run at the end of the game
    */
 
-  private void goodEnding() {
-    out.goodEnding();
+  private void checkForGoodEnding() {
+
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
-      // TODO: Include this stuff to output method goodEnding().
-      out.doOutput("Congratulations, you successfully completed the game!");
-      out.doOutput("Wanna play again? Please enter YES or NO");
+      out.goodEnding();
+
       // Replay question
-      if (in.readInSingleLine().equals("YES")) {
+      /*if (in.readInSingleLine().equals("YES")) {
         Control control = new Control();
         control.runGame();
       } else {
         out.doOutput("Thanks for playing! See you later.");
-        System.exit(0);;
+        System.exit(0);*/
+    }
   }
 
-  private void badEnding() {
+  private void checkForBadEnding() {
     // TODO: tidy up Code, include replay question in seperated method not to have code but game
     // loop and methods!
     if (character.getCurrentPlace().getName().equals("Bad Ending")
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
-      // TODO: Include this stuff to output method badEnding().
-      out.doOutput("Your Character unfortunately died. Wanna play again? Please enter YES or NO");
+      out.badEnding();
+
+      //out.doOutput("Your Character unfortunately died. Wanna play again? Please enter YES or NO");
       // Replay question
-      if (in.readInSingleLine().equals("YES")) {
+     /* if (in.readInSingleLine().equals("YES")) {
         Control control = new Control();
         control.runGame();
       } else {
         out.doOutput("Thanks for playing! See you later.");
         System.exit(0);
-      }
+      }*/
     }
   }
 
