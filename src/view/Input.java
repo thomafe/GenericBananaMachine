@@ -10,24 +10,24 @@ public class Input {
   Scanner scan = new Scanner(System.in);
 
   // Pattern for TAKE ITEM
-  Pattern patternTakeItem = Pattern.compile("/take\\s([a-zA-Z\\s]+)/i");
+  Pattern patternTakeItem = Pattern.compile("[tT]ake\\s([a-zA-Z\\s]+)");
   // Pattern for USE PASSAGE NAME
-  Pattern patternUsePassage = Pattern.compile("/use\\s([a-zA-Z\\s]+)/i");
+  Pattern patternUsePassage = Pattern.compile("[uU]se\\s([a-zA-Z\\s]+)");
   // Pattern for LOOK AT PLACE
   Pattern patternLookAtPlace =
-      Pattern.compile("/look\\s[a-zA-Z\\s]*around\\s*[a-zA-Z\\s]*/i");
+      Pattern.compile("[lL]ook\\s[a-zA-Z\\s]*[aA]round\\s*[a-zA-Z\\s]*");
   // Pattern for LOOK AT anything
-  Pattern patternLookAt = Pattern.compile("/look\\s[a-zA-Z\\s]*at\\s([a-zA-Z\\s]*)/i");
+  Pattern patternLookAt = Pattern.compile("[lL]ook\\s[a-zA-Z\\s]*[aT]t\\s([a-zA-Z\\s]*)");
   // Pattern for looking into INVENTORY
-  Pattern patternInventory = Pattern.compile("/inventory/i");
+  Pattern patternInventory = Pattern.compile("[iI]nventory");
   // Pattern for getting a list of possible actions
-  Pattern patternActions = Pattern.compile("/actions/i");
+  Pattern patternActions = Pattern.compile("[aA]ctions");
   // Pattern for using an item at an obstacle
-  Pattern patternUseItemObstacle = Pattern.compile("/use\\s([a-zA-Z\\s]*)/i");
+  Pattern patternUseItemObstacle = Pattern.compile("[uU]se\\s([a-zA-Z\\s]*)");
 
   // Creating Output and Control object for referencing
   Output out;
-  Control control;
+  Control control = null;
 
   /**
    * Constructor.
