@@ -185,7 +185,6 @@ public class Control {
   private void runGame() {
     gameIntroduction();
 
-
     // Game Loop
     do {
 
@@ -215,7 +214,7 @@ public class Control {
       return passageClear;
     }
 
-    if (this.checkForObstacle(destinationPassage)) {
+    if (checkForObstacle(destinationPassage)) {
       passageClear = interactWithObstacle(destinationPassage.getObstacle());
     }
 
@@ -240,7 +239,6 @@ public class Control {
     boolean obstacleResolved = false;
     boolean continueTrying = true;
     String answerString = null;
-
     Item chosenItem = null;
 
     if (currentObstacle.isResolved()) {
@@ -252,11 +250,11 @@ public class Control {
         answerString = in.readItemForObstacle();
         chosenItem = findItemInInventory(answerString);
 
-        if (answerString.equalsIgnoreCase("leave")) {
+        if (answerString == null) {
+          out.doOutput("You don't have this item!");
+        } else if (answerString.equalsIgnoreCase("leave")) {
           out.doOutput("You decided to go back to " + character.getCurrentPlace().getName());
           break;
-        } else if (chosenItem == null) {
-          out.doOutput("You don't have this item!");
         } else if (currentObstacle.tryToUseItem(chosenItem)) {
           out.doOutput(currentObstacle.getResolution());
           character.removeItem(chosenItem);
@@ -285,6 +283,7 @@ public class Control {
 
     if (itemToPickUp != null) {
       character.takeItem((Item) itemToPickUp);
+      character.getCurrentPlace().removeItemFromPlace(itemToPickUp);
 
       success = true;
     }
@@ -378,7 +377,9 @@ public class Control {
    * @return boolean
    */
   private boolean checkForObstacle(Passage destinationPassage) {
-    return destinationPassage.hasObstacle();
+    Obstacle obstacleInPassage = destinationPassage.getObstacle();
+
+    return obstacleInPassage != null && !obstacleInPassage.isResolved();
   }
 
   /**
