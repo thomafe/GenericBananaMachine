@@ -252,7 +252,7 @@ public class Control {
         answerString = in.readItemForObstacle();
         chosenItem = findItemInInventory(answerString);
 
-        if (answerString.equals("leave")) {
+        if (answerString.equalsIgnoreCase("leave")) {
           out.doOutput("You decided to go back to " + character.getCurrentPlace().getName());
           break;
         } else if (chosenItem == null) {
