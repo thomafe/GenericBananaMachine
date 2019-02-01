@@ -26,17 +26,32 @@ public class XmlParser {
       System.out.println("Chosen entity: " + doc.getDocumentElement().getNodeName());
       NodeList placeList = doc.getElementsByTagName("place");
 
-      for (int temp = 0; temp < placeList.getLength(); temp++) {
-        Node placeNode = placeList.item(temp);
+      // parse all existing Places
+      for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
+        Node placeNode = placeList.item(placeCounter);
         System.out.println("\nCurrent Element: " + placeNode.getNodeName());
 
         if (placeNode.getNodeType() == Node.ELEMENT_NODE) {
-          Element eElement = (Element) placeNode;
+          Element placeElement = (Element) placeNode;
 
-          System.out.println("Place id: " + eElement.getAttribute("id"));
-          System.out.println("AAA: " + eElement.getElementsByTagName("name").item(0).getTextContent());
-          System.out.println("BBB: " + eElement.getElementsByTagName("description").item(0).getTextContent());
-          System.out.println("CCC: " + eElement.getElementsByTagName("items").item(0).getTextContent());
+          System.out.println("Place id: " + placeElement.getAttribute("id"));
+          System.out.println("Place Name: " + placeElement.getElementsByTagName("name").item(0).getTextContent());
+          System.out.println("Place Description: " + placeElement.getElementsByTagName("description").item(0).getTextContent());
+
+          // parse all existing Place Items
+          NodeList placeItemList = doc.getElementsByTagName("items");
+
+          for(int placeItemCounter = 0; placeItemCounter < placeItemList.getLength(); placeItemCounter++) {
+            Node placeItemNode = placeItemList.item(placeItemCounter);
+
+            if (placeItemNode.getNodeType() == Node.ELEMENT_NODE) {
+              Element placeItemElement = (Element) placeNode;
+
+              System.out.println("Place Item" + placeItemCounter +": " + placeItemElement.getElementsByTagName("item").item(0).getTextContent());
+            }
+
+          }
+
         }
       }
     } catch (Exception e) {
