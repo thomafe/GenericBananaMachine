@@ -7,23 +7,29 @@ import control.Control;
 
 public class Input {
 
+  int boxings = 0;
   Scanner scan = new Scanner(System.in);
+  // List for all the patterns/commands
 
   // Pattern for TAKE ITEM
-  Pattern patternTakeItem = Pattern.compile("(?i)take\\s([a-zA-Z\\s]+)");
+  Pattern patternTakeItem = Pattern.compile("(?i)take\\s([\\w\\s]+)");
   // Pattern for USE PASSAGE NAME
-  Pattern patternUsePassage = Pattern.compile("(?i)use\\s([a-zA-Z\\s]+)");
+  Pattern patternGotoPassage = Pattern.compile("(?i)goto\\s([\\w\\s]+)");
   // Pattern for LOOK AT PLACE
   Pattern patternLookAtPlace =
-      Pattern.compile("(?i)look\\s[a-zA-Z\\s]*around\\s*[a-zA-Z\\s]*");
+      Pattern.compile("(?i)look\\s[\\w\\s]*around\\s*[\\w\\s]*");
   // Pattern for LOOK AT anything
-  Pattern patternLookAt = Pattern.compile("(?i)look\\s[a-zA-Z\\s]*at\\s([a-zA-Z\\s]*)");
+  Pattern patternLookAt = Pattern.compile("(?i)look\\s[\\w\\s]*at\\s([\\w\\s]*)");
   // Pattern for looking into INVENTORY
   Pattern patternInventory = Pattern.compile("(?i)inventory");
   // Pattern for getting a list of possible actions
   Pattern patternActions = Pattern.compile("(?i)actions");
   // Pattern for using an item at an obstacle
-  Pattern patternUseItemObstacle = Pattern.compile("(?i)use\\s([a-zA-Z\\s]*)");
+  Pattern patternUseItemObstacle = Pattern.compile("(?i)use\\s([\\w\\s]*)");
+
+  // Filling the array allPatterns with patterns
+  private Pattern possiblePatterns[] = {patternTakeItem, patternGotoPassage, patternLookAtPlace, patternLookAt,
+  patternInventory, patternActions, patternUseItemObstacle};
 
   // Creating Output and Control object for referencing
   Output out;
@@ -49,7 +55,7 @@ public class Input {
 
     //The order in which the input is being matched
     Matcher matcherTakeItem = patternTakeItem.matcher(userInput);
-    Matcher matcherUsePassage = patternUsePassage.matcher(userInput);
+    Matcher matcherGotoPassage = patternGotoPassage.matcher(userInput);
     Matcher matcherLookAtPlace = patternLookAtPlace.matcher(userInput);
     Matcher matcherLookAt = patternLookAt.matcher(userInput);
     Matcher matcherInventory = patternInventory.matcher(userInput);
@@ -59,36 +65,57 @@ public class Input {
 
     // matching with TAKE ITEM NAME
     if (matcherTakeItem.find()) {
-      if(control.pickUpItem(matcherTakeItem.group(1))) {
-        out.doOutput("You have successfully picked up " + matcherTakeItem.group(1));
-      } else {
-        // TODO make a method for this output - and others like it
-        out.doOutput("There is no item called: " + matcherTakeItem.group(1));
+      // Checking for boxed commands
+      if (!testForBoxing(userInput, 1)) {
+        if (control.pickUpItem(matcherTakeItem.group(1))) {
+          out.doOutput("You have successfully picked up " + matcherTakeItem.group(1));
+        } else {
+          out.doOutput("There is no item called: " + matcherTakeItem.group(1));
+        }
       }
 
 
       // matching with USE PASSAGE NAME
-    } else if (matcherUsePassage.find()) {
-      control.tryToMoveThroughPassage(matcherUsePassage.group(1));
-      out.lookAtCurrentPlace();
+    } else if (matcherGotoPassage.find()) {
+      // Checking for boxed commands
+      if (!testForBoxing(userInput, 2)){
+        if (!control.tryToMoveThroughPassage(matcherGotoPassage.group(1))) {
+          out.doOutput("There is no passage called " + matcherGotoPassage.group(1));
+        }
+          out.lookAtCurrentPlace();
+      }
 
       // matching witch LOOK AT CURRENT PLACE
     } else if (matcherLookAtPlace.find()) {
-      out.lookAtCurrentPlace();
-      out.listItemsInPlace();
-      out.listPassages();
+      // Checking for boxed commands
+      if (!testForBoxing(userInput, 3)){
+        out.lookAtCurrentPlace();
+        out.listItemsInPlace();
+        out.listPassages();
+      }
 
       // matching with LOOK AT
     } else if (matcherLookAt.find()) {
-      out.lookAtGameObject(matcherLookAt.group(1));
+      // Checking for boxed commands
+      if (!testForBoxing(userInput, 4)){
+        if (out.lookAtGameObject(matcherLookAt.group(1))) {
+          out.doOutput("There is no " + matcherLookAt.group(1) + " here.");
+        }
+      }
 
       // matching with INVENTORY
     } else if (matcherInventory.find()) {
-      out.listInventory();
+      // Checking for boxed commands
+      if (!testForBoxing(userInput, 5)){
+        out.listInventory();
+      }
 
       // matching with ACTIONS
     } else if (matcherActions.find()) {
-      out.listOptions();
+      // Checking for boxed commands
+      if (!testForBoxing(userInput, 6)){
+        out.listOptions();
+      }
 
       // if NOTHING matches
     } else {
@@ -114,7 +141,7 @@ public class Input {
    * @return String
    */
   public String readItemForObstacle(){
-    String input = this.readInSingleLine();
+    String input = readInSingleLine();
     Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher((input));
     String decision = null;
     if (matcherUseItemObstacle.find()) {
@@ -123,5 +150,33 @@ public class Input {
       decision = "leave";
     }
     return decision;
+  }
+
+  /**
+   *
+   * @param userInput
+   * @param hierachy
+   * @return
+   */
+  public boolean testForBoxing(String userInput, int hierachy){
+    boolean boxed = false;
+
+    for (int i=hierachy; i < possiblePatterns.length; i++){
+      Matcher m = possiblePatterns[i].matcher(userInput);
+      if (m.find()){
+        boxed = true;
+        break;
+      }
+    }
+    if (boxed){
+      boxings++;
+      if (boxings == 3){
+        out.doOutput("Are you stupid? I said: \"DONT MIX THE BLOODY COMMANDS!\"");
+        boxings = 0;
+      } else {
+        out.doOutput("Don't mix the bloody commands!");
+      }
+    }
+    return boxed;
   }
 }

@@ -211,7 +211,6 @@ public class Control {
     Passage destinationPassage = findPassage(passageName);
 
     if (destinationPassage == null) {
-      out.doOutput("There is no passage called " + passageName);
       return passageClear;
     }
 
@@ -284,7 +283,7 @@ public class Control {
     Item itemToPickUp = findItemOnTheFloor(itemName);
 
     if (itemToPickUp != null) {
-      character.takeItem((Item) itemToPickUp);
+      character.takeItem(itemToPickUp);
 
       success = true;
     }

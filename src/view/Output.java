@@ -15,7 +15,7 @@ public class Output {
   // private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory",
   // "Go through"};
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Use <Passage Name>",
+      "Goto <Passage Name>",
       "Take <Item Name>", "Inventory", "Actions"};
 
   /**
@@ -153,11 +153,11 @@ public class Output {
    *
    * @param objectName String
    */
-  public void lookAtGameObject(String objectName) {
+  public boolean lookAtGameObject(String objectName) {
     GameObject object = control.findGameObject(objectName);
 
     if (object == null) {
-      doOutput("There is no " + objectName + " here.");
+      return false;
     } else {
       StringBuilder gameObjectDescription = new StringBuilder();
 
@@ -165,6 +165,7 @@ public class Output {
       gameObjectDescription.append(object.getDescription());
 
       doOutput(gameObjectDescription.toString());
+      return true;
     }
   }
 
