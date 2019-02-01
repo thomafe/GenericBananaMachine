@@ -5,9 +5,9 @@ public class Obstacle extends GameObject {
   private String resolution;
   private boolean resolved = false;
   private boolean consumed = false;
-  private boolean requireItem = false;
-  private boolean requireAnswer = false; 
+  private boolean requireAnswer = false;
   private Item requiredItem;
+  private Item secondItem;
 
   /**
    * Constructor.
@@ -23,8 +23,11 @@ public class Obstacle extends GameObject {
   }
 
   /**
-   * Receive item and checks if it's equal to the required item to solve the obstacle. Returns true
-   * if the item matches the requirement, else false. If the correct item was tried, the obstacle gets resolved.
+   *Check if you only have to use one item or if you have to use a 'second item' first.
+   *If you don't have to use a second item, check if the item you wanted to use to resolve the obstacle is correct
+   * If it is correct, resolve obstacle
+   * if u have to use a second, check if the second item is correct and then check if the first item is correct
+   * if yes resolve obstacle
    *
    * @param itemToTry Item
    * @return boolean
@@ -32,14 +35,35 @@ public class Obstacle extends GameObject {
   public boolean tryToUseItem(Item itemToTry) {
     boolean obstacleResolved = false;
 
-    if (requiredItem.equals(itemToTry)) {
-      resolve(itemToTry);
+    if (secondItem == null) {
+      if (requiredItem.equals(itemToTry)) {
+        resolve(itemToTry);
 
-      obstacleResolved = true;
+        obstacleResolved = true;
+      }
     }
+    else {
+
+      if (secondItem.equals(itemToTry)) {
+        if (requiredItem.equals(itemToTry)) {
+          resolve(itemToTry);
+
+          obstacleResolved = true;
+        }
+
+      }
+
+    }
+
 
     return obstacleResolved;
   }
+
+
+
+
+
+
 
   /**
    * Getter for resolution which describes the resolution of the obstacle.
