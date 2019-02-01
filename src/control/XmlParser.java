@@ -40,12 +40,12 @@ public class XmlParser {
 
           // parse all existing Place Items
           NodeList itemList = placeElement.getElementsByTagName("item");
-          System.out.println("- Item List:");
 
           for (int itemCounter = 0; itemCounter < itemList.getLength(); itemCounter++) {
             Node itemNode = itemList.item(itemCounter);
             Element itemElement = (Element) itemNode;
 
+            System.out.println("- Item" + itemCounter + ":");
             System.out.println("- - Name: " + itemElement.getElementsByTagName("name").item(0).getTextContent());
             System.out.println("- - Description: " + itemElement.getElementsByTagName("description").item(0).getTextContent());
 
