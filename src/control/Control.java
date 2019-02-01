@@ -400,12 +400,12 @@ public class Control {
       out.goodEnding();
 
       // Replay question
-      /*if (in.readInSingleLine().equals("YES")) {
-        Control control = new Control();
-        control.runGame();
-      } else {
-        out.doOutput("Thanks for playing! See you later.");
-        System.exit(0);*/
+      /*
+       * if (in.readInSingleLine().equals("YES")) { Control control = new Control();
+       * control.runGame(); } else { out.doOutput("Thanks for playing! See you later.");
+       * System.exit(0);
+       */
+      System.exit(0);
     }
   }
 
@@ -416,15 +416,16 @@ public class Control {
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
       out.badEnding();
 
-      //out.doOutput("Your Character unfortunately died. Wanna play again? Please enter YES or NO");
+      // out.doOutput("Your Character unfortunately died. Wanna play again? Please enter YES or
+      // NO");
       // Replay question
-     /* if (in.readInSingleLine().equals("YES")) {
-        Control control = new Control();
-        control.runGame();
-      } else {
-        out.doOutput("Thanks for playing! See you later.");
-        System.exit(0);
-      }*/
+      /*
+       * if (in.readInSingleLine().equals("YES")) { Control control = new Control();
+       * control.runGame(); } else { out.doOutput("Thanks for playing! See you later.");
+       *  }
+       */
+      
+      System.exit(0);
     }
   }
 
