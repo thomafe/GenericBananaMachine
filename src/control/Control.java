@@ -240,7 +240,6 @@ public class Control {
     boolean obstacleResolved = false;
     boolean continueTrying = true;
     String answerString = null;
-
     Item chosenItem = null;
 
     if (currentObstacle.isResolved()) {
@@ -252,11 +251,11 @@ public class Control {
         answerString = in.readItemForObstacle();
         chosenItem = findItemInInventory(answerString);
 
-        if (answerString.equalsIgnoreCase("leave")) {
+        if (answerString == null) {
+          out.doOutput("You don't have this item!");
+        } else if (answerString.equalsIgnoreCase("leave")) {
           out.doOutput("You decided to go back to " + character.getCurrentPlace().getName());
           break;
-        } else if (chosenItem == null) {
-          out.doOutput("You don't have this item!");
         } else if (currentObstacle.tryToUseItem(chosenItem)) {
           out.doOutput(currentObstacle.getResolution());
           character.removeItem(chosenItem);
