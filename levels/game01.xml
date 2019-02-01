@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<world>
+  <places>
+    <place id="0">
+      <name>Beach</name>
+      <description>You look around and see a bunch of equipment stuff laying on the ground.</description>
+      <items>
+        <item>Machete</item>
+        <item>Flashlight</item>
+        <item>Rope</item>
+      </items>
+    </place>
+
+  </places>
+
+  <passages>
+    <passage>
+      <name>High Cliff</name>
+      <description>This is a very sharp and high cliff. You need something to climb it.</description>
+      <obstacle>
+        <description>You need to find a way to climb the cliff.</description>
+        <resolution>You used the rope to climb the cliff.</resolution>
+        <requiredItem>2</requiredItem>
+      </obstacle>
+      <entrancePlace>0</entrancePlace>
+      <exitPlace>1</exitPlace>
+    </passage>
+
+
+  </passages>
+
+</world>
