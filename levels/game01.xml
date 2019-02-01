@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <world>
   <places>
+
     <place id="0">
       <name>Beach</name>
       <description>You look around and see a bunch of equipment stuff laying on the ground.</description>
@@ -20,7 +21,6 @@
         <item>Dudeda</item>
       </items>
     </place>
-
 
   </places>
 
