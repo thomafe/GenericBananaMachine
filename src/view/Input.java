@@ -13,7 +13,7 @@ public class Input {
 
   // Pattern for TAKE ITEM
   Pattern patternTakeItem = Pattern.compile("(?i)take\\s([\\w\\s]+)");
-  // Pattern for USE PASSAGE NAME
+  // Pattern for GOTO PASSAGE NAME
   Pattern patternGotoPassage = Pattern.compile("(?i)goto\\s([\\w\\s]+)");
   // Pattern for LOOK AT PLACE
   Pattern patternLookAtPlace =
@@ -75,14 +75,12 @@ public class Input {
       }
 
 
-      // matching with USE PASSAGE NAME
+      // matching with GOTO PASSAGE NAME
     } else if (matcherGotoPassage.find()) {
       // Checking for boxed commands
       if (!testForBoxing(userInput, 2)){
-        if (!control.tryToMoveThroughPassage(matcherGotoPassage.group(1))) {
-          out.doOutput("There is no passage called " + matcherGotoPassage.group(1));
-        }
-          out.lookAtCurrentPlace();
+        control.tryToMoveThroughPassage(matcherGotoPassage.group(1));
+        out.lookAtCurrentPlace();
       }
 
       // matching witch LOOK AT CURRENT PLACE
@@ -98,9 +96,7 @@ public class Input {
     } else if (matcherLookAt.find()) {
       // Checking for boxed commands
       if (!testForBoxing(userInput, 4)){
-        if (out.lookAtGameObject(matcherLookAt.group(1))) {
-          out.doOutput("There is no " + matcherLookAt.group(1) + " here.");
-        }
+        out.lookAtGameObject(matcherLookAt.group(1));
       }
 
       // matching with INVENTORY
@@ -153,10 +149,12 @@ public class Input {
   }
 
   /**
-   *
-   * @param userInput
-   * @param hierachy
-   * @return
+   * Takes the userInput and the hierachy of the caller(command-matcher)
+   * and searches the userInput for commands with a hierachy lower than the caller.
+   * If any command matches with the input it return true, else it returns false.
+   * @param userInput command from the user as string
+   * @param hierachy the hierachy from the caller as integer
+   * @return boolean
    */
   public boolean testForBoxing(String userInput, int hierachy){
     boolean boxed = false;

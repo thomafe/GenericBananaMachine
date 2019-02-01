@@ -91,14 +91,18 @@ public class Output {
    * Lists all items in characters inventory.
    */
   public void listInventory() {
-    StringBuilder itemsInInventory = new StringBuilder();
+    if (!control.getCharacter().getItemsInInventory().isEmpty()) {
+      StringBuilder itemsInInventory = new StringBuilder();
 
-    itemsInInventory.append("These items are in your inventory:\n");
-    for (Item item : control.getCharacter().getItemsInInventory()) {
-      itemsInInventory.append(" - " + item.getName() + "\n");
+      itemsInInventory.append("These items are in your inventory:\n");
+      for (Item item : control.getCharacter().getItemsInInventory()) {
+        itemsInInventory.append(" - " + item.getName() + "\n");
+      }
+
+      doOutput(itemsInInventory.toString());
+    } else {
+      doOutput("You have nothing in your inventory!");
     }
-
-    doOutput(itemsInInventory.toString());
   }
 
   /**
@@ -153,11 +157,11 @@ public class Output {
    *
    * @param objectName String
    */
-  public boolean lookAtGameObject(String objectName) {
+  public void lookAtGameObject(String objectName) {
     GameObject object = control.findGameObject(objectName);
 
     if (object == null) {
-      return false;
+      doOutput("There is no " + objectName + " here.");
     } else {
       StringBuilder gameObjectDescription = new StringBuilder();
 
@@ -165,7 +169,6 @@ public class Output {
       gameObjectDescription.append(object.getDescription());
 
       doOutput(gameObjectDescription.toString());
-      return true;
     }
   }
 

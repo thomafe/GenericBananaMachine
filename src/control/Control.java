@@ -205,26 +205,20 @@ public class Control {
    * @param passageName String
    * @return whether the character moved r not
    */
-  public boolean tryToMoveThroughPassage(String passageName) {
+  public void tryToMoveThroughPassage(String passageName) {
     boolean passageClear = false;
 
     Passage destinationPassage = findPassage(passageName);
 
     if (destinationPassage == null) {
-      return passageClear;
-    }
-
-    if (this.checkForObstacle(destinationPassage)) {
+      out.doOutput("There is no passage called " + passageName);
+    } else if (this.checkForObstacle(destinationPassage)) {
       passageClear = interactWithObstacle(destinationPassage.getObstacle());
-    }
 
-    if (passageClear) {
-      character.move(destinationPassage);
-      return true;
-    } else {
-      return false;
+      if (passageClear) {
+        character.move(destinationPassage);
+      }
     }
-
   }
 
   /**
@@ -237,31 +231,29 @@ public class Control {
    */
   public boolean interactWithObstacle(Obstacle currentObstacle) {
     boolean obstacleResolved = false;
-    boolean continueTrying = true;
     String answerString = null;
-
     Item chosenItem = null;
 
     if (currentObstacle.isResolved()) {
       obstacleResolved = true;
     } else {
 
-      while (continueTrying) {
+      while (true) {
         out.listOptionsObstacleInteraction(currentObstacle);
         answerString = in.readItemForObstacle();
         chosenItem = findItemInInventory(answerString);
 
-        if (answerString.equals("leave")) {
+        if (answerString == null) {
+          out.doOutput("You don't have this item!");
+        } else if (answerString.equals("leave")) {
           out.doOutput("You decided to go back to " + character.getCurrentPlace().getName());
           break;
-        } else if (chosenItem == null) {
-          out.doOutput("You don't have this item!");
         } else if (currentObstacle.tryToUseItem(chosenItem)) {
           out.doOutput(currentObstacle.getResolution());
           character.removeItem(chosenItem);
 
           obstacleResolved = true;
-          continueTrying = false;
+          break;
         } else {
           out.doOutput("That doesn't work");
         }
