@@ -4,7 +4,9 @@ public class Obstacle extends GameObject {
 
   private String resolution;
   private boolean resolved = false;
-
+  private boolean consumed = false;
+  private boolean requireItem = false;
+  private boolean requireAnswer = false; 
   private Item requiredItem;
 
   /**
