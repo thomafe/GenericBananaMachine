@@ -5,21 +5,42 @@
     <place id="0">
       <name>Beach</name>
       <description>You look around and see a bunch of equipment stuff laying on the ground.</description>
-      <items>
-        <item>Machete</item>
-        <item>Flashlight</item>
-        <item>Rope</item>
-      </items>
+
+
+        <item>
+          <name>Machete</name>
+          <description>This is a sharp meele weapon which can also be used to cut plants.</description>
+        </item>
+
+        <item>
+          <name>Flashlight</name>
+        <description>The battery is on low charge but a small light is better than no light.</description>
+        </item>
+
+        <item>
+          <name>Rope</name>
+        <description>This is a long rope which has an iron hook at the end which can be used to climb.</description>
+        </item>
+
+
     </place>
 
     <place id="1">
-      <name>Test</name>
-      <description>Description of second test place.</description>
-      <items>
-        <item>Wadde</item>
-        <item>Hadde</item>
-        <item>Dudeda</item>
-      </items>
+      <name>Coast</name>
+      <description>You enter a barren Coast which borders on a deep Jungle.</description>
+
+
+        <item>
+          <name>Cloth</name>
+          <description>This is a part of a cloth which can be used as a bandage or to clean yourself or something else.</description>
+        </item>
+
+        <item>
+          <name>NAME</name>
+          <description>Description</description>
+        </item>
+
+
     </place>
 
   </places>
