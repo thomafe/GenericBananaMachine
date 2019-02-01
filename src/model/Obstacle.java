@@ -27,9 +27,9 @@ public class Obstacle extends GameObject {
   /**
    *Check if you only have to use one item or if you have to use a 'second item' first.
    *If you don't have to use a second item, check if the item you wanted to use to resolve the obstacle is correct
-   * If it is correct, resolve obstacle
+   * If it is correct, resolve obstacle by returning true for obstacleResolved, if not return false
    * if u have to use a second, check if the second item is correct and then check if the first item is correct
-   * if yes resolve obstacle
+   * if yes resolve obstacle by returning true for obstacleResolved, if not return false
    *
    * @param itemToTry Item
    * @return boolean
@@ -60,6 +60,13 @@ public class Obstacle extends GameObject {
   }
 
 
+  /**
+   * Check if the answer for the riddle is correct
+   * if yes return true fo obstacleResolved so that Obstacle gets resolved
+   * if no return false
+   * @param answerForRiddle
+   * @return
+   */
   public boolean tryToAnswerRiddle(String answerForRiddle){
     boolean obstacleResolved = false;
     if (riddleAnswer.equals(answerForRiddle)){
