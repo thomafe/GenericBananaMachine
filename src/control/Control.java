@@ -185,7 +185,6 @@ public class Control {
   private void runGame() {
     gameIntroduction();
 
-
     // Game Loop
     do {
 
@@ -215,7 +214,7 @@ public class Control {
       return passageClear;
     }
 
-    if (this.checkForObstacle(destinationPassage)) {
+    if (checkForObstacle(destinationPassage)) {
       passageClear = interactWithObstacle(destinationPassage.getObstacle());
     }
 
@@ -284,6 +283,7 @@ public class Control {
 
     if (itemToPickUp != null) {
       character.takeItem((Item) itemToPickUp);
+      character.getCurrentPlace().removeItemFromPlace(itemToPickUp);
 
       success = true;
     }
@@ -377,7 +377,9 @@ public class Control {
    * @return boolean
    */
   private boolean checkForObstacle(Passage destinationPassage) {
-    return destinationPassage.hasObstacle();
+    Obstacle obstacleInPassage = destinationPassage.getObstacle();
+
+    return obstacleInPassage != null && !obstacleInPassage.isResolved();
   }
 
   /**
