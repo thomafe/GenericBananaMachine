@@ -405,6 +405,7 @@ public class Control {
        * control.runGame(); } else { out.doOutput("Thanks for playing! See you later.");
        * System.exit(0);
        */
+      System.exit(0);
     }
   }
 
@@ -421,8 +422,10 @@ public class Control {
       /*
        * if (in.readInSingleLine().equals("YES")) { Control control = new Control();
        * control.runGame(); } else { out.doOutput("Thanks for playing! See you later.");
-       * System.exit(0); }
+       *  }
        */
+      
+      System.exit(0);
     }
   }
 
