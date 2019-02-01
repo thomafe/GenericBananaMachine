@@ -8,6 +8,7 @@ public class Obstacle extends GameObject {
   private boolean requireAnswer = false;
   private Item requiredItem;
   private Item secondItem;
+  private String riddleAnswer;
 
   /**
    * Constructor.
@@ -21,6 +22,7 @@ public class Obstacle extends GameObject {
     this.requiredItem = requiredItem;
     this.resolution = resolution;
   }
+
 
   /**
    *Check if you only have to use one item or if you have to use a 'second item' first.
@@ -54,8 +56,15 @@ public class Obstacle extends GameObject {
       }
 
     }
+    return obstacleResolved;
+  }
 
 
+  public boolean tryToAnswerRiddle(String answerForRiddle){
+    boolean obstacleResolved = false;
+    if (riddleAnswer.equals(answerForRiddle)){
+      obstacleResolved = true;
+    }
     return obstacleResolved;
   }
 
