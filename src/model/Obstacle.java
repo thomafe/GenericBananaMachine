@@ -60,17 +60,9 @@ public class Obstacle extends GameObject {
   }
 
   /**
-   * Returns the required item to resolve the obstacle.
+   * Set state of obstacle to true, when item has been used and needs to be consumed.
    *
-   * @return Object
-   */
-  public Item getRequiredItem() {
-    // getter required
-    return requiredItem;
-  }
-
-  /**
-   * Sets state of obstacle to true.
+   * @param itemToResolve Item
    */
   private void resolve(Item itemToResolve) {
     this.resolved = true;
