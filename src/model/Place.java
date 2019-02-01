@@ -25,8 +25,6 @@ public class Place extends GameObject {
     itemsOnTheFloor = new ArrayList<>();
     
     thingsInTheRoom = new ArrayList<>();
-
-    // TODO set passages
   }
 
   /**

@@ -144,9 +144,6 @@ public class Output {
     doOutput(placeDescription.toString());
   }
 
-  // TODO do we give this strings or does control resolve that?
-  // public void lookAtGameObject()
-
   /**
    * Shows GameObject's name / description in console or gives User an Exception if no such item
    * exists.

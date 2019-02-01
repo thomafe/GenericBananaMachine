@@ -29,10 +29,6 @@ public class Control {
    */
   private void initGame() {
 
-    // TODO: Adapt Ending to different ending Places (Places: room7, room8) which kill you.
-    // TODO: No need of system.out, just end game when entering the killing Places. Place
-    // description can tell Player that he died!
-
     // Scenario: "Shipwrecked"
     Place room0 = new Place("Beach",
         "You look around and see a bunch of equipment stuff laying on the ground.");
@@ -148,6 +144,11 @@ public class Control {
 
   }
 
+  /**
+   * Contains the old test szenario.
+   * 
+   */
+  @Deprecated
   public void initTest() {
     // Game World
     Place entrance = new Place("Entrance", "This is your starting area.");
@@ -393,40 +394,26 @@ public class Control {
   }
 
   /**
-   * Is run at the end of the game
+   * Checks if a good ending was entered
    */
-
   private void checkForGoodEnding() {
 
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
       out.goodEnding();
 
-      // Replay question
-      /*
-       * if (in.readInSingleLine().equals("YES")) { Control control = new Control();
-       * control.runGame(); } else { out.doOutput("Thanks for playing! See you later.");
-       * System.exit(0);
-       */
       System.exit(0);
     }
   }
 
+  /**
+   * Checks if a bad ending was entered.
+   * 
+   */
   private void checkForBadEnding() {
-    // TODO: tidy up Code, include replay question in seperated method not to have code but game
-    // loop and methods!
     if (character.getCurrentPlace().getName().equals("Bad Ending")
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
       out.badEnding();
 
-      // out.doOutput("Your Character unfortunately died. Wanna play again? Please enter YES or
-      // NO");
-      // Replay question
-      /*
-       * if (in.readInSingleLine().equals("YES")) { Control control = new Control();
-       * control.runGame(); } else { out.doOutput("Thanks for playing! See you later.");
-       *  }
-       */
-      
       System.exit(0);
     }
   }
@@ -440,9 +427,13 @@ public class Control {
     return character;
   }
 
-  // Main Method
-
+  /**
+   * Main Method.
+   * 
+   * @param args
+   */
   public static void main(String[] args) {
+    // TODO this belongs in it's own class
 
     Control control = new Control();
 

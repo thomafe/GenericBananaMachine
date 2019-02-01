@@ -30,7 +30,6 @@ public class Item extends GameObject {
    * Sets consume state on true if item has been used (consumed).
    */
   public void consume() {
-    // methode, wenn item consumed dann true
     this.consumed = true;
   }
 

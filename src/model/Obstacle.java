@@ -25,11 +25,10 @@ public class Obstacle extends GameObject {
 
 
   /**
-   *Check if you only have to use one item or if you have to use a 'second item' first.
-   *If you don't have to use a second item, check if the item you wanted to use to resolve the obstacle is correct
-   * If it is correct, resolve obstacle
-   * if u have to use a second, check if the second item is correct and then check if the first item is correct
-   * if yes resolve obstacle
+   * Check if you only have to use one item or if you have to use a 'second item' first. If you
+   * don't have to use a second item, check if the item you wanted to use to resolve the obstacle is
+   * correct If it is correct, resolve obstacle if u have to use a second, check if the second item
+   * is correct and then check if the first item is correct if yes resolve obstacle
    *
    * @param itemToTry Item
    * @return boolean
@@ -43,8 +42,7 @@ public class Obstacle extends GameObject {
 
         obstacleResolved = true;
       }
-    }
-    else {
+    } else {
 
       if (secondRequiredItem.equals(itemToTry)) {
         if (requiredItem.equals(itemToTry)) {
@@ -59,20 +57,19 @@ public class Obstacle extends GameObject {
     return obstacleResolved;
   }
 
-
-  public boolean tryToAnswerRiddle(String answerForRiddle){
+  /**
+   * Tries to answere the riddle...
+   * 
+   * @param answerForRiddle
+   * @return
+   */
+  public boolean tryToAnswerRiddle(String answerForRiddle) {
     boolean obstacleResolved = false;
-    if (riddleAnswer.equals(answerForRiddle)){
+    if (riddleAnswer.equals(answerForRiddle)) {
       obstacleResolved = true;
     }
     return obstacleResolved;
   }
-
-
-
-
-
-
 
   /**
    * Getter for resolution which describes the resolution of the obstacle.
