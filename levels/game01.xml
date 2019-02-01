@@ -11,6 +11,17 @@
       </items>
     </place>
 
+    <place id="1">
+      <name>Test</name>
+      <description>Description of second test place.</description>
+      <items>
+        <item>Wadde</item>
+        <item>Hadde</item>
+        <item>Dudeda</item>
+      </items>
+    </place>
+
+
   </places>
 
   <passages>
