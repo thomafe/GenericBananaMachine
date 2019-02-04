@@ -15,8 +15,7 @@ public class Output {
   // private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory",
   // "Go through"};
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Use <Passage Name>",
-      "Take <Item Name>", "Inventory", "Actions"};
+      "Use <Passage Name>", "Take <Item Name>", "Inventory", "Actions"};
 
   /**
    * Constructor.
@@ -33,18 +32,19 @@ public class Output {
   public void greeting() {
     doOutput("Hello fellow Player, welcome to your gobsmacking adventure!\n"
         + " In this glorious adventure game you can prove your bravery and smartness\n by passing the many obstacles that will come in your way\n"
-    +"Look for things along the way that might help you and you may stand a chance");
+        + "Look for things along the way that might help you and you may stand a chance");
 
   }
 
   /**
    * Ending sequence when the game is done, either because of succeed or because of death
    */
-  public void goodEnding(){
-    doOutput("Congraltulations, you've made it\n You reached the end of the game \n passing many obstacles you fought your way through the world \nconsider yourself a hero now");
+  public void goodEnding() {
+    doOutput(
+        "Congraltulations, you've made it\n You reached the end of the game \n passing many obstacles you fought your way through the world \nconsider yourself a hero now");
   }
 
-  public void badEnding(){
+  public void badEnding() {
     doOutput("You failed\n This is the end of the game \n This place brought death to you");
     // TODO implement play again
   }
@@ -78,7 +78,8 @@ public class Output {
     } else {
       StringBuilder itemsOutput = new StringBuilder();
 
-      itemsOutput.append("These items are in "+control.getCharacter().getCurrentPlace().getName() +": \n");
+      itemsOutput.append(
+          "These items are in " + control.getCharacter().getCurrentPlace().getName() + ": \n");
       for (Item item : itemsInPlace) {
         itemsOutput.append(" - " + item.getName() + "\n");
       }
@@ -107,7 +108,8 @@ public class Output {
   public void listPassages() {
     StringBuilder passages = new StringBuilder();
 
-    passages.append("These passages lead out of "+ control.getCharacter().getCurrentPlace().getName()+":\n");
+    passages.append(
+        "These passages lead out of " + control.getCharacter().getCurrentPlace().getName() + ":\n");
     for (Passage passage : control.getCharacter().getCurrentPlace().getPassages()) {
       passages.append(" - " + passage.getName() + "\n");
     }
@@ -123,8 +125,7 @@ public class Output {
     StringBuilder obstacleOptions = new StringBuilder();
 
     obstacleOptions.append(obstacle.getDescription() + "\n");
-    obstacleOptions
-        .append("Do you want to \"use\" an item or do you want to \"leave\"?");
+    obstacleOptions.append("Do you want to \"use\" an item or do you want to \"leave\"?");
     listInventory();
 
     doOutput(obstacleOptions.toString());
