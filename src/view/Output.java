@@ -172,7 +172,12 @@ public class Output {
    *
    * @param message String
    */
+  @Deprecated
   public void doOutput(String message) {
+    System.out.println(message);
+  }
+  
+  private void printString(String message) {
     System.out.println(message);
   }
 }
