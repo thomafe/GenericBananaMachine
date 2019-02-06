@@ -67,7 +67,6 @@ public class Obstacle extends GameObject {
    * @return boolean
    */
   public boolean tryToUseItem(Item itemToTry) {
-    reactsToContact();
     boolean obstacleResolved = false;
 
     if (additionalItem == null) {
@@ -88,9 +87,7 @@ public class Obstacle extends GameObject {
         additionalItemResolved = true;
         reactsToCorrectItem();
 
-      }
-
-      else if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
+      } else if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
         resolve(itemToTry);
         consume(itemToTry);
         obstacleResolved = true;
@@ -161,7 +158,7 @@ public class Obstacle extends GameObject {
     this.consumesItem = consumesItem;
   }
 
-  public void reactsToContact(){
+  public void reactsToContact() {
     System.out.println("The Obstacle is slightliy buzzing, it seems to notice your presence");
   }
 
@@ -173,8 +170,8 @@ public class Obstacle extends GameObject {
     System.out.println("Obstacle is gleaming, seems you've used the right item");
   }
 
-  public void reactsToCorrectAdditionalItem(){
-    System.out.println("Correctly used additional item");
+  public void walkAway() {
+    System.out.println("You can run from the obstacle but not from your own failure");
   }
 }
 
