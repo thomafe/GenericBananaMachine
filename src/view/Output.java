@@ -16,9 +16,13 @@ public class Output {
   public enum errorType {
     CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD
   }
-  
+
   public enum errorTypeInput {
     NO_ITEM, NO_PASSAGE, THERE_IS_NONE
+  }
+
+  public enum successType {
+    PICK_UP, OBSTACLE_WIN
   }
 
   private Control control;
@@ -182,8 +186,6 @@ public class Output {
 
   /**
    * Standard output for unsuccessful operations
-   * 
-   * @param type
    */
   public void noSuccess(errorType type) {
     switch (type) {
@@ -213,9 +215,6 @@ public class Output {
 
   /**
    * Standard output for unsuccessful operations
-   * 
-   * @param userInput
-   * @param type
    */
   public void noSuccess(String userInput, errorTypeInput type) {
     switch (type) {
@@ -233,13 +232,26 @@ public class Output {
     }
   }
 
-  public void success(String userInput, int i) {
-    switch (i) {
-      case 1:
+  public void success(String userInput, successType type) {
+    switch (type) {
+      case PICK_UP:
         printString("You have successfully picked up " + userInput);
+        break;
+      default:
+        printString("Yeah, you did it!");
     }
   }
-  
+
+  public void success(Obstacle obstacle, successType type) {
+    switch (type) {
+      case OBSTACLE_WIN:
+        printString(obstacle.getResolution());
+        break;
+      default:
+        printString("Yeah, you did it!");
+    }
+  }
+
   /**
    * Output a committed message in console. Deprecated! There should be a method for what you want
    * to do.

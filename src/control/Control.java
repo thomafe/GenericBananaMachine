@@ -11,6 +11,7 @@ import view.Output;
 import model.Passage;
 import model.GameObject;
 import view.Output.errorType;
+import view.Output.successType;
 
 public class Control {
 
@@ -310,7 +311,7 @@ public class Control {
         out.noSuccess(errorType.GO_BACK);
         break;
       } else if (currentObstacle.tryToUseItem(chosenItem)) {
-        out.doOutput(currentObstacle.getResolution());
+        out.success(currentObstacle, successType.OBSTACLE_WIN);
         character.removeItem(chosenItem);
         return true;
       } else {

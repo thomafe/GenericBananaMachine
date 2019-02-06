@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import control.Control;
 import view.Output.errorType;
 import view.Output.errorTypeInput;
+import view.Output.successType;
 
 public class Input {
 
@@ -86,7 +87,7 @@ public class Input {
   public void matchTakeItem(Matcher match) {
       if (control.checkPickUpItem(match.group(1))) {
         control.pickUpItem(match.group(1));
-        out.success(match.group(1), 1);
+        out.success(match.group(1), successType.PICK_UP);
       } else {
         out.noSuccess(match.group(1), errorTypeInput.NO_ITEM);
       }
