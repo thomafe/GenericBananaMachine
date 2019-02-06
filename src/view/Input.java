@@ -7,30 +7,21 @@ import control.Control;
 
 public class Input {
 
-  int boxings = 0;
+  private int boxings = 0;
   Scanner scan = new Scanner(System.in);
   // List for all the patterns/commands
 
-  // Pattern for TAKE ITEM
   Pattern patternTakeItem = Pattern.compile("(?i)take\\s([\\w\\s]+)");
-  // Pattern for GOTO PASSAGE NAME
   Pattern patternGotoPassage = Pattern.compile("(?i)goto\\s([\\w\\s]+)");
-  // Pattern for LOOK AT PLACE
   Pattern patternLookAtPlace =
       Pattern.compile("(?i)look\\s[\\w\\s]*around\\s*[\\w\\s]*");
-  // Pattern for LOOK AT anything
   Pattern patternLookAt = Pattern.compile("(?i)look\\s[\\w\\s]*at\\s([\\w\\s]*)");
-  // Pattern for looking into INVENTORY
   Pattern patternInventory = Pattern.compile("(?i)inventory");
-  // Pattern for getting a list of possible actions
   Pattern patternActions = Pattern.compile("(?i)actions");
-  // Pattern for using an item at an obstacle
   Pattern patternUseItemObstacle = Pattern.compile("(?i)use\\s([\\w\\s]*)");
 
-  // Filling the array allPatterns with patterns
   private Pattern possiblePatterns[] = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
-      patternLookAt,
-      patternInventory, patternActions, patternUseItemObstacle};
+      patternLookAt, patternInventory, patternActions, patternUseItemObstacle};
 
   // Creating Output and Control object for referencing
   Output out;
@@ -71,45 +62,62 @@ public class Input {
   }
 
   public boolean matchTakeItem(Matcher match, String userInput) {
-    if (match && !testForBoxing(userInput, 1)) {
-      if (control.pickUpItem(matcherTakeItem.group(1))) {
-        out.doOutput("You have successfully picked up " + matcherTakeItem.group(1));
+    if (match.find() && !testForBoxing(userInput, 1)) {
+      if (control.pickUpItem(match.group(1))) {
+        out.doOutput("You have successfully picked up " + match.group(1));
+        return true;
       } else {
-        out.doOutput("There is no item called: " + matcherTakeItem.group(1));
+        out.doOutput("There is no item called: " + match.group(1));
       }
     }
+    return false;
   }
 
   public boolean matchGotoPassage(Matcher match, String userInput) {
-    if (match && !testForBoxing(userInput, 2)) {
-      control.tryToMoveThroughPassage(matcherGotoPassage.group(1));
+    if (match.find() && !testForBoxing(userInput, 2)) {
+      control.tryToMoveThroughPassage(match.group(1));
       out.lookAtCurrentPlace();
+      return true;
+    } else {
+      return false;
     }
   }
 
   public boolean matchLookAtPlace(Matcher match, String userInput) {
-    if (match && !testForBoxing(userInput, 3)) {
+    if (match.find() && !testForBoxing(userInput, 3)) {
       out.lookAtCurrentPlace();
       out.listItemsInPlace();
       out.listPassages();
+      return true;
+    } else {
+      return false;
     }
   }
 
   public boolean matchLookAt(Matcher match, String userInput){
-    if(match && !testForBoxing(userInput, 4)) {
-      out.lookAtGameObject(matcherLookAt.group(1));
+    if(match.find() && !testForBoxing(userInput, 4)) {
+      out.lookAtGameObject(match.group(1));
+      return true;
+    } else {
+      return false;
     }
   }
 
   public boolean matchInventory(Matcher match, String userInput) {
-    if (match && !testForBoxing(userInput, 5)) {
+    if (match.find() && !testForBoxing(userInput, 5)) {
       out.listInventory();
+      return true;
+    } else {
+      return false;
     }
   }
 
-  public booleane matchActions(Matcher match, String userInput) {
-    if (match && !testForBoxing(userInput, 6)) {
+  public boolean matchActions(Matcher match, String userInput) {
+    if (match.find() && !testForBoxing(userInput, 6)) {
       out.listOptions();
+      return true;
+    }{
+      return false;
     }
   }
 
