@@ -9,8 +9,6 @@ public class Obstacle extends GameObject {
   private Item additionalItem;
   private String riddleAnswer;
   private boolean additionalItemResolved = false;
-  // TODO Item merken das schon da war, Methode muss nochmal aufgerufen werden für zweites Item
-  // versuchen
 
   /**
    * Create a new obstacle that takes one item that will be consumed.

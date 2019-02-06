@@ -7,10 +7,8 @@ public class Place extends GameObject {
 
   // Attribute
   private List<Passage> passages;
-  
-  private List<GameObject> thingsInTheRoom = null;
-  
-  private List<Item> itemsOnTheFloor;
+
+  private List<GameObject> thingsInTheRoom;
 
   /**
    * Default constructor. Creates a simple place with nothing in it.
@@ -21,7 +19,7 @@ public class Place extends GameObject {
   public Place(String name, String description) {
     super(name, description);
     passages = new ArrayList<>();
-    itemsOnTheFloor = new ArrayList<>();
+    thingsInTheRoom = new ArrayList<>();
   }
 
   /**
@@ -30,28 +28,31 @@ public class Place extends GameObject {
    * @return Passage List
    */
   public List<Passage> getPassages() {
-//    thingsInTheRoom.stream().filter(o -> o instanceof Passage).collect(collector);
-    
+    // thingsInTheRoom.stream().filter(o -> o instanceof Passage).collect(collector);
+
     // getter for passages
     return passages;
   }
 
   /**
-   * Add a single item to the item list.
+   * Add a single item to the item list. Deprecated! Use <code>addObjectToPlace()</code> instead
    *
    * @param item Item
    */
+  @Deprecated
   public void addItemOnTheFloor(Item item) {
-    itemsOnTheFloor.add(item);
+    thingsInTheRoom.add(item);
   }
 
   /**
-   * Setter for including Item which can be found in this Place.
-   *
-   * @param itemsOnTheFloor Item List
+   * Adds a new thing to to place.
+   * 
+   * @param object
    */
-  public void setItemsOnTheFloor(List<Item> itemsOnTheFloor) {
-    this.itemsOnTheFloor = itemsOnTheFloor;
+  public void addObjectToPlace(GameObject object) {
+    if (!thingsInTheRoom.contains(object)) {
+      thingsInTheRoom.add(object);
+    }
   }
 
   /**
@@ -60,7 +61,7 @@ public class Place extends GameObject {
    * @param itemToRemove Item
    */
   public void removeItemFromPlace(Item itemToRemove) {
-    this.itemsOnTheFloor.remove(itemToRemove);
+    this.thingsInTheRoom.remove(itemToRemove);
   }
 
   /**
@@ -68,8 +69,8 @@ public class Place extends GameObject {
    * 
    * @return itemsOnTheFloor
    */
-  public List<Item> getItemsOnTheFloor() {
-    return itemsOnTheFloor;
+  public List<GameObject> getObjectsInPlace() {
+    return thingsInTheRoom;
   }
 
   /**

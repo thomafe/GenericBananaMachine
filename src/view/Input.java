@@ -94,7 +94,7 @@ public class Input {
   public boolean matchLookAtPlace(Matcher match, String userInput) {
     if (!testForBoxing(userInput, 3)) {
       out.lookAtCurrentPlace();
-      out.listItemsInPlace();
+      out.listObjectsInPlace();
       out.listPassages();
       return true;
     } else {

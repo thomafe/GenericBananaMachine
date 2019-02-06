@@ -69,21 +69,21 @@ public class Output {
   /**
    * Lists all items in the room (on the floor).
    */
-  public void listItemsInPlace() {
-    List<Item> itemsInPlace = control.getCharacter().getCurrentPlace().getItemsOnTheFloor();
+  public void listObjectsInPlace() {
+    List<GameObject> objectsInPlace = control.getCharacter().getCurrentPlace().getObjectsInPlace();
 
-    if (itemsInPlace.isEmpty()) {
-      doOutput("There are no items here.");
+    if (objectsInPlace.isEmpty()) {
+      doOutput("There are no things here.");
     } else {
-      StringBuilder itemsOutput = new StringBuilder();
+      StringBuilder thingsOutput = new StringBuilder();
 
-      itemsOutput.append(
-          "These items are in " + control.getCharacter().getCurrentPlace().getName() + ": \n");
-      for (Item item : itemsInPlace) {
-        itemsOutput.append(" - " + item.getName() + "\n");
+      thingsOutput.append(
+          "These things are in " + control.getCharacter().getCurrentPlace().getName() + ": \n");
+      for (GameObject objectInPlace : objectsInPlace) {
+        thingsOutput.append(" - " + objectInPlace.getName() + "\n");
       }
 
-      doOutput(itemsOutput.toString());
+      doOutput(thingsOutput.toString());
     }
   }
 

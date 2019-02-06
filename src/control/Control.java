@@ -389,9 +389,9 @@ public class Control {
   private Item findItemOnTheFloor(String itemName) {
     Item foundItem = null;
 
-    for (Item item : character.getCurrentPlace().getItemsOnTheFloor()) {
-      if (item.getName().equalsIgnoreCase(itemName)) {
-        foundItem = item;
+    for (GameObject objectInPlace : character.getCurrentPlace().getObjectsInPlace()) {
+      if (objectInPlace instanceof Item && objectInPlace.getName().equalsIgnoreCase(itemName)) {
+        foundItem = (Item)objectInPlace;
         break;
       }
     }
