@@ -8,6 +8,16 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
 
+import model.Character;
+import model.Item;
+import model.Obstacle;
+import model.Place;
+import view.Input;
+import view.Output;
+import model.Passage;
+import model.GameObject;
+import control.XmlParser;
+
 /**
  * Parse given XML file in a specific path
  */
@@ -35,6 +45,10 @@ public class XmlParser {
 
       setNumberOfPlaces(placeList.getLength());
 
+      // TODO: reference to (1)
+      Place[] places = new Place[getNumberOfPlaces()];
+      Item[] items = new Item[getNumberOfItems()];
+
       // parse all existing Places
       for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
         Node placeNode = placeList.item(placeCounter);
@@ -47,6 +61,10 @@ public class XmlParser {
           System.out.println("- Name: " + placeElement.getElementsByTagName("name").item(0).getTextContent());
           System.out.println("- Description: " + placeElement.getElementsByTagName("description").item(0).getTextContent());
 
+          // TODO: reference to (1)
+          places[placeCounter] = new Place(placeElement.getElementsByTagName("name").item(0).getTextContent(),
+              placeElement.getElementsByTagName("description").item(0).getTextContent());
+
           // parse all existing Place Items
           NodeList itemList = placeElement.getElementsByTagName("item");
 
@@ -57,6 +75,8 @@ public class XmlParser {
             System.out.println("- Item" + itemCounter + ":");
             System.out.println("- - Name: " + itemElement.getElementsByTagName("name").item(0).getTextContent());
             System.out.println("- - Description: " + itemElement.getElementsByTagName("description").item(0).getTextContent());
+
+            // TODO: reference to (1)
 
           }
         }
@@ -97,12 +117,76 @@ public class XmlParser {
     }
 
   }
-  // numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
+
+  /**
+   * Setter for Number of Places.
+   *
+   * @param num int
+   */
   public void setNumberOfPlaces(int num) {
     numberOfPlaces = num;
   }
 
+  /**
+   * Getter for Number of Places.
+   *
+   * @return int
+   */
   public int getNumberOfPlaces() {
     return numberOfPlaces;
+  }
+
+  /**
+   * Setter for Number of Items.
+   *
+   * @param num int
+   */
+  public void setNumberOfItems(int num) {
+    numberOfItems = num;
+  }
+
+  /**
+   * Getter for Number of Items.
+   *
+   * @return int
+   */
+  public int getNumberOfItems() {
+    return numberOfItems;
+  }
+
+  /**
+   * Setter for Number of Passages.
+   *
+   * @param num int
+   */
+  public void setNumberOfPassages(int num) {
+    numberOfPassages = num;
+  }
+
+  /**
+   * Getter for Number of Passages.
+   *
+   * @return int
+   */
+  public int getNumberOfPassages() {
+    return numberOfPassages;
+  }
+
+  /**
+   * Setter for Number of Obstacles.
+   *
+   * @param num int
+   */
+  public void setNumberOfObstacles(int num) {
+    numberOfObstacles = num;
+  }
+
+  /**
+   * Getter for Number of Obstacles.
+   *
+   * @return int
+   */
+  public int getNumberOfObstacles() {
+    return numberOfObstacles;
   }
 }
