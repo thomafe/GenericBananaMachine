@@ -11,6 +11,7 @@ public class Obstacle extends GameObject {
   private boolean additionalItemResolved = false;
 
 
+
   /**
    * Create a new obstacle that takes one item that will be consumed.
    *
@@ -66,18 +67,17 @@ public class Obstacle extends GameObject {
    * @param itemToTry Item
    * @return boolean
    */
+
   public boolean tryToUseItem(Item itemToTry) {
-    boolean obstacleResolved = false;
+    boolean correctItemUsed = false;
 
     if (additionalItem == null) {
       // Only one item
       if (requiredItem.equals(itemToTry)) {
         resolve(itemToTry);
         consume(itemToTry);
-        obstacleResolved = true;
-        reactsToCorrectItem();
-      } else {
-        reactToFalseItem();
+        correctItemUsed = true;
+
       }
     } else {
 
@@ -85,19 +85,18 @@ public class Obstacle extends GameObject {
       if (additionalItem.equals(itemToTry)) {
         consume(itemToTry);
         additionalItemResolved = true;
-        reactsToCorrectItem();
+        correctItemUsed= true;
+
 
       } else if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
         resolve(itemToTry);
         consume(itemToTry);
-        obstacleResolved = true;
-        reactsToCorrectItem();
-      } else {
-        reactToFalseItem();
+        correctItemUsed = true;
+
       }
     }
 
-    return obstacleResolved;
+    return correctItemUsed;
   }
 
   /**
