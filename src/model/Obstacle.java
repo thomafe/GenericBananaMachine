@@ -4,7 +4,7 @@ public class Obstacle extends GameObject {
 
   private String resolution;
   private boolean resolved = false;
-  private boolean consumesItem = false;
+  private boolean consumesItem = true;
   private Item requiredItem;
   private Item additionalItem;
   private String riddleAnswer;
@@ -26,18 +26,18 @@ public class Obstacle extends GameObject {
   }
 
   /**
-   * Create a new obstacle that takes two items that will be consumed.
+   * Create a new obstacle that takes two items that will be consumed. Careful! Additional item is required first!
    *
    * @param name String
    * @param description String
-   * @param firstItem Item
-   * @param secondItem Item
+   * @param requiredItem Item
+   * @param additionalItem Item
    */
-  public Obstacle(String name, String description, String resolution, Item firstItem,
-      Item secondItem) {
+  public Obstacle(String name, String description, String resolution, Item requiredItem,
+      Item additionalItem) {
     super(name, description);
-    this.requiredItem = firstItem;
-    this.additionalItem = secondItem;
+    this.requiredItem = requiredItem;
+    this.additionalItem = additionalItem;
     this.resolution = resolution;
   }
 
