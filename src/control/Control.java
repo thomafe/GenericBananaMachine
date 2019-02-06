@@ -24,6 +24,26 @@ public class Control {
   }
 
   /**
+   * Creates a test game if the flag is set or a regular game if not.
+   * 
+   * @param doTest
+   */
+  public Control(boolean doTest) {
+    if (doTest) {
+      testWorld();
+    } else {
+      initGame();
+    }
+  }
+
+  private void initCharacter(Place startingPlace) {
+    character = new Character(startingPlace);
+
+    out = new Output(this);
+    in = new Input(out, this);
+  }
+
+  /**
    * Initializes the game world and all other required objects.
    * 
    */
@@ -137,19 +157,50 @@ public class Control {
     room4.addItemOnTheFloor(item8); // Outback -> signal rockets
 
     // Other objects
-    character = new Character(room0);
-
-    out = new Output(this);
-    in = new Input(out, this);
+    initCharacter(room0);
 
   }
 
   /**
-   * Contains the old test szenario.
+   * Create a test world. Character already has items in his inventory.
    * 
    */
+  private void testWorld() {
+    Place startingPlace = new Place("Entrance", "Starting Place");
+    Place room1 = new Place("Room 1", "Test Room 1");
+    Place room2 = new Place("Room 2", "Test Room 2");
+    Place room3 = new Place("Room 3", "Test Room 3");
+    Place room4 = new Place("Room 4", "Test Room 4");
+
+    Item item1 = new Item("Required Item", "Required Item");
+    Item item2 = new Item("Additional Item", "Additional Item");
+    Item itemOnFloor = new Item("Shoe", "A shoe");
+    
+    startingPlace.addItemOnTheFloor(itemOnFloor);
+
+    Obstacle singleItemObstacle =
+        new Obstacle("One Item Obstacle", "This obstalce takes one item", "It worked!", item1);
+    Obstacle doulbeItemObstacle = new Obstacle("Two Item Obstacle",
+        "This obstalce takes one item, addtitional Item first!", "It worked!", item1, item2);
+    Obstacle riddleObstacle =
+        new Obstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!", "Shoe");
+
+    new Passage("Free Passage", "Has no obstacles", startingPlace, room1);
+    (new Passage("Simple Passage", "Has simple Obstacle", startingPlace, room2))
+        .setObstacle(singleItemObstacle);
+    (new Passage("Double Passage", "Has double Obstacle", startingPlace, room3))
+        .setObstacle(doulbeItemObstacle);
+    (new Passage("Riddle Passage", "Has riddle Obstacle", startingPlace, room4))
+        .setObstacle(riddleObstacle);
+
+    initCharacter(startingPlace);
+    
+    character.takeItem(item1);
+    character.takeItem(item2);
+  }
+
   @Deprecated
-  public void initTest() {
+  public void oldTestWorld() {
     // Game World
     Place entrance = new Place("Entrance", "This is your starting area.");
     Place secondRoom =
@@ -162,22 +213,20 @@ public class Control {
     new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom,
         thirdRoom);
 
-    Item item1 = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
+    Item lightsaber = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
     Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
+    Item overcharger = new Item("Overcharger", "This thing just makes all gadgets go Uhweeeeee");
 
     Obstacle obstacle = new Obstacle("Blastdoor", "A thick blast door that blocks the way",
-        "You melt through the door with your lightsaber!", item1);
+        "You melt through the door with your lightsaber!", lightsaber, overcharger);
 
     pas1.setObstacle(obstacle);
 
-    entrance.addItemOnTheFloor(item1);
+    entrance.addItemOnTheFloor(lightsaber);
+    entrance.addItemOnTheFloor(overcharger);
     secondRoom.addItemOnTheFloor(item2);
 
-    // Other objects
-    character = new Character(entrance);
-
-    out = new Output(this);
-    in = new Input(out, this);
+    initCharacter(entrance);
   }
 
   /**
@@ -203,29 +252,28 @@ public class Control {
    * character moves to the next room.
    * 
    * @param passageName String
-   * @return whether the character moved r not
+   * @return whether the character moved or not
    */
+
   public boolean tryToMoveThroughPassage(String passageName) {
-    boolean passageClear = false;
+    boolean characterMoved = false;
 
     Passage destinationPassage = findPassage(passageName);
 
     if (destinationPassage == null) {
       out.doOutput("There is no passage called " + passageName);
-      return passageClear;
-    }
-
-    if (checkForObstacle(destinationPassage)) {
-      passageClear = interactWithObstacle(destinationPassage.getObstacle());
-    }
-
-    if (passageClear) {
-      character.move(destinationPassage);
-      return true;
-    } else {
       return false;
     }
 
+    Obstacle obstalceInPassage = destinationPassage.getObstacle();
+
+    if (obstalceInPassage == null || obstalceInPassage.isResolved()
+        || interactWithObstacle(obstalceInPassage)) {
+      character.move(destinationPassage);
+      characterMoved = true;
+    }
+
+    return characterMoved;
   }
 
   /**
@@ -238,7 +286,6 @@ public class Control {
    */
   public boolean interactWithObstacle(Obstacle currentObstacle) {
     boolean obstacleResolved = false;
-    boolean continueTrying = true;
     String answerString = null;
     Item chosenItem = null;
 
@@ -246,14 +293,14 @@ public class Control {
       obstacleResolved = true;
     } else {
 
-      while (continueTrying) {
+      while (true) {
         out.listOptionsObstacleInteraction(currentObstacle);
         answerString = in.readItemForObstacle();
         chosenItem = findItemInInventory(answerString);
 
         if (answerString == null) {
           out.doOutput("You don't have this item!");
-        } else if (answerString.equalsIgnoreCase("leave")) {
+        } else if (answerString.equals("leave")) {
           out.doOutput("You decided to go back to " + character.getCurrentPlace().getName());
           break;
         } else if (currentObstacle.tryToUseItem(chosenItem)) {
@@ -261,7 +308,7 @@ public class Control {
           character.removeItem(chosenItem);
 
           obstacleResolved = true;
-          continueTrying = false;
+          break;
         } else {
           out.doOutput("That doesn't work");
         }
@@ -414,6 +461,14 @@ public class Control {
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
       out.badEnding();
 
+      // out.doOutput("Your Character unfortunately died. Wanna play again? Please enter YES or
+      // NO");
+      // Replay question
+      /*
+       * if (in.readInSingleLine().equals("YES")) { Control control = new Control();
+       * control.runGame(); } else { out.doOutput("Thanks for playing! See you later."); }
+       */
+
       System.exit(0);
     }
   }
@@ -433,9 +488,9 @@ public class Control {
    * @param args
    */
   public static void main(String[] args) {
-    // TODO this belongs in it's own class
+    boolean doTest = true;
 
-    Control control = new Control();
+    Control control = new Control(doTest);
 
     control.runGame();
   }
