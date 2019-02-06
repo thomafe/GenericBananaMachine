@@ -22,6 +22,19 @@ public class Control {
   public Control() {
     initGame();
   }
+  
+  /**
+   * Creates a test game if the flag is set or a regular game if not.
+   * 
+   * @param doTest
+   */
+  public Control(boolean doTest) {
+    if(doTest) {
+      initTest();
+    } else {
+      initGame();
+    }
+  }
 
   /**
    * Initializes the game world and all other required objects.
@@ -443,8 +456,9 @@ public class Control {
   // Main Method
 
   public static void main(String[] args) {
+    boolean doTest = true;
 
-    Control control = new Control();
+    Control control = new Control(doTest);
 
     control.runGame();
   }
