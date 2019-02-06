@@ -12,8 +12,6 @@ public class Output {
 
   private Control control;
 
-  // private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory",
-  // "Go through"};
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
       "Goto <Passage Name>",
       "Take <Item Name>", "Inventory", "Actions"};
@@ -147,9 +145,6 @@ public class Output {
 
     doOutput(placeDescription.toString());
   }
-
-  // TODO do we give this strings or does control resolve that?
-  // public void lookAtGameObject()
 
   /**
    * Shows GameObject's name / description in console or gives User an Exception if no such item
