@@ -178,13 +178,16 @@ public class Control {
 
     Item item1 = new Item("Required Item", "Required Item");
     Item item2 = new Item("Additional Item", "Additional Item");
+    Item itemOnFloor = new Item("Shoe", "A shoe");
+    
+    startingPlace.addItemOnTheFloor(itemOnFloor);
 
     Obstacle singleItemObstacle =
-        new Obstacle("One Item Obstacle", "This obstalce takes one item", "It worked", item1);
+        new Obstacle("One Item Obstacle", "This obstalce takes one item", "It worked!", item1);
     Obstacle doulbeItemObstacle = new Obstacle("Two Item Obstacle",
-        "This obstalce takes one item, addtitional Item first!", "It worked", item1, item2);
+        "This obstalce takes one item, addtitional Item first!", "It worked!", item1, item2);
     Obstacle riddleObstacle =
-        new Obstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked", "Shoe");
+        new Obstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!", "Shoe");
 
     new Passage("Free Passage", "Has no obstacles", startingPlace, room1);
     (new Passage("Simple Passage", "Has simple Obstacle", startingPlace, room2))
