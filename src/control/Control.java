@@ -301,23 +301,23 @@ public class Control {
       chosenItem = findItemInInventory(answerString);
 
       if (answerString == null) {
-        out.doOutput("You don't have this item!");
+        out.noSuccess(3);
       } else if (answerString.equals("leave")) {
-        out.doOutput("You decided to go back to " + character.getCurrentPlace().getName());
+        out.noSuccess(4);
         break;
       } else if (currentObstacle.tryToUseItem(chosenItem)) {
         out.doOutput(currentObstacle.getResolution());
         character.removeItem(chosenItem);
         return true;
       } else {
-        out.doOutput("That doesn't work");
+        out.noSuccess(2);
       }
     }
     return false;
   }
 
   /**
-   * Chekcs if the GameObject exists
+   * Checks if the GameObject exists
    * @param objectName
    * @return boolean
    */

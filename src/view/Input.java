@@ -84,9 +84,9 @@ public class Input {
   public void matchTakeItem(Matcher match) {
       if (control.checkPickUpItem(match.group(1))) {
         control.pickUpItem(match.group(1));
-        out.doOutput("You have successfully picked up " + match.group(1));
+        out.success(match.group(1), 1);
       } else {
-        out.doOutput("There is no item called: " + match.group(1));
+        out.noSuccess(match.group(1), 1);
       }
   }
 
@@ -95,7 +95,7 @@ public class Input {
         control.tryToMoveThroughPassage(match.group(1));
         out.lookAtCurrentPlace();
       } else {
-        out.doOutput("There is no passage called " + match.group(1));
+        out.noSuccess(match.group(1), 2);
       }
   }
 
@@ -107,7 +107,7 @@ public class Input {
     if (control.checkLookAtGameObject(match.group(1))) {
       out.lookAtGameObject(match.group(1));
     } else {
-      out.doOutput("There is no " + match.group(1) + " here.");
+      out.noSuccess(match.group(1), 3);
     }
   }
 
@@ -120,8 +120,7 @@ public class Input {
   }
 
   public void noMatch() {
-    out.doOutput("You can't do that!");
-    out.listOptions();
+    out.noSuccess(1);
   }
 
   /**
@@ -174,10 +173,10 @@ public class Input {
     if (boxed) {
       boxings++;
       if (boxings == 3) {
-        out.doOutput("Are you stupid? I said: \"DONT MIX THE BLOODY COMMANDS!\"");
+        out.noSuccess(6);
         boxings = 0;
       } else {
-        out.doOutput("Don't mix the bloody commands!");
+        out.noSuccess(5);
       }
     }
     return boxed;
