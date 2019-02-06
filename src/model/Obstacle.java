@@ -26,7 +26,8 @@ public class Obstacle extends GameObject {
   }
 
   /**
-   * Create a new obstacle that takes two items that will be consumed. Careful! Additional item is required first!
+   * Create a new obstacle that takes two items that will be consumed. Careful! Additional item is
+   * reqq
    *
    * @param name String
    * @param description String
@@ -70,6 +71,7 @@ public class Obstacle extends GameObject {
     boolean obstacleResolved = false;
 
     if (additionalItem == null) {
+      // Only one item
       if (requiredItem.equals(itemToTry)) {
         resolve(itemToTry);
         consume(itemToTry);
@@ -82,6 +84,9 @@ public class Obstacle extends GameObject {
     }
     else {
 
+      
+    } else {
+      // Two item required
       if (additionalItem.equals(itemToTry)) {
         consume(itemToTry);
         additionalItemResolved = true;
