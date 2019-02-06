@@ -29,33 +29,17 @@ public class Character {
   }
 
   /**
-   * Check if item is on the floor, if yes, take item and add to the item list. Picked up Item on
-   * the floor will be removed from the floor.
+   * Puts an item into the players inventory.
    *
    * @param itemToPickUp Item
    */
   public void takeItem(Item itemToPickUp) {
-    // check if item is in the room and remove from inventory
-
-    List<Item> itemsOnTheFloor = currentPlace.getItemsOnTheFloor();
-
-    for (int i = 0; i < itemsOnTheFloor.size(); i++) {
-
-      itemsOnTheFloor.get(i);
-
-      if (itemToPickUp.equals(itemsOnTheFloor.get(i))) {
-
-        itemsInInventory.add(itemToPickUp);
-        currentPlace.removeItemFromPlace(itemsOnTheFloor.get(i));
-
-      } else {
-        // TODO: Output that no item is on the floor
-      }
-    }
+    itemsInInventory.add(itemToPickUp);
   }
-  
+
   /**
-   * Removes an item from the characters inventory. If that item isn't in the players inventory, nothing happens.
+   * Removes an item from the characters inventory. If that item isn't in the players inventory,
+   * nothing happens.
    * 
    * @param itemToRemove - The item to be removed from the characters inventory
    */

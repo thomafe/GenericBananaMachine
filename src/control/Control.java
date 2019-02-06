@@ -24,6 +24,19 @@ public class Control {
   }
 
   /**
+   * Creates a test game if the flag is set or a regular game if not.
+   * 
+   * @param doTest
+   */
+  public Control(boolean doTest) {
+    if (doTest) {
+      initTest();
+    } else {
+      initGame();
+    }
+  }
+
+  /**
    * Initializes the game world and all other required objects.
    * 
    */
@@ -161,15 +174,17 @@ public class Control {
     new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom,
         thirdRoom);
 
-    Item item1 = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
+    Item lightsaber = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
     Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
+    Item overcharger = new Item("Overcharger", "This thing just makes all gadgets go Uhweeeeee");
 
     Obstacle obstacle = new Obstacle("Blastdoor", "A thick blast door that blocks the way",
-        "You melt through the door with your lightsaber!", item1);
+        "You melt through the door with your lightsaber!", lightsaber, overcharger);
 
     pas1.setObstacle(obstacle);
 
-    entrance.addItemOnTheFloor(item1);
+    entrance.addItemOnTheFloor(lightsaber);
+    entrance.addItemOnTheFloor(overcharger);
     secondRoom.addItemOnTheFloor(item2);
 
     // Other objects
@@ -184,7 +199,6 @@ public class Control {
    */
   private void runGame() {
     gameIntroduction();
-
 
     // Game Loop
     do {
@@ -203,13 +217,13 @@ public class Control {
    * character moves to the next room.
    * 
    * @param passageName String
-   * @return whether the character moved r not
+   * @return whether the character moved or not
    */
   public void tryToMoveThroughPassage(String passageName) {
     boolean passageClear = false;
 
     Passage destinationPassage = findPassage(passageName);
-
+    
     if (destinationPassage == null) {
       out.doOutput("There is no passage called " + passageName);
     } else if (this.checkForObstacle(destinationPassage)) {
@@ -275,7 +289,8 @@ public class Control {
     Item itemToPickUp = findItemOnTheFloor(itemName);
 
     if (itemToPickUp != null) {
-      character.takeItem(itemToPickUp);
+      character.takeItem((Item) itemToPickUp);
+      character.getCurrentPlace().removeItemFromPlace(itemToPickUp);
 
       success = true;
     }
@@ -369,7 +384,9 @@ public class Control {
    * @return boolean
    */
   private boolean checkForObstacle(Passage destinationPassage) {
-    return destinationPassage.hasObstacle();
+    Obstacle obstacleInPassage = destinationPassage.getObstacle();
+
+    return obstacleInPassage != null && !obstacleInPassage.isResolved();
   }
 
   /**
@@ -413,10 +430,9 @@ public class Control {
       // Replay question
       /*
        * if (in.readInSingleLine().equals("YES")) { Control control = new Control();
-       * control.runGame(); } else { out.doOutput("Thanks for playing! See you later.");
-       *  }
+       * control.runGame(); } else { out.doOutput("Thanks for playing! See you later."); }
        */
-      
+
       System.exit(0);
     }
   }
@@ -433,8 +449,9 @@ public class Control {
   // Main Method
 
   public static void main(String[] args) {
+    boolean doTest = true;
 
-    Control control = new Control();
+    Control control = new Control(doTest);
 
     control.runGame();
   }
