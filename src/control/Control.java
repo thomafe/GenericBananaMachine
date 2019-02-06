@@ -30,10 +30,17 @@ public class Control {
    */
   public Control(boolean doTest) {
     if (doTest) {
-      initTest();
+      testWorld();
     } else {
       initGame();
     }
+  }
+
+  private void initCharacter(Place startingPlace) {
+    character = new Character(startingPlace);
+
+    out = new Output(this);
+    in = new Input(out, this);
   }
 
   /**
@@ -154,14 +161,47 @@ public class Control {
     room4.addItemOnTheFloor(item8); // Outback -> signal rockets
 
     // Other objects
-    character = new Character(room0);
-
-    out = new Output(this);
-    in = new Input(out, this);
+    initCharacter(room0);
 
   }
 
-  public void initTest() {
+  /**
+   * Create a test world. Character already has items in his inventory.
+   * 
+   */
+  private void testWorld() {
+    Place startingPlace = new Place("Entrance", "Starting Place");
+    Place room1 = new Place("Room 1", "Test Room 1");
+    Place room2 = new Place("Room 2", "Test Room 2");
+    Place room3 = new Place("Room 3", "Test Room 3");
+    Place room4 = new Place("Room 4", "Test Room 4");
+
+    Item item1 = new Item("Required Item", "Required Item");
+    Item item2 = new Item("Additional Item", "Additional Item");
+
+    Obstacle singleItemObstacle =
+        new Obstacle("One Item Obstacle", "This obstalce takes one item", "It worked", item1);
+    Obstacle doulbeItemObstacle = new Obstacle("Two Item Obstacle",
+        "This obstalce takes one item, addtitional Item first!", "It worked", item1, item2);
+    Obstacle riddleObstacle =
+        new Obstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked", "Shoe");
+
+    new Passage("Free Passage", "Has no obstacles", startingPlace, room1);
+    (new Passage("Simple Passage", "Has simple Obstacle", startingPlace, room2))
+        .setObstacle(singleItemObstacle);
+    (new Passage("Double Passage", "Has double Obstacle", startingPlace, room3))
+        .setObstacle(doulbeItemObstacle);
+    (new Passage("Riddle Passage", "Has riddle Obstacle", startingPlace, room4))
+        .setObstacle(riddleObstacle);
+
+    initCharacter(startingPlace);
+    
+    character.takeItem(item1);
+    character.takeItem(item2);
+  }
+
+  @Deprecated
+  public void oldTestWorld() {
     // Game World
     Place entrance = new Place("Entrance", "This is your starting area.");
     Place secondRoom =
@@ -187,11 +227,7 @@ public class Control {
     entrance.addItemOnTheFloor(overcharger);
     secondRoom.addItemOnTheFloor(item2);
 
-    // Other objects
-    character = new Character(entrance);
-
-    out = new Output(this);
-    in = new Input(out, this);
+    initCharacter(entrance);
   }
 
   /**
@@ -219,20 +255,26 @@ public class Control {
    * @param passageName String
    * @return whether the character moved or not
    */
-  public void tryToMoveThroughPassage(String passageName) {
-    boolean passageClear = false;
+
+  public boolean tryToMoveThroughPassage(String passageName) {
+    boolean characterMoved = false;
 
     Passage destinationPassage = findPassage(passageName);
-    
+
     if (destinationPassage == null) {
       out.doOutput("There is no passage called " + passageName);
-    } else if (this.checkForObstacle(destinationPassage)) {
-      passageClear = interactWithObstacle(destinationPassage.getObstacle());
-
-      if (passageClear) {
-        character.move(destinationPassage);
-      }
+      return false;
     }
+
+    Obstacle obstalceInPassage = destinationPassage.getObstacle();
+
+    if (obstalceInPassage == null || obstalceInPassage.isResolved()
+        || interactWithObstacle(obstalceInPassage)) {
+      character.move(destinationPassage);
+      characterMoved = true;
+    }
+
+    return characterMoved;
   }
 
   /**
