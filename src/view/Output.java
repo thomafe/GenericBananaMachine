@@ -7,12 +7,14 @@ import model.Item;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
+import model.Character;
 
 public class Output {
 
   // TODO define Strings for common use! "You can't do that" etc...
 
   private Control control;
+  private Character character = null;
 
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
       "Goto <Passage Name>", "Take <Item Name>", "Inventory", "Actions"};
@@ -171,6 +173,64 @@ public class Output {
   }
 
   /**
+   * Standard output for unsuccessful operations
+   * @param i
+   */
+  public void noSuccess(int i) {
+    switch (i) {
+      case 1:
+        doOutput("You can't do that!");
+        listOptions();
+        break;
+      case 2:
+        doOutput("That doesn't work");
+        break;
+      case 3:
+        doOutput("You don't have this item!");
+        break;
+      case 4:
+        doOutput("You decided to go back to " + character.getCurrentPlace().getName());
+        break;
+      case 5:
+        doOutput("Don't mix the bloody commands!");
+        break;
+      case 6:
+        doOutput("Are you stupid? I said: \"DONT MIX THE BLOODY COMMANDS!\"");
+        break;
+      default:
+        doOutput("Quite impossible");
+    }
+  }
+
+  /**
+   * Standard output for unsuccessful operations
+   * @param userInput
+   * @param i
+   */
+  public void noSuccess(String userInput, int i) {
+    switch (i) {
+      case 1:
+        doOutput("There is no item called: " + userInput);
+        break;
+      case 2:
+        doOutput("There is no passage called: " + userInput);
+        break;
+      case 3:
+        doOutput("There is no " + userInput + " here.");
+        break;
+      default:
+        doOutput("That's not here!");
+    }
+  }
+
+  public void success(String userInput, int i){
+    switch (i){
+      case 1:
+        doOutput("You have successfully picked up " + userInput);
+    }
+  }
+
+  /**
    * Output a committed message in console. Deprecated! There should be a method for what you want
    * to do.
    *
@@ -183,8 +243,6 @@ public class Output {
 
   /**
    * Print a string to the console.
-   * 
-   * @param message
    */
   private void printString(String message) {
     System.out.println(message);
