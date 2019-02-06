@@ -67,6 +67,7 @@ public class Obstacle extends GameObject {
    * @return boolean
    */
   public boolean tryToUseItem(Item itemToTry) {
+    reactsToContact();
     boolean obstacleResolved = false;
 
     if (additionalItem == null) {
@@ -159,6 +160,10 @@ public class Obstacle extends GameObject {
    */
   public void setConsumesItem(boolean consumesItem) {
     this.consumesItem = consumesItem;
+  }
+
+  public void reactsToContact(){
+    System.out.println("The Obstacle is slightliy buzzing, it seems to notice your presence");
   }
 
   public void reactToFalseItem() {
