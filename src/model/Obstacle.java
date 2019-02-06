@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * Obstacle can block passages, can be solved with one or more item or a riddle, can react when character
+ * interacts with it or when an item is used
+ *
+ * @author Simone273
+ */
 public class Obstacle extends GameObject {
 
   private String resolution;

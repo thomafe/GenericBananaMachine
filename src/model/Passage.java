@@ -1,6 +1,12 @@
 package model;
 
 // class mit name passage
+
+/**
+ * connects places, can be blocked by passages
+ *
+ * @author Simone273
+ */
 public class Passage extends GameObject {
 
   // attribute

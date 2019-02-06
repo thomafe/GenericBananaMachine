@@ -1,4 +1,9 @@
 package model;
+/**
+ *character moves through the world, picks up items, moves through passages and resolves obstacles
+ *
+ * @author Simone273
+ */
 
 import java.util.ArrayList;
 import java.util.List;

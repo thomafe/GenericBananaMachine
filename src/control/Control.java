@@ -1,5 +1,6 @@
 package control;
 
+
 import java.util.Collections;
 import model.Character;
 import model.Furniture;
@@ -13,6 +14,11 @@ import model.GameObject;
 import view.Output.errorType;
 import view.Output.successType;
 
+/**
+ * Runs main program
+ *
+ * @author Lehmeti, thomafe
+ */
 public class Control {
 
   private Character character = null;

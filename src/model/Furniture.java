@@ -3,6 +3,11 @@ package model;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ *Are in a place, can contain items, may be blcoked by obatacles
+ *
+ * @author thomafe
+ */
 public class Furniture extends GameObject {
   
   private Obstacle obstalce;

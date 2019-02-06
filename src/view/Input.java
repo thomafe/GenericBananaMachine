@@ -8,6 +8,11 @@ import view.Output.errorType;
 import view.Output.errorTypeInput;
 import view.Output.successType;
 
+/**
+ * processes input from user
+ *
+ * @author Niklas
+ */
 public class Input {
 
   private int boxings = 0;

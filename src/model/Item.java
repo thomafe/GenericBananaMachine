@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * item can be picked up by the character, added to inventory, used to resolve obstacles, and be consumed
+ *
+ * @author Simone273
+ */
 public class Item extends GameObject {
 
   // Attribute

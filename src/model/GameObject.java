@@ -2,9 +2,9 @@
 package model;
 
 /**
- * 
+ * ingame object with a game and a description
  *
- * @author thomafe, lehmeti
+ * @author thomafe
  */
 public abstract class GameObject {
 

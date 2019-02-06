@@ -9,6 +9,11 @@ import model.Passage;
 import model.Place;
 import model.Character;
 
+/**
+ * reacts to input from user with output 
+ *
+ * @author Niklas
+ */
 public class Output {
 
   // TODO define Strings for common use! "You can't do that" etc...
