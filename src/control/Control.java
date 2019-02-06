@@ -313,7 +313,9 @@ public class Control {
         out.noSuccess(errorType.GO_BACK);
         break;
       } else if (currentObstacle.tryToUseItem(chosenItem)) {
+        // TODO tell the player about the outcome of trying to use the item
         // out.obstacleOut(currentObstacle, successType.OBSTACLE_REACTION);
+        // TODO only consumed items get removed??
         character.removeItem(chosenItem);
         if (currentObstacle.isResolved()) {
           out.obstacleOut(currentObstacle, successType.OBSTACLE_RESOLUTION);
