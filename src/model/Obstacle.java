@@ -9,8 +9,7 @@ public class Obstacle extends GameObject {
   private Item additionalItem;
   private String riddleAnswer;
   private boolean additionalItemResolved = false;
-  // TODO Item merken das schon da war, Methode muss nochmal aufgerufen werden für zweites Item
-  // versuchen
+
 
   /**
    * Create a new obstacle that takes one item that will be consumed.
@@ -77,22 +76,18 @@ public class Obstacle extends GameObject {
         consume(itemToTry);
         obstacleResolved = true;
         reactsToCorrectItem();
-      }
-      else{
+      } else {
         reactToFalseItem();
       }
-    }
-    else {
-
-      
     } else {
+
       // Two item required
       if (additionalItem.equals(itemToTry)) {
         consume(itemToTry);
         additionalItemResolved = true;
         reactsToCorrectItem();
-      }
-      else {
+
+      } else {
         reactToFalseItem();
       }
       if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
@@ -100,17 +95,13 @@ public class Obstacle extends GameObject {
         consume(itemToTry);
         obstacleResolved = true;
         reactsToCorrectItem();
-      }
-      else{
-        reactToFalseItem();
+      } else {
+
       }
     }
 
-
-
     return obstacleResolved;
   }
-
 
   /**
    * Check if the answer for the riddle is correct if yes return true fo obstacleResolved so that
@@ -123,7 +114,6 @@ public class Obstacle extends GameObject {
     }
     return obstacleResolved;
   }
-
 
   /**
    * Getter for resolution which describes the resolution of the obstacle.
@@ -157,7 +147,8 @@ public class Obstacle extends GameObject {
 
 
   }
-  private void consume(Item itemToResolve){
+
+  private void consume(Item itemToResolve) {
     if (consumesItem == true) {
       itemToResolve.consume();
     }
