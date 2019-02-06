@@ -28,8 +28,9 @@ public class Input {
   Pattern patternUseItemObstacle = Pattern.compile("(?i)use\\s([\\w\\s]*)");
 
   // Filling the array allPatterns with patterns
-  private Pattern possiblePatterns[] = {patternTakeItem, patternGotoPassage, patternLookAtPlace, patternLookAt,
-  patternInventory, patternActions, patternUseItemObstacle};
+  private Pattern possiblePatterns[] = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
+      patternLookAt,
+      patternInventory, patternActions, patternUseItemObstacle};
 
   // Creating Output and Control object for referencing
   Output out;
@@ -47,7 +48,6 @@ public class Input {
 
   /**
    * Reads the user input and matches it with the patterns. Calls methods from Output or Control.
-   *
    */
   public void readInput() {
 
@@ -61,63 +61,61 @@ public class Input {
     Matcher matcherInventory = patternInventory.matcher(userInput);
     Matcher matcherActions = patternActions.matcher(userInput);
 
-    // matches the user input with the patterns
+    matchTakeItem(matcherTakeItem, userInput);
+    matchGotoPassage(matcherGotoPassage, userInput);
+    matchLookAtPlace(matcherLookAtPlace, userInput);
+    matchLookAt(matcherLookAt, userInput);
+    matchInventory(matcherInventory, userInput);
+    matchActions(matcherActions, userInput);
 
-    // matching with TAKE ITEM NAME
-    if (matcherTakeItem.find()) {
-      // Checking for boxed commands
-      if (!testForBoxing(userInput, 1)) {
-        if (control.pickUpItem(matcherTakeItem.group(1))) {
-          out.doOutput("You have successfully picked up " + matcherTakeItem.group(1));
-        } else {
-          out.doOutput("There is no item called: " + matcherTakeItem.group(1));
-        }
+  }
+
+  public boolean matchTakeItem(Matcher match, String userInput) {
+    if (match && !testForBoxing(userInput, 1)) {
+      if (control.pickUpItem(matcherTakeItem.group(1))) {
+        out.doOutput("You have successfully picked up " + matcherTakeItem.group(1));
+      } else {
+        out.doOutput("There is no item called: " + matcherTakeItem.group(1));
       }
+    }
+  }
 
+  public boolean matchGotoPassage(Matcher match, String userInput) {
+    if (match && !testForBoxing(userInput, 2)) {
+      control.tryToMoveThroughPassage(matcherGotoPassage.group(1));
+      out.lookAtCurrentPlace();
+    }
+  }
 
-      // matching with GOTO PASSAGE NAME
-    } else if (matcherGotoPassage.find()) {
-      // Checking for boxed commands
-      if (!testForBoxing(userInput, 2)){
-        control.tryToMoveThroughPassage(matcherGotoPassage.group(1));
-        out.lookAtCurrentPlace();
-      }
+  public boolean matchLookAtPlace(Matcher match, String userInput) {
+    if (match && !testForBoxing(userInput, 3)) {
+      out.lookAtCurrentPlace();
+      out.listItemsInPlace();
+      out.listPassages();
+    }
+  }
 
-      // matching witch LOOK AT CURRENT PLACE
-    } else if (matcherLookAtPlace.find()) {
-      // Checking for boxed commands
-      if (!testForBoxing(userInput, 3)){
-        out.lookAtCurrentPlace();
-        out.listItemsInPlace();
-        out.listPassages();
-      }
+  public boolean matchLookAt(Matcher match, String userInput){
+    if(match && !testForBoxing(userInput, 4)) {
+      out.lookAtGameObject(matcherLookAt.group(1));
+    }
+  }
 
-      // matching with LOOK AT
-    } else if (matcherLookAt.find()) {
-      // Checking for boxed commands
-      if (!testForBoxing(userInput, 4)){
-        out.lookAtGameObject(matcherLookAt.group(1));
-      }
+  public boolean matchInventory(Matcher match, String userInput) {
+    if (match && !testForBoxing(userInput, 5)) {
+      out.listInventory();
+    }
+  }
 
-      // matching with INVENTORY
-    } else if (matcherInventory.find()) {
-      // Checking for boxed commands
-      if (!testForBoxing(userInput, 5)){
-        out.listInventory();
-      }
-
-      // matching with ACTIONS
-    } else if (matcherActions.find()) {
-      // Checking for boxed commands
-      if (!testForBoxing(userInput, 6)){
-        out.listOptions();
-      }
-
-      // if NOTHING matches
-    } else {
-      out.doOutput("You can't do that!");
+  public booleane matchActions(Matcher match, String userInput) {
+    if (match && !testForBoxing(userInput, 6)) {
       out.listOptions();
     }
+  }
+
+  public void noMatch(){
+    out.doOutput("You can't do that!");
+    out.listOptions();
   }
 
   /**
