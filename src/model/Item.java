@@ -12,7 +12,6 @@ public class Item extends GameObject {
    * @param description String
    */
   public Item(String name, String description) {
-    // constructor (zum objekte erstellen)
     super(name, description);
 
   }
