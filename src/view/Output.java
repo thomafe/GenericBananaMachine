@@ -15,7 +15,7 @@ public class Output {
   // private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory",
   // "Go through"};
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Use <Passage Name>",
+      "Goto <Passage Name>",
       "Take <Item Name>", "Inventory", "Actions"};
 
   /**
@@ -91,14 +91,18 @@ public class Output {
    * Lists all items in characters inventory.
    */
   public void listInventory() {
-    StringBuilder itemsInInventory = new StringBuilder();
+    if (!control.getCharacter().getItemsInInventory().isEmpty()) {
+      StringBuilder itemsInInventory = new StringBuilder();
 
-    itemsInInventory.append("These items are in your inventory:\n");
-    for (Item item : control.getCharacter().getItemsInInventory()) {
-      itemsInInventory.append(" - " + item.getName() + "\n");
+      itemsInInventory.append("These items are in your inventory:\n");
+      for (Item item : control.getCharacter().getItemsInInventory()) {
+        itemsInInventory.append(" - " + item.getName() + "\n");
+      }
+
+      doOutput(itemsInInventory.toString());
+    } else {
+      doOutput("You have nothing in your inventory!");
     }
-
-    doOutput(itemsInInventory.toString());
   }
 
   /**

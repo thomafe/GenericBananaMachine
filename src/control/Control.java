@@ -255,6 +255,7 @@ public class Control {
    * @param passageName String
    * @return whether the character moved or not
    */
+
   public boolean tryToMoveThroughPassage(String passageName) {
     boolean characterMoved = false;
 
@@ -286,7 +287,6 @@ public class Control {
    */
   public boolean interactWithObstacle(Obstacle currentObstacle) {
     boolean obstacleResolved = false;
-    boolean continueTrying = true;
     String answerString = null;
     Item chosenItem = null;
 
@@ -294,14 +294,14 @@ public class Control {
       obstacleResolved = true;
     } else {
 
-      while (continueTrying) {
+      while (true) {
         out.listOptionsObstacleInteraction(currentObstacle);
         answerString = in.readItemForObstacle();
         chosenItem = findItemInInventory(answerString);
 
         if (answerString == null) {
           out.doOutput("You don't have this item!");
-        } else if (answerString.equalsIgnoreCase("leave")) {
+        } else if (answerString.equals("leave")) {
           out.doOutput("You decided to go back to " + character.getCurrentPlace().getName());
           break;
         } else if (currentObstacle.tryToUseItem(chosenItem)) {
@@ -309,7 +309,7 @@ public class Control {
           character.removeItem(chosenItem);
 
           obstacleResolved = true;
-          continueTrying = false;
+          break;
         } else {
           out.doOutput("That doesn't work");
         }
