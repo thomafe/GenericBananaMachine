@@ -12,7 +12,6 @@ public class Item extends GameObject {
    * @param description String
    */
   public Item(String name, String description) {
-    // constructor (zum objekte erstellen)
     super(name, description);
 
   }
@@ -30,7 +29,6 @@ public class Item extends GameObject {
    * Sets consume state on true if item has been used (consumed).
    */
   public void consume() {
-    // methode, wenn item consumed dann true
     this.consumed = true;
   }
 
