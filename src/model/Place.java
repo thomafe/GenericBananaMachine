@@ -10,18 +10,15 @@ public class Place extends GameObject {
   private List<Item> itemsOnTheFloor;
 
   /**
-   * COnstructor.
+   * Default constructor. Creates a simple place with nothing in it.
    *
    * @param name String
    * @param description String
    */
   public Place(String name, String description) {
-    // noch ein constructor für place mit inhalt diesmal
     super(name, description);
     passages = new ArrayList<>();
     itemsOnTheFloor = new ArrayList<>();
-
-    // TODO set passages
   }
 
   /**
