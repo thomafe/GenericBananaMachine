@@ -191,7 +191,7 @@ public class Control {
         .setObstacle(singleItemObstacle);
     (new Passage("Double Passage", "Has double Obstacle", startingPlace, room3))
         .setObstacle(doulbeItemObstacle);
-    (new Passage("Riddle Passage", "Has riddle Obstacle", startingPlace, room3))
+    (new Passage("Riddle Passage", "Has riddle Obstacle", startingPlace, room4))
         .setObstacle(riddleObstacle);
 
     initCharacter(startingPlace);
