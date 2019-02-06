@@ -6,9 +6,9 @@ public class Obstacle extends GameObject {
   private boolean resolved = false;
   private boolean consumesItem = true;
   private Item requiredItem;
-  private Item secondItem;
+  private Item additionalItem;
   private String riddleAnswer;
-  private boolean secondItemResolved= false;
+  private boolean additionalItemResolved = false;
   // TODO Item merken das schon da war, Methode muss nochmal aufgerufen werden für zweites Item
   // versuchen
 
@@ -36,8 +36,8 @@ public class Obstacle extends GameObject {
   public Obstacle(String name, String description, String resolution, Item firstItem,
       Item secondItem) {
     super(name, description);
-    this.requiredItem = secondItem;
-    this.secondItem = firstItem;
+    this.requiredItem = firstItem;
+    this.additionalItem = secondItem;
     this.resolution = resolution;
   }
 
@@ -56,10 +56,10 @@ public class Obstacle extends GameObject {
 
 
   /**
-   * Check if you only have to use one item or if you have to use a 'second item' first. If you
-   * don't have to use a second item, check if the item you wanted to use to resolve the obstacle is
+   * Check if you only have to use one item or if you have to use an 'additional item' first. If you
+   * don't have to use an additional item, check if the item you wanted to use to resolve the obstacle is
    * correct If it is correct, resolve obstacle by returning true for obstacleResolved, if not
-   * return false. If u have to use a second, check if the second item is correct and safe that in second item Obstacle
+   * return false. If u have to use an additional item , check if the additional item is correct and safe that in additional item Obstacle
    * resolved= true. When you run the method again with the correct first item, obstacle resolved will be returned.
    *
    * @param itemToTry Item
@@ -68,7 +68,7 @@ public class Obstacle extends GameObject {
   public boolean tryToUseItem(Item itemToTry) {
     boolean obstacleResolved = false;
 
-    if (secondItem == null) {
+    if (additionalItem == null) {
       if (requiredItem.equals(itemToTry)) {
         resolve(itemToTry);
 
@@ -76,14 +76,14 @@ public class Obstacle extends GameObject {
       }
     } else {
 
-      if (secondItem.equals(itemToTry)) {
-       secondItemResolved= true;
+      if (additionalItem.equals(itemToTry)) {
+       additionalItemResolved = true;
 
       }
 
       }
 
-    if (requiredItem.equals(itemToTry)&& secondItemResolved ==  true) {
+    if (requiredItem.equals(itemToTry)&& additionalItemResolved ==  true) {
       resolve(itemToTry);
       obstacleResolved = true;}
 
