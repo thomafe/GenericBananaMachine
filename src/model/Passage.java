@@ -19,7 +19,6 @@ public class Passage extends GameObject {
    * @param place1 Place
    * @param place2 Place
    */
-  // constructor, kein rückgabewert, name so wie klasse, initialisiert classenattribute
   public Passage(String name, String description, Place place1, Place place2) {
     super(name, description);
     this.connectingRooms[0] = place1;
@@ -31,12 +30,12 @@ public class Passage extends GameObject {
   /**
    * Returns next Place after accessing the passage.
    *
-   *
    * @param comingFromPlace Place
    * @return Object
    */
   public Place usePassage(Place comingFromPlace) {
-    // zurückgeben in welchem raum man ist
+    
+    // Returns the place the passage will lead to
     if (comingFromPlace.equals(connectingRooms[0])) {
       return connectingRooms[1];
     } else if (comingFromPlace.equals(connectingRooms[1])) {
@@ -45,8 +44,6 @@ public class Passage extends GameObject {
       return null;
     }
   }
-
-  // getter and setter for obstacle
 
   /**
    * Getter for obstacle.
@@ -71,7 +68,6 @@ public class Passage extends GameObject {
    *
    * @return Object Array
    */
-  // getter for connecting rooms
   public Place[] getConnectingRooms() {
     return connectingRooms;
   }

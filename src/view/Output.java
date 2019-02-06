@@ -9,14 +9,13 @@ import model.Passage;
 import model.Place;
 
 public class Output {
+  
+  // TODO define Strings for common use! "You can't do that" etc...
 
   private Control control;
 
-  // private final static String[] AVAILABLE_ACTIONS = {"Look at", "Inventory",
-  // "Go through"};
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Goto <Passage Name>",
-      "Take <Item Name>", "Inventory", "Actions"};
+      "Goto <Passage Name>", "Take <Item Name>", "Inventory", "Actions"};
 
   /**
    * Constructor.
@@ -31,7 +30,7 @@ public class Output {
    * Introduction for the player at the start of the game.
    */
   public void greeting() {
-    doOutput("Hello fellow Player, welcome to your gobsmacking adventure!\n"
+    printString("Hello fellow player!\n"
         + " In this glorious adventure game you can prove your bravery and smartness\n by passing the many obstacles that will come in your way\n"
         + "Look for things along the way that might help you and you may stand a chance");
 
@@ -41,12 +40,12 @@ public class Output {
    * Ending sequence when the game is done, either because of succeed or because of death
    */
   public void goodEnding() {
-    doOutput(
+    printString(
         "Congraltulations, you've made it\n You reached the end of the game \n passing many obstacles you fought your way through the world \nconsider yourself a hero now");
   }
 
   public void badEnding() {
-    doOutput("You failed\n This is the end of the game \n This place brought death to you");
+    printString("You failed\n This is the end of the game \n This place brought death to you");
     // TODO implement play again
   }
 
@@ -65,7 +64,7 @@ public class Output {
       }
     }
 
-    doOutput(options.toString());
+    printString(options.toString());
   }
 
   /**
@@ -75,7 +74,7 @@ public class Output {
     List<Item> itemsInPlace = control.getCharacter().getCurrentPlace().getItemsOnTheFloor();
 
     if (itemsInPlace.isEmpty()) {
-      doOutput("There are no items here.");
+      printString("There are no items here.");
     } else {
       StringBuilder itemsOutput = new StringBuilder();
 
@@ -85,7 +84,7 @@ public class Output {
         itemsOutput.append(" - " + item.getName() + "\n");
       }
 
-      doOutput(itemsOutput.toString());
+      printString(itemsOutput.toString());
     }
   }
 
@@ -101,9 +100,9 @@ public class Output {
         itemsInInventory.append(" - " + item.getName() + "\n");
       }
 
-      doOutput(itemsInInventory.toString());
+      printString(itemsInInventory.toString());
     } else {
-      doOutput("You have nothing in your inventory!");
+      printString("You have nothing in your inventory!");
     }
   }
 
@@ -119,7 +118,7 @@ public class Output {
       passages.append(" - " + passage.getName() + "\n");
     }
 
-    doOutput(passages.toString());
+    printString(passages.toString());
 
   }
 
@@ -130,11 +129,10 @@ public class Output {
     StringBuilder obstacleOptions = new StringBuilder();
 
     obstacleOptions.append(obstacle.getDescription() + "\n");
-    obstacleOptions
-        .append("Do you want to \"use\" an item or do you want to \"leave\"?");
+    obstacleOptions.append("Do you want to \"use\" an item or do you want to \"leave\"?");
     listInventory();
 
-    doOutput(obstacleOptions.toString());
+    printString(obstacleOptions.toString());
   }
 
   /**
@@ -148,15 +146,8 @@ public class Output {
     placeDescription.append("You are in " + currentPlace.getName() + "\n");
     placeDescription.append(currentPlace.getDescription());
 
-    doOutput(placeDescription.toString());
-
-    listItemsInPlace();
-
-    listPassages();
+    printString(placeDescription.toString());
   }
-
-  // TODO do we give this strings or does control resolve that?
-  // public void lookAtGameObject()
 
   /**
    * Shows GameObject's name / description in console or gives User an Exception if no such item
@@ -167,21 +158,37 @@ public class Output {
   public void lookAtGameObject(String objectName) {
     GameObject object = control.findGameObject(objectName);
 
-    StringBuilder gameObjectDescription = new StringBuilder();
+    if (object == null) {
+      printString("There is no " + objectName + " here.");
+    } else {
+      StringBuilder gameObjectDescription = new StringBuilder();
 
     gameObjectDescription.append("You look at " + object.getName() + "\n");
     gameObjectDescription.append(object.getDescription());
 
     doOutput(gameObjectDescription.toString());
 
+      printString(gameObjectDescription.toString());
+    }
   }
 
   /**
-   * Output a committed message in console.
+   * Output a committed message in console. Deprecated! There should be a method for what you want
+   * to do.
    *
    * @param message String
    */
+  @Deprecated
   public void doOutput(String message) {
+    printString(message);
+  }
+
+  /**
+   * Print a string to the console.
+   * 
+   * @param message
+   */
+  private void printString(String message) {
     System.out.println(message);
   }
 }
