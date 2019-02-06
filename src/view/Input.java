@@ -13,14 +13,13 @@ public class Input {
 
   Pattern patternTakeItem = Pattern.compile("(?i)take\\s([\\w\\s]+)");
   Pattern patternGotoPassage = Pattern.compile("(?i)goto\\s([\\w\\s]+)");
-  Pattern patternLookAtPlace =
-      Pattern.compile("(?i)look\\s[\\w\\s]*around\\s*[\\w\\s]*");
+  Pattern patternLookAtPlace = Pattern.compile("(?i)look\\s[\\w\\s]*around\\s*[\\w\\s]*");
   Pattern patternLookAt = Pattern.compile("(?i)look\\s[\\w\\s]*at\\s([\\w\\s]*)");
   Pattern patternInventory = Pattern.compile("(?i)inventory");
   Pattern patternActions = Pattern.compile("(?i)actions");
   Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
 
-  private Pattern possiblePatterns[] = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
+  private Pattern[] possiblePatterns = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
       patternLookAt, patternInventory, patternActions};
 
   // Creating Output and Control object for referencing
@@ -44,7 +43,7 @@ public class Input {
 
     String userInput = readInSingleLine();
 
-    //The order in which the input is being matched
+    // The order in which the input is being matched
     Matcher matcherTakeItem = patternTakeItem.matcher(userInput);
     Matcher matcherGotoPassage = patternGotoPassage.matcher(userInput);
     Matcher matcherLookAtPlace = patternLookAtPlace.matcher(userInput);
@@ -103,8 +102,8 @@ public class Input {
     }
   }
 
-  public boolean matchLookAt(Matcher match, String userInput){
-    if(!testForBoxing(userInput, 4)) {
+  public boolean matchLookAt(Matcher match, String userInput) {
+    if (!testForBoxing(userInput, 4)) {
       out.lookAtGameObject(match.group(1));
       return true;
     } else {
@@ -125,19 +124,20 @@ public class Input {
     if (!testForBoxing(userInput, 6)) {
       out.listOptions();
       return true;
-    }{
+    }
+    {
       return false;
     }
   }
 
-  public void noMatch(){
+  public void noMatch() {
     out.doOutput("You can't do that!");
     out.listOptions();
   }
 
   /**
-   * Returns Scanner new Line method.
-   * !Not recommended to use outside of this class!
+   * Returns Scanner new Line method. !Not recommended to use outside of this class!
+   * 
    * @return Scanner
    */
   public String readInSingleLine() {
@@ -145,46 +145,46 @@ public class Input {
   }
 
   /**
-   * Reads nextLine and searches for an decision
-   * searches for "use <item>" and returns <item>
-   * else it searches for "leave" and returns "leave"
-   * if nothing matches it returns null
+   * Reads nextLine and searches for an decision searches for "use <item>" and returns <item> else
+   * it searches for "leave" and returns "leave" if nothing matches it returns null
+   * 
    * @return String
    */
-  public String readItemForObstacle(){
+  public String readItemForObstacle() {
     String input = readInSingleLine();
     Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher((input));
     String decision = null;
     if (input.matches("[lL]eave")) {
       decision = "leave";
-    } else if (matcherUseItemObstacle.find()){
+    } else if (matcherUseItemObstacle.find()) {
       decision = matcherUseItemObstacle.group(2);
     }
     return decision;
   }
 
   /**
-   * Takes the userInput and the hierachy of the caller(command-matcher)
-   * and searches the userInput for commands with a hierachy lower than the caller.
-   * If any command matches with the input it return true, else it returns false.
+   * Takes the userInput and the hierachy of the caller(command-matcher) and searches the userInput
+   * for commands with a hierachy lower than the caller. If any command matches with the input it
+   * return true, else it returns false.
+   * 
    * @param userInput command from the user as string
    * @param hierachy the hierachy from the caller as integer
    * @return boolean
    */
-  public boolean testForBoxing(String userInput, int hierachy){
+  public boolean testForBoxing(String userInput, int hierachy) {
     boolean boxed = false;
 
-    for (int i=hierachy; i < possiblePatterns.length; i++){
+    for (int i = hierachy; i < possiblePatterns.length; i++) {
       Matcher m = possiblePatterns[i].matcher(userInput);
-      if (m.find()){
+      if (m.find()) {
         boxed = true;
         break;
       }
     }
 
-    if (boxed){
+    if (boxed) {
       boxings++;
-      if (boxings == 3){
+      if (boxings == 3) {
         out.doOutput("Are you stupid? I said: \"DONT MIX THE BLOODY COMMANDS!\"");
         boxings = 0;
       } else {
