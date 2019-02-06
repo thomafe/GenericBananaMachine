@@ -13,6 +13,14 @@ public class Output {
 
   // TODO define Strings for common use! "You can't do that" etc...
 
+  public enum errorType {
+    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD
+  }
+  
+  public enum errorTypeInput {
+    NO_ITEM, NO_PASSAGE, THERE_IS_NONE
+  }
+
   private Control control;
   private Character character = null;
 
@@ -174,62 +182,64 @@ public class Output {
 
   /**
    * Standard output for unsuccessful operations
+   * 
    * @param i
    */
   public void noSuccess(int i) {
     switch (i) {
       case 1:
-        doOutput("You can't do that!");
+        printString("You can't do that!");
         listOptions();
         break;
       case 2:
-        doOutput("That doesn't work");
+        printString("That doesn't work");
         break;
       case 3:
-        doOutput("You don't have this item!");
+        printString("You don't have this item!");
         break;
       case 4:
-        doOutput("You decided to go back to " + character.getCurrentPlace().getName());
+        printString("You decided to go back to " + character.getCurrentPlace().getName());
         break;
       case 5:
-        doOutput("Don't mix the bloody commands!");
+        printString("Don't mix the bloody commands!");
         break;
       case 6:
-        doOutput("Are you stupid? I said: \"DONT MIX THE BLOODY COMMANDS!\"");
+        printString("Are you stupid? I said: \"DONT MIX THE BLOODY COMMANDS!\"");
         break;
       default:
-        doOutput("Quite impossible");
+        printString("Quite impossible");
     }
   }
 
   /**
    * Standard output for unsuccessful operations
+   * 
    * @param userInput
    * @param i
    */
-  public void noSuccess(String userInput, int i) {
-    switch (i) {
-      case 1:
-        doOutput("There is no item called: " + userInput);
+  public void noSuccess(String userInput, errorTypeInput type) {
+    switch (type) {
+      case NO_ITEM:
+        printString("There is no item called: " + userInput);
         break;
-      case 2:
-        doOutput("There is no passage called: " + userInput);
+      case NO_PASSAGE:
+        printString("There is no passage called: " + userInput);
         break;
-      case 3:
-        doOutput("There is no " + userInput + " here.");
+      case THERE_IS_NONE:
+        printString("There is no " + userInput + " here.");
         break;
       default:
-        doOutput("That's not here!");
+        printString("That's not here!");
     }
   }
 
-  public void success(String userInput, int i){
-    switch (i){
+  public void success(String userInput, int i) {
+    switch (i) {
       case 1:
-        doOutput("You have successfully picked up " + userInput);
+        printString("You have successfully picked up " + userInput);
     }
   }
-
+  
   /**
    * Output a committed message in console. Deprecated! There should be a method for what you want
    * to do.

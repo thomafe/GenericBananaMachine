@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import control.Control;
+import view.Output.errorType;
 
 public class Input {
 
@@ -111,6 +112,7 @@ public class Input {
     } else {
       out.noSuccess(match.group(1), 3);
     }
+    
   }
 
   public void matchInventory() {
