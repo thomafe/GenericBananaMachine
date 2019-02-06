@@ -74,22 +74,34 @@ public class Obstacle extends GameObject {
         resolve(itemToTry);
         consume(itemToTry);
         obstacleResolved = true;
+        reactsToCorrectItem();
       }
-    } else {
+      else{
+        reactToFalseItem();
+      }
+    }
+    else {
 
       if (additionalItem.equals(itemToTry)) {
         consume(itemToTry);
         additionalItemResolved = true;
-
+        reactsToCorrectItem();
       }
-
+      else {
+        reactToFalseItem();
+      }
+      if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
+        resolve(itemToTry);
+        consume(itemToTry);
+        obstacleResolved = true;
+        reactsToCorrectItem();
+      }
+      else{
+        reactToFalseItem();
+      }
     }
 
-    if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
-      resolve(itemToTry);
-      consume(itemToTry);
-      obstacleResolved = true;
-    }
+
 
     return obstacleResolved;
   }
@@ -153,12 +165,12 @@ public class Obstacle extends GameObject {
     this.consumesItem = consumesItem;
   }
 
-  public void ObstacleReactsToFalseItem() {
-
+  public void reactToFalseItem() {
+    System.out.println("Obstacle is shaking, seems you've used the wrong item ");
   }
 
-  public void ObstacleReactsToCorrectItem() {
-
+  public void reactsToCorrectItem() {
+    System.out.println("Obstacle is gleaming, seems you've used the right item");
   }
 }
 
