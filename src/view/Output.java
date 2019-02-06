@@ -22,7 +22,7 @@ public class Output {
   }
 
   public enum successType {
-    PICK_UP, OBSTACLE_REACTION
+    PICK_UP, OBSTACLE_RESOLUTION, OBSTACLE_REACTION
   }
 
   private Control control;
@@ -244,8 +244,10 @@ public class Output {
 
   public void obstacleOut(Obstacle obstacle, successType type) {
     switch (type) {
-      case OBSTACLE_REACTION:
+      case OBSTACLE_RESOLUTION:
         printString(obstacle.getResolution());
+        break;
+      case OBSTACLE_REACTION:
         break;
       default:
         printString("Yeah, you did it!");

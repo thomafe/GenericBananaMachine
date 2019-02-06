@@ -174,8 +174,9 @@ public class Control {
     Item item1 = new Item("Required Item", "Required Item");
     Item item2 = new Item("Additional Item", "Additional Item");
     Item itemOnFloor = new Item("Shoe", "A shoe");
-    Item itemInChest = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
-    
+    Item itemInChest =
+        new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
+
     startingPlace.addObjectToPlace(itemOnFloor);
 
     Obstacle singleItemObstacle =
@@ -184,9 +185,10 @@ public class Control {
         "This obstalce takes one item, addtitional Item first!", "It worked!", item1, item2);
     Obstacle riddleObstacle =
         new Obstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!", "Shoe");
-    
-    Furniture chest = new Furniture("Chest", "A dirty old chest",  Collections.singletonList(itemInChest), singleItemObstacle);
-    
+
+    Furniture chest = new Furniture("Chest", "A dirty old chest",
+        Collections.singletonList(itemInChest), singleItemObstacle);
+
     startingPlace.addObjectToPlace(chest);
 
     new Passage("Free Passage", "Has no obstacles", startingPlace, room1);
@@ -311,9 +313,12 @@ public class Control {
         out.noSuccess(errorType.GO_BACK);
         break;
       } else if (currentObstacle.tryToUseItem(chosenItem)) {
-        out.obstacleOut(currentObstacle, successType.OBSTACLE_REACTION);
+        // out.obstacleOut(currentObstacle, successType.OBSTACLE_REACTION);
         character.removeItem(chosenItem);
-        return true;
+        if (currentObstacle.isResolved()) {
+          out.obstacleOut(currentObstacle, successType.OBSTACLE_RESOLUTION);
+          return true;
+        }
       } else {
         out.noSuccess(errorType.DOES_NOT_WORK);
       }
@@ -323,11 +328,12 @@ public class Control {
 
   /**
    * Checks if the GameObject exists
+   * 
    * @param objectName
    * @return boolean
    */
-  public boolean checkLookAtGameObject(String objectName){
-    if (findGameObject(objectName) != null){
+  public boolean checkLookAtGameObject(String objectName) {
+    if (findGameObject(objectName) != null) {
       return true;
     } else {
       return false;
@@ -369,7 +375,7 @@ public class Control {
 
     // TODO thomaf rework all of these
     foundObject = findPassage(objectName);
-    
+
     if (foundObject == null) {
       foundObject = findItemOnTheFloor(objectName);
     }
@@ -377,7 +383,7 @@ public class Control {
     if (foundObject == null) {
       foundObject = findItemInInventory(objectName);
     }
-    
+
     if (foundObject == null) {
       foundObject = findFurniture(objectName);
     }
@@ -414,7 +420,7 @@ public class Control {
 
     for (GameObject objectInPlace : character.getCurrentPlace().getObjectsInPlace()) {
       if (objectInPlace instanceof Item && objectInPlace.getName().equalsIgnoreCase(itemName)) {
-        foundItem = (Item)objectInPlace;
+        foundItem = (Item) objectInPlace;
         break;
       }
     }
@@ -451,7 +457,7 @@ public class Control {
 
     for (GameObject gameObject : character.getCurrentPlace().getObjectsInPlace()) {
       if (gameObject instanceof Furniture && gameObject.getName().equalsIgnoreCase(furnitureName)) {
-        foundFurniture = (Furniture)gameObject;
+        foundFurniture = (Furniture) gameObject;
         break;
       }
     }
