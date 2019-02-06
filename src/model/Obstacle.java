@@ -4,7 +4,7 @@ public class Obstacle extends GameObject {
 
   private String resolution;
   private boolean resolved = false;
-  private boolean consumesItem = false;
+  private boolean consumesItem = true;
   private Item requiredItem;
   private Item secondItem;
   private String riddleAnswer;
@@ -36,8 +36,8 @@ public class Obstacle extends GameObject {
   public Obstacle(String name, String description, String resolution, Item firstItem,
       Item secondItem) {
     super(name, description);
-    this.requiredItem = firstItem;
-    this.secondItem = secondItem;
+    this.requiredItem = secondItem;
+    this.secondItem = firstItem;
     this.resolution = resolution;
   }
 
