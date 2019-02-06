@@ -10,7 +10,7 @@ import model.Place;
 import model.Character;
 
 /**
- * reacts to input from user with output 
+ * reacts to input from user with output
  *
  * @author Niklas
  */
