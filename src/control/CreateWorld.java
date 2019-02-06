@@ -29,11 +29,6 @@ public class CreateWorld {
     int numPlaces = parser.getNumberOfPlaces();
     Place[] places = new Place[numPlaces];
 
-
-    // TODO: still in progress, just built basic structure of idea.
-    for(int placeCounter = 0; placeCounter < numPlaces; placeCounter++) {
-      places[placeCounter] = new Place("a", "b");
-    }
   }
 
 
