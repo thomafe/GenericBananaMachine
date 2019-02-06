@@ -74,19 +74,23 @@ public class Obstacle extends GameObject {
       // Only one item
       if (requiredItem.equals(itemToTry)) {
         resolve(itemToTry);
-
+        consume(itemToTry);
         obstacleResolved = true;
       }
       
     } else {
       // Two item required
       if (additionalItem.equals(itemToTry)) {
+        consume(itemToTry);
         additionalItemResolved = true;
+
       }
+
     }
 
     if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
       resolve(itemToTry);
+      consume(itemToTry);
       obstacleResolved = true;
     }
 
@@ -97,9 +101,6 @@ public class Obstacle extends GameObject {
   /**
    * Check if the answer for the riddle is correct if yes return true fo obstacleResolved so that
    * Obstacle gets resolved if no return false
-   * 
-   * @param answerForRiddle
-   * @return
    */
   public boolean tryToAnswerRiddle(String answerForRiddle) {
     boolean obstacleResolved = false;
@@ -108,7 +109,6 @@ public class Obstacle extends GameObject {
     }
     return obstacleResolved;
   }
-
 
 
   /**
@@ -122,7 +122,8 @@ public class Obstacle extends GameObject {
   }
 
   /**
-   * Returns the state of resolution. If obstacle is successfully resolved, return true, else false.
+   * Returns the state of resolution. If obstacle is successfully resolved, return true, else
+   * false.
    *
    * @return boolean
    */
@@ -134,12 +135,15 @@ public class Obstacle extends GameObject {
   /**
    * Set state of obstacle to true, when item has been used and needs to be consumed. Item can
    * either be consumed or not when resolving obstacle
-   * 
+   *
    * @param itemToResolve Item
    */
   private void resolve(Item itemToResolve) {
     this.resolved = true;
 
+
+  }
+  private void consume(Item itemToResolve){
     if (consumesItem == true) {
       itemToResolve.consume();
     }
@@ -147,11 +151,17 @@ public class Obstacle extends GameObject {
 
   /**
    * Set whether the item will be consumed upon resolving the obstacle.
-   * 
-   * @param consumesItem
    */
   public void setConsumesItem(boolean consumesItem) {
     this.consumesItem = consumesItem;
   }
 
+  public void ObstacleReactsToFalseItem() {
+
+  }
+
+  public void ObstacleReactsToCorrectItem() {
+
+  }
 }
+
