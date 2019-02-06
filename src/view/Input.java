@@ -18,10 +18,10 @@ public class Input {
   Pattern patternLookAt = Pattern.compile("(?i)look\\s[\\w\\s]*at\\s([\\w\\s]*)");
   Pattern patternInventory = Pattern.compile("(?i)inventory");
   Pattern patternActions = Pattern.compile("(?i)actions");
-  Pattern patternUseItemObstacle = Pattern.compile("(?i)use\\s([\\w\\s]*)");
+  Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
 
   private Pattern possiblePatterns[] = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
-      patternLookAt, patternInventory, patternActions, patternUseItemObstacle};
+      patternLookAt, patternInventory, patternActions};
 
   // Creating Output and Control object for referencing
   Output out;
@@ -52,17 +52,26 @@ public class Input {
     Matcher matcherInventory = patternInventory.matcher(userInput);
     Matcher matcherActions = patternActions.matcher(userInput);
 
-    matchTakeItem(matcherTakeItem, userInput);
-    matchGotoPassage(matcherGotoPassage, userInput);
-    matchLookAtPlace(matcherLookAtPlace, userInput);
-    matchLookAt(matcherLookAt, userInput);
-    matchInventory(matcherInventory, userInput);
-    matchActions(matcherActions, userInput);
+    if (matcherTakeItem.find()) {
+      matchTakeItem(matcherTakeItem, userInput);
+    } else if (matcherGotoPassage.find()) {
+      matchGotoPassage(matcherGotoPassage, userInput);
+    } else if (matcherLookAtPlace.find()) {
+      matchLookAtPlace(matcherLookAtPlace, userInput);
+    } else if (matcherLookAt.find()) {
+      matchLookAt(matcherLookAt, userInput);
+    } else if (matcherInventory.find()) {
+      matchInventory(matcherInventory, userInput);
+    } else if (matcherActions.find()) {
+      matchActions(matcherActions, userInput);
+    } else {
+      noMatch();
+    }
 
   }
 
   public boolean matchTakeItem(Matcher match, String userInput) {
-    if (match.find() && !testForBoxing(userInput, 1)) {
+    if (!testForBoxing(userInput, 1)) {
       if (control.pickUpItem(match.group(1))) {
         out.doOutput("You have successfully picked up " + match.group(1));
         return true;
@@ -74,7 +83,7 @@ public class Input {
   }
 
   public boolean matchGotoPassage(Matcher match, String userInput) {
-    if (match.find() && !testForBoxing(userInput, 2)) {
+    if (!testForBoxing(userInput, 2)) {
       control.tryToMoveThroughPassage(match.group(1));
       out.lookAtCurrentPlace();
       return true;
@@ -84,7 +93,7 @@ public class Input {
   }
 
   public boolean matchLookAtPlace(Matcher match, String userInput) {
-    if (match.find() && !testForBoxing(userInput, 3)) {
+    if (!testForBoxing(userInput, 3)) {
       out.lookAtCurrentPlace();
       out.listItemsInPlace();
       out.listPassages();
@@ -95,7 +104,7 @@ public class Input {
   }
 
   public boolean matchLookAt(Matcher match, String userInput){
-    if(match.find() && !testForBoxing(userInput, 4)) {
+    if(!testForBoxing(userInput, 4)) {
       out.lookAtGameObject(match.group(1));
       return true;
     } else {
@@ -104,7 +113,7 @@ public class Input {
   }
 
   public boolean matchInventory(Matcher match, String userInput) {
-    if (match.find() && !testForBoxing(userInput, 5)) {
+    if (!testForBoxing(userInput, 5)) {
       out.listInventory();
       return true;
     } else {
@@ -113,7 +122,7 @@ public class Input {
   }
 
   public boolean matchActions(Matcher match, String userInput) {
-    if (match.find() && !testForBoxing(userInput, 6)) {
+    if (!testForBoxing(userInput, 6)) {
       out.listOptions();
       return true;
     }{
@@ -146,10 +155,10 @@ public class Input {
     String input = readInSingleLine();
     Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher((input));
     String decision = null;
-    if (matcherUseItemObstacle.find()) {
-      decision = matcherUseItemObstacle.group(1);
-    } else if (input.matches("[lL]eave")){
+    if (input.matches("[lL]eave")) {
       decision = "leave";
+    } else if (matcherUseItemObstacle.find()){
+      decision = matcherUseItemObstacle.group(2);
     }
     return decision;
   }
@@ -172,6 +181,7 @@ public class Input {
         break;
       }
     }
+
     if (boxed){
       boxings++;
       if (boxings == 3){
