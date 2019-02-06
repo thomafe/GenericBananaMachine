@@ -1,5 +1,11 @@
+
 package model;
 
+/**
+ * 
+ *
+ * @author thomafe, lehmeti
+ */
 public abstract class GameObject {
 
   private String name;
