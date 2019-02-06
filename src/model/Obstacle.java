@@ -8,6 +8,7 @@ public class Obstacle extends GameObject {
   private Item requiredItem;
   private Item secondItem;
   private String riddleAnswer;
+  private boolean secondItemResolved= false;
   // TODO Item merken das schon da war, Methode muss nochmal aufgerufen werden für zweites Item
   // versuchen
 
@@ -58,9 +59,8 @@ public class Obstacle extends GameObject {
    * Check if you only have to use one item or if you have to use a 'second item' first. If you
    * don't have to use a second item, check if the item you wanted to use to resolve the obstacle is
    * correct If it is correct, resolve obstacle by returning true for obstacleResolved, if not
-   * return false if u have to use a second, check if the second item is correct and then check if
-   * the first item is correct if yes resolve obstacle by returning true for obstacleResolved, if
-   * not return false
+   * return false. If u have to use a second, check if the second item is correct and safe that in second item Obstacle
+   * resolved= true. When you run the method again with the correct first item, obstacle resolved will be returned.
    *
    * @param itemToTry Item
    * @return boolean
@@ -77,15 +77,16 @@ public class Obstacle extends GameObject {
     } else {
 
       if (secondItem.equals(itemToTry)) {
-        if (requiredItem.equals(itemToTry)) {
-          resolve(itemToTry);
-
-          obstacleResolved = true;
-        }
+       secondItemResolved= true;
 
       }
 
-    }
+      }
+
+    if (requiredItem.equals(itemToTry)&& secondItemResolved ==  true) {
+      resolve(itemToTry);
+      obstacleResolved = true;}
+
     return obstacleResolved;
   }
 
