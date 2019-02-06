@@ -320,24 +320,27 @@ public class Control {
   }
 
   /**
+   * Checks if the item exists in this place
+   * @param itemName
+   * @return Boolean
+   */
+  public boolean tryPickUpItem(String itemName){
+    if (findItemOnTheFloor((itemName)) != null){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
    * Tells the character to pick up an item
    *
    * @param itemName String
-   * @return boolean
    */
-  public boolean pickUpItem(String itemName) {
-    boolean success = false;
-
+  public void pickUpItem(String itemName) {
     Item itemToPickUp = findItemOnTheFloor(itemName);
-
-    if (itemToPickUp != null) {
-      character.takeItem((Item) itemToPickUp);
-      character.getCurrentPlace().removeItemFromPlace(itemToPickUp);
-
-      success = true;
-    }
-
-    return success;
+    character.takeItem(itemToPickUp);
+    character.getCurrentPlace().removeItemFromPlace(itemToPickUp);
   }
 
   /**

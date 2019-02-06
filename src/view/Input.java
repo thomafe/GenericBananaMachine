@@ -29,7 +29,7 @@ public class Input {
 
   /**
    * Constructor.
-   *
+   * 
    * @param output Output
    */
   public Input(Output output, Control control) {
@@ -72,7 +72,8 @@ public class Input {
 
   public boolean matchTakeItem(Matcher match, String userInput) {
     if (!testForBoxing(userInput, 1)) {
-      if (control.pickUpItem(match.group(1))) {
+      if (control.tryPickUpItem(match.group(1))) {
+        control.pickUpItem(match.group(1));
         out.doOutput("You have successfully picked up " + match.group(1));
         return true;
       } else {
@@ -136,9 +137,8 @@ public class Input {
   }
 
   /**
-   * Returns Scanner new Line method.
    * !Not recommended to use outside of this class!
-   * @return Scanner
+   * @return String
    */
   public String readInSingleLine() {
     return scan.nextLine();
