@@ -252,6 +252,7 @@ public class Control {
 
       checkForBadEnding();
       checkForGoodEnding();
+      checkIfCharacterDead();
       in.readInput();
 
     } while (true);
@@ -514,6 +515,17 @@ public class Control {
       System.exit(0);
     }
   }
+
+  /**
+   * Checks if Character is dead
+   *
+   */
+  private void checkIfCharacterDead(){
+    if (character.isDead()){
+           //TODO Niklas Output for dead
+    }
+  }
+
 
   /**
    * Getter for Character.
