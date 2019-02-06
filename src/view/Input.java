@@ -28,7 +28,7 @@ public class Input {
 
   /**
    * Constructor.
-   *
+   * 
    * @param output Output
    */
   public Input(Output output, Control control) {
@@ -52,82 +52,71 @@ public class Input {
     Matcher matcherActions = patternActions.matcher(userInput);
 
     if (matcherTakeItem.find()) {
-      matchTakeItem(matcherTakeItem, userInput);
+      if (!testForBoxing(userInput, 1)) {
+        matchTakeItem(matcherTakeItem);
+      }
     } else if (matcherGotoPassage.find()) {
-      matchGotoPassage(matcherGotoPassage, userInput);
+      if (!testForBoxing(userInput, 2)) {
+        matchGotoPassage(matcherGotoPassage);
+      }
     } else if (matcherLookAtPlace.find()) {
-      matchLookAtPlace(matcherLookAtPlace, userInput);
+      if (!testForBoxing(userInput, 3)) {
+        matchLookAtPlace();
+      }
     } else if (matcherLookAt.find()) {
-      matchLookAt(matcherLookAt, userInput);
+      if (!testForBoxing(userInput, 4)) {
+        matchLookAt(matcherLookAt);
+      }
     } else if (matcherInventory.find()) {
-      matchInventory(matcherInventory, userInput);
+      if (!testForBoxing(userInput, 5)) {
+        matchInventory();
+      }
     } else if (matcherActions.find()) {
-      matchActions(matcherActions, userInput);
+      if (!testForBoxing(userInput, 6)) {
+        matchActions();
+      }
     } else {
       noMatch();
     }
 
   }
 
-  public boolean matchTakeItem(Matcher match, String userInput) {
-    if (!testForBoxing(userInput, 1)) {
-      if (control.pickUpItem(match.group(1))) {
+  public void matchTakeItem(Matcher match) {
+      if (control.checkPickUpItem(match.group(1))) {
+        control.pickUpItem(match.group(1));
         out.doOutput("You have successfully picked up " + match.group(1));
-        return true;
       } else {
         out.doOutput("There is no item called: " + match.group(1));
       }
-    }
-    return false;
   }
 
-  public boolean matchGotoPassage(Matcher match, String userInput) {
-    if (!testForBoxing(userInput, 2)) {
-      control.tryToMoveThroughPassage(match.group(1));
+  public void matchGotoPassage(Matcher match) {
+      if (control.checkPassage(match.group(1))) {
+        control.tryToMoveThroughPassage(match.group(1));
+        out.lookAtCurrentPlace();
+      } else {
+        out.doOutput("There is no passage called " + match.group(1));
+      }
+  }
+
+  public void matchLookAtPlace() {
       out.lookAtCurrentPlace();
-      return true;
-    } else {
-      return false;
-    }
   }
 
-  public boolean matchLookAtPlace(Matcher match, String userInput) {
-    if (!testForBoxing(userInput, 3)) {
-      out.lookAtCurrentPlace();
-      out.listObjectsInPlace();
-      out.listPassages();
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  public boolean matchLookAt(Matcher match, String userInput) {
-    if (!testForBoxing(userInput, 4)) {
+  public void matchLookAt(Matcher match) {
+    if (control.checkLookAtGameObject(match.group(1))) {
       out.lookAtGameObject(match.group(1));
-      return true;
     } else {
-      return false;
+      out.doOutput("There is no " + match.group(1) + " here.");
     }
   }
 
-  public boolean matchInventory(Matcher match, String userInput) {
-    if (!testForBoxing(userInput, 5)) {
+  public void matchInventory() {
       out.listInventory();
-      return true;
-    } else {
-      return false;
-    }
   }
 
-  public boolean matchActions(Matcher match, String userInput) {
-    if (!testForBoxing(userInput, 6)) {
+  public void matchActions() {
       out.listOptions();
-      return true;
-    }
-    {
-      return false;
-    }
   }
 
   public void noMatch() {
@@ -136,17 +125,17 @@ public class Input {
   }
 
   /**
-   * Returns Scanner new Line method. !Not recommended to use outside of this class!
-   * 
-   * @return Scanner
+   * !Not recommended to use outside of this class!
+   * @return String
    */
   public String readInSingleLine() {
     return scan.nextLine();
   }
 
   /**
-   * Reads nextLine and searches for an decision searches for "use <item>" and returns <item> else
-   * it searches for "leave" and returns "leave" if nothing matches it returns null
+   * Searches for "use <item>" and returns <item> in input else
+   * it searches for "leave" and returns "leave" in input
+   * if nothing matches it returns null
    * 
    * @return String
    */

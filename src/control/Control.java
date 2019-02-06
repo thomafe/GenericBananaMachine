@@ -19,7 +19,6 @@ public class Control {
 
   /**
    * Default constructor. Initializes the game.
-   * 
    */
   public Control() {
     initGame();
@@ -27,8 +26,6 @@ public class Control {
 
   /**
    * Creates a test game if the flag is set or a regular game if not.
-   * 
-   * @param doTest
    */
   public Control(boolean doTest) {
     if (doTest) {
@@ -47,7 +44,6 @@ public class Control {
 
   /**
    * Initializes the game world and all other required objects.
-   * 
    */
   private void initGame() {
 
@@ -165,7 +161,6 @@ public class Control {
 
   /**
    * Create a test world. Character already has items in his inventory.
-   * 
    */
   private void testWorld() {
     Place startingPlace = new Place("Entrance", "Starting Place");
@@ -201,7 +196,7 @@ public class Control {
         .setObstacle(riddleObstacle);
 
     initCharacter(startingPlace);
-    
+
     character.takeItem(item1);
     character.takeItem(item2);
   }
@@ -254,10 +249,23 @@ public class Control {
   }
 
   /**
+   * Checks if the passage passageName exists at this place
+   *
+   * @return boolean
+   */
+  public boolean checkPassage(String passageName) {
+    if (findPassage(passageName) != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
    * Tries to move the character through a passage. If there is an obstacle in the way the character
    * first interacts with that obstacle. If there is no obstacle or the obstacle gets resolved the
    * character moves to the next room.
-   * 
+   *
    * @param passageName String
    * @return whether the character moved or not
    */
@@ -267,15 +275,10 @@ public class Control {
 
     Passage destinationPassage = findPassage(passageName);
 
-    if (destinationPassage == null) {
-      out.doOutput("There is no passage called " + passageName);
-      return false;
-    }
+    Obstacle obstacleInPassage = destinationPassage.getObstacle();
 
-    Obstacle obstalceInPassage = destinationPassage.getObstacle();
-
-    if (obstalceInPassage == null || obstalceInPassage.isResolved()
-        || interactWithObstacle(obstalceInPassage)) {
+    if (obstacleInPassage == null || obstacleInPassage.isResolved()
+        || interactWithObstacle(obstacleInPassage)) {
       character.move(destinationPassage);
       characterMoved = true;
     }
@@ -288,62 +291,69 @@ public class Control {
    * items on the obstacle. If the obstacle gets resolved the item is consumed and the character
    * moves through the passage. If the character stops trying items the interaction ends and the
    * character stays in that room.
-   * 
+   *
    * @return whether the character resolved the obstacle or not
    */
   public boolean interactWithObstacle(Obstacle currentObstacle) {
-    boolean obstacleResolved = false;
     String answerString = null;
     Item chosenItem = null;
 
-    if (currentObstacle.isResolved()) {
-      obstacleResolved = true;
-    } else {
+    while (true) {
+      out.listOptionsObstacleInteraction(currentObstacle);
+      answerString = in.readItemForObstacle();
+      chosenItem = findItemInInventory(answerString);
 
-      while (true) {
-        out.listOptionsObstacleInteraction(currentObstacle);
-        answerString = in.readItemForObstacle();
-        chosenItem = findItemInInventory(answerString);
-
-        if (answerString == null) {
-          out.doOutput("You don't have this item!");
-        } else if (answerString.equals("leave")) {
-          out.doOutput("You decided to go back to " + character.getCurrentPlace().getName());
-          break;
-        } else if (currentObstacle.tryToUseItem(chosenItem)) {
-          out.doOutput(currentObstacle.getResolution());
-          character.removeItem(chosenItem);
-
-          obstacleResolved = true;
-          break;
-        } else {
-          out.doOutput("That doesn't work");
-        }
+      if (answerString == null) {
+        out.doOutput("You don't have this item!");
+      } else if (answerString.equals("leave")) {
+        out.doOutput("You decided to go back to " + character.getCurrentPlace().getName());
+        break;
+      } else if (currentObstacle.tryToUseItem(chosenItem)) {
+        out.doOutput(currentObstacle.getResolution());
+        character.removeItem(chosenItem);
+        return true;
+      } else {
+        out.doOutput("That doesn't work");
       }
     }
+    return false;
+  }
 
-    return obstacleResolved;
+  /**
+   * Chekcs if the GameObject exists
+   * @param objectName
+   * @return boolean
+   */
+  public boolean checkLookAtGameObject(String objectName){
+    if (findGameObject(objectName) != null){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Checks if the item exists in this place
+   *
+   * @return boolean
+   */
+  public boolean checkPickUpItem(String itemName) {
+    if (findItemOnTheFloor((itemName)) != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
    * Tells the character to pick up an item
    *
    * @param itemName String
-   * @return boolean
    */
-  public boolean pickUpItem(String itemName) {
-    boolean success = false;
-
+  public void pickUpItem(String itemName) {
     Item itemToPickUp = findItemOnTheFloor(itemName);
-
-    if (itemToPickUp != null) {
-      character.takeItem((Item) itemToPickUp);
-      character.getCurrentPlace().removeItemFromPlace(itemToPickUp);
-
-      success = true;
-    }
-
-    return success;
+    character.takeItem(itemToPickUp);
+    character.getCurrentPlace().removeItemFromPlace(itemToPickUp);
   }
 
   /**
@@ -394,8 +404,7 @@ public class Control {
 
   /**
    * Looks for an item on the floor of the current room.
-   * 
-   * @param itemName
+   *
    * @return the found item or null if there was no such item
    */
   private Item findItemOnTheFloor(String itemName) {
@@ -413,8 +422,7 @@ public class Control {
 
   /**
    * Looks for an item in the characters inventory.
-   * 
-   * @param itemName
+   *
    * @return the found item or null if there was no such item
    */
   private Item findItemInInventory(String itemName) {
@@ -451,7 +459,6 @@ public class Control {
 
   /**
    * Is run once at game start to introduce the player to the game.
-   *
    */
   private void gameIntroduction() {
     out.greeting();

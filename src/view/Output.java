@@ -163,8 +163,10 @@ public class Output {
     } else {
       StringBuilder gameObjectDescription = new StringBuilder();
 
-      gameObjectDescription.append("You look at " + object.getName() + "\n");
-      gameObjectDescription.append(object.getDescription());
+    gameObjectDescription.append("You look at " + object.getName() + "\n");
+    gameObjectDescription.append(object.getDescription());
+
+    doOutput(gameObjectDescription.toString());
 
       printString(gameObjectDescription.toString());
     }
