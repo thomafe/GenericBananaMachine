@@ -70,13 +70,13 @@ public class Output {
   /**
    * Lists all items in the room (on the floor).
    */
-  public void listItemsInPlace() {
-    List<Item> itemsInPlace = control.getCharacter().getCurrentPlace().getItemsOnTheFloor();
+  public void listObjectsInPlace() {
+    List<GameObject> objectsInPlace = control.getCharacter().getCurrentPlace().getObjectsInPlace();
 
     if (itemsInPlace.isEmpty()) {
       printString("There are no items here.");
     } else {
-      StringBuilder itemsOutput = new StringBuilder();
+      StringBuilder thingsOutput = new StringBuilder();
 
       itemsOutput.append(
           "These items are in " + control.getCharacter().getCurrentPlace().getName() + ": \n");
