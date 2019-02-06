@@ -9,7 +9,7 @@ import model.Passage;
 import model.Place;
 
 public class Output {
-  
+
   // TODO define Strings for common use! "You can't do that" etc...
 
   private Control control;
@@ -73,18 +73,18 @@ public class Output {
   public void listObjectsInPlace() {
     List<GameObject> objectsInPlace = control.getCharacter().getCurrentPlace().getObjectsInPlace();
 
-    if (itemsInPlace.isEmpty()) {
+    if (objectsInPlace.isEmpty()) {
       printString("There are no items here.");
     } else {
       StringBuilder thingsOutput = new StringBuilder();
 
-      itemsOutput.append(
+      thingsOutput.append(
           "These items are in " + control.getCharacter().getCurrentPlace().getName() + ": \n");
-      for (Item item : itemsInPlace) {
-        itemsOutput.append(" - " + item.getName() + "\n");
+      for (GameObject object : objectsInPlace) {
+        thingsOutput.append(" - " + object.getName() + "\n");
       }
 
-      printString(itemsOutput.toString());
+      printString(thingsOutput.toString());
     }
   }
 
@@ -163,10 +163,8 @@ public class Output {
     } else {
       StringBuilder gameObjectDescription = new StringBuilder();
 
-    gameObjectDescription.append("You look at " + object.getName() + "\n");
-    gameObjectDescription.append(object.getDescription());
-
-    doOutput(gameObjectDescription.toString());
+      gameObjectDescription.append("You look at " + object.getName() + "\n");
+      gameObjectDescription.append(object.getDescription());
 
       printString(gameObjectDescription.toString());
     }

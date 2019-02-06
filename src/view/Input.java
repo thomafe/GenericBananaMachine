@@ -101,6 +101,8 @@ public class Input {
 
   public void matchLookAtPlace() {
       out.lookAtCurrentPlace();
+      out.listObjectsInPlace();
+      out.listPassages();
   }
 
   public void matchLookAt(Matcher match) {
