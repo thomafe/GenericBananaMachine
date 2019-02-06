@@ -57,10 +57,11 @@ public class Obstacle extends GameObject {
 
   /**
    * Check if you only have to use one item or if you have to use an 'additional item' first. If you
-   * don't have to use an additional item, check if the item you wanted to use to resolve the obstacle is
-   * correct If it is correct, resolve obstacle by returning true for obstacleResolved, if not
-   * return false. If u have to use an additional item , check if the additional item is correct and safe that in additional item Obstacle
-   * resolved= true. When you run the method again with the correct first item, obstacle resolved will be returned.
+   * don't have to use an additional item, check if the item you wanted to use to resolve the
+   * obstacle is correct If it is correct, resolve obstacle by returning true for obstacleResolved,
+   * if not return false. If u have to use an additional item , check if the additional item is
+   * correct and safe that in additional item Obstacle resolved= true. When you run the method again
+   * with the correct first item, obstacle resolved will be returned.
    *
    * @param itemToTry Item
    * @return boolean
@@ -71,21 +72,24 @@ public class Obstacle extends GameObject {
     if (additionalItem == null) {
       if (requiredItem.equals(itemToTry)) {
         resolve(itemToTry);
-
+        consume(itemToTry);
         obstacleResolved = true;
       }
     } else {
 
       if (additionalItem.equals(itemToTry)) {
-       additionalItemResolved = true;
+        consume(itemToTry);
+        additionalItemResolved = true;
 
       }
 
-      }
+    }
 
-    if (requiredItem.equals(itemToTry)&& additionalItemResolved ==  true) {
+    if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
       resolve(itemToTry);
-      obstacleResolved = true;}
+      consume(itemToTry);
+      obstacleResolved = true;
+    }
 
     return obstacleResolved;
   }
@@ -94,9 +98,6 @@ public class Obstacle extends GameObject {
   /**
    * Check if the answer for the riddle is correct if yes return true fo obstacleResolved so that
    * Obstacle gets resolved if no return false
-   * 
-   * @param answerForRiddle
-   * @return
    */
   public boolean tryToAnswerRiddle(String answerForRiddle) {
     boolean obstacleResolved = false;
@@ -105,7 +106,6 @@ public class Obstacle extends GameObject {
     }
     return obstacleResolved;
   }
-
 
 
   /**
@@ -119,7 +119,8 @@ public class Obstacle extends GameObject {
   }
 
   /**
-   * Returns the state of resolution. If obstacle is successfully resolved, return true, else false.
+   * Returns the state of resolution. If obstacle is successfully resolved, return true, else
+   * false.
    *
    * @return boolean
    */
@@ -131,24 +132,33 @@ public class Obstacle extends GameObject {
   /**
    * Set state of obstacle to true, when item has been used and needs to be consumed. Item can
    * either be consumed or not when resolving obstacle
-   * 
+   *
    * @param itemToResolve Item
    */
   private void resolve(Item itemToResolve) {
     this.resolved = true;
 
+
+  }
+  private void consume(Item itemToResolve){
     if (consumesItem == true) {
       itemToResolve.consume();
     }
   }
-  
+
   /**
    * Set whether the item will be consumed upon resolving the obstacle.
-   * 
-   * @param consumesItem
    */
   public void setConsumesItem(boolean consumesItem) {
     this.consumesItem = consumesItem;
   }
 
+  public void ObstacleReactsToFalseItem() {
+
+  }
+
+  public void ObstacleReactsToCorrectItem() {
+
+  }
 }
+
