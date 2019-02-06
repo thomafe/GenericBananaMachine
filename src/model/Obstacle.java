@@ -88,16 +88,15 @@ public class Obstacle extends GameObject {
         additionalItemResolved = true;
         reactsToCorrectItem();
 
-      } else {
-        reactToFalseItem();
       }
-      if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
+
+      else if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
         resolve(itemToTry);
         consume(itemToTry);
         obstacleResolved = true;
         reactsToCorrectItem();
       } else {
-
+        reactToFalseItem();
       }
     }
 
@@ -172,6 +171,10 @@ public class Obstacle extends GameObject {
 
   public void reactsToCorrectItem() {
     System.out.println("Obstacle is gleaming, seems you've used the right item");
+  }
+
+  public void reactsToCorrectAdditionalItem(){
+    System.out.println("Correctly used additional item");
   }
 }
 
