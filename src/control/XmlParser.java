@@ -24,6 +24,17 @@ import control.XmlParser;
  */
 public class XmlParser {
 
+  // TODO: 06.02.2019 15:08: add obstacle references to passages!
+  //    pass1.setObstacle(obs1); // High cliff -> way upstairs
+  //    pass2.setObstacle(obs2); // Underwood -> blocking vegetation
+  //    pass3.setObstacle(obs3); // Cave entrance -> darkness in cave
+  //    pass4.setObstacle(obs4); // dirty signpost -> dirt
+  //    pass5.setObstacle(obs5); // hole in the ground -> hole
+  //    pass6.setObstacle(obs6); // tunnel entrance -> darkness in tunnel
+  //    pass7.setObstacle(obs7); // Path to voices -> Attention
+  //    pass8.setObstacle(obs8); // Path away -> away
+  //    pass9.setObstacle(obs9); // Shore -> Rescue
+
   // TODO: (1) create getters of the variables which can be called in CreateWorld instead of pushing them to it.
   private int numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
 
