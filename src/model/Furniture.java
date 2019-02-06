@@ -1,18 +1,27 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Furniture extends GameObject {
   
   private Obstacle obstalce;
-  private List<Item> itemsInside;
+  private List<Item> itemsInside = null;
 
   public Furniture(String name, String description) {
     super(name, description);
+  }
+  
+  public Furniture(String name, String description, List<Item> itemsInside) {
+    this(name, description);
     
-    itemsInside = new ArrayList<>();
+    this.itemsInside = itemsInside;
+  }
+  
+  public Furniture(String name, String description, List<Item> itemsInside, Obstacle obstacle) {
+    this(name, description, itemsInside);
+    
+    this.obstalce = obstacle;
   }
   
   public Obstacle getObstacle() {
