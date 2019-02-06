@@ -19,7 +19,7 @@ public class Output {
   // TODO define Strings for common use! "You can't do that" etc...
 
   public enum errorType {
-    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD
+    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD
   }
 
   public enum errorTypeInput {
@@ -213,6 +213,8 @@ public class Output {
       case DONT_MIX_MAD:
         printString("Are you stupid? I said: \"DONT MIX THE BLOODY COMMANDS!\"");
         break;
+      case YOU_DEAD:
+        printString("You are dieded :(");
       default:
         printString("Quite impossible");
     }
