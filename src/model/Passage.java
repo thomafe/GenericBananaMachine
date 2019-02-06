@@ -3,13 +3,10 @@ package model;
 // class mit name passage
 public class Passage extends GameObject {
 
-
-
   // attribute
   private Place[] connectingRooms = new Place[2];
 
   private Obstacle obstacle = null;
-
 
   /**
    * Constructor.
@@ -73,12 +70,11 @@ public class Passage extends GameObject {
   }
 
   /**
-   * if this has an Obstacle, return true, else return false.
+   * If this has an Obstacle, return true, else return false.
    *
    * @return boolean
    */
   public boolean hasObstacle() {
-
     return obstacle != null;
   }
 
