@@ -10,6 +10,7 @@ import view.Input;
 import view.Output;
 import model.Passage;
 import model.GameObject;
+import view.Output.errorType;
 
 public class Control {
 
@@ -304,16 +305,16 @@ public class Control {
       chosenItem = findItemInInventory(answerString);
 
       if (answerString == null) {
-        out.noSuccess(3);
+        out.noSuccess(errorType.DONT_HAVE_ITEM);
       } else if (answerString.equals("leave")) {
-        out.noSuccess(4);
+        out.noSuccess(errorType.GO_BACK);
         break;
       } else if (currentObstacle.tryToUseItem(chosenItem)) {
         out.doOutput(currentObstacle.getResolution());
         character.removeItem(chosenItem);
         return true;
       } else {
-        out.noSuccess(2);
+        out.noSuccess(errorType.DOES_NOT_WORK);
       }
     }
     return false;

@@ -183,27 +183,27 @@ public class Output {
   /**
    * Standard output for unsuccessful operations
    * 
-   * @param i
+   * @param type
    */
-  public void noSuccess(int i) {
-    switch (i) {
-      case 1:
+  public void noSuccess(errorType type) {
+    switch (type) {
+      case CANT_DO_THAT:
         printString("You can't do that!");
         listOptions();
         break;
-      case 2:
+      case DOES_NOT_WORK:
         printString("That doesn't work");
         break;
-      case 3:
+      case DONT_HAVE_ITEM:
         printString("You don't have this item!");
         break;
-      case 4:
+      case GO_BACK:
         printString("You decided to go back to " + character.getCurrentPlace().getName());
         break;
-      case 5:
+      case DONT_MIX:
         printString("Don't mix the bloody commands!");
         break;
-      case 6:
+      case DONT_MIX_MAD:
         printString("Are you stupid? I said: \"DONT MIX THE BLOODY COMMANDS!\"");
         break;
       default:
@@ -215,7 +215,7 @@ public class Output {
    * Standard output for unsuccessful operations
    * 
    * @param userInput
-   * @param i
+   * @param type
    */
   public void noSuccess(String userInput, errorTypeInput type) {
     switch (type) {

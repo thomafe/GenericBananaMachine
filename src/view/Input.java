@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import control.Control;
 import view.Output.errorType;
+import view.Output.errorTypeInput;
 
 public class Input {
 
@@ -87,7 +88,7 @@ public class Input {
         control.pickUpItem(match.group(1));
         out.success(match.group(1), 1);
       } else {
-        out.noSuccess(match.group(1), 1);
+        out.noSuccess(match.group(1), errorTypeInput.NO_ITEM);
       }
   }
 
@@ -96,7 +97,7 @@ public class Input {
         control.tryToMoveThroughPassage(match.group(1));
         out.lookAtCurrentPlace();
       } else {
-        out.noSuccess(match.group(1), 2);
+        out.noSuccess(match.group(1), errorTypeInput.NO_PASSAGE);
       }
   }
 
@@ -110,7 +111,7 @@ public class Input {
     if (control.checkLookAtGameObject(match.group(1))) {
       out.lookAtGameObject(match.group(1));
     } else {
-      out.noSuccess(match.group(1), 3);
+      out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
     }
     
   }
@@ -124,7 +125,7 @@ public class Input {
   }
 
   public void noMatch() {
-    out.noSuccess(1);
+    out.noSuccess(errorType.CANT_DO_THAT);
   }
 
   /**
@@ -177,10 +178,10 @@ public class Input {
     if (boxed) {
       boxings++;
       if (boxings == 3) {
-        out.noSuccess(6);
+        out.noSuccess(errorType.DONT_MIX_MAD);
         boxings = 0;
       } else {
-        out.noSuccess(5);
+        out.noSuccess(errorType.DONT_MIX);
       }
     }
     return boxed;
