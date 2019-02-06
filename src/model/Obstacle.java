@@ -10,6 +10,7 @@ public class Obstacle extends GameObject {
   private String riddleAnswer;
   private boolean additionalItemResolved = false;
 
+
   /**
    * Create a new obstacle that takes one item that will be consumed.
    *
@@ -66,6 +67,7 @@ public class Obstacle extends GameObject {
    * @return boolean
    */
   public boolean tryToUseItem(Item itemToTry) {
+    reactsToContact();
     boolean obstacleResolved = false;
 
     if (additionalItem == null) {
@@ -74,27 +76,33 @@ public class Obstacle extends GameObject {
         resolve(itemToTry);
         consume(itemToTry);
         obstacleResolved = true;
+        reactsToCorrectItem();
+      } else {
+        reactToFalseItem();
       }
-      
     } else {
+
       // Two item required
       if (additionalItem.equals(itemToTry)) {
         consume(itemToTry);
         additionalItemResolved = true;
+        reactsToCorrectItem();
+
+      } else {
+        reactToFalseItem();
+      }
+      if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
+        resolve(itemToTry);
+        consume(itemToTry);
+        obstacleResolved = true;
+        reactsToCorrectItem();
+      } else {
 
       }
-
-    }
-
-    if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
-      resolve(itemToTry);
-      consume(itemToTry);
-      obstacleResolved = true;
     }
 
     return obstacleResolved;
   }
-
 
   /**
    * Check if the answer for the riddle is correct if yes return true fo obstacleResolved so that
@@ -140,7 +148,8 @@ public class Obstacle extends GameObject {
 
 
   }
-  private void consume(Item itemToResolve){
+
+  private void consume(Item itemToResolve) {
     if (consumesItem == true) {
       itemToResolve.consume();
     }
@@ -153,12 +162,16 @@ public class Obstacle extends GameObject {
     this.consumesItem = consumesItem;
   }
 
-  public void ObstacleReactsToFalseItem() {
-
+  public void reactsToContact(){
+    System.out.println("The Obstacle is slightliy buzzing, it seems to notice your presence");
   }
 
-  public void ObstacleReactsToCorrectItem() {
+  public void reactToFalseItem() {
+    System.out.println("Obstacle is shaking, seems you've used the wrong item ");
+  }
 
+  public void reactsToCorrectItem() {
+    System.out.println("Obstacle is gleaming, seems you've used the right item");
   }
 }
 
