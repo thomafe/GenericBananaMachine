@@ -26,7 +26,8 @@ public class Obstacle extends GameObject {
   }
 
   /**
-   * Create a new obstacle that takes two items that will be consumed. Careful! Additional item is required first!
+   * Create a new obstacle that takes two items that will be consumed. Careful! Additional item is
+   * reqq
    *
    * @param name String
    * @param description String
@@ -57,10 +58,11 @@ public class Obstacle extends GameObject {
 
   /**
    * Check if you only have to use one item or if you have to use an 'additional item' first. If you
-   * don't have to use an additional item, check if the item you wanted to use to resolve the obstacle is
-   * correct If it is correct, resolve obstacle by returning true for obstacleResolved, if not
-   * return false. If u have to use an additional item , check if the additional item is correct and safe that in additional item Obstacle
-   * resolved= true. When you run the method again with the correct first item, obstacle resolved will be returned.
+   * don't have to use an additional item, check if the item you wanted to use to resolve the
+   * obstacle is correct If it is correct, resolve obstacle by returning true for obstacleResolved,
+   * if not return false. If u have to use an additional item , check if the additional item is
+   * correct and safe that in additional item Obstacle resolved= true. When you run the method again
+   * with the correct first item, obstacle resolved will be returned.
    *
    * @param itemToTry Item
    * @return boolean
@@ -69,23 +71,24 @@ public class Obstacle extends GameObject {
     boolean obstacleResolved = false;
 
     if (additionalItem == null) {
+      // Only one item
       if (requiredItem.equals(itemToTry)) {
         resolve(itemToTry);
 
         obstacleResolved = true;
       }
+      
     } else {
-
+      // Two item required
       if (additionalItem.equals(itemToTry)) {
-       additionalItemResolved = true;
-
+        additionalItemResolved = true;
       }
+    }
 
-      }
-
-    if (requiredItem.equals(itemToTry)&& additionalItemResolved ==  true) {
+    if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
       resolve(itemToTry);
-      obstacleResolved = true;}
+      obstacleResolved = true;
+    }
 
     return obstacleResolved;
   }
@@ -141,7 +144,7 @@ public class Obstacle extends GameObject {
       itemToResolve.consume();
     }
   }
-  
+
   /**
    * Set whether the item will be consumed upon resolving the obstacle.
    * 
