@@ -46,8 +46,11 @@ public class XmlParser {
       setNumberOfPlaces(placeList.getLength());
 
       // TODO: reference to (1)
+      // Create object arrays.
       Place[] places = new Place[getNumberOfPlaces()];
       Item[] items = new Item[getNumberOfItems()];
+      Passage[] passages = new Passage[getNumberOfPassages()];
+      Obstacle[] obstacles = new Obstacle[getNumberOfObstacles()];
 
       // parse all existing Places
       for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
@@ -62,6 +65,7 @@ public class XmlParser {
           System.out.println("- Description: " + placeElement.getElementsByTagName("description").item(0).getTextContent());
 
           // TODO: reference to (1)
+          // Create Places.
           places[placeCounter] = new Place(placeElement.getElementsByTagName("name").item(0).getTextContent(),
               placeElement.getElementsByTagName("description").item(0).getTextContent());
 
@@ -77,6 +81,9 @@ public class XmlParser {
             System.out.println("- - Description: " + itemElement.getElementsByTagName("description").item(0).getTextContent());
 
             // TODO: reference to (1)
+            // Create items.
+            items[itemCounter] = new Item(itemElement.getElementsByTagName("name").item(0).getTextContent(),
+                itemElement.getElementsByTagName("description").item(0).getTextContent());
 
           }
         }
@@ -96,6 +103,13 @@ public class XmlParser {
           System.out.println("- Comes from: " + passageElement.getElementsByTagName("comeFrom").item(0).getTextContent());
           System.out.println("- Connects to: " + passageElement.getElementsByTagName("connectTo").item(0).getTextContent());
 
+          // TODO: reference to (1)
+          // Create Passage with connected Places.
+          passages[passageCounter] = new Passage(passageElement.getElementsByTagName("name").item(0).getTextContent(),
+              passageElement.getElementsByTagName("description").item(0).getTextContent(),
+              places[0],    // from this Place
+              places[1]);   // to that Place
+
           // parse all existing Passage Obstacles
           NodeList obstacleList = passageElement.getElementsByTagName("obstacle");
 
@@ -108,6 +122,13 @@ public class XmlParser {
             System.out.println("- - Resolution: " + obstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
             System.out.println("- - Required Item: " + obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
 
+            // TODO: reference to (1)
+            // Create Obstacles.
+            obstacles[obstacleCounter] = new Obstacle(
+                "Obstacle" + obstacleCounter,       // obstacle name
+                obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
+                obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
+                items[0]);      // required item
           }
         }
       }
