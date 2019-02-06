@@ -13,12 +13,7 @@ import java.io.File;
  */
 public class XmlParser {
 
-  // TODO: (1) create getters of the variables which can be called in CreateWorld instead of pushing them to it.
-  private int numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
-
-  public void parseXml() {
-
-    CreateWorld creator = new CreateWorld();
+  public static void main(String args[]) {
 
     try {
 
@@ -32,8 +27,6 @@ public class XmlParser {
 
       NodeList placeList = doc.getElementsByTagName("place");
       NodeList passageList = doc.getElementsByTagName("passage");
-
-      setNumberOfPlaces(placeList.getLength());
 
       // parse all existing Places
       for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
@@ -63,7 +56,7 @@ public class XmlParser {
       }
 
       // parse all existing passages
-      for (int passageCounter = 0; passageCounter < passageList.getLength(); passageCounter++) {
+      for (int passageCounter = 0; passageCounter < placeList.getLength(); passageCounter++) {
         Node passageNode = passageList.item(passageCounter);
         System.out.println("\nCurrent Element: " + passageNode.getNodeName());
 
@@ -75,6 +68,7 @@ public class XmlParser {
           System.out.println("- Description: " + passageElement.getElementsByTagName("description").item(0).getTextContent());
           System.out.println("- Comes from: " + passageElement.getElementsByTagName("comeFrom").item(0).getTextContent());
           System.out.println("- Connects to: " + passageElement.getElementsByTagName("connectTo").item(0).getTextContent());
+          // TODO: Verweise auf connectete Places, gehe über ID und erhalte Place Name!
 
           // parse all existing Passage Obstacles
           NodeList obstacleList = passageElement.getElementsByTagName("obstacle");
@@ -96,13 +90,9 @@ public class XmlParser {
       e.printStackTrace();
     }
 
-  }
-  // numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
-  public void setNumberOfPlaces(int num) {
-    numberOfPlaces = num;
-  }
 
-  public int getNumberOfPlaces() {
-    return numberOfPlaces;
+
+
+
   }
 }
