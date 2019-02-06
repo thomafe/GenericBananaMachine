@@ -1,6 +1,7 @@
 package model;
 /**
- *character moves through the world, picks up items, moves through passages and resolves obstacles
+ * character moves through the world, picks up items, moves through passages and resolves obstacles
+ * has lifepoints, can get more or use them, dies if no lifepoints left
  *
  * @author Simone273
  */
@@ -12,6 +13,8 @@ public class Character {
 
   private Place currentPlace = null;
   private List<Item> itemsInInventory = new ArrayList<>();
+  private int lifepoints;
+  private boolean dead = false;
 
   /**
    * Constructor.
@@ -45,7 +48,7 @@ public class Character {
   /**
    * Removes an item from the characters inventory. If that item isn't in the players inventory,
    * nothing happens.
-   * 
+   *
    * @param itemToRemove - The item to be removed from the characters inventory
    */
   public void removeItem(Item itemToRemove) {
@@ -57,7 +60,8 @@ public class Character {
    *
    * @param item
    */
-  public void useItem(Item item) {}
+  public void useItem(Item item) {
+  }
 
   /**
    * Getter for current Place.
@@ -71,11 +75,32 @@ public class Character {
 
   /**
    * Getter for items.
-   * 
+   *
    * @return itemsInInventory
    */
   public List<Item> getItemsInInventory() {
     return itemsInInventory;
   }
 
+  public void looseALivepoint(int damagepoints) {
+    lifepoints = lifepoints- damagepoints;
+  }
+
+  public void gainALivepoint(int healingpoints) {
+    lifepoints = lifepoints+ healingpoints;
+  }
+
+  public boolean isDead() {
+    if (lifepoints == 0) {
+      dead = true;
+    }
+    return dead;
+  }
+
+  public int getLifepoints() {
+
+    return lifepoints;
+  }
+
 }
+
