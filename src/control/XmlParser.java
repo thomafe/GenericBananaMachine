@@ -43,14 +43,14 @@ public class XmlParser {
       NodeList placeList = doc.getElementsByTagName("place");
       NodeList passageList = doc.getElementsByTagName("passage");
 
-      setNumberOfPlaces(placeList.getLength());
-
       // TODO: reference to (1)
       // Create object arrays.
       Place[] places = new Place[getNumberOfPlaces()];
       Item[] items = new Item[getNumberOfItems()];
       Passage[] passages = new Passage[getNumberOfPassages()];
       Obstacle[] obstacles = new Obstacle[getNumberOfObstacles()];
+      // set number of places.
+      setNumberOfPlaces(placeList.getLength());
 
       // parse all existing Places
       for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
@@ -72,6 +72,9 @@ public class XmlParser {
           // parse all existing Place Items
           NodeList itemList = placeElement.getElementsByTagName("item");
 
+          // set number of items.
+          setNumberOfItems(itemList.getLength());
+
           for (int itemCounter = 0; itemCounter < itemList.getLength(); itemCounter++) {
             Node itemNode = itemList.item(itemCounter);
             Element itemElement = (Element) itemNode;
@@ -84,12 +87,18 @@ public class XmlParser {
             // Create items.
             items[itemCounter] = new Item(itemElement.getElementsByTagName("name").item(0).getTextContent(),
                 itemElement.getElementsByTagName("description").item(0).getTextContent());
+            // Set items in current place.
+            places[placeCounter].addItemOnTheFloor(items[itemCounter]);
 
           }
         }
       }
 
       // parse all existing passages
+
+      // set number of passages.
+      setNumberOfPassages(passageList.getLength());
+
       for (int passageCounter = 0; passageCounter < passageList.getLength(); passageCounter++) {
         Node passageNode = passageList.item(passageCounter);
         System.out.println("\nCurrent Element: " + passageNode.getNodeName());
@@ -113,6 +122,9 @@ public class XmlParser {
           // parse all existing Passage Obstacles
           NodeList obstacleList = passageElement.getElementsByTagName("obstacle");
 
+          // set number of obstacles.
+          setNumberOfObstacles(obstacleList.getLength());
+
           for (int obstacleCounter = 0; obstacleCounter < obstacleList.getLength(); obstacleCounter++) {
             Node obstacleNode = obstacleList.item(obstacleCounter);
             Element obstacleElement = (Element) obstacleNode;
@@ -128,7 +140,7 @@ public class XmlParser {
                 "Obstacle" + obstacleCounter,       // obstacle name
                 obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
                 obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
-                items[0]);      // required item
+                getRequiredItem(items, obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent()));      // required item
           }
         }
       }
@@ -144,7 +156,7 @@ public class XmlParser {
    *
    * @param num int
    */
-  public void setNumberOfPlaces(int num) {
+  private void setNumberOfPlaces(int num) {
     numberOfPlaces = num;
   }
 
@@ -210,4 +222,23 @@ public class XmlParser {
   public int getNumberOfObstacles() {
     return numberOfObstacles;
   }
+
+  /**
+   * Getter for required item for obstacle.
+   * Gets all items and returns the item which has the equal name as the needed one.
+   *
+   * @param items Item
+   */
+  public Item getRequiredItem(Item[] items, String requiredItemName) {
+    Item requirement = null;
+
+    for(int i=0; i <= items.length; i++) {
+      if(items[i].getName().equals(requiredItemName)) {
+        requirement = items[i];
+      }
+    }
+    return requirement;
+  }
+
+
 }
