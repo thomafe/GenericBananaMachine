@@ -311,7 +311,7 @@ public class Control {
         out.noSuccess(errorType.GO_BACK);
         break;
       } else if (currentObstacle.tryToUseItem(chosenItem)) {
-        out.success(currentObstacle, successType.OBSTACLE_WIN);
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_REACTION);
         character.removeItem(chosenItem);
         return true;
       } else {

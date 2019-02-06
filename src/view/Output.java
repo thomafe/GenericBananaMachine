@@ -22,7 +22,7 @@ public class Output {
   }
 
   public enum successType {
-    PICK_UP, OBSTACLE_WIN
+    PICK_UP, OBSTACLE_REACTION
   }
 
   private Control control;
@@ -242,9 +242,9 @@ public class Output {
     }
   }
 
-  public void success(Obstacle obstacle, successType type) {
+  public void obstacleOut(Obstacle obstacle, successType type) {
     switch (type) {
-      case OBSTACLE_WIN:
+      case OBSTACLE_REACTION:
         printString(obstacle.getResolution());
         break;
       default:
