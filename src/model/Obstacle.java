@@ -15,8 +15,8 @@ public class Obstacle extends GameObject {
   private Item additionalItem;
   private String riddleAnswer;
   private boolean additionalItemResolved = false;
-
-
+  public int damagepoints;
+  public int healingpoints;
 
   /**
    * Create a new obstacle that takes one item that will be consumed.
@@ -85,13 +85,15 @@ public class Obstacle extends GameObject {
         correctItemUsed = true;
 
       }
+
+
     } else {
 
       // Two item required
       if (additionalItem.equals(itemToTry)) {
         consume(itemToTry);
         additionalItemResolved = true;
-        correctItemUsed= true;
+        correctItemUsed = true;
 
 
       } else if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
@@ -177,6 +179,15 @@ public class Obstacle extends GameObject {
 
   public void walkAway() {
     System.out.println("You can run from the obstacle but not from your own failure");
+  }
+
+  public int getDamagepoints(int damage) {
+    damagepoints= damagepoints +damage;
+    return damagepoints;
+  }
+  public int getHealingpoints(int healing){
+    healingpoints= healingpoints +healing;
+    return healingpoints;
   }
 }
 
