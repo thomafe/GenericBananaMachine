@@ -57,8 +57,6 @@ public class Character {
 
   /**
    * Use Item to solve Obstocle.
-   *
-   * @param item
    */
   public void useItem(Item item) {
   }
@@ -83,13 +81,12 @@ public class Character {
   }
 
   public int looseALivepoint(int damagepoints) {
-    lifepoints = lifepoints- damagepoints;
+    lifepoints = lifepoints - damagepoints;
     return lifepoints;
   }
 
-  public int gainALivepoint(int healingpoints)
-  {
-    lifepoints = lifepoints+ healingpoints;
+  public int gainALivepoint(int healingpoints) {
+    lifepoints = lifepoints + healingpoints;
     return lifepoints;
   }
 
@@ -98,16 +95,13 @@ public class Character {
       dead = true;
     }
     return dead;
+
   }
 
   public int getLifepoints() {
-
     return lifepoints;
   }
 
-  public void loosLifepoints(){
-
-  }
 
 }
 
