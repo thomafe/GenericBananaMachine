@@ -13,7 +13,7 @@ public class Character {
 
   private Place currentPlace = null;
   private List<Item> itemsInInventory = new ArrayList<>();
-  private int lifepoints;
+  private int lifepoints = 5;
   private boolean dead = false;
 
   /**
@@ -82,12 +82,15 @@ public class Character {
     return itemsInInventory;
   }
 
-  public void looseALivepoint(int damagepoints) {
+  public int looseALivepoint(int damagepoints) {
     lifepoints = lifepoints- damagepoints;
+    return lifepoints;
   }
 
-  public void gainALivepoint(int healingpoints) {
+  public int gainALivepoint(int healingpoints)
+  {
     lifepoints = lifepoints+ healingpoints;
+    return lifepoints;
   }
 
   public boolean isDead() {
@@ -100,6 +103,10 @@ public class Character {
   public int getLifepoints() {
 
     return lifepoints;
+  }
+
+  public void loosLifepoints(){
+
   }
 
 }
