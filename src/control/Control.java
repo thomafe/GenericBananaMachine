@@ -12,6 +12,7 @@ import view.Output;
 import model.Passage;
 import model.GameObject;
 import view.Output.errorType;
+import view.Output.errorTypeInput;
 import view.Output.successType;
 
 /**
@@ -286,12 +287,17 @@ public class Control {
 
     Passage destinationPassage = findPassage(passageName);
 
-    Obstacle obstacleInPassage = destinationPassage.getObstacle();
+    if (destinationPassage == null) {
+      out.noSuccess(passageName, errorTypeInput.NO_PASSAGE);
+    } else {
 
-    if (obstacleInPassage == null || obstacleInPassage.isResolved()
-        || interactWithObstacle(obstacleInPassage)) {
-      character.move(destinationPassage);
-      characterMoved = true;
+      Obstacle obstacleInPassage = destinationPassage.getObstacle();
+
+      if (obstacleInPassage == null || obstacleInPassage.isResolved()
+          || interactWithObstacle(obstacleInPassage)) {
+        character.move(destinationPassage);
+        characterMoved = true;
+      }
     }
 
     return characterMoved;
@@ -308,31 +314,36 @@ public class Control {
   public boolean interactWithObstacle(Obstacle currentObstacle) {
     String answerString = null;
     Item chosenItem = null;
+    boolean obstacleResolved = false;
 
-    while (true) {
+    while (!obstacleResolved) {
       out.listOptionsObstacleInteraction(currentObstacle);
       answerString = in.readItemForObstacle();
+
+      if (answerString.equalsIgnoreCase("leave")) {
+        break;
+      }
+
       chosenItem = findItemInInventory(answerString);
 
-      if (answerString == null) {
-        out.noSuccess(errorType.DONT_HAVE_ITEM);
-      } else if (answerString.equals("leave")) {
-        out.noSuccess(errorType.GO_BACK);
-        break;
-      } else if (currentObstacle.tryToUseItem(chosenItem)) {
-        // TODO tell the player about the outcome of trying to use the item
-        // out.obstacleOut(currentObstacle, successType.OBSTACLE_REACTION);
-        // TODO only consumed items get removed??
-        character.removeItem(chosenItem);
-        if (currentObstacle.isResolved()) {
-          out.obstacleOut(currentObstacle, successType.OBSTACLE_RESOLUTION);
-          return true;
+      if (chosenItem != null) {
+        if (currentObstacle.tryToUseItem(chosenItem) && chosenItem.isConsumed()) {
+          character.removeItem(chosenItem);
         }
       } else {
-        out.noSuccess(errorType.DOES_NOT_WORK);
+        currentObstacle.tryToAnswerRiddle(answerString);
+        // TODO when we can tell riddle and item obstacles apart, rework this
+      }
+
+      if (currentObstacle.isResolved()) {
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_RESOLUTION);
+        obstacleResolved = true;
+      } else {
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_REACTION);
       }
     }
-    return false;
+
+    return obstacleResolved;
   }
 
   /**
@@ -520,9 +531,9 @@ public class Control {
    * Checks if Character is dead
    *
    */
-  private void checkIfCharacterDead(){
-    if (character.isDead()){
-           //TODO Niklas Output for dead
+  private void checkIfCharacterDead() {
+    if (character.isDead()) {
+      // TODO Niklas Output for dead
     }
   }
 

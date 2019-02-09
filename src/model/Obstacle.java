@@ -80,8 +80,8 @@ public class Obstacle extends GameObject {
     if (additionalItem == null) {
       // Only one item
       if (requiredItem.equals(itemToTry)) {
-        resolve(itemToTry);
         consume(itemToTry);
+        resolve();
         correctItemUsed = true;
 
       }
@@ -97,7 +97,7 @@ public class Obstacle extends GameObject {
 
 
       } else if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
-        resolve(itemToTry);
+        resolve();
         consume(itemToTry);
         correctItemUsed = true;
 
@@ -112,11 +112,11 @@ public class Obstacle extends GameObject {
    * Obstacle gets resolved if no return false
    */
   public boolean tryToAnswerRiddle(String answerForRiddle) {
-    boolean obstacleResolved = false;
-    if (riddleAnswer.equals(answerForRiddle)) {
-      obstacleResolved = true;
+    
+    if (riddleAnswer.equalsIgnoreCase(answerForRiddle)) {
+      resolve();
     }
-    return obstacleResolved;
+    return resolved;
   }
 
   /**
@@ -146,14 +146,12 @@ public class Obstacle extends GameObject {
    *
    * @param itemToResolve Item
    */
-  private void resolve(Item itemToResolve) {
+  private void resolve() {
     this.resolved = true;
-
-
   }
 
   private void consume(Item itemToResolve) {
-    if (consumesItem == true) {
+    if (consumesItem) {
       itemToResolve.consume();
     }
   }

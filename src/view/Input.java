@@ -153,7 +153,7 @@ public class Input {
     String decision = readInSingleLine();
     Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher((decision));
     
-    if (decision.matches("[(?i)leave")) {
+    if (decision.matches("(?i)leave")) {
       decision = "leave";
     } else if (matcherUseItemObstacle.find()) {
       decision = matcherUseItemObstacle.group(2);
