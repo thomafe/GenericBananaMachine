@@ -9,6 +9,9 @@
 
 Die Generic Banana Machine (GBM) ist eine einfach Text Adventure Engine. Mit ihr können Text Abenteuer erlebt werden, in denen der Spieler einen Character in einer Spielwelt steurt.
 
+# Prioritäten
+Je größer die Priorität, um so optionaler die Anforderung
+1 - Unabdingbar | 2 - Grundlegend | 3 - Wünschenswert | 4 - Erfeulich | 5 - Völlig optional
 
 --- Funktionale Anforderungen ---
 ------------------------------------------------------
