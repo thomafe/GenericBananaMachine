@@ -261,19 +261,6 @@ public class Control {
   }
 
   /**
-   * Checks if the passage passageName exists at this place
-   *
-   * @return boolean
-   */
-  public boolean checkPassage(String passageName) {
-    if (findPassage(passageName) != null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /**
    * Tries to move the character through a passage. If there is an obstacle in the way the character
    * first interacts with that obstacle. If there is no obstacle or the obstacle gets resolved the
    * character moves to the next room.
@@ -301,6 +288,15 @@ public class Control {
     }
 
     return characterMoved;
+  }
+
+  public void interactWithFurniture(Furniture furniture) {    
+    Obstacle obstacleOnFurniture = furniture.getObstacle();
+
+    if (obstacleOnFurniture == null || obstacleOnFurniture.isResolved()
+        || interactWithObstacle(obstacleOnFurniture)) {
+      furniture.receiveItemsInSide().forEach(character.getCurrentPlace()::addObjectToPlace);
+    } 
   }
 
   /**
@@ -340,6 +336,7 @@ public class Control {
         obstacleResolved = true;
       } else {
         out.obstacleOut(currentObstacle, successType.OBSTACLE_REACTION);
+        // character.looseALivepoint(currentObstacle.getDamagepoints(0)); TODO this is not correct!
       }
     }
 

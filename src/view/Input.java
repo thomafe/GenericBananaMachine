@@ -4,6 +4,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import control.Control;
+import model.Furniture;
+import model.GameObject;
+import model.Passage;
 import view.Output.errorType;
 import view.Output.errorTypeInput;
 import view.Output.successType;
@@ -99,9 +102,13 @@ public class Input {
   }
 
   public void matchGotoPassage(Matcher match) {
-      if (control.checkPassage(match.group(1))) {
+    GameObject foundObject = control.findGameObject(match.group(1));
+    
+      if (foundObject instanceof Passage) {
         control.tryToMoveThroughPassage(match.group(1));
         out.lookAtCurrentPlace();
+      } else if (foundObject instanceof Furniture){
+       control.interactWithFurniture((Furniture)foundObject);
       } else {
         out.noSuccess(match.group(1), errorTypeInput.NO_PASSAGE);
       }
