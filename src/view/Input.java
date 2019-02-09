@@ -138,7 +138,7 @@ public class Input {
    * !Not recommended to use outside of this class!
    * @return String
    */
-  public String readInSingleLine() {
+  private String readInSingleLine() {
     return scan.nextLine();
   }
 
@@ -150,10 +150,10 @@ public class Input {
    * @return String
    */
   public String readItemForObstacle() {
-    String input = readInSingleLine();
-    Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher((input));
-    String decision = null;
-    if (input.matches("[lL]eave")) {
+    String decision = readInSingleLine();
+    Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher((decision));
+    
+    if (decision.matches("[(?i)leave")) {
       decision = "leave";
     } else if (matcherUseItemObstacle.find()) {
       decision = matcherUseItemObstacle.group(2);
