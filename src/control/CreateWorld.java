@@ -26,8 +26,9 @@ public class CreateWorld {
     XmlParser parser = new XmlParser();
     parser.parseXml();
 
-    int numPlaces = parser.getNumberOfPlaces();
-    Place[] places = new Place[numPlaces];
+    Control control = new Control(parser.getStartingPlace());
+
+    control.runGame();
 
   }
 

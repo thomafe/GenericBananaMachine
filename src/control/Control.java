@@ -23,6 +23,13 @@ public class Control {
     initGame();
   }
 
+  public Control(Place startingPlace) {
+    character = new Character(startingPlace);
+
+    out = new Output(this);
+    in = new Input(out, this);
+  }
+
   /**
    * Initializes the game world and all other required objects.
    * 
@@ -141,10 +148,7 @@ public class Control {
     room4.addItemOnTheFloor(item8); // Outback -> signal rockets
 
     // Other objects
-    character = new Character(room0);
 
-    out = new Output(this);
-    in = new Input(out, this);
 
   }
 
@@ -182,7 +186,7 @@ public class Control {
   /**
    * Contains the main game loop Every time check if game might end!
    */
-  private void runGame() {
+  public void runGame() {
     gameIntroduction();
 
 
