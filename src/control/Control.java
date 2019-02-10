@@ -5,8 +5,10 @@ import java.util.Collections;
 import model.Character;
 import model.Furniture;
 import model.Item;
+import model.Level;
 import model.Obstacle;
 import model.Place;
+import sun.security.acl.WorldGroupImpl;
 import view.Input;
 import view.Output;
 import model.Passage;
@@ -16,7 +18,9 @@ import view.Output.errorTypeInput;
 import view.Output.successType;
 
 /**
- * Runs main program
+ * Controls all interactions and logic of the game. Calls the input to take user input. Then
+ * executes the command and loops back to the input. Longer interaction routines can be happen from
+ * within the normal game loop but follow the same semantic.
  *
  * @author Lehmeti, thomafe
  */
@@ -26,12 +30,14 @@ public class Control {
   private Input in = null;
   private Output out = null;
 
-  /**
-   * Default constructor. Initializes the game.
-   */
-  public Control() {
-    initGame();
-  }
+  private Level level = null;
+
+//  /**
+//   * Default constructor. Initializes the game.
+//   */
+//  public Control(Level level) {
+//    initCharacter(level);
+//  }
 
   /**
    * Creates a test game if the flag is set or a regular game if not.
@@ -44,16 +50,24 @@ public class Control {
     }
   }
 
+  /**
+   * Initializes this class with a level and a character
+   * 
+   * @param level
+   */
   private void initCharacter(Place startingPlace) {
-    character = new Character(startingPlace);
+//    this.level = level;
 
     out = new Output(this);
     in = new Input(out, this);
+    
+    character = new Character(startingPlace);
   }
 
   /**
    * Initializes the game world and all other required objects.
    */
+  @Deprecated
   private void initGame() {
 
     // Scenario: "Shipwrecked"
@@ -171,6 +185,7 @@ public class Control {
   /**
    * Create a test world. Character already has items in his inventory.
    */
+  @Deprecated
   private void testWorld() {
     Place startingPlace = new Place("Entrance", "Starting Place");
     Place room1 = new Place("Room 1", "Test Room 1");
@@ -180,7 +195,7 @@ public class Control {
 
     Item item1 = new Item("Required Item", "Required Item");
     Item item2 = new Item("Additional Item", "Additional Item");
-    Item itemOnFloor = new Item("Shoe", "A shoe");
+    Item itemOnFloor = new Item("Rock", "A rock");
     Item itemInChest =
         new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
 
@@ -245,7 +260,7 @@ public class Control {
   /**
    * Contains the main game loop Every time check if game might end!
    */
-  private void runGame() {
+  public void runGame() {
     gameIntroduction();
 
     // Game Loop
@@ -253,7 +268,6 @@ public class Control {
 
       checkForBadEnding();
       checkForGoodEnding();
-      checkIfCharacterDead();
       in.readInput();
 
     } while (true);
@@ -290,13 +304,13 @@ public class Control {
     return characterMoved;
   }
 
-  public void interactWithFurniture(Furniture furniture) {    
+  public void interactWithFurniture(Furniture furniture) {
     Obstacle obstacleOnFurniture = furniture.getObstacle();
 
     if (obstacleOnFurniture == null || obstacleOnFurniture.isResolved()
         || interactWithObstacle(obstacleOnFurniture)) {
       furniture.receiveItemsInSide().forEach(character.getCurrentPlace()::addObjectToPlace);
-    } 
+    }
   }
 
   /**
@@ -379,6 +393,17 @@ public class Control {
     Item itemToPickUp = findItemOnTheFloor(itemName);
     character.takeItem(itemToPickUp);
     character.getCurrentPlace().removeItemFromPlace(itemToPickUp);
+  }
+  
+  /**
+   * Deals damage to the character, then checks for death.
+   * 
+   * @param damage
+   */
+  public void distributeDamage(int damage) {
+    character.looseALivepoint(damage);
+    
+    checkIfCharacterDead();
   }
 
   /**
@@ -543,19 +568,5 @@ public class Control {
   public Character getCharacter() {
     return character;
   }
-
-  /**
-   * Main Method.
-   * 
-   * @param args
-   */
-  public static void main(String[] args) {
-    boolean doTest = true;
-
-    Control control = new Control(doTest);
-
-    control.runGame();
-  }
-
 
 }

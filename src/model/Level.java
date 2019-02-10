@@ -59,6 +59,10 @@ public class Level {
   public boolean isEndingPlace(Place place) {
     return endings.containsKey(place);
   }
+  
+  public Place getStartingPlace() {
+    return startingPlace;
+  }
 
   public String getEndingForPlace(Place endingPlace) {
     String endingText = null;
