@@ -174,19 +174,13 @@ public class Output {
    *
    * @param objectName String
    */
-  public void lookAtGameObject(String objectName) {
-    GameObject object = control.findGameObject(objectName);
-
-    if (object == null) {
-      printString("There is no " + objectName + " here.");
-    } else {
+  public void lookAtGameObject(GameObject object) {
       StringBuilder gameObjectDescription = new StringBuilder();
 
       gameObjectDescription.append("You look at " + object.getName() + "\n");
       gameObjectDescription.append(object.getDescription());
 
       printString(gameObjectDescription.toString());
-    }
   }
 
   /**

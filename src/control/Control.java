@@ -33,12 +33,12 @@ public class Control {
   private Level level = null;
 
   // TODO constructors with Level
-//  /**
-//   * Default constructor. Initializes the game.
-//   */
-//  public Control(Level level) {
-//    initCharacter(level);
-//  }
+  // /**
+  // * Default constructor. Initializes the game.
+  // */
+  // public Control(Level level) {
+  // initCharacter(level);
+  // }
 
   /**
    * Creates a test game if the flag is set or a regular game if not.
@@ -58,11 +58,11 @@ public class Control {
    */
   // TODO give a level instead
   private void initCharacter(Place startingPlace) {
-//    this.level = level;
+    // this.level = level;
 
     out = new Output(this);
     in = new Input(out, this);
-    
+
     // TODO set hitpoints
     character = new Character(startingPlace);
   }
@@ -286,27 +286,27 @@ public class Control {
    * @return whether the character moved or not
    */
 
-  public boolean tryToMoveThroughPassage(String passageName) {
+  public boolean tryToMoveThroughPassage(Passage destinationPassage) {
     boolean characterMoved = false;
 
-    Passage destinationPassage = findPassage(passageName);
+    Obstacle obstacleInPassage = destinationPassage.getObstacle();
 
-    if (destinationPassage == null) {
-      out.noSuccess(passageName, errorTypeInput.NO_PASSAGE);
-    } else {
-
-      Obstacle obstacleInPassage = destinationPassage.getObstacle();
-
-      if (obstacleInPassage == null || obstacleInPassage.isResolved()
-          || interactWithObstacle(obstacleInPassage)) {
-        character.move(destinationPassage);
-        characterMoved = true;
-      }
+    if (obstacleInPassage == null || obstacleInPassage.isResolved()
+        || interactWithObstacle(obstacleInPassage)) {
+      character.move(destinationPassage);
+      characterMoved = true;
     }
 
     return characterMoved;
   }
 
+  /**
+   * Tries to receive items from a furniture. If there is an obstacle on the furniture the character
+   * interacts with it. If not or it gets resolved all items from within the furniture are put into
+   * the room.
+   * 
+   * @param furniture
+   */
   public void interactWithFurniture(Furniture furniture) {
     Obstacle obstacleOnFurniture = furniture.getObstacle();
 
@@ -361,43 +361,15 @@ public class Control {
   }
 
   /**
-   * Checks if the GameObject exists
-   * 
-   * @param objectName
-   * @return boolean
-   */
-  public boolean checkLookAtGameObject(String objectName) {
-    if (findGameObject(objectName) != null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /**
-   * Checks if the item exists in this place
-   *
-   * @return boolean
-   */
-  public boolean checkPickUpItem(String itemName) {
-    if (findItemOnTheFloor((itemName)) != null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /**
    * Tells the character to pick up an item
    *
    * @param itemName String
    */
-  public void pickUpItem(String itemName) {
-    Item itemToPickUp = findItemOnTheFloor(itemName);
+  public void pickUpItem(Item itemToPickUp) {
     character.takeItem(itemToPickUp);
     character.getCurrentPlace().removeItemFromPlace(itemToPickUp);
   }
-  
+
   /**
    * Deals damage to the character, then checks for death.
    * 
@@ -405,7 +377,7 @@ public class Control {
    */
   public void distributeDamage(int damage) {
     character.looseALivepoint(damage);
-    
+
     checkIfCharacterDead();
   }
 
@@ -417,60 +389,19 @@ public class Control {
    */
   public GameObject findGameObject(String objectName) {
     GameObject foundObject = null;
-
-    // TODO thomaf rework all of these
-    foundObject = findPassage(objectName);
-
-    if (foundObject == null) {
-      foundObject = findItemOnTheFloor(objectName);
+    
+    for (GameObject gameObject : character.getCurrentPlace().getObjectsInPlace()) {
+      if(gameObject.getName().equals(objectName)) {
+        foundObject = gameObject;
+        break;
+      }
     }
 
     if (foundObject == null) {
       foundObject = findItemInInventory(objectName);
     }
 
-    if (foundObject == null) {
-      foundObject = findFurniture(objectName);
-    }
-
     return foundObject;
-  }
-
-  /**
-   * Returns found Passage after searching it in the current Place where the Character currently is
-   * inside.
-   *
-   * @param passageName String
-   * @return Passage
-   */
-  private Passage findPassage(String passageName) {
-    Passage foundPassage = null;
-
-    for (Passage passage : character.getCurrentPlace().getPassages()) {
-      if (passage.getName().equalsIgnoreCase(passageName)) {
-        foundPassage = passage;
-        break;
-      }
-    }
-    return foundPassage;
-  }
-
-  /**
-   * Looks for an item on the floor of the current room.
-   *
-   * @return the found item or null if there was no such item
-   */
-  private Item findItemOnTheFloor(String itemName) {
-    Item foundItem = null;
-
-    for (GameObject objectInPlace : character.getCurrentPlace().getObjectsInPlace()) {
-      if (objectInPlace instanceof Item && objectInPlace.getName().equalsIgnoreCase(itemName)) {
-        foundItem = (Item) objectInPlace;
-        break;
-      }
-    }
-
-    return foundItem;
   }
 
   /**
@@ -489,25 +420,6 @@ public class Control {
     }
 
     return foundItem;
-  }
-
-  /**
-   * Looks for furniture in the current room.
-   * 
-   * @param furnitureName
-   * @return
-   */
-  private Furniture findFurniture(String furnitureName) {
-    Furniture foundFurniture = null;
-
-    for (GameObject gameObject : character.getCurrentPlace().getObjectsInPlace()) {
-      if (gameObject instanceof Furniture && gameObject.getName().equalsIgnoreCase(furnitureName)) {
-        foundFurniture = (Furniture) gameObject;
-        break;
-      }
-    }
-
-    return foundFurniture;
   }
 
   /**
