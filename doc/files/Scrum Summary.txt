@@ -18,6 +18,6 @@ Total Points:     4
 
 ### Felix ###
 Accepted Stories: 13
-Features:         7
-Chores/Bugs:      5
-Total Points:     5
+Features:         6
+Chores/Bugs:      7
+Total Points:     3
