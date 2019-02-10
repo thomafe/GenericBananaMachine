@@ -162,6 +162,10 @@ public class XmlParser {
         }
 
         startingPlace = places.get(0);
+
+        System.out.println("\n\n");
+        System.out.println("World has successfully been created! God saw all that he had made, and it was good.");
+        System.out.println("\n\n\n\n");
       }
 
     } catch (Exception e) {
