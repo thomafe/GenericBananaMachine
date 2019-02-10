@@ -71,7 +71,6 @@ public class XmlParser {
 
           // TODO: reference to (1)
           // Create Places.
-          System.out.println(places.size());
           places.add(
               new Place(
                   placeElement.getElementsByTagName("name").item(0).getTextContent(),
@@ -96,6 +95,7 @@ public class XmlParser {
 
             // TODO: reference to (1)
             // Create items.
+
             items.add(
                 new Item(
                     itemElement.getElementsByTagName("name").item(0).getTextContent(),
@@ -103,8 +103,14 @@ public class XmlParser {
                 )
             );
             // Set items in current place.
-            places.get(placeCounter).addItemOnTheFloor(items.get(itemCounter));
+            places.get(placeCounter).addItemOnTheFloor(getIncludedItem(itemElement, items));
 
+            /*
+            places.get(placeCounter).addItemOnTheFloor(new Item(
+                itemElement.getElementsByTagName("name").item(0).getTextContent(),
+                itemElement.getElementsByTagName("description").item(0).getTextContent()
+            ));
+             */
           }
         }
       }
@@ -131,8 +137,8 @@ public class XmlParser {
           // Create Passage with connected Places.
           passages.add(new Passage(passageElement.getElementsByTagName("name").item(0).getTextContent(),
               passageElement.getElementsByTagName("description").item(0).getTextContent(),
-              places.get(0),    // from this Place
-              places.get(1))    // to that Place
+              getFromPlace(passageElement, places),    // from this Place
+              getFollowPlace(passageElement, places))    // to that Place
           );
 
           // parse all existing Passage Obstacles
@@ -160,13 +166,13 @@ public class XmlParser {
 
           }
         }
-
-        startingPlace = places.get(0);
-
-        System.out.println("\n\n");
-        System.out.println("World has successfully been created! God saw all that he had made, and it was good.");
-        System.out.println("\n\n\n\n");
       }
+
+      startingPlace = places.get(0);
+
+      System.out.println("\n\n");
+      System.out.println("World has successfully been created! God saw all that he had made, and it was good.");
+      System.out.println("\n\n\n\n");
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -265,6 +271,36 @@ public class XmlParser {
 
   public Place getStartingPlace() {
     return startingPlace;
+  }
+
+  public Place getFromPlace (Element passageElement, ArrayList<Place> places) {
+    Place start = null;
+    for(int i = 0; i <= places.size()-1; i++) {
+      if(passageElement.getElementsByTagName("comeFrom").item(0).getTextContent().equals(places.get(i).getName())){
+        start = places.get(i);
+      }
+    }
+    return start;
+  }
+
+  public Place getFollowPlace (Element passageElement, ArrayList<Place> places) {
+    Place follow = null;
+    for(int i = 0; i <= places.size()-1; i++) {
+      if(passageElement.getElementsByTagName("connectTo").item(0).getTextContent().equals(places.get(i).getName())){
+        follow = places.get(i);
+      }
+    }
+    return follow;
+  }
+
+  public Item getIncludedItem (Element itemElement, ArrayList<Item> items) {
+    Item include = null;
+    for(int i = 0; i <= items.size()-1; i++) {
+      if(items.get(i).getName().equals(itemElement.getElementsByTagName("name").item(0).getTextContent())) {
+        include = items.get(i);
+      }
+    }
+    return include;
   }
 
 }
