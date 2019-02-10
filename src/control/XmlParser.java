@@ -35,6 +35,8 @@ public class XmlParser {
 
     try {
 
+      System.out.println("\n\nIn the beginning God created the heaven and the world...\n\n");
+
       File fXmlFile = new File("./levels/game01.xml");
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
