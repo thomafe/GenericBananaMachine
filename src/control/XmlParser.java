@@ -211,15 +211,6 @@ public class XmlParser {
   }
 
   /**
-   * Getter for Number of Obstacles.
-   *
-   * @return int
-   */
-  public int getNumberOfObstacles() {
-    return numberOfObstacles;
-  }
-
-  /**
    * Getter for required item for obstacle.
    * Gets all items and returns the item which has the equal name as the needed one.
    *
