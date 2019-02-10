@@ -1,13 +1,14 @@
 package model;
 
 /**
- * Obstacle can block passages, can be solved with one or more item or a riddle, can react when character
- * interacts with it or when an item is used
+ * Obstacle can block passages, can be solved with one or more item or a riddle, can react when
+ * character interacts with it or when an item is used
  *
  * @author Simone273
  */
 public class Obstacle extends GameObject {
 
+  // TODO use inheritance to make this a bunch cleaner
   private String resolution;
   private boolean resolved = false;
   private boolean consumesItem = true;
@@ -15,8 +16,8 @@ public class Obstacle extends GameObject {
   private Item additionalItem;
   private String riddleAnswer;
   private boolean additionalItemResolved = false;
-  public int damagepoints;
-  public int healingpoints;
+  private int damagepoints;
+  private int healingpoints;
 
   /**
    * Create a new obstacle that takes one item that will be consumed.
@@ -78,7 +79,7 @@ public class Obstacle extends GameObject {
     boolean correctItemUsed = false;
 
     if (additionalItem == null) {
-      // Only one item
+      // One item required
       if (requiredItem.equals(itemToTry)) {
         consume(itemToTry);
         resolve();
@@ -89,7 +90,7 @@ public class Obstacle extends GameObject {
 
     } else {
 
-      // Two item required
+      // Two items required
       if (additionalItem.equals(itemToTry)) {
         consume(itemToTry);
         additionalItemResolved = true;
@@ -112,7 +113,7 @@ public class Obstacle extends GameObject {
    * Obstacle gets resolved if no return false
    */
   public boolean tryToAnswerRiddle(String answerForRiddle) {
-    
+
     if (riddleAnswer.equalsIgnoreCase(answerForRiddle)) {
       resolve();
     }
@@ -125,18 +126,15 @@ public class Obstacle extends GameObject {
    * @return String
    */
   public String getResolution() {
-    // getter resolution
     return resolution;
   }
 
   /**
-   * Returns the state of resolution. If obstacle is successfully resolved, return true, else
-   * false.
+   * Returns the state of resolution. If obstacle is successfully resolved, return true, else false.
    *
    * @return boolean
    */
   public boolean isResolved() {
-    // getter resolved
     return resolved;
   }
 
@@ -163,6 +161,7 @@ public class Obstacle extends GameObject {
     this.consumesItem = consumesItem;
   }
 
+  // TODO simone all of the below should just return a string.
   public void reactsToContact() {
     System.out.println("The Obstacle is slightliy buzzing, it seems to notice your presence");
   }
@@ -179,12 +178,16 @@ public class Obstacle extends GameObject {
     System.out.println("You can run from the obstacle but not from your own failure");
   }
 
+  // TODO simone this should just return the amount of damage the obstacle does. Also, how do I know
+  // WHEN to call this method?? Doku please
   public int getDamagepoints(int damage) {
-    damagepoints= damagepoints +damage;
+    damagepoints = damagepoints + damage;
     return damagepoints;
   }
-  public int getHealingpoints(int healing){
-    healingpoints= healingpoints +healing;
+
+  // TODO simone obstacles can heal? When?
+  public int getHealingpoints(int healing) {
+    healingpoints = healingpoints + healing;
     return healingpoints;
   }
 }

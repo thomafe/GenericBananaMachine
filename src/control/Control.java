@@ -32,6 +32,7 @@ public class Control {
 
   private Level level = null;
 
+  // TODO constructors with Level
 //  /**
 //   * Default constructor. Initializes the game.
 //   */
@@ -55,12 +56,14 @@ public class Control {
    * 
    * @param level
    */
+  // TODO give a level instead
   private void initCharacter(Place startingPlace) {
 //    this.level = level;
 
     out = new Output(this);
     in = new Input(out, this);
     
+    // TODO set hitpoints
     character = new Character(startingPlace);
   }
 
@@ -512,6 +515,7 @@ public class Control {
    */
   private void gameIntroduction() {
     out.greeting();
+    // TODO use the introduction from the level
     out.lookAtCurrentPlace();
     out.listOptions();
   }
