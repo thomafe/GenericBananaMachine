@@ -87,6 +87,101 @@
       </obstacle>
     </passage>
 
+    <passage id="1">
+      <name>Underwood</name>
+      <description>The vegetation is blocking your way through. You need something to cut a pass through.</description>
+      <comeFrom>Coast</comeFrom>
+      <connectTo>Jungle</connectTo>
+      <obstacle>
+        <description>You need to cut a way through the vegetation which blocks you.</description>
+        <resolution>You used the machete to cut through.</resolution>
+        <requiredItem>Machete</requiredItem>
+      </obstacle>
+    </passage>
+
+    <passage id="2">
+      <name>Cave Entrance</name>
+      <description>You stand in front of an impressive cave entrance. You seem to be attracted by the darkness which comes from inside. You need something to light up your way.</description>
+      <comeFrom>Jungle</comeFrom>
+      <connectTo>Cave</connectTo>
+      <obstacle>
+        <description>You can't see anything. You need to light up your way.</description>
+        <resolution>You used the flashlight to light up your way.</resolution>
+        <requiredItem>Flashlight</requiredItem>
+      </obstacle>
+    </passage>
+
+    <passage id="3">
+      <name>Dirty Signpost</name>
+      <description>You look at a very dirty and old signpost. You can't read it because it's so dirty. You need something to clean it.</description>
+      <comeFrom>Jungle</comeFrom>
+      <connectTo>Outback</connectTo>
+      <obstacle>
+        <description>You need to remove the dirt from the signpost.</description>
+        <resolution>You used the cloth to clean the signpost. You can hear human voices in the distance.</resolution>
+        <requiredItem>Cloth</requiredItem>
+      </obstacle>
+    </passage>
+
+    <passage id="4">
+      <name>Hole in the Ground</name>
+      <description>You stand in front of a small but unbreachable hole. You need something to get over it.</description>
+      <comeFrom>Cave</comeFrom>
+      <connectTo>Bad Ending</connectTo>
+      <obstacle>
+        <description>You need to pass the hole.</description>
+        <resolution>You used the wooden plank to build a custom bridge.</resolution>
+        <requiredItem>Plank</requiredItem>
+      </obstacle>
+    </passage>
+
+    <passage id="5">
+      <name>Tunnel Entrance</name>
+      <description>You light inside but can't see anything. It seems that something inside is attracting you.</description>
+      <comeFrom>Cave</comeFrom>
+      <connectTo>Cave</connectTo>
+      <obstacle>
+        <description>Your flashlight is too low for this darkness. You need something to check if there is anything.</description>
+        <resolution>You threw the stone in the tunnel but you are instantly hit by the same stone. Is this a portal back to the entrance?</resolution>
+        <requiredItem>Stone</requiredItem>
+      </obstacle>
+    </passage>
+
+    <passage id="6">
+      <name>Path to Voices</name>
+      <description>You can hear human voices in the distance. You think about calling someones attention.</description>
+      <comeFrom>Outback</comeFrom>
+      <connectTo>Another Bad Ending</connectTo>
+      <obstacle>
+        <description>You need to call attention of the humans you hear.</description>
+        <resolution>You fired your missile of signal rockets to call attention.</resolution>
+        <requiredItem>Signal Rocket</requiredItem>
+      </obstacle>
+    </passage>
+
+    <passage id="7">
+      <name>Path Away</name>
+      <description>You can hear human voices in the distance. You think about not to call attention and follow the other path.</description>
+      <comeFrom>Outback</comeFrom>
+      <connectTo>Beach at the other side</connectTo>
+      <obstacle>
+        <description>You need something to orientate not to get lost on the path.</description>
+        <resolution>You used the compass to find the way to south which guides you away from the human voices.</resolution>
+        <requiredItem>Compass</requiredItem>
+      </obstacle>
+    </passage>
+
+    <passage id="8">
+      <name>Shore</name>
+      <description>You enter the shore, the broken waves plash on your legs. You need something to call attention.</description>
+      <comeFrom>Beach at the other side</comeFrom>
+      <connectTo>Ship of Coastguard</connectTo>
+      <obstacle>
+        <description>You need something to call attention for rescue.</description>
+        <resolution>You used the missile of the sign rocket to call attention of the ship. It answered and took you on board.</resolution>
+        <requiredItem>Signal Rocket</requiredItem>
+      </obstacle>
+    </passage>
 
   </passages>
 
