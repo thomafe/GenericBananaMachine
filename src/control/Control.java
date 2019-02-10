@@ -388,13 +388,10 @@ public class Control {
    * @return String description
    */
   public GameObject findGameObject(String objectName) {
-    GameObject foundObject = null;
+    GameObject foundObject = findThingInPlace(objectName);
     
-    for (GameObject gameObject : character.getCurrentPlace().getObjectsInPlace()) {
-      if(gameObject.getName().equals(objectName)) {
-        foundObject = gameObject;
-        break;
-      }
+    if (foundObject == null) {
+      foundObject = findPassageInPlace(objectName);
     }
 
     if (foundObject == null) {
@@ -403,7 +400,46 @@ public class Control {
 
     return foundObject;
   }
+  
+  /**
+   * Look for a thing in the current place
+   * 
+   * @param objectName
+   * @return
+   */
+  private GameObject findThingInPlace(String objectName) {
+    GameObject foundObject = null;
+    
+    for (GameObject gameObject : character.getCurrentPlace().getObjectsInPlace()) {
+      if(gameObject.getName().equalsIgnoreCase(objectName)) {
+        foundObject = gameObject;
+        break;
+      }
+    }
+    
+    return foundObject;
+  }
 
+  /**
+   * Look for a thing in the current place
+   * 
+   * @param objectName
+   * @return
+   */
+  private Passage findPassageInPlace(String passageName) {
+    Passage foundPassage = null;
+    
+    // TODO thomaf add passages to the things in a room and rework?
+    for (Passage gameObject : character.getCurrentPlace().getPassages()) {
+      if(gameObject.getName().equalsIgnoreCase(passageName)) {
+        foundPassage = gameObject;
+        break;
+      }
+    }
+    
+    return foundPassage;
+  }  
+  
   /**
    * Looks for an item in the characters inventory.
    *
