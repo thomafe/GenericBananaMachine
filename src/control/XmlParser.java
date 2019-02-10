@@ -24,7 +24,7 @@ import control.XmlParser;
  */
 public class XmlParser {
 
-  public Place startingPlace = null;
+  private Place startingPlace = null;
 
   // TODO: (1) create getters of the variables which can be called in CreateWorld instead of pushing them to it.
   private int numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
@@ -51,7 +51,6 @@ public class XmlParser {
       ArrayList<Place> places = new ArrayList<Place>();
       ArrayList<Item> items = new ArrayList<Item>();
       ArrayList<Passage> passages = new ArrayList<Passage>();
-      ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 
       // parse all existing Places
       for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
@@ -95,7 +94,6 @@ public class XmlParser {
 
             // TODO: reference to (1)
             // Create items.
-
             items.add(
                 new Item(
                     itemElement.getElementsByTagName("name").item(0).getTextContent(),
@@ -105,12 +103,6 @@ public class XmlParser {
             // Set items in current place.
             places.get(placeCounter).addItemOnTheFloor(getIncludedItem(itemElement, items));
 
-            /*
-            places.get(placeCounter).addItemOnTheFloor(new Item(
-                itemElement.getElementsByTagName("name").item(0).getTextContent(),
-                itemElement.getElementsByTagName("description").item(0).getTextContent()
-            ));
-             */
           }
         }
       }
@@ -190,30 +182,12 @@ public class XmlParser {
   }
 
   /**
-   * Getter for Number of Places.
-   *
-   * @return int
-   */
-  public int getNumberOfPlaces() {
-    return numberOfPlaces;
-  }
-
-  /**
    * Setter for Number of Items.
    *
    * @param num int
    */
-  public void setNumberOfItems(int num) {
+  private void setNumberOfItems(int num) {
     numberOfItems = num;
-  }
-
-  /**
-   * Getter for Number of Items.
-   *
-   * @return int
-   */
-  public int getNumberOfItems() {
-    return numberOfItems;
   }
 
   /**
@@ -221,17 +195,8 @@ public class XmlParser {
    *
    * @param num int
    */
-  public void setNumberOfPassages(int num) {
+  private void setNumberOfPassages(int num) {
     numberOfPassages = num;
-  }
-
-  /**
-   * Getter for Number of Passages.
-   *
-   * @return int
-   */
-  public int getNumberOfPassages() {
-    return numberOfPassages;
   }
 
   /**
@@ -239,7 +204,7 @@ public class XmlParser {
    *
    * @param num int
    */
-  public void setNumberOfObstacles(int num) {
+  private void setNumberOfObstacles(int num) {
     numberOfObstacles = num;
   }
 
@@ -258,7 +223,7 @@ public class XmlParser {
    *
    * @param items Item
    */
-  public Item getRequiredItem(ArrayList<Item> items, String requiredItemName) {
+  private Item getRequiredItem(ArrayList<Item> items, String requiredItemName) {
     Item requirement = null;
 
     for(int i=0; i <= items.size()-1; i++) {
@@ -269,11 +234,24 @@ public class XmlParser {
     return requirement;
   }
 
+  /**
+   * Getter for the Starting Place which must be given to the new Character.
+   *
+   * @return Place
+   */
   public Place getStartingPlace() {
     return startingPlace;
   }
 
-  public Place getFromPlace (Element passageElement, ArrayList<Place> places) {
+  /**
+   * Checks which Place is the Place before the current Passage and
+   * returns the Place the Character comes from.
+   *
+   * @param passageElement Element
+   * @param places ArrayList
+   * @return Place
+   */
+  private Place getFromPlace (Element passageElement, ArrayList<Place> places) {
     Place start = null;
     for(int i = 0; i <= places.size()-1; i++) {
       if(passageElement.getElementsByTagName("comeFrom").item(0).getTextContent().equals(places.get(i).getName())){
@@ -283,7 +261,15 @@ public class XmlParser {
     return start;
   }
 
-  public Place getFollowPlace (Element passageElement, ArrayList<Place> places) {
+  /**
+   * Checks which Place is the Place after the current Passage and
+   * returns the Place the Character can enter.
+   *
+   * @param passageElement Element
+   * @param places ArrayList
+   * @return Place
+   */
+  private Place getFollowPlace (Element passageElement, ArrayList<Place> places) {
     Place follow = null;
     for(int i = 0; i <= places.size()-1; i++) {
       if(passageElement.getElementsByTagName("connectTo").item(0).getTextContent().equals(places.get(i).getName())){
@@ -293,7 +279,15 @@ public class XmlParser {
     return follow;
   }
 
-  public Item getIncludedItem (Element itemElement, ArrayList<Item> items) {
+  /**
+   * Checks which Item is included in the current Place and
+   * returns the included item.
+   *
+   * @param itemElement Element
+   * @param items ArrayList
+   * @return Item
+   */
+  private Item getIncludedItem (Element itemElement, ArrayList<Item> items) {
     Item include = null;
     for(int i = 0; i <= items.size()-1; i++) {
       if(items.get(i).getName().equals(itemElement.getElementsByTagName("name").item(0).getTextContent())) {
