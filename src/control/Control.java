@@ -45,6 +45,8 @@ public class Control {
    */
   public Control(boolean doTest) {
     if (doTest) {
+      // TODO move the old levels to the new format and add a way to play them.
+      // TODO move the TEST to a JUnit Test class
       testWorld();
     } else {
       initGame();
@@ -276,6 +278,11 @@ public class Control {
     } while (true);
 
   }
+  
+  private void endGame() {
+    // TODO stop the look, so we return to main
+    // TODO take an "Ending" as parameter? Maybe just a string?
+  }
 
   /**
    * Tries to move the character through a passage. If there is an obstacle in the way the character
@@ -353,7 +360,8 @@ public class Control {
         obstacleResolved = true;
       } else {
         out.obstacleOut(currentObstacle, successType.OBSTACLE_REACTION);
-        // character.looseALivepoint(currentObstacle.getDamagepoints(0)); TODO this is not correct!
+        // TODO thomaf fix when reactions are fixed
+        // character.looseALivepoint(currentObstacle.getDamagepoints(0));
       }
     }
 
@@ -510,8 +518,7 @@ public class Control {
       // TODO Niklas Output for dead
     }
   }
-
-
+  
   /**
    * Getter for Character.
    *
