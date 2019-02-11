@@ -26,6 +26,8 @@ public class XmlParser {
 
   private Place startingPlace = null;
 
+  private boolean enableDebug = false;
+
   // TODO: (1) create getters of the variables which can be called in CreateWorld instead of pushing them to it.
   private int numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
 
@@ -35,7 +37,7 @@ public class XmlParser {
 
     try {
 
-      System.out.println("\n\nIn the beginning God created the heaven and the world...\n\n");
+      debug("\n\nIn the beginning God created the heaven and the world...\n\n");
 
       File fXmlFile = new File("./levels/game01.xml");
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -43,7 +45,7 @@ public class XmlParser {
       Document doc = dBuilder.parse(fXmlFile);
 
       doc.getDocumentElement().normalize();
-      System.out.println("Chosen entity: " + doc.getDocumentElement().getNodeName());
+      debug("Chosen entity: " + doc.getDocumentElement().getNodeName());
 
       NodeList placeList = doc.getElementsByTagName("place");
       NodeList passageList = doc.getElementsByTagName("passage");
@@ -61,14 +63,14 @@ public class XmlParser {
         // set number of places.
         setNumberOfPlaces(placeList.getLength());
 
-        System.out.println("\nCurrent Element: " + placeNode.getNodeName());
+        debug("\nCurrent Element: " + placeNode.getNodeName());
 
         if (placeNode.getNodeType() == Node.ELEMENT_NODE) {
           Element placeElement = (Element) placeNode;
 
-          System.out.println("- id: " + placeElement.getAttribute("id"));
-          System.out.println("- Name: " + placeElement.getElementsByTagName("name").item(0).getTextContent());
-          System.out.println("- Description: " + placeElement.getElementsByTagName("description").item(0).getTextContent());
+          debug("- id: " + placeElement.getAttribute("id"));
+          debug("- Name: " + placeElement.getElementsByTagName("name").item(0).getTextContent());
+          debug("- Description: " + placeElement.getElementsByTagName("description").item(0).getTextContent());
 
           // TODO: reference to (1)
           // Create Places.
@@ -90,9 +92,9 @@ public class XmlParser {
 
             Element itemElement = (Element) itemNode;
 
-            System.out.println("- Item" + itemCounter + ":");
-            System.out.println("- - Name: " + itemElement.getElementsByTagName("name").item(0).getTextContent());
-            System.out.println("- - Description: " + itemElement.getElementsByTagName("description").item(0).getTextContent());
+            debug("- Item" + itemCounter + ":");
+            debug("- - Name: " + itemElement.getElementsByTagName("name").item(0).getTextContent());
+            debug("- - Description: " + itemElement.getElementsByTagName("description").item(0).getTextContent());
 
             // TODO: reference to (1)
             // Create items.
@@ -116,16 +118,16 @@ public class XmlParser {
         // set number of passages.
         setNumberOfPassages(passageList.getLength());
 
-        System.out.println("\nCurrent Element: " + passageNode.getNodeName());
+        debug("\nCurrent Element: " + passageNode.getNodeName());
 
         if (passageNode.getNodeType() == Node.ELEMENT_NODE) {
           Element passageElement = (Element) passageNode;
 
-          System.out.println("- id: " + passageElement.getAttribute("id"));
-          System.out.println("- Name: " + passageElement.getElementsByTagName("name").item(0).getTextContent());
-          System.out.println("- Description: " + passageElement.getElementsByTagName("description").item(0).getTextContent());
-          System.out.println("- Comes from: " + passageElement.getElementsByTagName("comeFrom").item(0).getTextContent());
-          System.out.println("- Connects to: " + passageElement.getElementsByTagName("connectTo").item(0).getTextContent());
+          debug("- id: " + passageElement.getAttribute("id"));
+          debug("- Name: " + passageElement.getElementsByTagName("name").item(0).getTextContent());
+          debug("- Description: " + passageElement.getElementsByTagName("description").item(0).getTextContent());
+          debug("- Comes from: " + passageElement.getElementsByTagName("comeFrom").item(0).getTextContent());
+          debug("- Connects to: " + passageElement.getElementsByTagName("connectTo").item(0).getTextContent());
 
           // TODO: reference to (1)
           // Create Passage with connected Places.
@@ -146,10 +148,10 @@ public class XmlParser {
 
             Element obstacleElement = (Element) obstacleNode;
 
-            System.out.println("- Obstacle" + obstacleCounter + ":");
-            System.out.println("- - Description: " + obstacleElement.getElementsByTagName("description").item(0).getTextContent());
-            System.out.println("- - Resolution: " + obstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
-            System.out.println("- - Required Item: " + obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
+            debug("- Obstacle" + obstacleCounter + ":");
+            debug("- - Description: " + obstacleElement.getElementsByTagName("description").item(0).getTextContent());
+            debug("- - Resolution: " + obstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
+            debug("- - Required Item: " + obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
 
             // Create the obstacle for each passage.
             passages.get(passageCounter).setObstacle(new Obstacle("",
@@ -164,9 +166,9 @@ public class XmlParser {
 
       startingPlace = places.get(0);
 
-      System.out.println("\n\n");
-      System.out.println("World has successfully been created! God saw all that he had made, and it was good.");
-      System.out.println("\n\n\n\n");
+      debug("\n\n");
+      debug("World has successfully been created! God saw all that he had made, and it was good.");
+      debug("\n\n\n\n");
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -288,6 +290,17 @@ public class XmlParser {
       }
     }
     return include;
+  }
+
+  /**
+   * If enableDebug = true, debug alerts will be printed in console.
+   *
+   * @param post String
+   */
+  private void debug(String post) {
+    if(enableDebug) {
+      System.out.println(post);
+    }
   }
 
 }
