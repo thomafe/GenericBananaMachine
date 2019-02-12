@@ -12,8 +12,9 @@ public class GameLauncher {
     boolean doTest = true;
 
     // TODO Out and In probably should be created here, so we can do the play again stuff easily?
-
-    GameControl control = new GameControl(doTest);
+    // TODO File/Path or parameter input. Via args?
+    
+    GameControl control = new GameControl(null);
 
     control.runGame();
   }
