@@ -1,5 +1,6 @@
 package view;
 
+import control.GameControl.decision_type;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,6 +9,7 @@ import model.Furniture;
 import model.GameObject;
 import model.Item;
 import model.Passage;
+import view.Output.endingType;
 import view.Output.errorType;
 import view.Output.errorTypeInput;
 import view.Output.successType;
@@ -31,6 +33,7 @@ public class Input {
   Pattern patternActions = Pattern.compile("(?i)actions");
   Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
   Pattern patternExitGame = Pattern.compile("(?i)exit[\\w\\s]*");
+  Pattern patternYesNo = Pattern.compile("(?i)(yes)[\\w\\s]*(no)");
 
   private Pattern[] possiblePatterns = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
       patternLookAt, patternInventory, patternActions, patternExitGame};
@@ -149,8 +152,8 @@ public class Input {
   }
 
   public void matchExitGame(){
-    control.endGame();
-    out.exitingTheGame();
+    out.exitingTheGame(endingType.YOU_SURE);
+    yesNoDecision();
   }
 
   public void noMatch() {
@@ -174,7 +177,7 @@ public class Input {
    */
   public String readItemForObstacle() {
     String decision = readInSingleLine();
-    Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher((decision));
+    Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher(decision);
     
     if (decision.matches("(?i)leave")) {
       decision = "leave";
@@ -182,6 +185,23 @@ public class Input {
       decision = matcherUseItemObstacle.group(2);
     }
     return decision;
+  }
+
+  /**
+   * Asks the user for a "Yes/No" decision
+   */
+  public void yesNoDecision(){
+    String decision = readInSingleLine();
+    Matcher matcherYesNoDecision = patternYesNo.matcher(decision);
+    if (decision.matches("(?i)yes") && decision.matches("(?i)no")){
+      control.endGame(decision_type.CANT_DECIDE);
+    } else if (decision.matches("(?i)yes")){
+      control.endGame(decision_type.YES);
+    } else if (decision.matches("(?i)no")){
+      control.endGame(decision_type.NO);
+    } else {
+      control.endGame(decision_type.NO_MATCH);
+    }
   }
 
   /**

@@ -11,6 +11,7 @@ import model.Passage;
 import model.Place;
 import view.Input;
 import view.Output;
+import view.Output.endingType;
 import view.Output.errorType;
 import view.Output.successType;
 
@@ -30,6 +31,10 @@ public class GameControl {
   private GameWorld gameWorld = null;
   
   private boolean gameIsRunning = false;
+
+  public enum decision_type {
+    CANT_DECIDE, YES, NO, NO_MATCH
+  }
 
   /**
    * Create a new controller with local Input and output.
@@ -81,8 +86,23 @@ public class GameControl {
    * Stops the game from running.
    * 
    */
-  public void endGame() {
-    gameIsRunning = false;
+  public void endGame(decision_type type) {
+    switch (type) {
+      case CANT_DECIDE:
+        out.exitingTheGame(endingType.NO_MATCH);
+        in.yesNoDecision();
+        break;
+      case NO_MATCH:
+        out.exitingTheGame(endingType.NO_MATCH);
+        in.yesNoDecision();
+        break;
+      case NO:
+        out.exitingTheGame(endingType.NO);
+        break;
+      case YES:
+        out.exitingTheGame(endingType.YES);
+        gameIsRunning = false;
+    }
     // TODO take an "Ending" as parameter? Maybe just a string?
   }
 
@@ -286,7 +306,7 @@ public class GameControl {
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
       out.goodEnding();
 
-      System.exit(0);
+      gameIsRunning = false;
     }
   }
 
@@ -307,7 +327,7 @@ public class GameControl {
        * control.runGame(); } else { out.doOutput("Thanks for playing! See you later."); }
        */
 
-      System.exit(0);
+      gameIsRunning = false;
     }
   }
 
@@ -318,7 +338,7 @@ public class GameControl {
   private void checkIfCharacterDead() {
     if (character.isDead()) {
       out.noSuccess(errorType.YOU_DEAD);
-      endGame();
+      gameIsRunning = false;
     }
   }
 

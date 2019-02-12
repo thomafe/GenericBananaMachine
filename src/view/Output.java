@@ -17,7 +17,8 @@ import model.Place;
 public class Output {
 
   public enum errorType {
-    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD
+    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD,
+    DECIDE
   }
 
   public enum errorTypeInput {
@@ -26,6 +27,10 @@ public class Output {
 
   public enum successType {
     PICK_UP, OBSTACLE_RESOLUTION, OBSTACLE_REACTION
+  }
+
+  public enum endingType {
+    YOU_SURE, NO, YES, NO_MATCH
   }
 
   private GameControl control;
@@ -209,6 +214,8 @@ public class Output {
       case YOU_DEAD:
         printString("You are dieded :(");
         break;
+      case DECIDE:
+        printString("You can't do both!");
       default:
         printString("Quite impossible");
     }
@@ -233,6 +240,11 @@ public class Output {
     }
   }
 
+  /**
+   * Standard output for successful operations
+   * @param userInput
+   * @param type
+   */
   public void success(String userInput, successType type) {
     switch (type) {
       case PICK_UP:
@@ -243,6 +255,11 @@ public class Output {
     }
   }
 
+  /**
+   * Standard output for obstacle interactions
+   * @param obstacle
+   * @param type
+   */
   public void obstacleOut(Obstacle obstacle, successType type) {
     switch (type) {
       case OBSTACLE_RESOLUTION:
@@ -257,8 +274,25 @@ public class Output {
     }
   }
 
-  public void exitingTheGame(){
-    printString("You successfully exited the Game!");
+  /**
+   * Standard output for game endings
+   * @param type
+   */
+  public void exitingTheGame(endingType type){
+    switch (type){
+      case YOU_SURE:
+        printString("Are you sure you want to exit the game?[YES/NO]");
+        break;
+      case NO:
+        printString("Glad you're still here!");
+        break;
+      case YES:
+        printString("Sad to see you leaving :(");
+        break;
+      case NO_MATCH:
+        printString("YES or NO!?");
+        break;
+    }
   }
 
   /**
