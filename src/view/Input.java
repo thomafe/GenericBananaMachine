@@ -149,7 +149,8 @@ public class Input {
   }
 
   public void matchExitGame(){
-    control.exitGame();
+    control.endGame();
+    out.exitingTheGame();
   }
 
   public void noMatch() {

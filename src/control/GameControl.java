@@ -4,11 +4,11 @@ package control;
 import model.Character;
 import model.Furniture;
 import model.GameObject;
+import model.GameWorld;
 import model.Item;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
-import model.GameWorld;
 import view.Input;
 import view.Output;
 import view.Output.errorType;
@@ -338,11 +338,6 @@ public class GameControl {
    */
   public Place getCurrentPlace() {
     return character.getCurrentPlace();
-  }
-
-  public void exitGame(){
-    out.exitingTheGame();
-    System.exit(0);
   }
 
 }
