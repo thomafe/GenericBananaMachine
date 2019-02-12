@@ -12,8 +12,6 @@ import java.util.Map;
  */
 public class GameWorld {
 
-  // TODO thomaf add comments
-
   private String indroduction = null;
   private Map<Place, String> endings = null;
 
