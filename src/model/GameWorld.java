@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * game world
+ * A data class that contains a GameWorld
  *
  * @author thomafe
  */
-public class World {
+public class GameWorld {
   
   // TODO thomaf add comments
 
@@ -20,12 +20,12 @@ public class World {
   private Place startingPlace = null;
   private List<Place> places = null;
 
-  public World() {
+  public GameWorld() {
     endings = new HashMap<>();
     places = new ArrayList<>();
   }
 
-  public World(String introdution, Place startingPlace) {
+  public GameWorld(String introdution, Place startingPlace) {
     this();
 
     this.indroduction = introdution;
