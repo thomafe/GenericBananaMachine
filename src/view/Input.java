@@ -188,7 +188,9 @@ public class Input {
   }
 
   /**
-   * Asks the user for a "Yes/No" decision
+   * Asks the user for a "Yes/No" decision for the exitLoop
+   * Can't do anything more :(
+   * Will rework the methods at wednesday
    */
   public void yesNoDecision(){
     String decision = readInSingleLine();

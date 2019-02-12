@@ -83,8 +83,9 @@ public class GameControl {
   }
 
   /**
-   * Stops the game from running.
-   * 
+   * Depending on the input it makes an output and/or exits the game
+   * Doesn't look very neat :(
+   * Will rework the repetetive cicle at wednesday
    */
   public void endGame(decision_type type) {
     switch (type) {
