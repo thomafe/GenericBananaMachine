@@ -9,22 +9,63 @@ import model.Place;
 
 public class GameFactory {
 
-  public GameControl getTestGame() {
-    return createNewGameController();
+  /**
+   * Create a new test game.
+   * 
+   * @return
+   */
+  public static GameControl getTestGame() {
+    return createNewGameController(testWorld());
   }
 
-  public GameControl getGameFromFile(String filePath) {
-    return createNewGameController();
+  /**
+   * Create a new game from an XML File.
+   * 
+   * @param filePath
+   * @return
+   */
+  public static GameControl getGameFromFile(String filePath) {
+    GameControl newGame = null;
+
+    XmlParser parser = new XmlParser();
+    parser.parseXml();
+
+    newGame = new GameControl(parser.getStartingPlace());
+
+    return newGame;
   }
 
-  public GameControl getLocalGame() {
-    return createNewGameController();
+  /**
+   * Create a new game from local code. These are mostly old test worlds that are not ported or
+   * worlds that contain features that are not included in the level.xmls yet.
+   * 
+   * @param number
+   * @return
+   */
+  public static GameControl getLocalGame(int number) {
+    GameControl newLocalGame = null;
+
+    switch (number) {
+      case 0:
+        newLocalGame = new GameControl(oldTestWorld());
+        break;
+      case 1:
+        newLocalGame = new GameControl(shipwreckedWorld());
+        break;
+      default:
+    }
+
+    return newLocalGame;
   }
 
-  private GameControl createNewGameController() {
-    GameControl newControl = new GameControl(null);
-
-    return newControl;
+  /**
+   * Create a new controller.
+   * 
+   * @param startingPlace
+   * @return
+   */
+  private static GameControl createNewGameController(Place startingPlace) {
+    return new GameControl(startingPlace);
   }
 
   /* ----------------------------------------------------------------------------------------- */
@@ -33,9 +74,9 @@ public class GameFactory {
 
 
   /**
-   * Create a test world. Character already has items in his inventory.
+   * Create a test world.
    */
-  private void testWorld() {
+  private static Place testWorld() {
     Place startingPlace = new Place("Entrance", "Starting Place");
     Place room1 = new Place("Room 1", "Test Room 1");
     Place room2 = new Place("Room 2", "Test Room 2");
@@ -48,6 +89,9 @@ public class GameFactory {
     Item itemInChest =
         new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
 
+    // TODO would be nice to add item1 and item2 to characters inventory right away
+    startingPlace.addObjectToPlace(item1);
+    startingPlace.addObjectToPlace(item2);
     startingPlace.addObjectToPlace(itemOnFloor);
 
     Obstacle singleItemObstacle =
@@ -70,15 +114,14 @@ public class GameFactory {
     (new Passage("Riddle Passage", "Has riddle Obstacle", startingPlace, room4))
         .setObstacle(riddleObstacle);
 
-    // character.takeItem(item1);
-    // character.takeItem(item2);
+    return startingPlace;
   }
 
 
   /**
    * Initializes the game world and all other required objects.
    */
-  private void shipwreckedWorld() {
+  private static Place shipwreckedWorld() {
 
     // Scenario: "Shipwrecked"
     Place room0 = new Place("Beach",
@@ -187,11 +230,12 @@ public class GameFactory {
     room3.addItemOnTheFloor(item7); // Cave -> Compass
     room4.addItemOnTheFloor(item8); // Outback -> signal rockets
 
+    return room0;
   }
-  
+
 
   @Deprecated
-  public void oldTestWorld() {
+  public static Place oldTestWorld() {
     // Game World
     Place entrance = new Place("Entrance", "This is your starting area.");
     Place secondRoom =
@@ -217,6 +261,7 @@ public class GameFactory {
     entrance.addItemOnTheFloor(overcharger);
     secondRoom.addItemOnTheFloor(item2);
 
+    return entrance;
   }
 
 }

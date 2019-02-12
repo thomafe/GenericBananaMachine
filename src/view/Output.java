@@ -2,12 +2,12 @@ package view;
 
 import java.util.List;
 import control.GameControl;
+import model.Character;
 import model.GameObject;
 import model.Item;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
-import model.Character;
 
 /**
  * reacts to input from user with output
@@ -41,6 +41,7 @@ public class Output {
    *
    * @param contoller Control
    */
+  // TODO remove gameControl put the needed objects as parameters
   public Output(GameControl contoller) {
     control = contoller;
   }

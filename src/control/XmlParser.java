@@ -1,23 +1,17 @@
 package control;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
 import java.io.File;
-import java.util.*;
-
-import model.Character;
+import java.util.ArrayList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import model.Item;
 import model.Obstacle;
-import model.Place;
-import view.Input;
-import view.Output;
 import model.Passage;
-import model.GameObject;
-import control.XmlParser;
+import model.Place;
 
 /**
  * Parse given XML file in a specific path
@@ -32,8 +26,6 @@ public class XmlParser {
   private int numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
 
   public void parseXml() {
-
-    CreateWorld creator = new CreateWorld();
 
     try {
 

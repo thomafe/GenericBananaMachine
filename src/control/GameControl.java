@@ -54,36 +54,6 @@ public class GameControl {
     this.out = out;
     this.in = in;
   }
-  
-//  /**
-//   * Creates a test game if the flag is set or a regular game if not.
-//   */
-//  @Deprecated
-//  public GameControl(boolean doTest) {
-//    if (doTest) {
-//      // TODO move the old levels to the new format and add a way to play them.
-//      // TODO move the TEST to a JUnit Test class
-//      testWorld();
-//    } else {
-//      initGame();
-//    }
-//  }
-  
-/**
-  * Initializes this class with a level and a character
-  * 
-  * @param level
-  */
- // TODO give a level instead
- private void initCharacter(Place startingPlace) {
-   // this.level = level;
-
-   out = new Output(this);
-   in = new Input(out, this);
-
-   // TODO set hitpoints
-   character = new Character(startingPlace);
- }
 
   /**
    * Contains the main game loop Every time check if game might end!
