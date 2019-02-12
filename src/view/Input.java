@@ -30,9 +30,10 @@ public class Input {
   Pattern patternInventory = Pattern.compile("(?i)inventory");
   Pattern patternActions = Pattern.compile("(?i)actions");
   Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
+  Pattern patternExitGame = Pattern.compile("(?i)exit[\\w\\s]*");
 
   private Pattern[] possiblePatterns = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
-      patternLookAt, patternInventory, patternActions};
+      patternLookAt, patternInventory, patternActions, patternExitGame};
 
   // Creating Output and Control object for referencing
   Output out;
@@ -62,6 +63,7 @@ public class Input {
     Matcher matcherLookAt = patternLookAt.matcher(userInput);
     Matcher matcherInventory = patternInventory.matcher(userInput);
     Matcher matcherActions = patternActions.matcher(userInput);
+    Matcher matcherExitGame = patternExitGame.matcher(userInput);
 
     if (matcherTakeItem.find()) {
       if (!testForBoxing(userInput, 1)) {
@@ -86,6 +88,10 @@ public class Input {
     } else if (matcherActions.find()) {
       if (!testForBoxing(userInput, 6)) {
         matchActions();
+      }
+    } else if (matcherExitGame.find()){
+      if (!testForBoxing(userInput, 7)){
+        matchExitGame();
       }
     } else {
       noMatch();
@@ -140,6 +146,10 @@ public class Input {
 
   public void matchActions() {
       out.listOptions();
+  }
+
+  public void matchExitGame(){
+    control.exitGame();
   }
 
   public void noMatch() {

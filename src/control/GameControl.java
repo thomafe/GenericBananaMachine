@@ -340,4 +340,9 @@ public class GameControl {
     return character.getCurrentPlace();
   }
 
+  public void exitGame(){
+    out.exitingTheGame();
+    System.exit(0);
+  }
+
 }
