@@ -32,7 +32,7 @@ public class Output {
   private Character character = null;
 
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Goto <Passage Name>", "Take <Item Name>", "Inventory", "Actions"};
+      "Goto <Passage | Furniture Name>", "Take <Item Name>", "Inventory", "Actions, Exit"};
 
   /**
    * Constructor.
