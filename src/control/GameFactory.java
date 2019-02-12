@@ -7,6 +7,11 @@ import model.Obstacle;
 import model.Passage;
 import model.Place;
 
+/**
+ * 
+ * @author thomafe
+ *
+ */
 public class GameFactory {
 
   /**

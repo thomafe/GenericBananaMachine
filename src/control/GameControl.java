@@ -8,9 +8,10 @@ import model.Item;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
-import model.World;
+import model.GameWorld;
 import view.Input;
 import view.Output;
+import view.Output.errorType;
 import view.Output.successType;
 
 /**
@@ -26,7 +27,9 @@ public class GameControl {
   private Input in = null;
   private Output out = null;
 
-  private World level = null;
+  private GameWorld gameWorld = null;
+  
+  private boolean gameIsRunning = false;
 
   /**
    * Create a new controller with local Input and output.
@@ -60,6 +63,8 @@ public class GameControl {
    */
   public void runGame() {
     gameIntroduction();
+    
+    gameIsRunning = true;
 
     // Game Loop
     do {
@@ -68,12 +73,16 @@ public class GameControl {
       checkForGoodEnding();
       in.readInput();
 
-    } while (true);
+    } while (gameIsRunning);
 
   }
 
-  private void endGame() {
-    // TODO stop the look, so we return to main
+  /**
+   * Stops the game from running.
+   * 
+   */
+  public void endGame() {
+    gameIsRunning = false;
     // TODO take an "Ending" as parameter? Maybe just a string?
   }
 
@@ -308,7 +317,8 @@ public class GameControl {
    */
   private void checkIfCharacterDead() {
     if (character.isDead()) {
-      // TODO Niklas Output for dead
+      out.noSuccess(errorType.YOU_DEAD);
+      endGame();
     }
   }
 
@@ -319,6 +329,15 @@ public class GameControl {
    */
   public Character getCharacter() {
     return character;
+  }
+  
+  /**
+   * Getter for the place the character is currently in.
+   * 
+   * @return
+   */
+  public Place getCurrentPlace() {
+    return character.getCurrentPlace();
   }
 
   public void exitGame(){

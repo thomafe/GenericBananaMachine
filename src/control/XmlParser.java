@@ -14,7 +14,9 @@ import model.Passage;
 import model.Place;
 
 /**
- * Parse given XML file in a specific path
+ * Parse given XML file in a specific path.
+ * 
+ * @author Lehmeti
  */
 public class XmlParser {
 

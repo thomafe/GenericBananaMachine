@@ -16,8 +16,6 @@ import model.Place;
  */
 public class Output {
 
-  // TODO define Strings for common use! "You can't do that" etc...
-
   public enum errorType {
     CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD
   }
@@ -210,6 +208,7 @@ public class Output {
         break;
       case YOU_DEAD:
         printString("You are dieded :(");
+        break;
       default:
         printString("Quite impossible");
     }
