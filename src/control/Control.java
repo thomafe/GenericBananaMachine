@@ -69,6 +69,13 @@ public class Control {
     character = new Character(startingPlace);
   }
 
+  public Control(Place startingPlace) {
+    character = new Character(startingPlace);
+
+    out = new Output(this);
+    in = new Input(out, this);
+  }
+
   /**
    * Initializes the game world and all other required objects.
    */
@@ -183,6 +190,7 @@ public class Control {
     room4.addItemOnTheFloor(item8); // Outback -> signal rockets
 
     // Other objects
+
     initCharacter(room0);
 
   }
