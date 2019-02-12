@@ -10,7 +10,7 @@ import java.util.Map;
  *
  * @author thomafe
  */
-public class Level {
+public class World {
   
   // TODO thomaf add comments
 
@@ -20,12 +20,12 @@ public class Level {
   private Place startingPlace = null;
   private List<Place> places = null;
 
-  public Level() {
+  public World() {
     endings = new HashMap<>();
     places = new ArrayList<>();
   }
 
-  public Level(String introdution, Place startingPlace) {
+  public World(String introdution, Place startingPlace) {
     this();
 
     this.indroduction = introdution;
