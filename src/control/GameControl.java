@@ -8,7 +8,6 @@ import model.Item;
 import model.Level;
 import model.Obstacle;
 import model.Place;
-import sun.security.acl.WorldGroupImpl;
 import view.Input;
 import view.Output;
 import model.Passage;
