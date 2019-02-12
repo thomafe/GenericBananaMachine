@@ -321,4 +321,9 @@ public class GameControl {
     return character;
   }
 
+  public void exitGame(){
+    out.exitingTheGame();
+    System.exit(0);
+  }
+
 }

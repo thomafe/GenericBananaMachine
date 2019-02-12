@@ -258,6 +258,10 @@ public class Output {
     }
   }
 
+  public void exitingTheGame(){
+    printString("You successfully exited the Game!");
+  }
+
   /**
    * Output a committed message in console. Deprecated! There should be a method for what you want
    * to do.
