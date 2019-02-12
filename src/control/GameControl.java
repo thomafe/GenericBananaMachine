@@ -24,7 +24,7 @@ import view.Output.successType;
  *
  * @author Lehmeti, thomafe
  */
-public class Control {
+public class GameControl {
 
   private Character character = null;
   private Input in = null;
@@ -43,7 +43,7 @@ public class Control {
   /**
    * Creates a test game if the flag is set or a regular game if not.
    */
-  public Control(boolean doTest) {
+  public GameControl(boolean doTest) {
     if (doTest) {
       // TODO move the old levels to the new format and add a way to play them.
       // TODO move the TEST to a JUnit Test class
@@ -69,7 +69,7 @@ public class Control {
     character = new Character(startingPlace);
   }
 
-  public Control(Place startingPlace) {
+  public GameControl(Place startingPlace) {
     character = new Character(startingPlace);
 
     out = new Output(this);

@@ -26,7 +26,7 @@ public class CreateWorld {
     XmlParser parser = new XmlParser();
     parser.parseXml();
 
-    Control control = new Control(parser.getStartingPlace());
+    GameControl control = new GameControl(parser.getStartingPlace());
 
     control.runGame();
 

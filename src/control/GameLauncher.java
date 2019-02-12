@@ -13,7 +13,7 @@ public class GameLauncher {
 
     // TODO Out and In probably should be created here, so we can do the play again stuff easily?
 
-    Control control = new Control(doTest);
+    GameControl control = new GameControl(doTest);
 
     control.runGame();
   }

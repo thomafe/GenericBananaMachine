@@ -1,7 +1,7 @@
 package view;
 
 import java.util.List;
-import control.Control;
+import control.GameControl;
 import model.GameObject;
 import model.Item;
 import model.Obstacle;
@@ -30,7 +30,7 @@ public class Output {
     PICK_UP, OBSTACLE_RESOLUTION, OBSTACLE_REACTION
   }
 
-  private Control control;
+  private GameControl control;
   private Character character = null;
 
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
@@ -41,7 +41,7 @@ public class Output {
    *
    * @param contoller Control
    */
-  public Output(Control contoller) {
+  public Output(GameControl contoller) {
     control = contoller;
   }
 

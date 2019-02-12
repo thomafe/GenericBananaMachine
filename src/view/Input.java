@@ -3,7 +3,7 @@ package view;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import control.Control;
+import control.GameControl;
 import model.Furniture;
 import model.GameObject;
 import model.Item;
@@ -36,14 +36,14 @@ public class Input {
 
   // Creating Output and Control object for referencing
   Output out;
-  Control control;
+  GameControl control;
 
   /**
    * Constructor.
    * 
    * @param output Output
    */
-  public Input(Output output, Control control) {
+  public Input(Output output, GameControl control) {
     out = output;
     this.control = control;
   }
