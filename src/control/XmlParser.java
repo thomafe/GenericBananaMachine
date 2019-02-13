@@ -166,6 +166,8 @@ public class XmlParser {
       }
 
       startingPlace = places.get(0);
+      world.setStartingPlace(startingPlace);
+
 
       debug("\n\n");
       debug("World has successfully been created! God saw all that he had made, and it was good.");
