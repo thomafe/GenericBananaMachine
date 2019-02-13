@@ -84,22 +84,17 @@ public class GameControl {
   }
 
   /**
-   * Depending on the input it makes an output and/or exits the game Doesn't look very neat :( Will
-   * rework the repetetive cicle at wednesday
+   * Asks the player if he wants to leave the game.
+   * Takes an yes/no answer from input.
    */
-  public void endGame(decision_type type) {
-    switch (type) {
-      case CANT_DECIDE:
-      case NO_MATCH:
-        out.exitingTheGame(endingType.NO_MATCH);
-        in.yesNoDecision();
-        break;
-      case NO:
+  public void endGame() {
+    out.exitingTheGame(endingType.YOU_SURE);
+    boolean answer = in.yesNo();
+    if (answer) {
+      out.exitingTheGame(endingType.YES);
+      gameIsRunning = false;
+    } else {
         out.exitingTheGame(endingType.NO);
-        break;
-      case YES:
-        out.exitingTheGame(endingType.YES);
-        gameIsRunning = false;
     }
     // TODO take an "Ending" as parameter? Maybe just a string?
   }

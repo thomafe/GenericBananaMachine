@@ -151,8 +151,7 @@ public class Input {
   }
 
   public void matchExitGame() {
-    out.exitingTheGame(endingType.YOU_SURE);
-    yesNoDecision();
+    control.endGame();
   }
 
   public void noMatch() {
@@ -187,20 +186,19 @@ public class Input {
   }
 
   /**
-   * Asks the user for a "Yes/No" decision for the exitLoop Can't do anything more :( Will rework
-   * the methods at wednesday
+   * The method to get a yes/no decision from the player
+   * @return boolean
    */
-  public void yesNoDecision() {
-    String decision = readInSingleLine();
-    Matcher matcherYesNoDecision = patternYesNo.matcher(decision);
-    if (decision.matches("(?i)yes") && decision.matches("(?i)no")) {
-      control.endGame(decision_type.CANT_DECIDE);
-    } else if (decision.matches("(?i)yes")) {
-      control.endGame(decision_type.YES);
-    } else if (decision.matches("(?i)no")) {
-      control.endGame(decision_type.NO);
-    } else {
-      control.endGame(decision_type.NO_MATCH);
+  public boolean yesNo(){
+    while (true) {
+      String answer = readInSingleLine();
+      if (answer.matches("(?i)yes")){
+        return true;
+      } else if (answer.matches("(?i)no")){
+        return false;
+      } else {
+        out.noSuccess(errorType.DECIDE);
+      }
     }
   }
 

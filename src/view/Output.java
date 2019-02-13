@@ -199,6 +199,7 @@ public class Output {
         break;
       case DECIDE:
         printString("You can't do both!");
+        break;
       default:
         printString("Quite impossible");
     }
@@ -271,9 +272,6 @@ public class Output {
         break;
       case YES:
         printString("Sad to see you leaving :(");
-        break;
-      case NO_MATCH:
-        printString("YES or NO!?");
         break;
     }
   }
