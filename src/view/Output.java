@@ -95,9 +95,9 @@ public class Output {
       StringBuilder thingsOutput = new StringBuilder();
 
       thingsOutput.append(
-          "These things are in " + currentPlace.getName() + ": \n");
+          "These things are in " + currentPlace.getName() + ": ");
       for (GameObject object : currentPlace.getObjectsInPlace()) {
-        thingsOutput.append(" - " + object.getName() + "\n");
+        thingsOutput.append(object.getName() + " | ");
       }
 
       printString(thingsOutput.toString());
@@ -111,9 +111,9 @@ public class Output {
     if (!itemsInInventory.isEmpty()) {
       StringBuilder itemList = new StringBuilder();
 
-      itemList.append("These items are in your inventory:\n");
+      itemList.append("These items are in your inventory: ");
       for (Item item : itemsInInventory) {
-        itemList.append(" - " + item.getName() + "\n");
+        itemList.append(item.getName() + " | ");
       }
 
       printString(itemList.toString());
@@ -130,9 +130,9 @@ public class Output {
 
      // TODO rework these to | styles lists. Make method for it
     passageList.append(
-        "These passages lead out of " + currentPlace.getName() + ":\n");
+        "These passages lead out of " + currentPlace.getName() + ": ");
     for (Passage passage : currentPlace.getPassages()) {
-      passageList.append(" - " + passage.getName() + "\n");
+      passageList.append(passage.getName() + " | ");
     }
 
     printString(passageList.toString());
