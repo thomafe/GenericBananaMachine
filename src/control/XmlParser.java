@@ -83,6 +83,11 @@ public class XmlParser {
               )
           );
 
+          // add EndingPlace to World, set endingText to Places' Description
+          if(placeElement.getAttribute("end").equals("bad")) {
+            world.addEndingPlace(places.get(placeCounter), places.get(placeCounter).getDescription());
+          }
+
           // Add current Place to GameWorld
           world.addPlace(places.get(placeCounter));
 
