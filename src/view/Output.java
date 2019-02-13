@@ -2,11 +2,11 @@ package view;
 
 import java.util.List;
 import model.Character;
-import model.GameObject;
 import model.Item;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
+import model.superclasses.GameObject;
 
 /**
  * reacts to input from user with output

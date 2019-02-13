@@ -2,13 +2,15 @@ package model;
 
 import java.util.Collections;
 import java.util.List;
+import model.superclasses.Approachable;
+import model.superclasses.GameObject;
 
 /**
  *Are in a place, can contain items, may be blcoked by obatacles
  *
  * @author thomafe
  */
-public class Furniture extends GameObject {
+public class Furniture extends GameObject implements Approachable {
   
   private Obstacle obstalce;
   private List<Item> itemsInside = null;

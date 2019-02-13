@@ -1,5 +1,7 @@
 package model;
 
+import model.superclasses.GameObject;
+
 /**
  * Obstacle can block passages, can be solved with one or more item or a riddle, can react when
  * character interacts with it or when an item is used

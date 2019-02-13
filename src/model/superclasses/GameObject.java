@@ -1,5 +1,5 @@
 
-package model;
+package model.superclasses;
 
 /**
  * ingame object with a game and a description
