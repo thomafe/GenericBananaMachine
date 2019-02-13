@@ -14,7 +14,7 @@ public class GameLauncher {
     String fileName = "";
     int localGameNumber = -1;
 
-    args = new String[] {"-d"};
+//    args = new String[] {"-d"};
 
     for (int i = 0; i < args.length; i++) {
       if (args[i].equalsIgnoreCase("-d")) {
@@ -28,6 +28,8 @@ public class GameLauncher {
 
     }
 
+    localGameNumber = 1;
+    
     // TODO Out and In probably should be created here, so we can do the play again stuff easily?
 
     do {

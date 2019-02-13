@@ -287,8 +287,6 @@ public class GameControl {
    */
   private void gameIntroduction() {
     out.greeting();
-    // TODO use the introduction from the level
-    out.lookAtCurrentPlace(getCurrentPlace());
     out.listOptions();
   }
 
