@@ -1,7 +1,8 @@
 package model;
 
 /**
- * Obstacles that require two items to be resolved. Must be resolved so that they don't block passages anymore.
+ * Obstacles that require two items to be resolved. Must be resolved so that they don't block
+ * passages anymore.
  *
  * @author Simone
  */
@@ -36,8 +37,11 @@ public class DoubleItemObstacle extends ItemObstacle {
       consume(itemToTry);
 
       correctItemUsed = true;
-      // additionalItemResolved= true;
-      super.tryToUseItem(itemToTry);
+      additionalItemResolved = true;
+
+
+    } else if (additionalItemResolved) {
+      correctItemUsed = super.tryToUseItem(itemToTry);
 
     }
 
