@@ -22,14 +22,14 @@ public class ItemObstacle extends Obstacle {
 
   public boolean tryToUseItem(Item itemToTry) {
 
-    if (requiredItem.equals(itemToTry)) {
+    if (requiredItem.equals(itemToTry) ) {
 
-      resolve();
       consume(itemToTry);
       correctItemUsed = true;
     }
-
+    resolve();
     return correctItemUsed;
+
   }
 
 
