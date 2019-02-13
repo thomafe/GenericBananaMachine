@@ -57,7 +57,7 @@ public class Input {
    * Reads the user input and matches it with the patterns. Calls methods from Output or Control.
    */
   public void readInput() {
-
+    out.inputLine();
     String userInput = readInSingleLine();
     userInput = userInput.trim();
 
@@ -164,7 +164,7 @@ public class Input {
     out.exitingTheGame(endingType.YOU_SURE);
     if (yesNo()) {
       out.exitingTheGame(endingType.YES);
-      control.endGame();
+      control.endGame(false);
     } else {
       out.exitingTheGame(endingType.NO);
     }
@@ -190,6 +190,7 @@ public class Input {
    * @return String
    */
   public String readItemForObstacle() {
+    out.inputLine();
     String decision = readInSingleLine();
     Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher(decision);
 
@@ -207,6 +208,7 @@ public class Input {
    */
   public boolean yesNo(){
     while (true) {
+      out.inputLine();
       String answer = readInSingleLine();
       if (answer.matches("(?i)yes")){
         return true;

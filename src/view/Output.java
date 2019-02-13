@@ -35,7 +35,7 @@ public class Output {
   private Character character = null;
 
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Goto/Use <Passage | Furniture Name>", "Go back to the last passage", "Take <Item Name>",
+      "Goto/Use <Passage/Furniture Name>", "Go back to the last passage", "Take <Item Name>",
       "Inventory", "Actions" , "Exit"};
 
   /**
@@ -57,12 +57,14 @@ public class Output {
         "Congraltulations, you've made it\n"
             + "You reached the end of the game \n"
             + "passing many obstacles you fought your way through the world \n"
-            + "consider yourself a hero now");
+            + "consider yourself a hero now\n");
+    youDidItASCI();
   }
 
   public void badEnding() {
     printString("You failed\n This is the end of the game \n"
         + "This place brought death to you");
+    youDidItNotASCI();
   }
 
   /**
@@ -126,6 +128,7 @@ public class Output {
   public void listPassages(Place currentPlace) {
     StringBuilder passageList = new StringBuilder();
 
+     // TODO rework these to | styles lists. Make method for it
     passageList.append(
         "These passages lead out of " + currentPlace.getName() + ":\n");
     for (Passage passage : currentPlace.getPassages()) {
@@ -285,6 +288,41 @@ public class Output {
         printString("Do you want to play again?");
         break;
     }
+  }
+
+  public void youDidItASCI(){
+    printString(" __     __               _ _     _   _ _     __  \n"
+        + " \\ \\   / /              | (_)   | | (_) |    \\ \\ \n"
+        + "  \\ \\_/ /__  _   _    __| |_  __| |  _| |_  (_) |\n"
+        + "   \\   / _ \\| | | |  / _` | |/ _` | | | __|   | |\n"
+        + "    | | (_) | |_| | | (_| | | (_| | | | |_   _| |\n"
+        + "    |_|\\___/ \\__,_|  \\__,_|_|\\__,_| |_|\\__| (_) |\n"
+        + "                                             /_/ \n");
+  }
+
+  public void youDidItNotASCI(){
+    printString(" __     __               _ _     _    _ _                 _        __\n"
+        + " \\ \\   / /              | (_)   | |  (_) |               | |    _ / /\n"
+        + "  \\ \\_/ /__  _   _    __| |_  __| |   _| |_   _ __   ___ | |_  (_) | \n"
+        + "   \\   / _ \\| | | |  / _` | |/ _` |  | | __| | '_ \\ / _ \\| __|   | | \n"
+        + "    | | (_) | |_| | | (_| | | (_| |  | | |_  | | | | (_) | |_   _| | \n"
+        + "    |_|\\___/ \\__,_|  \\__,_|_|\\__,_|  |_|\\__| |_| |_|\\___/ \\__| (_) | \n"
+        + "                                                                  \\_\\\n");
+  }
+
+  /**
+   * Output a committed message in console. Deprecated! There should be a method for what you want
+   * to do.
+   *
+   * @param message String
+   */
+  @Deprecated
+  public void doOutput(String message) {
+    printString(message);
+  }
+
+  public void inputLine(){
+    System.out.print(">");
   }
 
   /**
