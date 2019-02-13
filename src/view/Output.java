@@ -268,7 +268,7 @@ public class Output {
 
   /**
    * Standard output for game endings
-   * @param type
+   * @param type    
    */
   public void exitingTheGame(endingType type){
     switch (type){
