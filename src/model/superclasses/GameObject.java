@@ -1,5 +1,11 @@
-package model;
 
+package model.superclasses;
+
+/**
+ * ingame object with a game and a description
+ *
+ * @author thomafe
+ */
 public abstract class GameObject {
 
   private String name;

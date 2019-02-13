@@ -1,4 +1,10 @@
 package model;
+/**
+ * character moves through the world, picks up items, moves through passages and resolves obstacles
+ * has lifepoints, can get more or use them, dies if no lifepoints left
+ *
+ * @author Simone273
+ */
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,15 +13,27 @@ public class Character {
 
   private Place currentPlace = null;
   private List<Item> itemsInInventory = new ArrayList<>();
+  private int lifepoints;
+  private boolean dead = false;
 
   /**
-   * Constructor.
+   * Constructor for games where the character won't take damage.
    *
    * @param startingPlace Place
    */
   public Character(Place startingPlace) {
+    this(startingPlace, 1);
+  }
+
+  /**
+   * Constructor for games where the character may take damage.
+   *
+   * @param startingPlace Place
+   */
+  public Character(Place startingPlace, int lifepoints) {
     itemsInInventory = new ArrayList<>();
     currentPlace = startingPlace;
+    this.lifepoints = lifepoints;
   }
 
   /**
@@ -29,34 +47,18 @@ public class Character {
   }
 
   /**
-   * Check if item is on the floor, if yes, take item and add to the item list. Picked up Item on
-   * the floor will be removed from the floor.
+   * Puts an item into the players inventory.
    *
    * @param itemToPickUp Item
    */
   public void takeItem(Item itemToPickUp) {
-    // check if item is in the room and remove from inventory
-
-    List<Item> itemsOnTheFloor = currentPlace.getItemsOnTheFloor();
-
-    for (int i = 0; i < itemsOnTheFloor.size(); i++) {
-
-      itemsOnTheFloor.get(i);
-
-      if (itemToPickUp.equals(itemsOnTheFloor.get(i))) {
-
-        itemsInInventory.add(itemToPickUp);
-        currentPlace.removeItemFromPlace(itemsOnTheFloor.get(i));
-
-      } else {
-        // TODO: Output that no item is on the floor
-      }
-    }
+    itemsInInventory.add(itemToPickUp);
   }
-  
+
   /**
-   * Removes an item from the characters inventory. If that item isn't in the players inventory, nothing happens.
-   * 
+   * Removes an item from the characters inventory. If that item isn't in the players inventory,
+   * nothing happens.
+   *
    * @param itemToRemove - The item to be removed from the characters inventory
    */
   public void removeItem(Item itemToRemove) {
@@ -65,8 +67,6 @@ public class Character {
 
   /**
    * Use Item to solve Obstocle.
-   *
-   * @param item
    */
   public void useItem(Item item) {}
 
@@ -82,11 +82,36 @@ public class Character {
 
   /**
    * Getter for items.
-   * 
+   *
    * @return itemsInInventory
    */
   public List<Item> getItemsInInventory() {
     return itemsInInventory;
   }
 
+  public void takeDamage(int damagepoints) {
+    lifepoints = lifepoints - damagepoints;
+    if (lifepoints < 0) {
+      lifepoints = 0;
+    }
+  }
+
+  public void healDamage(int healingpoints) {
+    lifepoints = lifepoints + healingpoints;
+  }
+
+  public boolean isDead() {
+    if (lifepoints == 0) {
+      dead = true;
+    }
+    return dead;
+
+  }
+
+  public int getLifepoints() {
+    return lifepoints;
+  }
+
+
 }
+
