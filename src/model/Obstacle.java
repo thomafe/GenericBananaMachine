@@ -18,7 +18,10 @@ public class Obstacle extends GameObject {
   private boolean additionalItemResolved = false;
   private int damagepoints;
   private int healingpoints;
-
+  private String contactWithItem;
+  private String usedFalseItem;
+  private String usedCorrectItem;
+  private String walkingAway;
   /**
    * Create a new obstacle that takes one item that will be consumed.
    *
@@ -161,21 +164,21 @@ public class Obstacle extends GameObject {
     this.consumesItem = consumesItem;
   }
 
-  // TODO simone all of the below should just return a string.
-  public void reactsToContact() {
-    System.out.println("The Obstacle is slightliy buzzing, it seems to notice your presence");
+  /
+  public String reactsToContact() {
+   return contactWithItem;
   }
 
-  public void reactToFalseItem() {
-    System.out.println("Obstacle is shaking, seems you've used the wrong item ");
+  public String reactToFalseItem() {
+    return usedFalseItem;
   }
 
-  public void reactsToCorrectItem() {
-    System.out.println("Obstacle is gleaming, seems you've used the right item");
+  public String reactsToCorrectItem() {
+    return usedCorrectItem;
   }
 
-  public void walkAway() {
-    System.out.println("You can run from the obstacle but not from your own failure");
+  public String  walkAway() {
+    return walkingAway;
   }
 
   // TODO simone this should just return the amount of damage the obstacle does. Also, how do I know
