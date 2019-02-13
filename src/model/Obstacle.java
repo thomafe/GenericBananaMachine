@@ -10,11 +10,11 @@ public class Obstacle extends GameObject {
 
   // TODO use inheritance to make this a bunch cleaner
   private String resolution;
-  private boolean resolved = false;
+  protected boolean resolved = false;
   private boolean consumesItem = true;
   private Item requiredItem;
   private Item additionalItem;
-  private String riddleAnswer;
+
   private boolean additionalItemResolved = false;
   private int damagepoints;
   private String contactWithItem;
@@ -110,17 +110,7 @@ public class Obstacle extends GameObject {
     return correctItemUsed;
   }
 
-  /**
-   * Check if the answer for the riddle is correct if yes return true fo obstacleResolved so that
-   * Obstacle gets resolved if no return false
-   */
-  public boolean tryToAnswerRiddle(String answerForRiddle) {
 
-    if (riddleAnswer.equalsIgnoreCase(answerForRiddle)) {
-      resolve();
-    }
-    return resolved;
-  }
 
   /**
    * Getter for resolution which describes the resolution of the obstacle.
@@ -146,7 +136,7 @@ public class Obstacle extends GameObject {
    *
    * @param itemToResolve Item
    */
-  private void resolve() {
+  protected void resolve() {
     this.resolved = true;
   }
 
