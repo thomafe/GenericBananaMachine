@@ -164,7 +164,6 @@ public class Obstacle extends GameObject {
     this.consumesItem = consumesItem;
   }
 
-  /
   public String reactsToContact() {
    return contactWithItem;
   }

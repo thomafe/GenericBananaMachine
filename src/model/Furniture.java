@@ -40,7 +40,6 @@ public class Furniture extends GameObject {
    */
   public List<Item> receiveItemsInSide(boolean takeOutItems) {
     if(obstalce == null || obstalce.isResolved()) {
-      // TODO are the items removed from here then??
       if(takeOutItems) {
         itemsInside = Collections.emptyList();
       }
