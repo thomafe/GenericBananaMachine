@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <world>
+  <story>
+    <introduction>Waddehaddedudeda</introduction>
+  </story>
+
   <places>
     <place id="0">
       <name>Beach</name>
