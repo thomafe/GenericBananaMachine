@@ -1,5 +1,8 @@
 package model;
 
+import model.superclasses.Approachable;
+import model.superclasses.GameObject;
+
 // class mit name passage
 
 /**
@@ -7,7 +10,7 @@ package model;
  *
  * @author Simone273
  */
-public class Passage extends GameObject {
+public class Passage extends GameObject implements Approachable{
 
   // attribute
   private Place[] connectingRooms = new Place[2];
