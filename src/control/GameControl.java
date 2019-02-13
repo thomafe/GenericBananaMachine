@@ -29,7 +29,7 @@ public class GameControl {
   private Output out = null;
 
   private GameWorld gameWorld = null;
-  
+
   private boolean gameIsRunning = false;
 
   public enum decision_type {
@@ -47,10 +47,10 @@ public class GameControl {
     out = new Output();
     in = new Input(out, this);
   }
-  
+
   /**
-   * Create new controller and use provided input and output.
-   * Currently not usable as Input needs a reference to control.
+   * Create new controller and use provided input and output. Currently not usable as Input needs a
+   * reference to control.
    * 
    * @param out
    * @param in
@@ -68,24 +68,24 @@ public class GameControl {
    */
   public void runGame() {
     gameIntroduction();
-    
+
     gameIsRunning = true;
 
     // Game Loop
-    do {
+    while (gameIsRunning) {
 
       checkForBadEnding();
       checkForGoodEnding();
+      out.lookAtCurrentPlace(getCurrentPlace());
       in.readInput();
 
-    } while (gameIsRunning);
+    }
 
   }
 
   /**
-   * Depending on the input it makes an output and/or exits the game
-   * Doesn't look very neat :(
-   * Will rework the repetetive cicle at wednesday
+   * Depending on the input it makes an output and/or exits the game Doesn't look very neat :( Will
+   * rework the repetetive cicle at wednesday
    */
   public void endGame(decision_type type) {
     switch (type) {
@@ -156,7 +156,7 @@ public class GameControl {
     Item chosenItem = null;
     boolean obstacleResolved = false;
 
-    while (!obstacleResolved) {
+    while (!obstacleResolved && gameIsRunning) {
       out.listOptionsObstacleInteraction(currentObstacle);
       out.listInventory(character.getItemsInInventory());
       answerString = in.readItemForObstacle();
@@ -180,9 +180,7 @@ public class GameControl {
         out.obstacleOut(currentObstacle, successType.OBSTACLE_RESOLUTION);
         obstacleResolved = true;
       } else {
-        out.obstacleOut(currentObstacle, successType.OBSTACLE_REACTION);
-        // TODO thomaf fix when reactions are fixed
-        // character.looseALivepoint(currentObstacle.getDamagepoints(0));
+        distributeDamage(currentObstacle.getDamagepoints());
       }
     }
 
@@ -205,7 +203,7 @@ public class GameControl {
    * @param damage
    */
   public void distributeDamage(int damage) {
-    character.looseALivepoint(damage);
+    character.takeDamage(damage);
 
     checkIfCharacterDead();
   }
@@ -349,7 +347,7 @@ public class GameControl {
   public Character getCharacter() {
     return character;
   }
-  
+
   /**
    * Getter for the place the character is currently in.
    * 

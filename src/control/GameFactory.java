@@ -115,7 +115,7 @@ public class GameFactory {
         new Obstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!", "Shoe");
     Obstacle dangerousObstacle = new Obstacle("Dangerous Obstacle", "This will kill you.",
         "You should never read this", new Item("Void Item", "This is nowhere"));
-    dangerousObstacle.setDamage(9001);
+    dangerousObstacle.setDamagepoints(9001);
 
     Furniture chest = new Furniture("Chest", "A dirty old chest",
         Collections.singletonList(itemInChest), singleItemObstacle);

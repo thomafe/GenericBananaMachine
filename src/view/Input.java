@@ -92,8 +92,8 @@ public class Input {
       if (!testForBoxing(userInput, 6)) {
         matchActions();
       }
-    } else if (matcherExitGame.find()){
-      if (!testForBoxing(userInput, 7)){
+    } else if (matcherExitGame.find()) {
+      if (!testForBoxing(userInput, 7)) {
         matchExitGame();
       }
     } else {
@@ -104,54 +104,53 @@ public class Input {
 
   public void matchTakeItem(Matcher match) {
     GameObject foundObject = control.findGameObject(match.group(1));
-    
-      if (foundObject instanceof Item) {
-        control.pickUpItem((Item) foundObject);
-        out.success(match.group(1), successType.PICK_UP);
-      } else {
-        out.noSuccess(match.group(1), errorTypeInput.NO_ITEM);
-      }
+
+    if (foundObject instanceof Item) {
+      control.pickUpItem((Item) foundObject);
+      out.success(match.group(1), successType.PICK_UP);
+    } else {
+      out.noSuccess(match.group(1), errorTypeInput.NO_ITEM);
+    }
   }
 
   public void matchGotoPassage(Matcher match) {
     GameObject foundObject = control.findGameObject(match.group(1));
-    
-      if (foundObject instanceof Passage) {
-        control.tryToMoveThroughPassage((Passage)foundObject);
-        out.lookAtCurrentPlace(control.getCurrentPlace());
-      } else if (foundObject instanceof Furniture){
-       control.interactWithFurniture((Furniture)foundObject);
-      } else {
-        out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
-      }
+
+    if (foundObject instanceof Passage) {
+      control.tryToMoveThroughPassage((Passage) foundObject);
+    } else if (foundObject instanceof Furniture) {
+      control.interactWithFurniture((Furniture) foundObject);
+    } else {
+      out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
+    }
   }
 
   public void matchLookAtPlace() {
-      out.lookAtCurrentPlace(control.getCurrentPlace());
-      out.listObjectsInPlace(control.getCurrentPlace());
-      out.listPassages(control.getCurrentPlace());
+    out.lookAtCurrentPlace(control.getCurrentPlace());
+    out.listObjectsInPlace(control.getCurrentPlace());
+    out.listPassages(control.getCurrentPlace());
   }
 
   public void matchLookAt(Matcher match) {
     GameObject foundObject = control.findGameObject(match.group(1));
-    
+
     if (foundObject != null) {
       out.lookAtGameObject(foundObject);
     } else {
       out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
     }
-    
+
   }
 
   public void matchInventory() {
-      out.listInventory(control.getCharacter().getItemsInInventory());
+    out.listInventory(control.getCharacter().getItemsInInventory());
   }
 
   public void matchActions() {
-      out.listOptions();
+    out.listOptions();
   }
 
-  public void matchExitGame(){
+  public void matchExitGame() {
     out.exitingTheGame(endingType.YOU_SURE);
     yesNoDecision();
   }
@@ -162,6 +161,7 @@ public class Input {
 
   /**
    * !Not recommended to use outside of this class!
+   * 
    * @return String
    */
   private String readInSingleLine() {
@@ -169,16 +169,15 @@ public class Input {
   }
 
   /**
-   * Searches for "use <item>" and returns <item> in input else
-   * it searches for "leave" and returns "leave" in input
-   * if nothing matches it returns null
+   * Searches for "use <item>" and returns <item> in input else it searches for "leave" and returns
+   * "leave" in input if nothing matches it returns null
    * 
    * @return String
    */
   public String readItemForObstacle() {
     String decision = readInSingleLine();
     Matcher matcherUseItemObstacle = patternUseItemObstacle.matcher(decision);
-    
+
     if (decision.matches("(?i)leave")) {
       decision = "leave";
     } else if (matcherUseItemObstacle.find()) {
@@ -188,18 +187,17 @@ public class Input {
   }
 
   /**
-   * Asks the user for a "Yes/No" decision for the exitLoop
-   * Can't do anything more :(
-   * Will rework the methods at wednesday
+   * Asks the user for a "Yes/No" decision for the exitLoop Can't do anything more :( Will rework
+   * the methods at wednesday
    */
-  public void yesNoDecision(){
+  public void yesNoDecision() {
     String decision = readInSingleLine();
     Matcher matcherYesNoDecision = patternYesNo.matcher(decision);
-    if (decision.matches("(?i)yes") && decision.matches("(?i)no")){
+    if (decision.matches("(?i)yes") && decision.matches("(?i)no")) {
       control.endGame(decision_type.CANT_DECIDE);
-    } else if (decision.matches("(?i)yes")){
+    } else if (decision.matches("(?i)yes")) {
       control.endGame(decision_type.YES);
-    } else if (decision.matches("(?i)no")){
+    } else if (decision.matches("(?i)no")) {
       control.endGame(decision_type.NO);
     } else {
       control.endGame(decision_type.NO_MATCH);

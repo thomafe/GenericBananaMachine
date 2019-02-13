@@ -89,14 +89,15 @@ public class Character {
     return itemsInInventory;
   }
 
-  public int looseALivepoint(int damagepoints) {
+  public void takeDamage(int damagepoints) {
     lifepoints = lifepoints - damagepoints;
-    return lifepoints;
+    if (lifepoints < 0) {
+      lifepoints = 0;
+    }
   }
 
-  public int gainALivepoint(int healingpoints) {
+  public void healDamage(int healingpoints) {
     lifepoints = lifepoints + healingpoints;
-    return lifepoints;
   }
 
   public boolean isDead() {

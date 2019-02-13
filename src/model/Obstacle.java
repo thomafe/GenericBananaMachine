@@ -116,7 +116,7 @@ public class Obstacle extends GameObject {
    */
   public boolean tryToAnswerRiddle(String answerForRiddle) {
 
-    if (riddleAnswer.equalsIgnoreCase(answerForRiddle)) {
+    if (riddleAnswer != null && riddleAnswer.equalsIgnoreCase(answerForRiddle)) {
       resolve();
     }
     return resolved;
