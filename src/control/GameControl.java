@@ -33,10 +33,6 @@ public class GameControl {
   private boolean gameIsRunning = false;
   private boolean restartGame = false;
 
-  public enum decision_type {
-    CANT_DECIDE, YES, NO, NO_MATCH
-  }
-
   /**
    * Create a new controller with local Input and output.
    * 

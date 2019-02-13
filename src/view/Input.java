@@ -22,24 +22,26 @@ public class Input {
 
   private int boxings = 0;
   Scanner scan = new Scanner(System.in);
-  // List for all the patterns/commands
+  Output out;
+  GameControl control;
+  Passage lastPassage = null;
 
-  // TODO niklas spaces after commands do not work?
+  // List for all the patterns/commands
   Pattern patternTakeItem = Pattern.compile("(?i)take\\s([\\w\\s]+)");
   Pattern patternGotoPassage = Pattern.compile("(?i)(goto|use)\\s([\\w\\s]+)");
   Pattern patternLookAtPlace = Pattern.compile("(?i)look\\s[\\w\\s]*around\\s*[\\w\\s]*");
   Pattern patternLookAt = Pattern.compile("(?i)look\\s[\\w\\s]*at\\s([\\w\\s]*)");
   Pattern patternInventory = Pattern.compile("(?i)inventory");
   Pattern patternActions = Pattern.compile("(?i)actions");
-  Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
   Pattern patternExitGame = Pattern.compile("(?i)exit[\\w\\s]*");
+  Pattern patternGoBack = Pattern.compile("(?i)back");
+
+  //Only in use while at obstacle
+  Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
 
   private Pattern[] possiblePatterns = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
       patternLookAt, patternInventory, patternActions, patternExitGame};
 
-  // Creating Output and Control object for referencing
-  Output out;
-  GameControl control;
 
   /**
    * Constructor.
@@ -67,6 +69,7 @@ public class Input {
     Matcher matcherInventory = patternInventory.matcher(userInput);
     Matcher matcherActions = patternActions.matcher(userInput);
     Matcher matcherExitGame = patternExitGame.matcher(userInput);
+    Matcher matcherGoBack = patternGoBack.matcher(userInput);
 
     if (matcherTakeItem.find()) {
       if (!testForBoxing(userInput, 1)) {
@@ -96,6 +99,12 @@ public class Input {
       if (!testForBoxing(userInput, 7)) {
         matchExitGame();
       }
+    } else if (matcherGoBack.find()) {
+      if (lastPassage != null) {
+        control.tryToMoveThroughPassage(lastPassage);
+      } else {
+        out.noSuccess(errorType.NO_PASSAGE);
+      }
     } else {
       noMatch();
     }
@@ -118,6 +127,7 @@ public class Input {
 
     if (foundObject instanceof Passage) {
       control.tryToMoveThroughPassage((Passage) foundObject);
+      lastPassage = (Passage) foundObject;
     } else if (foundObject instanceof Furniture) {
       control.interactWithFurniture((Furniture) foundObject);
     } else {

@@ -17,7 +17,7 @@ public class Output {
 
   public enum errorType {
     CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD,
-    DECIDE
+    DECIDE, NO_PASSAGE
   }
 
   public enum errorTypeInput {
@@ -35,7 +35,8 @@ public class Output {
   private Character character = null;
 
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Goto <Passage | Furniture Name>", "Take <Item Name>", "Inventory", "Actions" , "Exit"};
+      "Goto/Use <Passage | Furniture Name>", "Go back to the last passage", "Take <Item Name>", "Inventory",
+      "Actions" , "Exit"};
 
   /**
    * Introduction for the player at the start of the game.
@@ -137,7 +138,7 @@ public class Output {
     StringBuilder obstacleOptions = new StringBuilder();
 
     obstacleOptions.append(obstacle.getDescription() + "\n");
-    obstacleOptions.append("Do you want to \"use\" an item or do you want to \"leave\"?");
+    obstacleOptions.append("Do you want to use an item or do you want to \"leave\"?");
 
     printString(obstacleOptions.toString());
   }
@@ -198,6 +199,9 @@ public class Output {
         break;
       case DECIDE:
         printString("You can't do both!");
+        break;
+      case NO_PASSAGE:
+        printString("You first have to go through a passage!");
         break;
       default:
         printString("Quite impossible");
