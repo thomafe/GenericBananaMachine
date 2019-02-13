@@ -87,6 +87,15 @@ public class GameControl {
     return restartGame;
   }
 
+  public boolean playAgain(){
+    out.exitingTheGame(endingType.TRY_AGAIN);
+    if(in.yesNo()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   /**
    * Asks the player if he wants to leave the game.
    * Takes an yes/no answer from input.
@@ -301,7 +310,11 @@ public class GameControl {
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
       out.goodEnding();
 
-      gameIsRunning = false;
+      if (playAgain()) {
+        //restart game
+      } else {
+        gameIsRunning = false;
+      }
     }
   }
 
@@ -322,7 +335,11 @@ public class GameControl {
        * control.runGame(); } else { out.doOutput("Thanks for playing! See you later."); }
        */
 
-      gameIsRunning = false;
+      if (playAgain()){
+        //restart game
+      } else {
+        gameIsRunning = false;
+      }
     }
   }
 
