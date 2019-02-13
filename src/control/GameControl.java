@@ -83,22 +83,17 @@ public class GameControl {
       in.readInput();
 
     }
-    
+
     return restartGame;
   }
 
-  public boolean playAgain(){
+  public boolean playAgain() {
     out.exitingTheGame(endingType.TRY_AGAIN);
-    if(in.yesNo()) {
-      return true;
-    } else {
-      return false;
-    }
+    return in.yesNo();
   }
 
   /**
-   * Asks the player if he wants to leave the game.
-   * Takes an yes/no answer from input.
+   * Asks the player if he wants to leave the game. Takes an yes/no answer from input.
    */
   public void endGame() {
     out.exitingTheGame(endingType.YOU_SURE);
@@ -106,7 +101,7 @@ public class GameControl {
       out.exitingTheGame(endingType.YES);
       gameIsRunning = false;
     } else {
-        out.exitingTheGame(endingType.NO);
+      out.exitingTheGame(endingType.NO);
     }
     // TODO take an "Ending" as parameter? Maybe just a string?
   }
@@ -311,7 +306,7 @@ public class GameControl {
       out.goodEnding();
 
       if (playAgain()) {
-        //restart game
+        // restart game
       } else {
         gameIsRunning = false;
       }
@@ -335,8 +330,8 @@ public class GameControl {
        * control.runGame(); } else { out.doOutput("Thanks for playing! See you later."); }
        */
 
-      if (playAgain()){
-        //restart game
+      if (playAgain()) {
+        // restart game
       } else {
         gameIsRunning = false;
       }
