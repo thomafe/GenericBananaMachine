@@ -80,7 +80,6 @@ public class GameControl {
       in.readInput();
 
     }
-
   }
 
   /**
