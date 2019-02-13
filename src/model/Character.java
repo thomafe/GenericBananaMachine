@@ -65,11 +65,6 @@ public class Character {
   }
 
   /**
-   * Use Item to solve Obstocle.
-   */
-  public void useItem(Item item) {}
-
-  /**
    * Getter for current Place.
    *
    * @return Place

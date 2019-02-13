@@ -61,9 +61,9 @@ public class GameFactory {
     GameControl newLocalGame = null;
 
     switch (number) {
-      case 0:
-        newLocalGame = new GameControl(oldTestWorld());
-        break;
+//      case 0:
+//        newLocalGame = new GameControl(oldTestWorld());
+//        break;
       case 1:
         newLocalGame = new GameControl(shipwreckedWorld());
         break;
@@ -114,9 +114,9 @@ public class GameFactory {
     Obstacle singleItemObstacle =
         new ItemObstacle("One Item Obstacle", "This obstalce takes one item", "It worked!", item1);
     Obstacle doulbeItemObstacle = new DoubleItemObstacle("Two Item Obstacle",
-        "This obstalce takes one item, addtitional Item first!", "It worked!", item1, item2);
+        "This obstalce takes one item, addtitional Item first!", "It worked!!!", item1, item2);
     Obstacle riddleObstacle =
-        new RiddleObstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!", "Shoe");
+        new RiddleObstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!!", "Shoe");
     Obstacle dangerousObstacle = new ItemObstacle("Dangerous Obstacle", "This will kill you.",
         "You should never read this", new Item("Void Item", "This is nowhere"));
     dangerousObstacle.setDamagepoints(9001);
@@ -245,47 +245,47 @@ public class GameFactory {
     pass8.setObstacle(obs8); // Path away -> away
     pass9.setObstacle(obs9); // Shore -> Rescue
 
-    room0.addItemOnTheFloor(item1); // beach -> machete
-    room0.addItemOnTheFloor(item2); // beach -> flashlight
-    room0.addItemOnTheFloor(item3); // beach -> rope
-    room1.addItemOnTheFloor(item4); // coast -> cloth
-    room2.addItemOnTheFloor(item5); // Jungle -> Wooden Plank
-    room2.addItemOnTheFloor(item6); // Jungle -> Stone
-    room3.addItemOnTheFloor(item7); // Cave -> Compass
-    room4.addItemOnTheFloor(item8); // Outback -> signal rockets
+    room0.addObjectToPlace(item1); // beach -> machete
+    room0.addObjectToPlace(item2); // beach -> flashlight
+    room0.addObjectToPlace(item3); // beach -> rope
+    room1.addObjectToPlace(item4); // coast -> cloth
+    room2.addObjectToPlace(item5); // Jungle -> Wooden Plank
+    room2.addObjectToPlace(item6); // Jungle -> Stone
+    room3.addObjectToPlace(item7); // Cave -> Compass
+    room4.addObjectToPlace(item8); // Outback -> signal rockets
 
     return room0;
   }
 
-
-  @Deprecated
-  public static Place oldTestWorld() {
-    // Game World
-    Place entrance = new Place("Entrance", "This is your starting area.");
-    Place secondRoom =
-        new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
-    Place thirdRoom =
-        new Place("Lighthouse", "You can't see anything in here because the light is blinding.");
-
-    Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed",
-        entrance, secondRoom);
-    new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom,
-        thirdRoom);
-
-    Item lightsaber = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
-    Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
-    Item overcharger = new Item("Overcharger", "This thing just makes all gadgets go Uhweeeeee");
-
-    Obstacle obstacle = new DoubleItemObstacle("Blastdoor", "A thick blast door that blocks the way",
-        "You melt through the door with your lightsaber!", lightsaber, overcharger);
-
-    pas1.setObstacle(obstacle);
-
-    entrance.addItemOnTheFloor(lightsaber);
-    entrance.addItemOnTheFloor(overcharger);
-    secondRoom.addItemOnTheFloor(item2);
-
-    return entrance;
-  }
+//
+//  @Deprecated
+//  public static Place oldTestWorld() {
+//    // Game World
+//    Place entrance = new Place("Entrance", "This is your starting area.");
+//    Place secondRoom =
+//        new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
+//    Place thirdRoom =
+//        new Place("Lighthouse", "You can't see anything in here because the light is blinding.");
+//
+//    Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed",
+//        entrance, secondRoom);
+//    new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom,
+//        thirdRoom);
+//
+//    Item lightsaber = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
+//    Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
+//    Item overcharger = new Item("Overcharger", "This thing just makes all gadgets go Uhweeeeee");
+//
+//    Obstacle obstacle = new DoubleItemObstacle("Blastdoor", "A thick blast door that blocks the way",
+//        "You melt through the door with your lightsaber!", lightsaber, overcharger);
+//
+//    pas1.setObstacle(obstacle);
+//
+//    entrance.addObjectToPlace(lightsaber);
+//    entrance.addObjectToPlace(overcharger);
+//    secondRoom.addObjectToPlace(item2);
+//
+//    return entrance;
+//  }
 
 }

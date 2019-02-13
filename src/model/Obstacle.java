@@ -71,7 +71,7 @@ public abstract class Obstacle extends GameObject {
   }
 
 
-  public void setContactWithItem(){
+  public void setContactWithItem(String contactWithItem){
     this.contactWithItem = contactWithItem;
   }
 

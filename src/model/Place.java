@@ -43,16 +43,6 @@ public class Place extends GameObject {
   }
 
   /**
-   * Add a single item to the item list. Deprecated! Use <code>addObjectToPlace()</code> instead
-   *
-   * @param item Item
-   */
-  @Deprecated
-  public void addItemOnTheFloor(Item item) {
-    thingsInTheRoom.add(item);
-  }
-
-  /**
    * Adds a new thing to to place.
    * 
    * @param object

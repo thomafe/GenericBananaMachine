@@ -40,7 +40,7 @@ public class GameLauncher {
       }
 
       if (gameControl == null) {
-        System.out.println("No valid game found...");
+        System.err.println("No valid game found...");
         break;
       }
     } while (gameControl.runGame());

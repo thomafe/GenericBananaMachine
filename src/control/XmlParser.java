@@ -99,7 +99,7 @@ public class XmlParser {
                 )
             );
             // Set items in current place.
-            places.get(placeCounter).addItemOnTheFloor(getIncludedItem(itemElement, items));
+            places.get(placeCounter).addObjectToPlace(getIncludedItem(itemElement, items));
 
           }
         }
