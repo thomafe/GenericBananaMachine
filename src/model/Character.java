@@ -13,17 +13,27 @@ public class Character {
 
   private Place currentPlace = null;
   private List<Item> itemsInInventory = new ArrayList<>();
-  private int lifepoints = 5;
+  private int lifepoints;
   private boolean dead = false;
 
   /**
-   * Constructor.
+   * Constructor for games where the character won't take damage.
    *
    * @param startingPlace Place
    */
   public Character(Place startingPlace) {
+    this(startingPlace, 1);
+  }
+
+  /**
+   * Constructor for games where the character may take damage.
+   *
+   * @param startingPlace Place
+   */
+  public Character(Place startingPlace, int lifepoints) {
     itemsInInventory = new ArrayList<>();
     currentPlace = startingPlace;
+    this.lifepoints = lifepoints;
   }
 
   /**
@@ -58,8 +68,7 @@ public class Character {
   /**
    * Use Item to solve Obstocle.
    */
-  public void useItem(Item item) {
-  }
+  public void useItem(Item item) {}
 
   /**
    * Getter for current Place.

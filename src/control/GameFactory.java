@@ -15,6 +15,13 @@ import model.Place;
 public class GameFactory {
 
   /**
+   * There are no objects of this class.
+   */
+  private GameFactory() {
+
+  }
+
+  /**
    * Create a new test game.
    * 
    * @return
@@ -87,6 +94,7 @@ public class GameFactory {
     Place room2 = new Place("Room 2", "Test Room 2");
     Place room3 = new Place("Room 3", "Test Room 3");
     Place room4 = new Place("Room 4", "Test Room 4");
+    Place room5 = new Place("Room 5", "Test Room 5");
 
     Item item1 = new Item("Required Item", "Required Item");
     Item item2 = new Item("Additional Item", "Additional Item");
@@ -105,6 +113,9 @@ public class GameFactory {
         "This obstalce takes one item, addtitional Item first!", "It worked!", item1, item2);
     Obstacle riddleObstacle =
         new Obstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!", "Shoe");
+    Obstacle dangerousObstacle = new Obstacle("Dangerous Obstacle", "This will kill you.",
+        "You should never read this", new Item("Void Item", "This is nowhere"));
+    dangerousObstacle.setDamage(9001);
 
     Furniture chest = new Furniture("Chest", "A dirty old chest",
         Collections.singletonList(itemInChest), singleItemObstacle);
@@ -118,6 +129,8 @@ public class GameFactory {
         .setObstacle(doulbeItemObstacle);
     (new Passage("Riddle Passage", "Has riddle Obstacle", startingPlace, room4))
         .setObstacle(riddleObstacle);
+    (new Passage("Dangerous Passage", "Will kill you", startingPlace, room5))
+        .setObstacle(dangerousObstacle);
 
     return startingPlace;
   }
