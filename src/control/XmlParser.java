@@ -50,12 +50,20 @@ public class XmlParser {
 
       NodeList placeList = doc.getElementsByTagName("place");
       NodeList passageList = doc.getElementsByTagName("passage");
+      NodeList storyList = doc.getElementsByTagName("story");
 
       // TODO: reference to (1)
       // Create object arrays.
       ArrayList<Place> places = new ArrayList<Place>();
       ArrayList<Item> items = new ArrayList<Item>();
       ArrayList<Passage> passages = new ArrayList<Passage>();
+
+      // parse story text
+      Node storyNode = storyList.item(0);
+      Element storyElement = (Element) storyNode;
+      debug("Intro:" + storyElement.getElementsByTagName("introduction").item(0).getTextContent());
+      // add introduction to world
+      world.setIntroduction(storyElement.getElementsByTagName("introduction").item(0).getTextContent());
 
       // parse all existing Places
       for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
