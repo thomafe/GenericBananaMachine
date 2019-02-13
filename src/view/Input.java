@@ -4,7 +4,6 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import control.GameControl;
-import control.GameControl.decision_type;
 import model.Furniture;
 import model.Item;
 import model.Passage;
@@ -151,7 +150,12 @@ public class Input {
   }
 
   public void matchExitGame() {
-    control.endGame();
+    if (yesNo()) {
+      out.exitingTheGame(endingType.YES);
+      control.endGame();
+    } else {
+      out.exitingTheGame(endingType.NO);
+    }
   }
 
   public void noMatch() {

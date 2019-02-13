@@ -95,6 +95,7 @@ public class GameFactory {
     Place room3 = new Place("Room 3", "Test Room 3");
     Place room4 = new Place("Room 4", "Test Room 4");
     Place room5 = new Place("Room 5", "Test Room 5");
+    Place endingPlace = new Place("Ship of Coastguard", "It all ends here...");
 
     Item item1 = new Item("Required Item", "Required Item");
     Item item2 = new Item("Additional Item", "Additional Item");
@@ -131,6 +132,7 @@ public class GameFactory {
         .setObstacle(riddleObstacle);
     (new Passage("Dangerous Passage", "Will kill you", startingPlace, room5))
         .setObstacle(dangerousObstacle);
+    new Passage("Ending Passage", "Leads to the end", startingPlace, endingPlace);
 
     return startingPlace;
   }

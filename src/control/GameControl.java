@@ -77,11 +77,10 @@ public class GameControl {
     // Game Loop
     while (gameIsRunning) {
 
-      checkForBadEnding();
-      checkForGoodEnding();
       out.lookAtCurrentPlace(getCurrentPlace());
       in.readInput();
-
+      checkForBadEnding();
+      checkForGoodEnding();
     }
 
     return restartGame;
@@ -96,14 +95,7 @@ public class GameControl {
    * Asks the player if he wants to leave the game. Takes an yes/no answer from input.
    */
   public void endGame() {
-    out.exitingTheGame(endingType.YOU_SURE);
-    if (in.yesNo()) {
-      out.exitingTheGame(endingType.YES);
-      gameIsRunning = false;
-    } else {
-      out.exitingTheGame(endingType.NO);
-    }
-    // TODO take an "Ending" as parameter? Maybe just a string?
+    gameIsRunning = false;
   }
 
   /**
@@ -304,7 +296,7 @@ public class GameControl {
 
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
       out.goodEnding();
-
+      endGame();
       restartGame = playAgain();
     }
   }
@@ -317,14 +309,7 @@ public class GameControl {
     if (character.getCurrentPlace().getName().equals("Bad Ending")
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
       out.badEnding();
-
-      // out.doOutput("Your Character unfortunately died. Wanna play again? Please enter YES or
-      // NO");
-      // Replay question
-      /*
-       * if (in.readInSingleLine().equals("YES")) { Control control = new Control();
-       * control.runGame(); } else { out.doOutput("Thanks for playing! See you later."); }
-       */
+      endGame();
 
       restartGame = playAgain();
     }
