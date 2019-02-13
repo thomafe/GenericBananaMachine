@@ -322,7 +322,7 @@ public class Output {
   }
 
   public void inputLine(){
-    System.out.print(">");
+    System.out.print("> ");
   }
 
   /**
