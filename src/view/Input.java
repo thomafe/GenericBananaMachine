@@ -26,14 +26,13 @@ public class Input {
 
   // TODO niklas spaces after commands do not work?
   Pattern patternTakeItem = Pattern.compile("(?i)take\\s([\\w\\s]+)");
-  Pattern patternGotoPassage = Pattern.compile("(?i)goto\\s([\\w\\s]+)");
+  Pattern patternGotoPassage = Pattern.compile("(?i)(goto|use)\\s([\\w\\s]+)");
   Pattern patternLookAtPlace = Pattern.compile("(?i)look\\s[\\w\\s]*around\\s*[\\w\\s]*");
   Pattern patternLookAt = Pattern.compile("(?i)look\\s[\\w\\s]*at\\s([\\w\\s]*)");
   Pattern patternInventory = Pattern.compile("(?i)inventory");
   Pattern patternActions = Pattern.compile("(?i)actions");
   Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
   Pattern patternExitGame = Pattern.compile("(?i)exit[\\w\\s]*");
-  Pattern patternYesNo = Pattern.compile("(?i)(yes)[\\w\\s]*(no)");
 
   private Pattern[] possiblePatterns = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
       patternLookAt, patternInventory, patternActions, patternExitGame};
@@ -58,6 +57,7 @@ public class Input {
   public void readInput() {
 
     String userInput = readInSingleLine();
+    userInput = userInput.trim();
 
     // The order in which the input is being matched
     Matcher matcherTakeItem = patternTakeItem.matcher(userInput);
@@ -114,14 +114,14 @@ public class Input {
   }
 
   public void matchGotoPassage(Matcher match) {
-    GameObject foundObject = control.findGameObject(match.group(1));
+    GameObject foundObject = control.findGameObject(match.group(2));
 
     if (foundObject instanceof Passage) {
       control.tryToMoveThroughPassage((Passage) foundObject);
     } else if (foundObject instanceof Furniture) {
       control.interactWithFurniture((Furniture) foundObject);
     } else {
-      out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
+      out.noSuccess(match.group(2), errorTypeInput.THERE_IS_NONE);
     }
   }
 
