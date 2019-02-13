@@ -89,8 +89,7 @@ public class GameControl {
    */
   public void endGame() {
     out.exitingTheGame(endingType.YOU_SURE);
-    boolean answer = in.yesNo();
-    if (answer) {
+    if (in.yesNo()) {
       out.exitingTheGame(endingType.YES);
       gameIsRunning = false;
     } else {
