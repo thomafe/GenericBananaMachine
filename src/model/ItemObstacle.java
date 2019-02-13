@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Obstacle that can be resolved with using the correct item. When resolved, passage is not blocked anymore.
+ *
+ * @author
+ */
 
 public class ItemObstacle extends Obstacle {
 
@@ -19,17 +24,11 @@ public class ItemObstacle extends Obstacle {
   }
   
   /**
-   * Check if you only have to use one item or if you have to use an 'additional item' first. If you
-   * don't have to use an additional item, check if the item you wanted to use to resolve the
-   * obstacle is correct If it is correct, resolve obstacle by returning true for obstacleResolved,
-   * if not return false. If u have to use an additional item , check if the additional item is
-   * correct and safe that in additional item Obstacle resolved= true. When you run the method again
-   * with the correct first item, obstacle resolved will be returned.
+   * Checks if required item is correct, if yes resolves Obstacle
    *
    * @param itemToTry Item
    * @return boolean
    */
-
   public boolean tryToUseItem(Item itemToTry) {
     boolean correctItemUsed = false;
     
@@ -37,8 +36,9 @@ public class ItemObstacle extends Obstacle {
 
       consume(itemToTry);
       correctItemUsed = true;
+      resolve();
     }
-    resolve();
+
     return correctItemUsed;
 
   }

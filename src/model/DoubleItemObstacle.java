@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * Obstacles that require two items to be resolved. Must be resolved so that they don't block passages anymore.
+ *
+ * @author Simone
+ */
 public class DoubleItemObstacle extends ItemObstacle {
 
   private Item additionalItem;
@@ -22,6 +27,9 @@ public class DoubleItemObstacle extends ItemObstacle {
   }
 
   @Override
+  /**
+   * Checks if additional item is correct, if yes run tryToUseItem in ItemObstacle
+   */
   public boolean tryToUseItem(Item itemToTry) {
     boolean correctItemUsed = false;
     if (additionalItem.equals(itemToTry)) {
