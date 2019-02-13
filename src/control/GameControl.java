@@ -96,6 +96,8 @@ public class GameControl {
    */
   public void endGame() {
     gameIsRunning = false;
+    
+    restartGame = playAgain();
   }
 
   /**
@@ -297,7 +299,6 @@ public class GameControl {
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
       out.goodEnding();
       endGame();
-      restartGame = playAgain();
     }
   }
 
@@ -310,8 +311,6 @@ public class GameControl {
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
       out.badEnding();
       endGame();
-
-      restartGame = playAgain();
     }
   }
 
@@ -322,7 +321,7 @@ public class GameControl {
   private void checkIfCharacterDead() {
     if (character.isDead()) {
       out.noSuccess(errorType.YOU_DEAD);
-      gameIsRunning = false;
+      endGame();
     }
   }
 
