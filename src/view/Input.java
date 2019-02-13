@@ -1,10 +1,10 @@
 package view;
 
-import control.GameControl.decision_type;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import control.GameControl;
+import control.GameControl.decision_type;
 import model.Furniture;
 import model.GameObject;
 import model.Item;
@@ -118,7 +118,7 @@ public class Input {
     
       if (foundObject instanceof Passage) {
         control.tryToMoveThroughPassage((Passage)foundObject);
-        out.lookAtCurrentPlace();
+        out.lookAtCurrentPlace(control.getCurrentPlace());
       } else if (foundObject instanceof Furniture){
        control.interactWithFurniture((Furniture)foundObject);
       } else {
@@ -127,9 +127,9 @@ public class Input {
   }
 
   public void matchLookAtPlace() {
-      out.lookAtCurrentPlace();
-      out.listObjectsInPlace();
-      out.listPassages();
+      out.lookAtCurrentPlace(control.getCurrentPlace());
+      out.listObjectsInPlace(control.getCurrentPlace());
+      out.listPassages(control.getCurrentPlace());
   }
 
   public void matchLookAt(Matcher match) {
@@ -144,7 +144,7 @@ public class Input {
   }
 
   public void matchInventory() {
-      out.listInventory();
+      out.listInventory(control.getCharacter().getItemsInInventory());
   }
 
   public void matchActions() {

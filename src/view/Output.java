@@ -1,7 +1,6 @@
 package view;
 
 import java.util.List;
-import control.GameControl;
 import model.Character;
 import model.GameObject;
 import model.Item;
@@ -33,21 +32,10 @@ public class Output {
     YOU_SURE, NO, YES, NO_MATCH
   }
 
-  private GameControl control;
   private Character character = null;
 
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Goto <Passage | Furniture Name>", "Take <Item Name>", "Inventory", "Actions, Exit"};
-
-  /**
-   * Constructor.
-   *
-   * @param contoller Control
-   */
-  // TODO remove gameControl put the needed objects as parameters
-  public Output(GameControl contoller) {
-    control = contoller;
-  }
+      "Goto <Passage | Furniture Name>", "Take <Item Name>", "Inventory", "Actions" , "Exit"};
 
   /**
    * Introduction for the player at the start of the game.
@@ -93,17 +81,15 @@ public class Output {
   /**
    * Lists all items in the room (on the floor).
    */
-  public void listObjectsInPlace() {
-    List<GameObject> objectsInPlace = control.getCharacter().getCurrentPlace().getObjectsInPlace();
-
-    if (objectsInPlace.isEmpty()) {
+  public void listObjectsInPlace(Place currentPlace) {
+    if (currentPlace.getObjectsInPlace().isEmpty()) {
       printString("There are no items here.");
     } else {
       StringBuilder thingsOutput = new StringBuilder();
 
       thingsOutput.append(
-          "These items are in " + control.getCharacter().getCurrentPlace().getName() + ": \n");
-      for (GameObject object : objectsInPlace) {
+          "These items are in " + currentPlace.getName() + ": \n");
+      for (GameObject object : currentPlace.getObjectsInPlace()) {
         thingsOutput.append(" - " + object.getName() + "\n");
       }
 
@@ -114,16 +100,16 @@ public class Output {
   /**
    * Lists all items in characters inventory.
    */
-  public void listInventory() {
-    if (!control.getCharacter().getItemsInInventory().isEmpty()) {
-      StringBuilder itemsInInventory = new StringBuilder();
+  public void listInventory(List<Item> itemsInInventory) {
+    if (!itemsInInventory.isEmpty()) {
+      StringBuilder itemList = new StringBuilder();
 
-      itemsInInventory.append("These items are in your inventory:\n");
-      for (Item item : control.getCharacter().getItemsInInventory()) {
-        itemsInInventory.append(" - " + item.getName() + "\n");
+      itemList.append("These items are in your inventory:\n");
+      for (Item item : itemsInInventory) {
+        itemList.append(" - " + item.getName() + "\n");
       }
 
-      printString(itemsInInventory.toString());
+      printString(itemList.toString());
     } else {
       printString("You have nothing in your inventory!");
     }
@@ -132,16 +118,16 @@ public class Output {
   /**
    * Lists all passages in the current room.
    */
-  public void listPassages() {
-    StringBuilder passages = new StringBuilder();
+  public void listPassages(Place currentPlace) {
+    StringBuilder passageList = new StringBuilder();
 
-    passages.append(
-        "These passages lead out of " + control.getCharacter().getCurrentPlace().getName() + ":\n");
-    for (Passage passage : control.getCharacter().getCurrentPlace().getPassages()) {
-      passages.append(" - " + passage.getName() + "\n");
+    passageList.append(
+        "These passages lead out of " + currentPlace.getName() + ":\n");
+    for (Passage passage : currentPlace.getPassages()) {
+      passageList.append(" - " + passage.getName() + "\n");
     }
 
-    printString(passages.toString());
+    printString(passageList.toString());
 
   }
 
@@ -153,7 +139,6 @@ public class Output {
 
     obstacleOptions.append(obstacle.getDescription() + "\n");
     obstacleOptions.append("Do you want to \"use\" an item or do you want to \"leave\"?");
-    listInventory();
 
     printString(obstacleOptions.toString());
   }
@@ -161,9 +146,7 @@ public class Output {
   /**
    * Look at the currentPlace.
    */
-  public void lookAtCurrentPlace() {
-    Place currentPlace = control.getCharacter().getCurrentPlace();
-
+  public void lookAtCurrentPlace(Place currentPlace) {
     StringBuilder placeDescription = new StringBuilder();
 
     placeDescription.append("You are in " + currentPlace.getName() + "\n");

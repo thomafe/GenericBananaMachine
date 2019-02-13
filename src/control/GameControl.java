@@ -44,7 +44,7 @@ public class GameControl {
   public GameControl(Place startingPlace) {
     character = new Character(startingPlace);
 
-    out = new Output(this);
+    out = new Output();
     in = new Input(out, this);
   }
   
@@ -90,9 +90,6 @@ public class GameControl {
   public void endGame(decision_type type) {
     switch (type) {
       case CANT_DECIDE:
-        out.exitingTheGame(endingType.NO_MATCH);
-        in.yesNoDecision();
-        break;
       case NO_MATCH:
         out.exitingTheGame(endingType.NO_MATCH);
         in.yesNoDecision();
@@ -142,7 +139,7 @@ public class GameControl {
 
     if (obstacleOnFurniture == null || obstacleOnFurniture.isResolved()
         || interactWithObstacle(obstacleOnFurniture)) {
-      furniture.receiveItemsInSide().forEach(character.getCurrentPlace()::addObjectToPlace);
+      furniture.receiveItemsInSide(true).forEach(character.getCurrentPlace()::addObjectToPlace);
     }
   }
 
@@ -161,6 +158,7 @@ public class GameControl {
 
     while (!obstacleResolved) {
       out.listOptionsObstacleInteraction(currentObstacle);
+      out.listInventory(character.getItemsInInventory());
       answerString = in.readItemForObstacle();
 
       if (answerString.equalsIgnoreCase("leave")) {
@@ -295,7 +293,7 @@ public class GameControl {
   private void gameIntroduction() {
     out.greeting();
     // TODO use the introduction from the level
-    out.lookAtCurrentPlace();
+    out.lookAtCurrentPlace(getCurrentPlace());
     out.listOptions();
   }
 
