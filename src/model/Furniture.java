@@ -38,9 +38,12 @@ public class Furniture extends GameObject {
    * 
    * @return
    */
-  public List<Item> receiveItemsInSide() {
+  public List<Item> receiveItemsInSide(boolean takeOutItems) {
     if(obstalce == null || obstalce.isResolved()) {
       // TODO are the items removed from here then??
+      if(takeOutItems) {
+        itemsInside = Collections.emptyList();
+      }
       return itemsInside;
     } else {
       return Collections.emptyList();

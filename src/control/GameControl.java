@@ -139,7 +139,7 @@ public class GameControl {
 
     if (obstacleOnFurniture == null || obstacleOnFurniture.isResolved()
         || interactWithObstacle(obstacleOnFurniture)) {
-      furniture.receiveItemsInSide().forEach(character.getCurrentPlace()::addObjectToPlace);
+      furniture.receiveItemsInSide(true).forEach(character.getCurrentPlace()::addObjectToPlace);
     }
   }
 
