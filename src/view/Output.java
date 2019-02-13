@@ -29,7 +29,7 @@ public class Output {
   }
 
   public enum endingType {
-    YOU_SURE, NO, YES, NO_MATCH
+    YOU_SURE, NO, YES, TRY_AGAIN
   }
 
   private Character character = null;
@@ -272,6 +272,9 @@ public class Output {
         break;
       case YES:
         printString("Sad to see you leaving :(");
+        break;
+      case TRY_AGAIN:
+        printString("Do you want to play again?");
         break;
     }
   }
