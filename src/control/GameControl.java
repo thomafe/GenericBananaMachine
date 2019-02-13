@@ -6,9 +6,11 @@ import model.Furniture;
 import model.GameObject;
 import model.GameWorld;
 import model.Item;
+import model.ItemObstacle;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
+import model.RiddleObstacle;
 import view.Input;
 import view.Output;
 import view.Output.endingType;
@@ -167,12 +169,12 @@ public class GameControl {
 
       chosenItem = findItemInInventory(answerString);
 
-      if (chosenItem != null) {
-        if (currentObstacle.tryToUseItem(chosenItem) && chosenItem.isConsumed()) {
+      if (chosenItem != null && currentObstacle instanceof ItemObstacle) {
+        if (((ItemObstacle)currentObstacle).tryToUseItem(chosenItem) && chosenItem.isConsumed()) {
           character.removeItem(chosenItem);
         }
-      } else {
-        currentObstacle.tryToAnswerRiddle(answerString);
+      } else if (currentObstacle instanceof RiddleObstacle){
+        ((RiddleObstacle)currentObstacle).tryToAnswerRiddle(answerString);
         // TODO when we can tell riddle and item obstacles apart, rework this
       }
 

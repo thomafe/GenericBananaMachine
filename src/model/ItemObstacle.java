@@ -3,11 +3,19 @@ package model;
 
 public class ItemObstacle extends Obstacle {
 
-  protected Item requiredItem;
-  protected Item additionalItem;
-  protected boolean additionalItemResolved = false;
-  boolean correctItemUsed = false;
+  private Item requiredItem;
 
+  /**
+   * Create a new obstacle that takes one item that will be consumed.
+   *
+   * @param name String
+   * @param description String
+   * @param requiredItem Item
+   */
+  public ItemObstacle(String name, String description, String resolution, Item requiredItem) {
+    super(name, description, resolution);
+  }
+  
   /**
    * Check if you only have to use one item or if you have to use an 'additional item' first. If you
    * don't have to use an additional item, check if the item you wanted to use to resolve the
@@ -21,7 +29,8 @@ public class ItemObstacle extends Obstacle {
    */
 
   public boolean tryToUseItem(Item itemToTry) {
-
+    boolean correctItemUsed = false;
+    
     if (requiredItem.equals(itemToTry) ) {
 
       consume(itemToTry);

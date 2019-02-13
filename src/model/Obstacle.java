@@ -6,65 +6,25 @@ package model;
  *
  * @author Simone273
  */
-public class Obstacle extends GameObject {
+public abstract class Obstacle extends GameObject {
 
   // TODO use inheritance to make this a bunch cleaner
   private String resolution;
   protected boolean resolved = false;
   private boolean consumesItem = true;
 
-
-
   private int damagepoints;
   private String contactWithItem;
   private String usedFalseItem;
   private String usedCorrectItem;
   private String walkingAway;
-  /**
-   * Create a new obstacle that takes one item that will be consumed.
-   *
-   * @param name String
-   * @param description String
-   * @param requiredItem Item
-   */
-  public Obstacle(String name, String description, String resolution, Item requiredItem) {
+
+  public Obstacle(String name, String description, String resolution) {
     super(name, description);
+    
     this.resolution = resolution;
   }
-
-  /**
-   * Create a new obstacle that takes two items that will be consumed. Careful! Additional item is
-   * reqq
-   *
-   * @param name String
-   * @param description String
-   * @param requiredItem Item
-   * @param additionalItem Item
-   */
-  public Obstacle(String name, String description, String resolution, Item requiredItem,
-      Item additionalItem) {
-    super(name, description);
-
-    this.resolution = resolution;
-  }
-
-  /**
-   * Create a new obstacle that takes a riddle answer to be solved.
-   *
-   * @param name String
-   * @param description String
-   * @param riddleAnswere String
-   */
-  public Obstacle(String name, String description, String resolution, String riddleAnswere) {
-    super(name, description);
-
-    this.resolution = resolution;
-  }
-
-
-
-
-
+  
   /**
    * Getter for resolution which describes the resolution of the obstacle.
    *
