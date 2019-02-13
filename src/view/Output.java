@@ -263,7 +263,7 @@ public class Output {
 
   /**
    * Standard output for game endings
-   * @param type
+   * @param type    
    */
   public void exitingTheGame(endingType type){
     switch (type){
@@ -280,17 +280,6 @@ public class Output {
         printString("Do you want to play again?");
         break;
     }
-  }
-
-  /**
-   * Output a committed message in console. Deprecated! There should be a method for what you want
-   * to do.
-   *
-   * @param message String
-   */
-  @Deprecated
-  public void doOutput(String message) {
-    printString(message);
   }
 
   /**
