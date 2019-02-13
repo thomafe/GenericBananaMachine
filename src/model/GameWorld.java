@@ -30,13 +30,13 @@ public class GameWorld {
   /**
    * Create a new GameWorld with an introduction and a starting place.
    * 
-   * @param introdution String
+   * @param introduction String
    * @param startingPlace Place
    */
-  public GameWorld(String introdution, Place startingPlace) {
+  public GameWorld(String introduction, Place startingPlace) {
     this();
 
-    this.introduction = introdution;
+    this.introduction = introduction;
     this.startingPlace = startingPlace;
   }
 
