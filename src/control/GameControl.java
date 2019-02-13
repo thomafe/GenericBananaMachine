@@ -9,8 +9,8 @@ import model.ItemObstacle;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
-import model.superclasses.GameObject;
 import model.RiddleObstacle;
+import model.superclasses.GameObject;
 import view.Input;
 import view.Output;
 import view.Output.endingType;
@@ -75,7 +75,6 @@ public class GameControl {
     // Game Loop
     while (gameIsRunning) {
 
-      out.lookAtCurrentPlace(getCurrentPlace());
       in.readInput();
       checkForBadEnding();
       checkForGoodEnding();
@@ -92,10 +91,12 @@ public class GameControl {
   /**
    * Asks the player if he wants to leave the game. Takes an yes/no answer from input.
    */
-  public void endGame() {
+  public void endGame(boolean askTryAgain) {
     gameIsRunning = false;
-    
-    restartGame = playAgain();
+
+    if (askTryAgain) {
+      restartGame = playAgain();
+    }
   }
 
   /**
@@ -116,6 +117,7 @@ public class GameControl {
         || interactWithObstacle(obstacleInPassage)) {
       character.move(destinationPassage);
       characterMoved = true;
+      out.lookAtCurrentPlace(getCurrentPlace());
     }
 
     return characterMoved;
@@ -163,11 +165,11 @@ public class GameControl {
       chosenItem = findItemInInventory(answerString);
 
       if (chosenItem != null && currentObstacle instanceof ItemObstacle) {
-        if (((ItemObstacle)currentObstacle).tryToUseItem(chosenItem) && chosenItem.isConsumed()) {
+        if (((ItemObstacle) currentObstacle).tryToUseItem(chosenItem) && chosenItem.isConsumed()) {
           character.removeItem(chosenItem);
         }
-      } else if (currentObstacle instanceof RiddleObstacle){
-        ((RiddleObstacle)currentObstacle).tryToAnswerRiddle(answerString);
+      } else if (currentObstacle instanceof RiddleObstacle) {
+        ((RiddleObstacle) currentObstacle).tryToAnswerRiddle(answerString);
         // TODO when we can tell riddle and item obstacles apart, rework this
       }
 
@@ -296,7 +298,7 @@ public class GameControl {
 
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
       out.goodEnding();
-      endGame();
+      endGame(true);
     }
   }
 
@@ -308,7 +310,7 @@ public class GameControl {
     if (character.getCurrentPlace().getName().equals("Bad Ending")
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
       out.badEnding();
-      endGame();
+      endGame(true);
     }
   }
 
@@ -319,7 +321,7 @@ public class GameControl {
   private void checkIfCharacterDead() {
     if (character.isDead()) {
       out.noSuccess(errorType.YOU_DEAD);
-      endGame();
+      endGame(true);
     }
   }
 

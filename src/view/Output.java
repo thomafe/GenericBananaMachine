@@ -126,6 +126,7 @@ public class Output {
   public void listPassages(Place currentPlace) {
     StringBuilder passageList = new StringBuilder();
 
+     // TODO rework these to | styles lists. Make method for it
     passageList.append(
         "These passages lead out of " + currentPlace.getName() + ":\n");
     for (Passage passage : currentPlace.getPassages()) {
