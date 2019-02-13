@@ -197,14 +197,15 @@ public class Obstacle extends GameObject {
     return walkingAway;
   }
 
-  // TODO simone this should just return the amount of damage the obstacle does. Also, how do I know
-  // WHEN to call this method?? Doku please
-  public int setDamagepoints(int damage){
-
+  /**
+   * Set the damage an Obstacle does and return the damagepoints done to the character
+   * @param damage
+   */
+  public void setDamagepoints(int damage){
+    damagepoints =  damage;
   }
 
-  public int getDamagepoints(int damage) {
-    damagepoints = damagepoints + damage;
+  public int getDamagepoints() {
     return damagepoints;
   }
 

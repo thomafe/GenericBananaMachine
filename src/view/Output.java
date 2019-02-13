@@ -266,8 +266,8 @@ public class Output {
         printString(obstacle.getResolution());
         break;
       case OBSTACLE_REACTION:
-//        printString(obstacle.reactToFalseItem(););
-        obstacle.reactToFalseItem();
+//        printString(obstacle.getReactionToFalseItem(););
+        obstacle.getReactionToFalseItem();
         break;
       default:
         printString("Yeah, you did it!");
