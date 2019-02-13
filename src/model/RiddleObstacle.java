@@ -2,6 +2,8 @@ package model;
 
 public class RiddleObstacle extends Obstacle{
 
+  public RiddleObstacle(){};
+
   private String riddleAnswer;
   /**
    * Check if the answer for the riddle is correct if yes return true fo obstacleResolved so that
