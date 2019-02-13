@@ -24,7 +24,7 @@ public class GameFactory {
   /**
    * Create a new test game.
    * 
-   * @return
+   * @return GameControl
    */
   public static GameControl getTestGame() {
     return createNewGameController(testWorld());
@@ -33,14 +33,14 @@ public class GameFactory {
   /**
    * Create a new game from an XML File.
    * 
-   * @param filePath
-   * @return
+   * @param filePath String
+   * @return GameControl
    */
   public static GameControl getGameFromFile(String filePath) {
     GameControl newGame = null;
 
     XmlParser parser = new XmlParser();
-    parser.parseXml();
+    parser.parseXml(filePath);
 
     newGame = new GameControl(parser.getStartingPlace());
 
@@ -51,8 +51,8 @@ public class GameFactory {
    * Create a new game from local code. These are mostly old test worlds that are not ported or
    * worlds that contain features that are not included in the level.xmls yet.
    * 
-   * @param number
-   * @return
+   * @param number int
+   * @return GameControl
    */
   public static GameControl getLocalGame(int number) {
     GameControl newLocalGame = null;
@@ -73,8 +73,8 @@ public class GameFactory {
   /**
    * Create a new controller.
    * 
-   * @param startingPlace
-   * @return
+   * @param startingPlace Place
+   * @return Place
    */
   private static GameControl createNewGameController(Place startingPlace) {
     return new GameControl(startingPlace);
