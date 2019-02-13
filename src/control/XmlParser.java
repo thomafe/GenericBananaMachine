@@ -82,6 +82,9 @@ public class XmlParser {
               )
           );
 
+          // Add current Place to GameWorld
+          world.addPlace(places.get(placeCounter));
+
           // parse all existing Place Items
           NodeList itemList = placeElement.getElementsByTagName("item");
 
@@ -166,8 +169,11 @@ public class XmlParser {
       }
 
       startingPlace = places.get(0);
-      world.setStartingPlace(startingPlace);
 
+      // set starting Place in GameWorld
+      if(world.getStartingPlace() == null) {
+        world.setStartingPlace(startingPlace);
+      }
 
       debug("\n\n");
       debug("World has successfully been created! God saw all that he had made, and it was good.");
