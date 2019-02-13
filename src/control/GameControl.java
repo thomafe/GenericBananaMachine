@@ -90,9 +90,6 @@ public class GameControl {
   public void endGame(decision_type type) {
     switch (type) {
       case CANT_DECIDE:
-        out.exitingTheGame(endingType.NO_MATCH);
-        in.yesNoDecision();
-        break;
       case NO_MATCH:
         out.exitingTheGame(endingType.NO_MATCH);
         in.yesNoDecision();
