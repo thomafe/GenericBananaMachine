@@ -1,11 +1,14 @@
 package control;
 
 import java.util.Collections;
+import model.DoubleItemObstacle;
 import model.Furniture;
 import model.Item;
+import model.ItemObstacle;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
+import model.RiddleObstacle;
 
 /**
  * 
@@ -109,14 +112,15 @@ public class GameFactory {
     startingPlace.addObjectToPlace(itemOnFloor);
 
     Obstacle singleItemObstacle =
-        new Obstacle("One Item Obstacle", "This obstalce takes one item", "It worked!", item1);
-    Obstacle doulbeItemObstacle = new Obstacle("Two Item Obstacle",
+        new ItemObstacle("One Item Obstacle", "This obstalce takes one item", "It worked!", item1);
+    Obstacle doulbeItemObstacle = new DoubleItemObstacle("Two Item Obstacle",
         "This obstalce takes one item, addtitional Item first!", "It worked!", item1, item2);
     Obstacle riddleObstacle =
-        new Obstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!", "Shoe");
-    Obstacle dangerousObstacle = new Obstacle("Dangerous Obstacle", "This will kill you.",
+        new RiddleObstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!", "Shoe");
+    Obstacle dangerousObstacle = new ItemObstacle("Dangerous Obstacle", "This will kill you.",
         "You should never read this", new Item("Void Item", "This is nowhere"));
     dangerousObstacle.setDamagepoints(9001);
+
 
     Furniture chest = new Furniture("Chest", "A dirty old chest",
         Collections.singletonList(itemInChest), singleItemObstacle);
@@ -204,30 +208,30 @@ public class GameFactory {
     Item item8 = new Item("Signal Rocket",
         "There is one missile left which can be used to call someones attention.");
 
-    Obstacle obs1 = new Obstacle("Way upstairs", "You need to find a way to climb the cliff.",
+    Obstacle obs1 = new ItemObstacle("Way upstairs", "You need to find a way to climb the cliff.",
         "You used the rope to climb the cliff.", item3);
-    Obstacle obs2 = new Obstacle("Blocking vegetation",
+    Obstacle obs2 = new ItemObstacle("Blocking vegetation",
         "You need to cut a way through the vegetation which blocks you.",
         "You used the machete to cut through.", item1);
-    Obstacle obs3 = new Obstacle("Darkness in the cave",
+    Obstacle obs3 = new ItemObstacle("Darkness in the cave",
         "You can't see anything. You need to light up your way.",
         "You used the flashlight to light up your way.", item2);
-    Obstacle obs4 = new Obstacle("Dirt", "You need to remove the dirt from the signpost.",
+    Obstacle obs4 = new ItemObstacle("Dirt", "You need to remove the dirt from the signpost.",
         "You used the cloth to clean the signpost. You can hear human voices in the distance.",
         item4);
-    Obstacle obs5 = new Obstacle("Hole", "You need to pass the hole.",
+    Obstacle obs5 = new ItemObstacle("Hole", "You need to pass the hole.",
         "You used the wooden plank to build a custom bridge.", item5);
-    Obstacle obs6 = new Obstacle("Darkness in the tunnel",
+    Obstacle obs6 = new ItemObstacle("Darkness in the tunnel",
         "Your flashlight is too low for this darkness. You need something to check if there is anything.",
         "You threw the stone in the tunnel but you are instantly hit by the same stone. Is this a portal back to the entrance?",
         item6);
-    Obstacle obs7 = new Obstacle("Attention", "You need to call attention of the humans you hear.",
+    Obstacle obs7 = new ItemObstacle("Attention", "You need to call attention of the humans you hear.",
         "You fired your missile of signal rockets to call attention.", item8);
-    Obstacle obs8 = new Obstacle("Path away from voices",
+    Obstacle obs8 = new ItemObstacle("Path away from voices",
         "You need something to orientate not to get lost on the path.",
         "You used the compass to find the way to south which guides you away from the human voices.",
         item7);
-    Obstacle obs9 = new Obstacle("Rescue", "You need something to call attention for rescue.",
+    Obstacle obs9 = new ItemObstacle("Rescue", "You need something to call attention for rescue.",
         "You used the missile of the sign rocket to call attention of the ship. It answered and took you on board.",
         item8);
 
@@ -272,7 +276,7 @@ public class GameFactory {
     Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
     Item overcharger = new Item("Overcharger", "This thing just makes all gadgets go Uhweeeeee");
 
-    Obstacle obstacle = new Obstacle("Blastdoor", "A thick blast door that blocks the way",
+    Obstacle obstacle = new DoubleItemObstacle("Blastdoor", "A thick blast door that blocks the way",
         "You melt through the door with your lightsaber!", lightsaber, overcharger);
 
     pas1.setObstacle(obstacle);
