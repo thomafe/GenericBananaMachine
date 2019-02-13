@@ -17,7 +17,6 @@ public class Obstacle extends GameObject {
   private String riddleAnswer;
   private boolean additionalItemResolved = false;
   private int damagepoints;
-  private int healingpoints;
   private String contactWithItem;
   private String usedFalseItem;
   private String usedCorrectItem;
@@ -164,6 +163,27 @@ public class Obstacle extends GameObject {
     this.consumesItem = consumesItem;
   }
 
+  public void setContactWithItem(String contactWithItem) {
+    this.contactWithItem = contactWithItem;
+  }
+
+  public void setUsedFalseItem(String usedFalseItem) {
+    this.usedFalseItem = usedFalseItem;
+  }
+
+  public void setUsedCorrectItem(String usedCorrectItem) {
+    this.usedCorrectItem = usedCorrectItem;
+  }
+
+  public void setWalkingAway(String walkingAway) {
+    this.walkingAway = walkingAway;
+  }
+
+  public void setResolution(String resolution) {
+    this.resolution = resolution;
+  }
+  
+
   /**
    * Method that will be run when Character gets in Contact with Item
    * Obstacle reacts to contact then
@@ -209,10 +229,6 @@ public class Obstacle extends GameObject {
     return damagepoints;
   }
 
-  // TODO simone obstacles can heal? When?
-  public int getHealingpoints(int healing) {
-    healingpoints = healingpoints + healing;
-    return healingpoints;
-  }
+
 }
 
