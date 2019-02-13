@@ -44,7 +44,7 @@ public class GameControl {
   public GameControl(Place startingPlace) {
     character = new Character(startingPlace);
 
-    out = new Output(this);
+    out = new Output();
     in = new Input(out, this);
   }
   
@@ -158,6 +158,7 @@ public class GameControl {
 
     while (!obstacleResolved) {
       out.listOptionsObstacleInteraction(currentObstacle);
+      out.listInventory(character.getItemsInInventory());
       answerString = in.readItemForObstacle();
 
       if (answerString.equalsIgnoreCase("leave")) {
@@ -292,7 +293,7 @@ public class GameControl {
   private void gameIntroduction() {
     out.greeting();
     // TODO use the introduction from the level
-    out.lookAtCurrentPlace();
+    out.lookAtCurrentPlace(getCurrentPlace());
     out.listOptions();
   }
 
