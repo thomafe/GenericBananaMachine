@@ -27,13 +27,18 @@ public class XmlParser {
   // TODO: (1) create getters of the variables which can be called in CreateWorld instead of pushing them to it.
   private int numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
 
-  public void parseXml() {
+  /**
+   * Parse given XML file in /levels/ directory, generate objects, connections and GameWorld.
+   *
+   * @param file String
+   */
+  public void parseXml(String file) {
 
     try {
 
       debug("\n\nIn the beginning God created the heaven and the world...\n\n");
 
-      File fXmlFile = new File("./levels/game01.xml");
+      File fXmlFile = new File("./levels/" + file);
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
       Document doc = dBuilder.parse(fXmlFile);
