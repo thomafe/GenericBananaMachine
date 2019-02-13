@@ -305,11 +305,7 @@ public class GameControl {
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
       out.goodEnding();
 
-      if (playAgain()) {
-        // restart game
-      } else {
-        gameIsRunning = false;
-      }
+      restartGame = playAgain();
     }
   }
 
@@ -330,11 +326,7 @@ public class GameControl {
        * control.runGame(); } else { out.doOutput("Thanks for playing! See you later."); }
        */
 
-      if (playAgain()) {
-        // restart game
-      } else {
-        gameIsRunning = false;
-      }
+      restartGame = playAgain();
     }
   }
 
