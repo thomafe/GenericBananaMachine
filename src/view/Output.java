@@ -82,12 +82,12 @@ public class Output {
    */
   public void listObjectsInPlace(Place currentPlace) {
     if (currentPlace.getObjectsInPlace().isEmpty()) {
-      printString("There are no items here.");
+      printString("There are no things here.");
     } else {
       StringBuilder thingsOutput = new StringBuilder();
 
       thingsOutput.append(
-          "These items are in " + currentPlace.getName() + ": \n");
+          "These things are in " + currentPlace.getName() + ": \n");
       for (GameObject object : currentPlace.getObjectsInPlace()) {
         thingsOutput.append(" - " + object.getName() + "\n");
       }

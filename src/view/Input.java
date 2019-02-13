@@ -24,6 +24,7 @@ public class Input {
   Scanner scan = new Scanner(System.in);
   // List for all the patterns/commands
 
+  // TODO niklas spaces after commands do not work?
   Pattern patternTakeItem = Pattern.compile("(?i)take\\s([\\w\\s]+)");
   Pattern patternGotoPassage = Pattern.compile("(?i)goto\\s([\\w\\s]+)");
   Pattern patternLookAtPlace = Pattern.compile("(?i)look\\s[\\w\\s]*around\\s*[\\w\\s]*");
