@@ -17,7 +17,6 @@ public class Obstacle extends GameObject {
   private String riddleAnswer;
   private boolean additionalItemResolved = false;
   private int damagepoints;
-  private int healingpoints;
   private String contactWithItem;
   private String usedFalseItem;
   private String usedCorrectItem;
@@ -164,33 +163,68 @@ public class Obstacle extends GameObject {
     this.consumesItem = consumesItem;
   }
 
-  public String reactsToContact() {
-   return contactWithItem;
+    this.contactWithItem = contactWithItem;
   }
 
-  public String reactToFalseItem() {
+  public void setUsedFalseItem(String usedFalseItem) {
+    this.usedFalseItem = usedFalseItem;
+  }
+
+  public void setUsedCorrectItem(String usedCorrectItem) {
+    this.usedCorrectItem = usedCorrectItem;
+  }
+
+  public void setWalkingAway(String walkingAway) {
+    this.walkingAway = walkingAway;
+  }
+
+  public void setResolution(String resolution) {
+    this.resolution = resolution;
+  }
+  
+
+  /**
+   * Method that will be run when Character gets in Contact with Item
+   * Obstacle reacts to contact then
+   *
+   */
+  public String getReactionToContact() {
+   return contactWithItem;
+   * Reaction of Obstacle when somebody uses the wrong item
+   *
+   */
+  public String getReactionToFalseItem() {
     return usedFalseItem;
   }
 
-  public String reactsToCorrectItem() {
+  /**
+   * Reaction of Obstacle when someone used the correct item
+   *
+   */
+  public String getReactionToCorrectItem() {
     return usedCorrectItem;
   }
 
-  public String  walkAway() {
+  /**
+   * Character walks away, Obstacle reacts
+   *
+   */
+  public String getWalkAwayReaction() {
     return walkingAway;
   }
 
-  // TODO simone this should just return the amount of damage the obstacle does. Also, how do I know
-  // WHEN to call this method?? Doku please
-  public int getDamagepoints(int damage) {
-    damagepoints = damagepoints + damage;
+  /**
+   * Set the damage an Obstacle does and return the damagepoints done to the character
+   * @param damage
+   */
+  public void setDamagepoints(int damage){
+    damagepoints =  damage;
+  }
+
+  public int getDamagepoints() {
     return damagepoints;
   }
 
-  // TODO simone obstacles can heal? When?
-  public int getHealingpoints(int healing) {
-    healingpoints = healingpoints + healing;
-    return healingpoints;
-  }
+
 }
 
