@@ -1,12 +1,13 @@
 package model;
 
 
+public class ItemObstacle extends Obstacle {
 
-public class ItemObstacle extends Obstacle{
   protected Item requiredItem;
   protected Item additionalItem;
   protected boolean additionalItemResolved = false;
   boolean correctItemUsed = false;
+
   /**
    * Check if you only have to use one item or if you have to use an 'additional item' first. If you
    * don't have to use an additional item, check if the item you wanted to use to resolve the
@@ -21,19 +22,18 @@ public class ItemObstacle extends Obstacle{
 
   public boolean tryToUseItem(Item itemToTry) {
 
+    if (requiredItem.equals(itemToTry)) {
 
-
-      // Two items required
-        resolve();
-        consume(itemToTry);
-        correctItemUsed = true;
-
-
-      return correctItemUsed;
+      resolve();
+      consume(itemToTry);
+      correctItemUsed = true;
     }
 
-
+    return correctItemUsed;
   }
+
+
+}
 
 
 
