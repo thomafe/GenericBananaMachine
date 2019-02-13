@@ -164,7 +164,7 @@ public class Input {
     out.exitingTheGame(endingType.YOU_SURE);
     if (yesNo()) {
       out.exitingTheGame(endingType.YES);
-      control.endGame();
+      control.endGame(false);
     } else {
       out.exitingTheGame(endingType.NO);
     }
