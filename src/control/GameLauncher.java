@@ -11,10 +11,10 @@ public class GameLauncher {
   public static void main(String[] args) {
     GameControl gameControl = null;
     boolean doTest = false;
-    String fileName = "";
+    String fileName = "level";
     int localGameNumber = -1;
 
-    args = new String[] {"-d"};
+//    args = new String[] {"-d"};
 
     for (int i = 0; i < args.length; i++) {
       if (args[i].equalsIgnoreCase("-d")) {
