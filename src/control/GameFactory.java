@@ -117,7 +117,7 @@ public class GameFactory {
         "This obstalce takes one item, addtitional Item first!", "It worked!", item1, item2);
     Obstacle riddleObstacle =
         new RiddleObstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!", "Shoe");
-    Obstacle dangerousObstacle = new Obstacle("Dangerous Obstacle", "This will kill you.",
+    Obstacle dangerousObstacle = new ItemObstacle("Dangerous Obstacle", "This will kill you.",
         "You should never read this", new Item("Void Item", "This is nowhere"));
     dangerousObstacle.setDamagepoints(9001);
 
