@@ -30,8 +30,8 @@ public class GameWorld {
   /**
    * Create a new GameWorld with an introduction and a starting place.
    * 
-   * @param introdution
-   * @param startingPlace
+   * @param introdution String
+   * @param startingPlace Place
    */
   public GameWorld(String introdution, Place startingPlace) {
     this();
@@ -43,7 +43,7 @@ public class GameWorld {
   /**
    * Set the introduction to the game.
    * 
-   * @param introduction
+   * @param introduction String
    */
   public void setIntroduction(String introduction) {
     this.introduction = introduction;
@@ -52,7 +52,7 @@ public class GameWorld {
   /**
    * Get the introduction to the game.
    * 
-   * @return
+   * @return String
    */
   public String getIntroduction() {
     return introduction;
@@ -61,7 +61,7 @@ public class GameWorld {
   /**
    * Set the starting place.
    * 
-   * @param startingPlace
+   * @param startingPlace Place
    */
   public void setStartingPlace(Place startingPlace) {
     this.startingPlace = startingPlace;
@@ -70,7 +70,7 @@ public class GameWorld {
   /**
    * Get the starting place.
    * 
-   * @return
+   * @return Place
    */
   public Place getStartingPlace() {
     return startingPlace;
@@ -79,7 +79,7 @@ public class GameWorld {
   /**
    * Add a place to the GameWorld.
    * 
-   * @param newPlace
+   * @param newPlace Place
    */
   public void addPlace(Place newPlace) {
     places.add(newPlace);
@@ -88,8 +88,8 @@ public class GameWorld {
   /**
    * Add a passage to a place.
    * 
-   * @param passge
-   * @param place
+   * @param passge Passage
+   * @param place Place
    */
   @Deprecated
   public void addPassageToPlace(Passage passge, Place place) {
@@ -99,8 +99,8 @@ public class GameWorld {
   /**
    * Add an ending place.
    * 
-   * @param endingPlace
-   * @param endingText
+   * @param endingPlace Place
+   * @param endingText String
    */
   public void addEndingPlace(Place endingPlace, String endingText) {
     endings.put(endingPlace, endingText);
@@ -109,8 +109,8 @@ public class GameWorld {
   /**
    * Find out whether a place is an ending place.
    * 
-   * @param place
-   * @return
+   * @param place Place
+   * @return Place
    */
   public boolean isEndingPlace(Place place) {
     return endings.containsKey(place);
@@ -120,7 +120,7 @@ public class GameWorld {
    * Get the ending for a place.
    * 
    * @param endingPlace the Edning or null if the place is not an ending place.
-   * @return
+   * @return String
    */
   public String getEndingForPlace(Place endingPlace) {
     String endingText = null;
