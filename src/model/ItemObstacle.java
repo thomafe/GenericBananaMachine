@@ -3,9 +3,10 @@ package model;
 
 
 public class ItemObstacle extends Obstacle{
-  private Item requiredItem;
-  private Item additionalItem;
-  private boolean additionalItemResolved = false;
+  protected Item requiredItem;
+  protected Item additionalItem;
+  protected boolean additionalItemResolved = false;
+  boolean correctItemUsed = false;
   /**
    * Check if you only have to use one item or if you have to use an 'additional item' first. If you
    * don't have to use an additional item, check if the item you wanted to use to resolve the
@@ -19,37 +20,20 @@ public class ItemObstacle extends Obstacle{
    */
 
   public boolean tryToUseItem(Item itemToTry) {
-    boolean correctItemUsed = false;
-
-    if (additionalItem == null) {
-      // One item required
-      if (requiredItem.equals(itemToTry)) {
-        consume(itemToTry);
-        resolve();
-        correctItemUsed = true;
-
-      }
 
 
-    } else {
 
       // Two items required
-      if (additionalItem.equals(itemToTry)) {
-        consume(itemToTry);
-        additionalItemResolved = true;
-        correctItemUsed = true;
-
-
-      } else if (requiredItem.equals(itemToTry) && additionalItemResolved == true) {
         resolve();
         consume(itemToTry);
         correctItemUsed = true;
 
-      }
+
+      return correctItemUsed;
     }
 
-    return correctItemUsed;
+
   }
 
 
-}
+
