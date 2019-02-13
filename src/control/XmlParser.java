@@ -12,6 +12,7 @@ import model.Item;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
+import model.GameWorld;
 
 /**
  * Parse given XML file in a specific path.
@@ -21,6 +22,7 @@ import model.Place;
 public class XmlParser {
 
   private Place startingPlace = null;
+  private GameWorld world = new GameWorld();
 
   private boolean enableDebug = false;
 
