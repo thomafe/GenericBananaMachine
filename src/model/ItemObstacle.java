@@ -1,11 +1,11 @@
 package model;
 
 /**
- * Obstacle that can be resolved with using the correct item. When resolved, passage is not blocked anymore.
+ * Obstacle that can be resolved with using the correct item. When resolved, passage is not blocked
+ * anymore.
  *
  * @author
  */
-
 public class ItemObstacle extends Obstacle {
 
   private Item requiredItem;
@@ -19,10 +19,9 @@ public class ItemObstacle extends Obstacle {
    */
   public ItemObstacle(String name, String description, String resolution, Item requiredItem) {
     super(name, description, resolution);
-    
     this.requiredItem = requiredItem;
   }
-  
+
   /**
    * Checks if required item is correct, if yes resolves Obstacle
    *
@@ -31,19 +30,14 @@ public class ItemObstacle extends Obstacle {
    */
   public boolean tryToUseItem(Item itemToTry) {
     boolean correctItemUsed = false;
-    
-    if (requiredItem.equals(itemToTry) ) {
 
+    if (requiredItem.equals(itemToTry)) {
       consume(itemToTry);
       correctItemUsed = true;
       resolve();
     }
-
     return correctItemUsed;
-
   }
-
-
 }
 
 

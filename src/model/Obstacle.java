@@ -10,24 +10,22 @@ import model.superclasses.GameObject;
  */
 public abstract class Obstacle extends GameObject {
 
-  // TODO use inheritance to make this a bunch cleaner
   private String resolution;
   protected boolean resolved = false;
   private boolean consumesItem = true;
-
   private int damagepoints;
   private String contactWithItem;
   private String usedFalseItem;
   private String usedCorrectItem;
   private String walkingAway;
 
+  /**
+   * Constructor
+   */
   public Obstacle(String name, String description, String resolution) {
     super(name, description);
-    
     this.resolution = resolution;
   }
-
-
 
   /**
    * Getter for resolution which describes the resolution of the obstacle.
@@ -39,7 +37,8 @@ public abstract class Obstacle extends GameObject {
   }
 
   /**
-   * Returns the state of resolution. If obstacle is successfully resolved, return true, else false.
+   * Returns the state of resolution. If obstacle is successfully resolved, return true, else
+   * false.
    *
    * @return boolean
    */
@@ -64,14 +63,13 @@ public abstract class Obstacle extends GameObject {
   }
 
   /**
-   * Set whether the item will be consumed upon resolving the obstacle.
+   * Setter for Interactions with Obstacle
    */
   public void setConsumesItem(boolean consumesItem) {
     this.consumesItem = consumesItem;
   }
 
-
-  public void setContactWithItem(){
+  public void setContactWithItem() {
     this.contactWithItem = contactWithItem;
   }
 
@@ -90,25 +88,24 @@ public abstract class Obstacle extends GameObject {
   public void setResolution(String resolution) {
     this.resolution = resolution;
   }
-  
 
   /**
-   * Method that will be run when Character gets in Contact with Item
-   * Obstacle reacts to contact then
-   *
+   * Method that will be run when Character gets in Contact with Item Obstacle reacts to contact
+   * then
    */
   public String getReactionToContact() {
-   return contactWithItem;}
-//   * Reaction of Obstacle when somebody uses the wrong item
+    return contactWithItem;
+  }
 
-    //
-  public String getReactionToFalseItem(){
+  /**
+   * Reaction of Obstacle when somebody used the false item
+   */
+  public String getReactionToFalseItem() {
     return usedFalseItem;
   }
 
   /**
    * Reaction of Obstacle when someone used the correct item
-   *
    */
   public String getReactionToCorrectItem() {
     return usedCorrectItem;
@@ -116,7 +113,6 @@ public abstract class Obstacle extends GameObject {
 
   /**
    * Character walks away, Obstacle reacts
-   *
    */
   public String getWalkAwayReaction() {
     return walkingAway;
@@ -124,16 +120,13 @@ public abstract class Obstacle extends GameObject {
 
   /**
    * Set the damage an Obstacle does and return the damagepoints done to the character
-   * @param damage
    */
-  public void setDamagepoints(int damage){
-    damagepoints =  damage;
+  public void setDamagepoints(int damage) {
+    damagepoints = damage;
   }
 
   public int getDamagepoints() {
     return damagepoints;
   }
-
-
 }
 

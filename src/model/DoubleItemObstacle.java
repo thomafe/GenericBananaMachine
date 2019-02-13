@@ -23,7 +23,6 @@ public class DoubleItemObstacle extends ItemObstacle {
   public DoubleItemObstacle(String name, String description, String resolution, Item requiredItem,
       Item additionalItem) {
     super(name, description, resolution, requiredItem);
-
     this.additionalItem = additionalItem;
   }
 
@@ -33,19 +32,14 @@ public class DoubleItemObstacle extends ItemObstacle {
    */
   public boolean tryToUseItem(Item itemToTry) {
     boolean correctItemUsed = false;
+
     if (additionalItem.equals(itemToTry)) {
       consume(itemToTry);
-
       correctItemUsed = true;
       additionalItemResolved = true;
-
-
     } else if (additionalItemResolved) {
       correctItemUsed = super.tryToUseItem(itemToTry);
-
     }
-
     return correctItemUsed;
   }
-
 }
