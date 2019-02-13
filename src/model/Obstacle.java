@@ -163,6 +163,8 @@ public class Obstacle extends GameObject {
     this.consumesItem = consumesItem;
   }
 
+
+  public void setContactWithItem(){
     this.contactWithItem = contactWithItem;
   }
 
@@ -189,11 +191,11 @@ public class Obstacle extends GameObject {
    *
    */
   public String getReactionToContact() {
-   return contactWithItem;
-   * Reaction of Obstacle when somebody uses the wrong item
-   *
-   */
-  public String getReactionToFalseItem() {
+   return contactWithItem;}
+//   * Reaction of Obstacle when somebody uses the wrong item
+
+    //
+  public String getReactionToFalseItem(){
     return usedFalseItem;
   }
 
