@@ -57,7 +57,7 @@ public class Input {
    * Reads the user input and matches it with the patterns. Calls methods from Output or Control.
    */
   public void readInput() {
-
+    out.inputLine();
     String userInput = readInSingleLine();
     userInput = userInput.trim();
 

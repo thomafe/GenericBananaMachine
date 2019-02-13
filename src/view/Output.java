@@ -35,7 +35,7 @@ public class Output {
   private Character character = null;
 
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Goto/Use <Passage | Furniture Name>", "Go back to the last passage", "Take <Item Name>",
+      "Goto/Use <Passage/Furniture Name>", "Go back to the last passage", "Take <Item Name>",
       "Inventory", "Actions" , "Exit"};
 
   /**
@@ -296,6 +296,10 @@ public class Output {
   @Deprecated
   public void doOutput(String message) {
     printString(message);
+  }
+
+  public void inputLine(){
+    System.out.print(">");
   }
 
   /**
