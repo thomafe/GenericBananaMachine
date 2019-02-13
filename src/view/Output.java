@@ -35,15 +35,16 @@ public class Output {
   private Character character = null;
 
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Goto/Use <Passage | Furniture Name>", "Go back to the last passage", "Take <Item Name>", "Inventory",
-      "Actions" , "Exit"};
+      "Goto/Use <Passage | Furniture Name>", "Go back to the last passage", "Take <Item Name>",
+      "Inventory", "Actions" , "Exit"};
 
   /**
    * Introduction for the player at the start of the game.
    */
   public void greeting() {
     printString("Hello fellow player!\n"
-        + " In this glorious adventure game you can prove your bravery and smartness\n by passing the many obstacles that will come in your way\n"
+        + "In this glorious adventure game you can prove your bravery and smartness\n"
+        + "by passing the many obstacles that will come in your way\n"
         + "Look for things along the way that might help you and you may stand a chance");
 
   }
@@ -53,11 +54,15 @@ public class Output {
    */
   public void goodEnding() {
     printString(
-        "Congraltulations, you've made it\n You reached the end of the game \n passing many obstacles you fought your way through the world \nconsider yourself a hero now");
+        "Congraltulations, you've made it\n"
+            + "You reached the end of the game \n"
+            + "passing many obstacles you fought your way through the world \n"
+            + "consider yourself a hero now");
   }
 
   public void badEnding() {
-    printString("You failed\n This is the end of the game \n This place brought death to you");
+    printString("You failed\n This is the end of the game \n"
+        + "This place brought death to you");
   }
 
   /**
@@ -287,5 +292,6 @@ public class Output {
    */
   private void printString(String message) {
     System.out.println(message);
+    System.out.println("-------------------------------");
   }
 }
