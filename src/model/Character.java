@@ -31,7 +31,6 @@ public class Character {
    *
    * @param passage Passage
    */
-  // bei gang durch passage wird current place zum neuen place
   public void move(Passage passage) {
     currentPlace = passage.usePassage(currentPlace);
   }
@@ -58,8 +57,7 @@ public class Character {
   /**
    * Use Item to solve Obstocle.
    */
-  public void useItem(Item item) {
-  }
+  public void useItem(Item item) {}
 
   /**
    * Getter for current Place.
