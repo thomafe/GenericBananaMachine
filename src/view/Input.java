@@ -150,6 +150,7 @@ public class Input {
   }
 
   public void matchExitGame() {
+    out.exitingTheGame(endingType.YOU_SURE);
     if (yesNo()) {
       out.exitingTheGame(endingType.YES);
       control.endGame();
