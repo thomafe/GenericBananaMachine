@@ -40,7 +40,7 @@ public class GameControl {
   /**
    * Create a new controller with local Input and output.
    * 
-   * @param startingPlace
+   * @param startingPlace Place
    */
   public GameControl(Place startingPlace) {
     character = new Character(startingPlace);
@@ -53,9 +53,9 @@ public class GameControl {
    * Create new controller and use provided input and output. Currently not usable as Input needs a
    * reference to control.
    * 
-   * @param out
-   * @param in
-   * @param startingPlace
+   * @param out Output
+   * @param in Inpout
+   * @param startingPlace Place
    */
   public GameControl(Output out, Input in, Place startingPlace) {
     character = new Character(startingPlace);
@@ -111,7 +111,7 @@ public class GameControl {
    * first interacts with that obstacle. If there is no obstacle or the obstacle gets resolved the
    * character moves to the next room.
    *
-   * @param passageName String
+   * @param destinationPassage String
    * @return whether the character moved or not
    */
 
@@ -134,7 +134,7 @@ public class GameControl {
    * interacts with it. If not or it gets resolved all items from within the furniture are put into
    * the room.
    * 
-   * @param furniture
+   * @param furniture Furniture
    */
   public void interactWithFurniture(Furniture furniture) {
     Obstacle obstacleOnFurniture = furniture.getObstacle();
@@ -192,7 +192,7 @@ public class GameControl {
   /**
    * Tells the character to pick up an item
    *
-   * @param itemName String
+   * @param itemToPickUp String
    */
   public void pickUpItem(Item itemToPickUp) {
     character.takeItem(itemToPickUp);
@@ -202,7 +202,7 @@ public class GameControl {
   /**
    * Deals damage to the character, then checks for death.
    * 
-   * @param damage
+   * @param damage int
    */
   public void distributeDamage(int damage) {
     character.takeDamage(damage);
@@ -233,8 +233,8 @@ public class GameControl {
   /**
    * Look for a thing in the current place
    * 
-   * @param objectName
-   * @return
+   * @param objectName String
+   * @return GameObject
    */
   private GameObject findThingInPlace(String objectName) {
     GameObject foundObject = null;
@@ -252,8 +252,8 @@ public class GameControl {
   /**
    * Look for a thing in the current place
    * 
-   * @param objectName
-   * @return
+   * @param passageName String
+   * @return Passage
    */
   private Passage findPassageInPlace(String passageName) {
     Passage foundPassage = null;
@@ -353,7 +353,7 @@ public class GameControl {
   /**
    * Getter for the place the character is currently in.
    * 
-   * @return
+   * @return Place
    */
   public Place getCurrentPlace() {
     return character.getCurrentPlace();
