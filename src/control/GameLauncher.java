@@ -11,7 +11,7 @@ public class GameLauncher {
   public static void main(String[] args) {
     GameControl gameControl = null;
     boolean doTest = false;
-    String fileName = "";
+    String fileName = "file";
     int localGameNumber = -1;
 
 //    args = new String[] {"-d"};
@@ -28,8 +28,6 @@ public class GameLauncher {
 
     }
 
-    localGameNumber = 1;
-    
     // TODO Out and In probably should be created here, so we can do the play again stuff easily?
 
     do {
