@@ -1,0 +1,221 @@
+### Generic Banana Machine ###
+
+--- Inhalt ---
+- Einleitung
+- Funktionale Anforderungen
+- Nicht funktionale Anforderungen
+
+--- Einleitung ---
+
+Die Generic Banana Machine (GBM) ist eine einfach Text Adventure Engine. Mit ihr können Text Abenteuer erlebt werden, in denen der Spieler einen Character in einer Spielwelt steurt.
+
+# Prioritäten
+Je größer die Priorität, um so optionaler die Anforderung
+1 - Unabdingbar | 2 - Grundlegend | 3 - Wünschenswert | 4 - Erfeulich | 5 - Völlig optional
+
+--- Funktionale Anforderungen ---
+------------------------------------------------------
+Name:           Character
+Priorität:      1
+Vorraussetzung: -
+Beschreibung:   Der Character der vom Spieler gesteurt wird.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Ort
+Priorität:      1
+Vorraussetzung: -
+Beschreibung:   Der Character befindet sich immer an einem Ort
+------------------------------------------------------
+------------------------------------------------------
+Name:           Durchgang
+Priorität:      1
+Vorraussetzung: Ort
+Beschreibung:   Ein Durchgang verbindet zwei Orte. Der Character kann über einen Durchgang an einen neuen Ort gelangen.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Gegenstand
+Priorität:      1
+Vorraussetzung: Ort, Character
+Beschreibung:   Ein Gegenstand befindet sich in einem Ort oder im Inventar der Characters.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Hinderniss
+Priorität:      1
+Vorraussetzung: Durchgang, Gegenstand
+Beschreibung:   Ein Hinderniss befindet sich in einem Durchgang. Solange es nicht aufgelöst ist, kann der Durchgang nicht benutzt werden.
+                Der Spieler kann Items die sein Character besitzt benutzen. Genau ein Gegenstand löst das Hinderniss und erlaubt durchgang.
+                Der Gegenstand wir verbraucht, wenn er der richtige war.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Spielwelt
+Priorität:      1
+Vorraussetzung: Alles vorherige
+Beschreibung:   Eine Spielwelt besteht aus Orten und Übergängen. Der Character hat einen Startort in dem das Spiel beginnt.
+                Verschiedene Verästelungen sind möglich, jedoch ist es immer möglich jeden Ort zu erreichen.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Textausgabe
+Priorität:      1
+Vorraussetzung: -
+Beschreibung:   Die Vorgänge im Spiel werden per Text in die Konsole ausgegeben.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Texteingabe
+Priorität:      1
+Vorraussetzung: -
+Beschreibung:   Der Spieler gibt Befehle über die Konsole ein. Das Spiel versteht diese und führt die korrekten Aktionen aus.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Spielstart
+Priorität:      1
+Vorraussetzung: -
+Beschreibung:   Zu Spielstart wird die Welt aufgebaut und der Spieler begrüßst.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Spielend
+Priorität:      1
+Vorraussetzung: Spielstart
+Beschreibung:   Wenn der Character einen bestimmen Ort erreicht endet das Spiel. Es kann verschiene Enden geben.
+------------------------------------------------------
+--> Version 1.0
+------------------------------------------------------
+Name:           Komplexere Hindernisse
+Priorität:      2
+Vorraussetzung: Hinderniss
+Beschreibung:   Hindernisse können bis zu 2 Gegenstände benötigen um gelöst zu werden.
+                Außerdem kann es Hindernisse geben die durch die richtige Rätsel Antwort gelöst werden.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Einrichtungsgegenstände
+Priorität:      2
+Vorraussetzung: Ort
+Beschreibung:   In Orten können neben Gegenstände auch Einrichtungsgegenstände sein. Diese können Gegenstände enthalten
+                und ebenfalls von Hindernissen blockiert werden.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Robustere Texteingabe
+Priorität:      2
+Vorraussetzung: Texteingabe
+Beschreibung:   Bessere Fehlererkennung, CaPiTaliZation
+------------------------------------------------------
+------------------------------------------------------
+Name:           Uniforme Textausgabe
+Priorität:      2
+Vorraussetzung: Textausgabe
+Beschreibung:   Formatierter Text, Einheitliche Fehler.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Modulare Spielwelten
+Priorität:      2
+Vorraussetzung: Spielwelt
+Beschreibung:   Die Spielwelt kann bei Programmstart ausgewählt werden. Das Spiel baut danach die Welt auf.
+                Solche Spielwelten werden in Datein gelesen (vmtl XML).
+------------------------------------------------------
+------------------------------------------------------
+Name:           Hindrniss Reaktionen
+Priorität:      2
+Vorraussetzung: Hindernisse
+Beschreibung:   Auf Aktionen vom Spieler kann ein Hinderniss reagieren.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Tod
+Priorität:      2
+Vorraussetzung: Character
+Beschreibung:   Der Character kann sterben. Falls dies passiert endet das Spiel.
+------------------------------------------------------
+--> Version 1.1
+------------------------------------------------------
+Name:           Nochmal Spielen
+Priorität:      3
+Vorraussetzung: Spielende
+Beschreibung:   Nach Spielende kann der Spieler das Spiel erneut starten.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Hauptmenü
+Priorität:      4
+Vorraussetzung: -
+Beschreibung:   Nach Programmstart wird ein Menü angezeigt:
+                    - Spiel Starten
+                    - Credits
+                    - ...?
+------------------------------------------------------
+------------------------------------------------------
+Name:           Einfach graphische Oberfläche
+Priorität:      4
+Vorraussetzung: -
+Beschreibung:   Text Ein- und Ausgabe getrennt in einem simplen Fenster.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Checkpunkte
+Priorität:      4
+Vorraussetzung: Tod
+Beschreibung:   Wenn der Character stirbt kann er statt in Startort in einem Checkpunkt Ort wieder einsteigen.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Schwierigkeit
+Priorität:      4
+Vorraussetzung: Tod
+Beschreibung:   Bei Spielstart kann die Schwierigkeit des Spiels ausgewählt werden.
+------------------------------------------------------
+--> Version 2.0
+------------------------------------------------------
+Name:           Kampange
+Priorität:      5
+Vorraussetzung: Modulare Spielwelt, Spielende
+Beschreibung:   Mehrere Spielwelten können einen zusammenhängende Geschichte erzählen.
+                Nachdem ein Spiel erfolgreich beendet wurden, kann der nächste Teil gespielt werden.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Auto Vervollständigung
+Priorität:      5
+Vorraussetzung: Texteingabe
+Beschreibung:   Über die TAB Taste werden Vorschläge zur Autovervollständigung des eingebenen Befehls ausgegeben.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Frühere Befehle
+Priorität:      5
+Vorraussetzung: Texteingabe
+Beschreibung:   Durch die HOCH und RUNTER Pfeiltasten können frühere Befehle in die Texteingabe geladen werden.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Befehle Synonyme
+Priorität:      5
+Vorraussetzung: Texteingabe
+Beschreibung:   Für eine Aktion kann es mehrere Befehle geben.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Level Editor
+Priorität:      5
+Vorraussetzung: Modulare Spielwelt
+Beschreibung:   Über eine Oberfläche kann der Spieler eigene Spielwelten erstellen oder bearbeiten.
+------------------------------------------------------
+
+--- Nicht funktionale Anforderungen ---
+------------------------------------------------------
+Name:           Objectorientierung
+Beschreibung:   Das Project soll objektorientiert entwickelt werden. Auf Interfaces und starte Vererbung soll weitestgehens verzichtet werden.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Model View Control
+Beschreibung:   Das Proekt soll ein "Model" haben welches die Inhale des Spielbeschreibt, eine "Control" die das Model steuert und eine "View" welche die Inhalte des Spiels darstellt.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Fehlerverhalten
+Beschreibung:   Da der Spieler direkt Eingaben macht, soll das Spiel robust gegenüber Fehleingaben sein und dem Spieler Rückmeldung geben, falls er illegale Eingaben tätigt.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Dokumentation
+Beschreibung:   Die Entwicklung und der Code des Projekts soll außreichend Dokumentiert werden. Die Sprache für Dokumentation is english.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Coding Style
+Beschreibung:   Es soll ein konsitenter Coding Style verwendet und weitere Konventionen von den Entwicklern abgesprochen werden.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Versionskontrolle
+Beschreibung:   Größere Änderungen sollen auf "Branches" entwickelt werden. Der "master" soll nur fertige Versionen/Releases enthalten.
+------------------------------------------------------
+------------------------------------------------------
+Name:           Spielwelt
+Beschreibung:   Es soll mindestens eine Spielwelt erstellt werden, welche alle Möglichkeiten des Spiels verwendet und zudem eine unterhaltsame Geschichte erzählt.
+------------------------------------------------------
