@@ -11,7 +11,7 @@ public class GameLauncher {
   public static void main(String[] args) {
     GameControl gameControl = null;
 
-    boolean doTest = false;
+    boolean doTest = true;
 
     // TODO Out and In probably should be created here, so we can do the play again stuff easily?
     // TODO File/Path or parameter input. Via args?
