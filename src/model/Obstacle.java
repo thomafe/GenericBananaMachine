@@ -9,8 +9,8 @@ import model.superclasses.GameObject;
  * @author Simone273
  */
 public abstract class Obstacle extends GameObject {
+  // TODO use a "tryToUse(Object)" method? More inheritance tricks!!
 
-  // TODO use inheritance to make this a bunch cleaner
   private String resolution;
   protected boolean resolved = false;
   private boolean consumesItem = true;
