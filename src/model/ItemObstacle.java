@@ -14,6 +14,8 @@ public class ItemObstacle extends Obstacle {
    */
   public ItemObstacle(String name, String description, String resolution, Item requiredItem) {
     super(name, description, resolution);
+    
+    this.requiredItem = requiredItem;
   }
   
   /**
