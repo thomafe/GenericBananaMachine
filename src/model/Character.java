@@ -1,16 +1,15 @@
 package model;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * character moves through the world, picks up items, moves through passages and resolves obstacles
  * has lifepoints, can get more or use them, dies if no lifepoints left
  *
  * @author Simone273
  */
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Character {
-
   private Place currentPlace = null;
   private List<Item> itemsInInventory = new ArrayList<>();
   private int lifepoints;
@@ -70,7 +69,6 @@ public class Character {
    * @return Place
    */
   public Place getCurrentPlace() {
-
     return currentPlace;
   }
 
@@ -99,13 +97,10 @@ public class Character {
       dead = true;
     }
     return dead;
-
   }
 
   public int getLifepoints() {
     return lifepoints;
   }
-
-
 }
 

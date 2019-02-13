@@ -10,12 +10,8 @@ import model.superclasses.GameObject;
  *
  * @author Simone273
  */
-
 public class Place extends GameObject {
-
-  // Attribute
   private List<Passage> passages;
-
   private List<GameObject> thingsInTheRoom;
 
   /**
@@ -36,9 +32,6 @@ public class Place extends GameObject {
    * @return Passage List
    */
   public List<Passage> getPassages() {
-    // thingsInTheRoom.stream().filter(o -> o instanceof Passage).collect(collector);
-
-    // getter for passages
     return passages;
   }
 
