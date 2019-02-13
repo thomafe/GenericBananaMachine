@@ -57,7 +57,6 @@ public class Output {
 
   public void badEnding() {
     printString("You failed\n This is the end of the game \n This place brought death to you");
-    // TODO implement play again
   }
 
   /**

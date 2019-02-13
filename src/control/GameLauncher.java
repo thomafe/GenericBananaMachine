@@ -29,7 +29,6 @@ public class GameLauncher {
     }
 
     // TODO Out and In probably should be created here, so we can do the play again stuff easily?
-    // TODO File/Path or parameter input. Via args?
 
     do {
       if (doTest) {
