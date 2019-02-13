@@ -1,6 +1,6 @@
 package model;
 
-public class RiddleObstacle extends Obstacle{
+public class RiddleObstacle extends Obstacle {
 
   private String riddleAnswer;
 
@@ -13,21 +13,17 @@ public class RiddleObstacle extends Obstacle{
    */
   public RiddleObstacle(String name, String description, String resolution, String riddleAnswere) {
     super(name, description, resolution);
-
     this.riddleAnswer = riddleAnswere;
   }
 
-  
   /**
    * Check if the answer for the riddle is correct if yes return true fo obstacleResolved so that
    * Obstacle gets resolved if no return false
    */
   public boolean tryToAnswerRiddle(String answerForRiddle) {
-
     if (riddleAnswer.equalsIgnoreCase(answerForRiddle)) {
       resolve();
     }
     return isResolved();
   }
-
 }
