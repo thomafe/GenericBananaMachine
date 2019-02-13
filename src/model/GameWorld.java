@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class GameWorld {
 
-  private String indroduction = null;
+  private String introduction = null;
   private Map<Place, String> endings = null;
 
   private Place startingPlace = null;
@@ -36,7 +36,7 @@ public class GameWorld {
   public GameWorld(String introdution, Place startingPlace) {
     this();
 
-    this.indroduction = introdution;
+    this.introduction = introdution;
     this.startingPlace = startingPlace;
   }
 
@@ -46,7 +46,7 @@ public class GameWorld {
    * @param introduction
    */
   public void setIntroduction(String introduction) {
-    this.indroduction = introduction;
+    this.introduction = introduction;
   }
 
   /**
@@ -54,8 +54,8 @@ public class GameWorld {
    * 
    * @return
    */
-  public String getIndroduction() {
-    return indroduction;
+  public String getIntroduction() {
+    return introduction;
   }
 
   /**
