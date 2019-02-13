@@ -164,25 +164,45 @@ public class Obstacle extends GameObject {
     this.consumesItem = consumesItem;
   }
 
-  /
-  public String reactsToContact() {
+  /**
+   * Method that will be run when Character gets in Contact with Item
+   * Obstacle reacts to contact then
+   *
+   */
+  public String getReactionToContact() {
    return contactWithItem;
   }
 
-  public String reactToFalseItem() {
+  /**
+   * Reaction of Obstacle when somebody uses the wrong item
+   *
+   */
+  public String getReactionToFalseItem() {
     return usedFalseItem;
   }
 
-  public String reactsToCorrectItem() {
+  /**
+   * Reaction of Obstacle when someone used the correct item
+   *
+   */
+  public String getReactionToCorrectItem() {
     return usedCorrectItem;
   }
 
-  public String  walkAway() {
+  /**
+   * Character walks away, Obstacle reacts
+   *
+   */
+  public String getWalkAwayReaction() {
     return walkingAway;
   }
 
   // TODO simone this should just return the amount of damage the obstacle does. Also, how do I know
   // WHEN to call this method?? Doku please
+  public int setDamagepoints(int damage){
+
+  }
+
   public int getDamagepoints(int damage) {
     damagepoints = damagepoints + damage;
     return damagepoints;
