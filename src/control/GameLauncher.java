@@ -31,19 +31,19 @@ public class GameLauncher {
     // TODO Out and In probably should be created here, so we can do the play again stuff easily?
     // TODO File/Path or parameter input. Via args?
 
-    if (doTest) {
-      gameControl = GameFactory.getTestGame();
-    } else if (!fileName.isEmpty()) {
-      gameControl = GameFactory.getGameFromFile(fileName);
-    } else if (localGameNumber >= 0) {
-      gameControl = GameFactory.getLocalGame(localGameNumber);
-    }
+    do {
+      if (doTest) {
+        gameControl = GameFactory.getTestGame();
+      } else if (!fileName.isEmpty()) {
+        gameControl = GameFactory.getGameFromFile(fileName);
+      } else if (localGameNumber >= 0) {
+        gameControl = GameFactory.getLocalGame(localGameNumber);
+      }
 
-    if (gameControl != null) {
-      gameControl.runGame();
-    } else {
-      System.out.println("No valid game found...");
-    }
+      if (gameControl == null) {
+        System.out.println("No valid game found...");
+        break;
+      }
+    } while (gameControl.runGame());
   }
-
 }

@@ -31,6 +31,7 @@ public class GameControl {
   private GameWorld gameWorld = null;
 
   private boolean gameIsRunning = false;
+  private boolean restartGame = false;
 
   public enum decision_type {
     CANT_DECIDE, YES, NO, NO_MATCH
@@ -65,8 +66,10 @@ public class GameControl {
 
   /**
    * Contains the main game loop Every time check if game might end!
+   * 
+   * @return whether the player wants to play again.
    */
-  public void runGame() {
+  public boolean runGame() {
     gameIntroduction();
 
     gameIsRunning = true;
@@ -80,6 +83,8 @@ public class GameControl {
       in.readInput();
 
     }
+    
+    return restartGame;
   }
 
   /**
