@@ -4,8 +4,14 @@ import view.Input;
 import view.Output;
 
 public class GameLauncher {
-
-
+  
+  /**
+   * There are no objects of this class.
+   */
+  private GameLauncher() {
+    
+  }
+  
   /**
    * Main Method.
    * 
@@ -20,8 +26,6 @@ public class GameLauncher {
     Output out = new Output();
     Input in = new Input(out);
 
-    // args = new String[] {"-d"};
-
     for (int i = 0; i < args.length; i++) {
       if (args[i].equalsIgnoreCase("-d")) {
         doTest = true;
@@ -33,8 +37,6 @@ public class GameLauncher {
       }
 
     }
-
-    // TODO Out and In probably should be created here, so we can do the play again stuff easily?
 
     do {
       if (doTest) {
