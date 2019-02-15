@@ -151,8 +151,9 @@ public class Output {
   }
 
   /**
-   * Look at the currentPlace.
+   * Look at the currentPlace. Use <code>lookAtGameObject()</code> instead
    */
+  @Deprecated
   public void lookAtCurrentPlace(Place currentPlace) {
     StringBuilder placeDescription = new StringBuilder();
 
@@ -169,12 +170,9 @@ public class Output {
    * @param objectName String
    */
   public void lookAtGameObject(GameObject object) {
-    StringBuilder gameObjectDescription = new StringBuilder();
-
-    gameObjectDescription.append("You look at " + object.getName() + "\n");
-    gameObjectDescription.append(object.getDescription());
-
-    printString(gameObjectDescription.toString());
+    // TODO does not work great with place. Go back to old method?
+    
+    printString(object.getDescription());
   }
 
   /**

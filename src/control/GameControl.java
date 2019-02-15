@@ -118,7 +118,7 @@ public class GameControl {
         || interactWithObstacle(obstacleInPassage)) {
       character.move(destinationPassage);
       characterMoved = true;
-      out.lookAtCurrentPlace(getCurrentPlace());
+      out.lookAtGameObject(getCurrentPlace());
     }
 
     return characterMoved;
@@ -134,11 +134,12 @@ public class GameControl {
   public void interactWithFurniture(Furniture furniture) {
     Obstacle obstacleOnFurniture = furniture.getObstacle();
 
+    // TODO feedback what's happening
     if (obstacleOnFurniture == null || obstacleOnFurniture.isResolved()
         || interactWithObstacle(obstacleOnFurniture)) {
       furniture.receiveItemsInSide().forEach(getCurrentPlace()::addObjectToPlace);
       furniture.emptyOutFurniture();
-    }
+    } 
   }
 
   /**
@@ -160,6 +161,7 @@ public class GameControl {
       answerString = in.readItemForObstacle();
 
       if (answerString.equalsIgnoreCase("leave")) {
+        out.noSuccess(errorType.GO_BACK);
         break;
       }
 
@@ -171,7 +173,6 @@ public class GameControl {
         }
       } else if (currentObstacle instanceof RiddleObstacle) {
         ((RiddleObstacle) currentObstacle).tryToAnswerRiddle(answerString);
-        // TODO when we can tell riddle and item obstacles apart, rework this
       }
 
       if (currentObstacle.isResolved()) {
