@@ -1,6 +1,5 @@
 package model;
 
-import model.superclasses.Approachable;
 import model.superclasses.GameObject;
 
 /**
@@ -8,7 +7,7 @@ import model.superclasses.GameObject;
  *
  * @author Simone273
  */
-public class Passage extends GameObject implements Approachable {
+public class Passage extends GameObject{
 
   private Place[] connectingRooms = new Place[2];
   private Obstacle obstacle = null;

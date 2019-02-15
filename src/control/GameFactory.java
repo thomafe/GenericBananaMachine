@@ -45,7 +45,9 @@ public class GameFactory {
     XmlParser parser = new XmlParser();
     parser.parseXml();
 
-    newGame = new GameControl(parser.getStartingPlace());
+    if (parser.getStartingPlace() != null) {
+      newGame = new GameControl(parser.getStartingPlace());
+    }
 
     return newGame;
   }
@@ -61,9 +63,9 @@ public class GameFactory {
     GameControl newLocalGame = null;
 
     switch (number) {
-//      case 0:
-//        newLocalGame = new GameControl(oldTestWorld());
-//        break;
+      // case 0:
+      // newLocalGame = new GameControl(oldTestWorld());
+      // break;
       case 1:
         newLocalGame = new GameControl(shipwreckedWorld());
         break;
@@ -225,8 +227,9 @@ public class GameFactory {
         "Your flashlight is too low for this darkness. You need something to check if there is anything.",
         "You threw the stone in the tunnel but you are instantly hit by the same stone. Is this a portal back to the entrance?",
         item6);
-    Obstacle obs7 = new ItemObstacle("Attention", "You need to call attention of the humans you hear.",
-        "You fired your missile of signal rockets to call attention.", item8);
+    Obstacle obs7 =
+        new ItemObstacle("Attention", "You need to call attention of the humans you hear.",
+            "You fired your missile of signal rockets to call attention.", item8);
     Obstacle obs8 = new ItemObstacle("Path away from voices",
         "You need something to orientate not to get lost on the path.",
         "You used the compass to find the way to south which guides you away from the human voices.",
@@ -257,35 +260,37 @@ public class GameFactory {
     return room0;
   }
 
-//
-//  @Deprecated
-//  public static Place oldTestWorld() {
-//    // Game World
-//    Place entrance = new Place("Entrance", "This is your starting area.");
-//    Place secondRoom =
-//        new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
-//    Place thirdRoom =
-//        new Place("Lighthouse", "You can't see anything in here because the light is blinding.");
-//
-//    Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed",
-//        entrance, secondRoom);
-//    new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom,
-//        thirdRoom);
-//
-//    Item lightsaber = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
-//    Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
-//    Item overcharger = new Item("Overcharger", "This thing just makes all gadgets go Uhweeeeee");
-//
-//    Obstacle obstacle = new DoubleItemObstacle("Blastdoor", "A thick blast door that blocks the way",
-//        "You melt through the door with your lightsaber!", lightsaber, overcharger);
-//
-//    pas1.setObstacle(obstacle);
-//
-//    entrance.addObjectToPlace(lightsaber);
-//    entrance.addObjectToPlace(overcharger);
-//    secondRoom.addObjectToPlace(item2);
-//
-//    return entrance;
-//  }
+  //
+  // @Deprecated
+  // public static Place oldTestWorld() {
+  // // Game World
+  // Place entrance = new Place("Entrance", "This is your starting area.");
+  // Place secondRoom =
+  // new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
+  // Place thirdRoom =
+  // new Place("Lighthouse", "You can't see anything in here because the light is blinding.");
+  //
+  // Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed",
+  // entrance, secondRoom);
+  // new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom,
+  // thirdRoom);
+  //
+  // Item lightsaber = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
+  // Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a
+  // monkey.");
+  // Item overcharger = new Item("Overcharger", "This thing just makes all gadgets go Uhweeeeee");
+  //
+  // Obstacle obstacle = new DoubleItemObstacle("Blastdoor", "A thick blast door that blocks the
+  // way",
+  // "You melt through the door with your lightsaber!", lightsaber, overcharger);
+  //
+  // pas1.setObstacle(obstacle);
+  //
+  // entrance.addObjectToPlace(lightsaber);
+  // entrance.addObjectToPlace(overcharger);
+  // secondRoom.addObjectToPlace(item2);
+  //
+  // return entrance;
+  // }
 
 }

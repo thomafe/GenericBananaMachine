@@ -1,10 +1,8 @@
 package view;
 
 import java.util.List;
-import model.Character;
 import model.Item;
 import model.Obstacle;
-import model.Passage;
 import model.Place;
 import model.superclasses.GameObject;
 
@@ -16,8 +14,7 @@ import model.superclasses.GameObject;
 public class Output {
 
   public enum errorType {
-    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD,
-    DECIDE, NO_PASSAGE
+    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE, NO_PASSAGE
   }
 
   public enum errorTypeInput {
@@ -32,15 +29,9 @@ public class Output {
     YOU_SURE, NO, YES, TRY_AGAIN
   }
 
-  public enum options {
-    NOT_YET
-  }
-
-  private Character character = null;
-
-  private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Goto/Use <Passage/Furniture Name>", "Go back to the last passage", "Take <Item Name>",
-      "Inventory", "Actions" , "Exit"};
+  private static final String[] ACTIONS =
+      {"Look at <something>", "Look around", "Goto/Use <Passage/Furniture Name>",
+          "Go back to the last passage", "Take <Item Name>", "Inventory", "Actions", "Exit"};
 
   /**
    * Introduction for the player at the start of the game.
@@ -57,17 +48,14 @@ public class Output {
    * Ending sequence when the game is done, either because of succeed or because of death
    */
   public void goodEnding() {
-    printString(
-        "Congraltulations, you've made it\n"
-            + "You reached the end of the game \n"
-            + "passing many obstacles you fought your way through the world \n"
-            + "consider yourself a hero now\n");
+    printString("Congraltulations, you've made it\n" + "You reached the end of the game \n"
+        + "passing many obstacles you fought your way through the world \n"
+        + "consider yourself a hero now\n");
     youDidItASCI();
   }
 
   public void badEnding() {
-    printString("You failed\n This is the end of the game \n"
-        + "This place brought death to you");
+    printString("You failed\n This is the end of the game \n" + "This place brought death to you");
     youDidItNotASCI();
   }
 
@@ -98,11 +86,8 @@ public class Output {
     } else {
       StringBuilder thingsOutput = new StringBuilder();
 
-      thingsOutput.append(
-          "These things are in " + currentPlace.getName() + ": ");
-      for (GameObject object : currentPlace.getObjectsInPlace()) {
-        thingsOutput.append(object.getName() + " | ");
-      }
+      thingsOutput.append("These things are in " + currentPlace.getName() + ":\n");
+      thingsOutput.append(createList(currentPlace.getObjectsInPlace()));
 
       printString(thingsOutput.toString());
     }
@@ -115,9 +100,12 @@ public class Output {
     if (!itemsInInventory.isEmpty()) {
       StringBuilder itemList = new StringBuilder();
 
-      itemList.append("These items are in your inventory: ");
-      for (Item item : itemsInInventory) {
-        itemList.append(item.getName() + " | ");
+      itemList.append("These items are in your inventory:\n");
+      for (int i = 0; i < itemsInInventory.size(); i++) {
+        itemList.append(itemsInInventory.get(i));
+        if (i != itemsInInventory.size() - 1) {
+          itemList.append(" | ");
+        }
       }
 
       printString(itemList.toString());
@@ -132,12 +120,15 @@ public class Output {
   public void listPassages(Place currentPlace) {
     StringBuilder passageList = new StringBuilder();
 
-     // TODO rework these to | styles lists. Make method for it
-    passageList.append(
-        "These passages lead out of " + currentPlace.getName() + ": ");
-    for (Passage passage : currentPlace.getPassages()) {
-      passageList.append(passage.getName() + " | ");
+    // TODO rework these to | styles lists. Make method for it
+    passageList.append("These passages lead out of " + currentPlace.getName() + ":\n");
+    for (int i = 0; i < currentPlace.getPassages().size(); i++) {
+      passageList.append(currentPlace.getPassages().get(i));
+      if (i != currentPlace.getPassages().size() - 1) {
+        passageList.append(" | ");
+      }
     }
+    
 
     printString(passageList.toString());
 
@@ -174,12 +165,12 @@ public class Output {
    * @param objectName String
    */
   public void lookAtGameObject(GameObject object) {
-      StringBuilder gameObjectDescription = new StringBuilder();
+    StringBuilder gameObjectDescription = new StringBuilder();
 
-      gameObjectDescription.append("You look at " + object.getName() + "\n");
-      gameObjectDescription.append(object.getDescription());
+    gameObjectDescription.append("You look at " + object.getName() + "\n");
+    gameObjectDescription.append(object.getDescription());
 
-      printString(gameObjectDescription.toString());
+    printString(gameObjectDescription.toString());
   }
 
   /**
@@ -211,7 +202,7 @@ public class Output {
         printString("You don't have this item!");
         break;
       case GO_BACK:
-        printString("You decided to go back to " + character.getCurrentPlace().getName());
+        printString("You decided to go back");
         break;
       case DONT_MIX:
         printString("Don't mix the bloody commands!");
@@ -254,6 +245,7 @@ public class Output {
 
   /**
    * Standard output for successful operations
+   * 
    * @param userInput
    * @param type
    */
@@ -269,6 +261,7 @@ public class Output {
 
   /**
    * Standard output for obstacle interactions
+   * 
    * @param obstacle
    * @param type
    */
@@ -278,7 +271,7 @@ public class Output {
         printString(obstacle.getResolution());
         break;
       case OBSTACLE_REACTION:
-//        printString(obstacle.getReactionToFalseItem(););
+        // printString(obstacle.getReactionToFalseItem(););
         obstacle.getReactionToFalseItem();
         break;
       default:
@@ -288,10 +281,11 @@ public class Output {
 
   /**
    * Standard output for game endings
-   * @param type    
+   * 
+   * @param type
    */
-  public void exitingTheGame(endingType type){
-    switch (type){
+  public void exitingTheGame(endingType type) {
+    switch (type) {
       case YOU_SURE:
         printString("Are you sure you want to exit the game?[YES/NO]");
         break;
@@ -325,7 +319,7 @@ public class Output {
         + "                                             /_/ \n");
   }
 
-  public void youDidItNotASCI(){
+  public void youDidItNotASCI() {
     printString(" __     __               _ _     _    _ _                 _        __\n"
         + " \\ \\   / /              | (_)   | |  (_) |               | |    _ / /\n"
         + "  \\ \\_/ /__  _   _    __| |_  __| |   _| |_   _ __   ___ | |_  (_) | \n"
@@ -335,19 +329,8 @@ public class Output {
         + "                                                                  \\_\\\n");
   }
 
-  /**
-   * Output a committed message in console. Deprecated! There should be a method for what you want
-   * to do.
-   *
-   * @param message String
-   */
-  @Deprecated
-  public void doOutput(String message) {
-    printString(message);
-  }
-
-  public void inputLine(){
-    System.out.print("> ");
+  public void beforeInput() {
+    System.out.print("-------------------------------\n> ");
   }
 
   /**
@@ -355,7 +338,27 @@ public class Output {
    */
   private void printString(String message) {
     System.out.println(message);
-    System.out.println("-------------------------------");
+  }
+
+  /**
+   * Creates a list from gameobject names, seperated by |
+   * name1 | name2 | name3
+   * 
+   * @param gameObjects
+   * @return
+   */
+  // TODO why does this not work with List<Passage> etc??
+  private String createList(List<GameObject> gameObjects) {
+    StringBuilder gameObjectList = new StringBuilder();
+
+    for (int i = 0; i < gameObjects.size(); i++) {
+      gameObjectList.append(gameObjects.get(i));
+      if (i != gameObjects.size() - 1) {
+        gameObjectList.append(" | ");
+      }
+    }
+
+    return gameObjectList.toString();
   }
 
 }

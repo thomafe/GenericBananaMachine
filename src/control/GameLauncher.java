@@ -6,8 +6,14 @@ import view.Output.errorType;
 import view.Output.options;
 
 public class GameLauncher {
-
-
+  
+  /**
+   * There are no objects of this class.
+   */
+  private GameLauncher() {
+    
+  }
+  
   /**
    * Main Method.
    * 
@@ -84,8 +90,7 @@ public class GameLauncher {
         System.err.println("No valid game found...");
         break;
       } else {
-        gameControl.setInput(in);
-        gameControl.setOutput(out);
+        gameControl.setInputOutput(in, out);
       }
     } while (gameControl.runGame());
   }
