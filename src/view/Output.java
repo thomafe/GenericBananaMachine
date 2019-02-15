@@ -309,20 +309,9 @@ public class Output {
         + "    |_|\\___/ \\__,_|  \\__,_|_|\\__,_|  |_|\\__| |_| |_|\\___/ \\__| (_) | \n"
         + "                                                                  \\_\\\n");
   }
-
-  /**
-   * Output a committed message in console. Deprecated! There should be a method for what you want
-   * to do.
-   *
-   * @param message String
-   */
-  @Deprecated
-  public void doOutput(String message) {
-    printString(message);
-  }
-
-  public void inputLine(){
-    System.out.print("> ");
+  
+  public void beforeInput() {
+    System.out.print("-------------------------------\n> ");
   }
 
   /**
@@ -330,6 +319,5 @@ public class Output {
    */
   private void printString(String message) {
     System.out.println(message);
-    System.out.println("-------------------------------");
   }
 }
