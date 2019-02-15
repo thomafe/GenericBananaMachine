@@ -134,7 +134,7 @@ public class Input {
   }
 
   public void matchLookAtPlace() {
-    out.lookAtCurrentPlace(control.getCurrentPlace());
+    out.lookAtGameObject(control.getCurrentPlace());
     out.listObjectsInPlace(control.getCurrentPlace());
     out.listPassages(control.getCurrentPlace());
   }
