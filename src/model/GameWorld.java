@@ -13,6 +13,8 @@ import java.util.Map;
 public class GameWorld {
 
   private String introduction = null;
+  private String levelName = null;
+  private String levelVersion = null;
   private Map<Place, String> endings = null;
 
   private Place startingPlace = null;
@@ -74,6 +76,42 @@ public class GameWorld {
    */
   public Place getStartingPlace() {
     return startingPlace;
+  }
+
+  /**
+   * Setter for levelName
+   *
+   * @param levelName String
+   */
+  public void setLevelName(String levelName) {
+    this.levelName = levelName;
+  }
+
+  /**
+   * Getter for levelName.
+   *
+   * @return String
+   */
+  public String getlevelName() {
+    return levelName;
+  }
+
+  /**
+   * Setter for levelVersion.
+   *
+   * @param version String
+   */
+  public void setLevelVersion(String version) {
+    this.levelVersion = version;
+  }
+
+  /**
+   * Getter for levelVersion.
+   *
+   * @return String
+   */
+  public String getLevelVersion() {
+    return levelVersion;
   }
 
   /**
