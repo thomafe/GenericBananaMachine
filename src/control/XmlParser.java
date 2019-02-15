@@ -28,6 +28,7 @@ public class XmlParser {
 
   // TODO: (1) create getters of the variables which can be called in CreateWorld instead of pushing them to it.
   private int numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
+  private String storyName;
 
   /**
    * Parse given XML file in /levels/ directory, generate objects, connections and GameWorld.
@@ -61,10 +62,14 @@ public class XmlParser {
       // parse story text
       Node storyNode = storyList.item(0);
       Element storyElement = (Element) storyNode;
-      debug("Intro:" + storyElement.getElementsByTagName("introduction").item(0).getTextContent());
-      // add introduction to world
+      debug("Intro: " + storyElement.getElementsByTagName("introduction").item(0).getTextContent());
+      debug("Level: " + storyElement.getElementsByTagName("name").item(0).getTextContent());
+      debug("Version: " + storyElement.getElementsByTagName("version").item(0).getTextContent());
+      // add story elements to world
       world.setIntroduction(storyElement.getElementsByTagName("introduction").item(0).getTextContent());
-
+      world.setLevelName(storyElement.getElementsByTagName("name").item(0).getTextContent());
+      world.setLevelVersion(storyElement.getElementsByTagName("version").item(0).getTextContent());
+      
       // parse all existing Places
       for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
         Node placeNode = placeList.item(placeCounter);
@@ -324,6 +329,22 @@ public class XmlParser {
     if(enableDebug) {
       System.out.println(post);
     }
+  }
+
+  /**
+   * Setter for storyName
+   */
+  public void setStoryName(String name) {
+    storyName = name;
+  }
+
+  /**
+   * Getter for storyName.
+   *
+   * @return String
+   */
+  private String getStoryName() {
+    return storyName;
   }
 
 }
