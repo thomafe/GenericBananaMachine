@@ -25,8 +25,6 @@ public class XmlParser {
   private GameWorld world = new GameWorld();
 
   private boolean enableDebug = false;
-
-  private int numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
   private String storyName;
 
   /**
@@ -53,9 +51,9 @@ public class XmlParser {
       NodeList storyList = doc.getElementsByTagName("story");
 
       // Create object arrays.
-      ArrayList<Place> places = new ArrayList<Place>();
-      ArrayList<Item> items = new ArrayList<Item>();
-      ArrayList<Passage> passages = new ArrayList<Passage>();
+      ArrayList<Place> places = new ArrayList<>();
+      ArrayList<Item> items = new ArrayList<>();
+      ArrayList<Passage> passages = new ArrayList<>();
 
       // parse story text
       Node storyNode = storyList.item(0);
@@ -71,9 +69,6 @@ public class XmlParser {
       // parse all existing Places
       for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
         Node placeNode = placeList.item(placeCounter);
-
-        // set number of places.
-        setNumberOfPlaces(placeList.getLength());
 
         debug("\nCurrent Element: " + placeNode.getNodeName());
 
@@ -107,9 +102,6 @@ public class XmlParser {
           for (int itemCounter = 0; itemCounter < itemList.getLength(); itemCounter++) {
             Node itemNode = itemList.item(itemCounter);
 
-            // set number of items.
-            setNumberOfItems(itemList.getLength());
-
             Element itemElement = (Element) itemNode;
 
             debug("- Item" + itemCounter + ":");
@@ -134,9 +126,6 @@ public class XmlParser {
       for (int passageCounter = 0; passageCounter < passageList.getLength(); passageCounter++) {
         Node passageNode = passageList.item(passageCounter);
 
-        // set number of passages.
-        setNumberOfPassages(passageList.getLength());
-
         debug("\nCurrent Element: " + passageNode.getNodeName());
 
         if (passageNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -160,9 +149,6 @@ public class XmlParser {
 
           for (int obstacleCounter = 0; obstacleCounter < obstacleList.getLength(); obstacleCounter++) {
             Node obstacleNode = obstacleList.item(obstacleCounter);
-
-            // set number of obstacles.
-            setNumberOfObstacles(obstacleList.getLength());
 
             Element obstacleElement = (Element) obstacleNode;
 
@@ -197,42 +183,6 @@ public class XmlParser {
       e.printStackTrace();
     }
 
-  }
-
-  /**
-   * Setter for Number of Places.
-   *
-   * @param num int
-   */
-  private void setNumberOfPlaces(int num) {
-    numberOfPlaces = num;
-  }
-
-  /**
-   * Setter for Number of Items.
-   *
-   * @param num int
-   */
-  private void setNumberOfItems(int num) {
-    numberOfItems = num;
-  }
-
-  /**
-   * Setter for Number of Passages.
-   *
-   * @param num int
-   */
-  private void setNumberOfPassages(int num) {
-    numberOfPassages = num;
-  }
-
-  /**
-   * Setter for Number of Obstacles.
-   *
-   * @param num int
-   */
-  private void setNumberOfObstacles(int num) {
-    numberOfObstacles = num;
   }
 
   /**
@@ -327,7 +277,7 @@ public class XmlParser {
   }
 
   /**
-   * Setter for storyName
+   * Setter for storyName.
    */
   public void setStoryName(String name) {
     storyName = name;

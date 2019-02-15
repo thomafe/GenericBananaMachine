@@ -150,7 +150,7 @@ public class GameWorld {
    * @param place Place
    * @return Place
    */
-  public boolean isEndingPlace(Place place) {
+  private boolean isEndingPlace(Place place) {
     return endings.containsKey(place);
   }
 
