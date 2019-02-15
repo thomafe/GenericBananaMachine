@@ -26,7 +26,6 @@ public class XmlParser {
 
   private boolean enableDebug = false;
 
-  // TODO: (1) create getters of the variables which can be called in CreateWorld instead of pushing them to it.
   private int numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
   private String storyName;
 
@@ -53,7 +52,6 @@ public class XmlParser {
       NodeList passageList = doc.getElementsByTagName("passage");
       NodeList storyList = doc.getElementsByTagName("story");
 
-      // TODO: reference to (1)
       // Create object arrays.
       ArrayList<Place> places = new ArrayList<Place>();
       ArrayList<Item> items = new ArrayList<Item>();
@@ -87,7 +85,6 @@ public class XmlParser {
           debug("- Name: " + placeElement.getElementsByTagName("name").item(0).getTextContent());
           debug("- Description: " + placeElement.getElementsByTagName("description").item(0).getTextContent());
 
-          // TODO: reference to (1)
           // Create Places.
           places.add(
               new Place(
@@ -119,7 +116,6 @@ public class XmlParser {
             debug("- - Name: " + itemElement.getElementsByTagName("name").item(0).getTextContent());
             debug("- - Description: " + itemElement.getElementsByTagName("description").item(0).getTextContent());
 
-            // TODO: reference to (1)
             // Create items.
             items.add(
                 new Item(
@@ -128,7 +124,7 @@ public class XmlParser {
                 )
             );
             // Set items in current place.
-            places.get(placeCounter).addItemOnTheFloor(getIncludedItem(itemElement, items));
+            places.get(placeCounter).addObjectToPlace(getIncludedItem(itemElement,items));
 
           }
         }
@@ -152,7 +148,6 @@ public class XmlParser {
           debug("- Comes from: " + passageElement.getElementsByTagName("comeFrom").item(0).getTextContent());
           debug("- Connects to: " + passageElement.getElementsByTagName("connectTo").item(0).getTextContent());
 
-          // TODO: reference to (1)
           // Create Passage with connected Places.
           passages.add(new Passage(passageElement.getElementsByTagName("name").item(0).getTextContent(),
               passageElement.getElementsByTagName("description").item(0).getTextContent(),
@@ -255,15 +250,6 @@ public class XmlParser {
       }
     }
     return requirement;
-  }
-
-  /**
-   * Getter for the Starting Place which must be given to the new Character.
-   *
-   * @return Place
-   */
-  public Place getStartingPlace() {
-    return startingPlace;
   }
 
   /**
