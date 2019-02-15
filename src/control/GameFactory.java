@@ -239,14 +239,14 @@ public class GameFactory {
     pass8.setObstacle(obs8); // Path away -> away
     pass9.setObstacle(obs9); // Shore -> Rescue
 
-    room0.addItemOnTheFloor(item1); // beach -> machete
-    room0.addItemOnTheFloor(item2); // beach -> flashlight
-    room0.addItemOnTheFloor(item3); // beach -> rope
-    room1.addItemOnTheFloor(item4); // coast -> cloth
-    room2.addItemOnTheFloor(item5); // Jungle -> Wooden Plank
-    room2.addItemOnTheFloor(item6); // Jungle -> Stone
-    room3.addItemOnTheFloor(item7); // Cave -> Compass
-    room4.addItemOnTheFloor(item8); // Outback -> signal rockets
+    room0.addObjectToPlace(item1); // beach -> machete
+    room0.addObjectToPlace(item2); // beach -> flashlight
+    room0.addObjectToPlace(item3); // beach -> rope
+    room1.addObjectToPlace(item4); // coast -> cloth
+    room2.addObjectToPlace(item5); // Jungle -> Wooden Plank
+    room2.addObjectToPlace(item6); // Jungle -> Stone
+    room3.addObjectToPlace(item7); // Cave -> Compass
+    room4.addObjectToPlace(item8); // Outback -> signal rockets
 
     return room0;
   }
@@ -275,9 +275,9 @@ public class GameFactory {
 
     pas1.setObstacle(obstacle);
 
-    entrance.addItemOnTheFloor(lightsaber);
-    entrance.addItemOnTheFloor(overcharger);
-    secondRoom.addItemOnTheFloor(item2);
+    entrance.addObjectToPlace(lightsaber);
+    entrance.addObjectToPlace(overcharger);
+    secondRoom.addObjectToPlace(item2);
 
     return entrance;
   }
