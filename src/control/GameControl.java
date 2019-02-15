@@ -42,9 +42,6 @@ public class GameControl {
    */
   public GameControl(Place startingPlace) {
     character = new Character(startingPlace);
-
-    out = new Output();
-    in = new Input(out, this);
   }
 
   /**
@@ -68,6 +65,10 @@ public class GameControl {
    * @return whether the player wants to play again.
    */
   public boolean runGame() {
+    if(out == null || in == null) {
+      return false;
+    }
+    
     gameIntroduction();
 
     gameIsRunning = true;
@@ -341,6 +342,15 @@ public class GameControl {
    */
   public Place getCurrentPlace() {
     return character.getCurrentPlace();
+  }
+  
+  public void setOutput(Output out) {
+    this.out = out;
+  }
+  
+  public void setInput(Input in) {
+    this.in = in;
+    in.setControl(this);
   }
 
 }

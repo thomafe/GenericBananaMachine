@@ -48,9 +48,8 @@ public class Input {
    * 
    * @param output Output
    */
-  public Input(Output output, GameControl control) {
+  public Input(Output output) {
     out = output;
-    this.control = control;
   }
 
   /**
@@ -250,5 +249,9 @@ public class Input {
       }
     }
     return boxed;
+  }
+  
+  public void setControl(GameControl control) {
+    this.control = control;
   }
 }
