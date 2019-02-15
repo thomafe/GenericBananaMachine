@@ -43,7 +43,7 @@ public class GameFactory {
     GameControl newGame = null;
 
     XmlParser parser = new XmlParser();
-    parser.parseXml(filePath);
+    parser.initParser(filePath);
 
     newGame = new GameControl(parser.getStartingPlace());
 

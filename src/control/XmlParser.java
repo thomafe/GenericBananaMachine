@@ -27,6 +27,12 @@ public class XmlParser {
   private boolean enableDebug = false;
   private String storyName;
 
+  public void initParser(String file) {
+    if(checkFileExists(file)){
+      parseXml(file);
+    }
+  }
+
   /**
    * Parse given XML file in /levels/ directory, generate objects, connections and GameWorld.
    *
@@ -290,6 +296,21 @@ public class XmlParser {
    */
   private String getStoryName() {
     return storyName;
+  }
+
+  /**
+   * Check if file in path exists and returns true if it does, false if not.
+   * @param file String
+   * @return boolean
+   */
+  private boolean checkFileExists(String file) {
+    boolean exist = false;
+    File tmpFile = new File("./levels/" + file);
+    if(tmpFile.exists()) {
+      //file exists
+      exist = true;
+    }
+    return exist;
   }
 
 }
