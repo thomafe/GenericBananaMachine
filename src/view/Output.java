@@ -32,6 +32,10 @@ public class Output {
     YOU_SURE, NO, YES, TRY_AGAIN
   }
 
+  public enum options {
+    NOT_YET
+  }
+
   private Character character = null;
 
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
@@ -179,6 +183,19 @@ public class Output {
   }
 
   /**
+   * Takes an array with all Options and prints them out
+   * @param gameOptions Array
+   */
+  public void mainMenuText(String[] gameOptions){
+    StringBuilder mainMenuOptions = new StringBuilder();
+    mainMenuOptions.append("Welcome to our Game!" + "\n");
+    for (int i = 0; i < gameOptions.length; i++) {
+      mainMenuOptions.append(gameOptions[i] + " | ");
+    }
+    printString(mainMenuOptions.toString());
+  }
+
+  /**
    * Standard output for unsuccessful operations
    */
   public void noSuccess(errorType type) {
@@ -290,6 +307,14 @@ public class Output {
     }
   }
 
+  public void menuOptions(options opt){
+    switch (opt){
+      case NOT_YET:
+        printString("There is nothing you can change yet!");
+        break;
+    }
+  }
+
   public void youDidItASCI(){
     printString(" __     __               _ _     _   _ _     __  \n"
         + " \\ \\   / /              | (_)   | | (_) |    \\ \\ \n"
@@ -332,4 +357,5 @@ public class Output {
     System.out.println(message);
     System.out.println("-------------------------------");
   }
+
 }

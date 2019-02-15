@@ -254,4 +254,19 @@ public class Input {
   public void setControl(GameControl control) {
     this.control = control;
   }
+
+  public String getStartOpt(String[] options) {
+    String userInput = readInSingleLine();
+    String chosenOpt = null;
+    for (int i = 0; i < options.length; i++) {
+      if (userInput.matches("(?i)" + options[i])) {
+        chosenOpt = options[i];
+        break;
+      }
+    }
+    if (chosenOpt == null) {
+      out.noSuccess(errorType.CANT_DO_THAT);
+    }
+    return chosenOpt;
+  }
 }
