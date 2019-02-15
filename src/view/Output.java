@@ -29,6 +29,10 @@ public class Output {
     YOU_SURE, NO, YES, TRY_AGAIN
   }
 
+  public enum options {
+    NOT_YET
+  }
+
   private static final String[] ACTIONS =
       {"Look at <something>", "Look around", "Goto/Use <Passage/Furniture Name>",
           "Go back to the last passage", "Take <Item Name>", "Inventory", "Actions", "Exit"};
