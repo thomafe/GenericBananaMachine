@@ -5,9 +5,11 @@ import model.Character;
 import model.Furniture;
 import model.GameWorld;
 import model.Item;
+import model.ItemObstacle;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
+import model.RiddleObstacle;
 import model.superclasses.GameObject;
 import view.Input;
 import view.Output;
@@ -33,10 +35,6 @@ public class GameControl {
   private boolean gameIsRunning = false;
   private boolean restartGame = false;
 
-  public enum decision_type {
-    CANT_DECIDE, YES, NO, NO_MATCH
-  }
-
   /**
    * Create a new controller with local Input and output.
    * 
@@ -44,9 +42,6 @@ public class GameControl {
    */
   public GameControl(Place startingPlace) {
     character = new Character(startingPlace);
-
-    out = new Output();
-    in = new Input(out, this);
   }
 
   /**
@@ -70,6 +65,10 @@ public class GameControl {
    * @return whether the player wants to play again.
    */
   public boolean runGame() {
+    if(out == null || in == null) {
+      return false;
+    }
+    
     gameIntroduction();
 
     gameIsRunning = true;
@@ -77,11 +76,9 @@ public class GameControl {
     // Game Loop
     while (gameIsRunning) {
 
+      in.readInput();
       checkForBadEnding();
       checkForGoodEnding();
-      out.lookAtCurrentPlace(getCurrentPlace());
-      in.readInput();
-
     }
 
     return restartGame;
@@ -95,15 +92,12 @@ public class GameControl {
   /**
    * Asks the player if he wants to leave the game. Takes an yes/no answer from input.
    */
-  public void endGame() {
-    out.exitingTheGame(endingType.YOU_SURE);
-    if (in.yesNo()) {
-      out.exitingTheGame(endingType.YES);
-      gameIsRunning = false;
-    } else {
-      out.exitingTheGame(endingType.NO);
+  public void endGame(boolean askTryAgain) {
+    gameIsRunning = false;
+
+    if (askTryAgain) {
+      restartGame = playAgain();
     }
-    // TODO take an "Ending" as parameter? Maybe just a string?
   }
 
   /**
@@ -124,6 +118,7 @@ public class GameControl {
         || interactWithObstacle(obstacleInPassage)) {
       character.move(destinationPassage);
       characterMoved = true;
+      out.lookAtCurrentPlace(getCurrentPlace());
     }
 
     return characterMoved;
@@ -141,7 +136,8 @@ public class GameControl {
 
     if (obstacleOnFurniture == null || obstacleOnFurniture.isResolved()
         || interactWithObstacle(obstacleOnFurniture)) {
-      furniture.receiveItemsInSide(true).forEach(character.getCurrentPlace()::addObjectToPlace);
+      furniture.receiveItemsInSide().forEach(getCurrentPlace()::addObjectToPlace);
+      furniture.emptyOutFurniture();
     }
   }
 
@@ -169,12 +165,12 @@ public class GameControl {
 
       chosenItem = findItemInInventory(answerString);
 
-      if (chosenItem != null) {
-        if (currentObstacle.tryToUseItem(chosenItem) && chosenItem.isConsumed()) {
+      if (chosenItem != null && currentObstacle instanceof ItemObstacle) {
+        if (((ItemObstacle) currentObstacle).tryToUseItem(chosenItem) && chosenItem.isConsumed()) {
           character.removeItem(chosenItem);
         }
-      } else {
-        currentObstacle.tryToAnswerRiddle(answerString);
+      } else if (currentObstacle instanceof RiddleObstacle) {
+        ((RiddleObstacle) currentObstacle).tryToAnswerRiddle(answerString);
         // TODO when we can tell riddle and item obstacles apart, rework this
       }
 
@@ -293,7 +289,6 @@ public class GameControl {
   private void gameIntroduction() {
     out.greeting();
     // TODO use the introduction from the level
-    out.lookAtCurrentPlace(getCurrentPlace());
     out.listOptions();
   }
 
@@ -304,8 +299,7 @@ public class GameControl {
 
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
       out.goodEnding();
-
-      restartGame = playAgain();
+      endGame(true);
     }
   }
 
@@ -317,16 +311,7 @@ public class GameControl {
     if (character.getCurrentPlace().getName().equals("Bad Ending")
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
       out.badEnding();
-
-      // out.doOutput("Your Character unfortunately died. Wanna play again? Please enter YES or
-      // NO");
-      // Replay question
-      /*
-       * if (in.readInSingleLine().equals("YES")) { Control control = new Control();
-       * control.runGame(); } else { out.doOutput("Thanks for playing! See you later."); }
-       */
-
-      restartGame = playAgain();
+      endGame(true);
     }
   }
 
@@ -337,7 +322,7 @@ public class GameControl {
   private void checkIfCharacterDead() {
     if (character.isDead()) {
       out.noSuccess(errorType.YOU_DEAD);
-      gameIsRunning = false;
+      endGame(true);
     }
   }
 
@@ -358,5 +343,13 @@ public class GameControl {
   public Place getCurrentPlace() {
     return character.getCurrentPlace();
   }
+  
+  public void setInputOutput(Input in, Output out) {
+    this.in = in;
+    this.out = out;
+    
+    in.setControl(this);
+  }
+
 
 }

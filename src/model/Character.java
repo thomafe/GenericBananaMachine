@@ -1,16 +1,15 @@
 package model;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * character moves through the world, picks up items, moves through passages and resolves obstacles
  * has lifepoints, can get more or use them, dies if no lifepoints left
  *
  * @author Simone273
  */
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Character {
-
   private Place currentPlace = null;
   private List<Item> itemsInInventory = new ArrayList<>();
   private int lifepoints;
@@ -41,7 +40,6 @@ public class Character {
    *
    * @param passage Passage
    */
-  // bei gang durch passage wird current place zum neuen place
   public void move(Passage passage) {
     currentPlace = passage.usePassage(currentPlace);
   }
@@ -66,17 +64,11 @@ public class Character {
   }
 
   /**
-   * Use Item to solve Obstocle.
-   */
-  public void useItem(Item item) {}
-
-  /**
    * Getter for current Place.
    *
    * @return Place
    */
   public Place getCurrentPlace() {
-
     return currentPlace;
   }
 
@@ -105,13 +97,10 @@ public class Character {
       dead = true;
     }
     return dead;
-
   }
 
   public int getLifepoints() {
     return lifepoints;
   }
-
-
 }
 

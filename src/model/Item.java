@@ -9,7 +9,6 @@ import model.superclasses.GameObject;
  */
 public class Item extends GameObject {
 
-  // Attribute
   private boolean consumed = false;
 
   /**
@@ -20,7 +19,6 @@ public class Item extends GameObject {
    */
   public Item(String name, String description) {
     super(name, description);
-
   }
 
   /**
@@ -38,5 +36,4 @@ public class Item extends GameObject {
   public void consume() {
     this.consumed = true;
   }
-
 }

@@ -17,7 +17,7 @@ public class Output {
 
   public enum errorType {
     CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD,
-    DECIDE
+    DECIDE, NO_PASSAGE
   }
 
   public enum errorTypeInput {
@@ -35,14 +35,16 @@ public class Output {
   private Character character = null;
 
   private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Goto <Passage | Furniture Name>", "Take <Item Name>", "Inventory", "Actions" , "Exit"};
+      "Goto/Use <Passage/Furniture Name>", "Go back to the last passage", "Take <Item Name>",
+      "Inventory", "Actions" , "Exit"};
 
   /**
    * Introduction for the player at the start of the game.
    */
   public void greeting() {
     printString("Hello fellow player!\n"
-        + " In this glorious adventure game you can prove your bravery and smartness\n by passing the many obstacles that will come in your way\n"
+        + "In this glorious adventure game you can prove your bravery and smartness\n"
+        + "by passing the many obstacles that will come in your way\n"
         + "Look for things along the way that might help you and you may stand a chance");
 
   }
@@ -52,11 +54,17 @@ public class Output {
    */
   public void goodEnding() {
     printString(
-        "Congraltulations, you've made it\n You reached the end of the game \n passing many obstacles you fought your way through the world \nconsider yourself a hero now");
+        "Congraltulations, you've made it\n"
+            + "You reached the end of the game \n"
+            + "passing many obstacles you fought your way through the world \n"
+            + "consider yourself a hero now\n");
+    youDidItASCI();
   }
 
   public void badEnding() {
-    printString("You failed\n This is the end of the game \n This place brought death to you");
+    printString("You failed\n This is the end of the game \n"
+        + "This place brought death to you");
+    youDidItNotASCI();
   }
 
   /**
@@ -82,14 +90,14 @@ public class Output {
    */
   public void listObjectsInPlace(Place currentPlace) {
     if (currentPlace.getObjectsInPlace().isEmpty()) {
-      printString("There are no items here.");
+      printString("There are no things here.");
     } else {
       StringBuilder thingsOutput = new StringBuilder();
 
       thingsOutput.append(
-          "These items are in " + currentPlace.getName() + ": \n");
+          "These things are in " + currentPlace.getName() + ": ");
       for (GameObject object : currentPlace.getObjectsInPlace()) {
-        thingsOutput.append(" - " + object.getName() + "\n");
+        thingsOutput.append(object.getName() + " | ");
       }
 
       printString(thingsOutput.toString());
@@ -103,9 +111,9 @@ public class Output {
     if (!itemsInInventory.isEmpty()) {
       StringBuilder itemList = new StringBuilder();
 
-      itemList.append("These items are in your inventory:\n");
+      itemList.append("These items are in your inventory: ");
       for (Item item : itemsInInventory) {
-        itemList.append(" - " + item.getName() + "\n");
+        itemList.append(item.getName() + " | ");
       }
 
       printString(itemList.toString());
@@ -120,10 +128,11 @@ public class Output {
   public void listPassages(Place currentPlace) {
     StringBuilder passageList = new StringBuilder();
 
+     // TODO rework these to | styles lists. Make method for it
     passageList.append(
-        "These passages lead out of " + currentPlace.getName() + ":\n");
+        "These passages lead out of " + currentPlace.getName() + ": ");
     for (Passage passage : currentPlace.getPassages()) {
-      passageList.append(" - " + passage.getName() + "\n");
+      passageList.append(passage.getName() + " | ");
     }
 
     printString(passageList.toString());
@@ -137,7 +146,7 @@ public class Output {
     StringBuilder obstacleOptions = new StringBuilder();
 
     obstacleOptions.append(obstacle.getDescription() + "\n");
-    obstacleOptions.append("Do you want to \"use\" an item or do you want to \"leave\"?");
+    obstacleOptions.append("Do you want to use an item or do you want to \"leave\"?");
 
     printString(obstacleOptions.toString());
   }
@@ -199,6 +208,9 @@ public class Output {
       case DECIDE:
         printString("You can't do both!");
         break;
+      case NO_PASSAGE:
+        printString("You first have to go through a passage!");
+        break;
       default:
         printString("Quite impossible");
     }
@@ -259,7 +271,7 @@ public class Output {
 
   /**
    * Standard output for game endings
-   * @param type
+   * @param type    
    */
   public void exitingTheGame(endingType type){
     switch (type){
@@ -278,6 +290,26 @@ public class Output {
     }
   }
 
+  public void youDidItASCI(){
+    printString(" __     __               _ _     _   _ _     __  \n"
+        + " \\ \\   / /              | (_)   | | (_) |    \\ \\ \n"
+        + "  \\ \\_/ /__  _   _    __| |_  __| |  _| |_  (_) |\n"
+        + "   \\   / _ \\| | | |  / _` | |/ _` | | | __|   | |\n"
+        + "    | | (_) | |_| | | (_| | | (_| | | | |_   _| |\n"
+        + "    |_|\\___/ \\__,_|  \\__,_|_|\\__,_| |_|\\__| (_) |\n"
+        + "                                             /_/ \n");
+  }
+
+  public void youDidItNotASCI(){
+    printString(" __     __               _ _     _    _ _                 _        __\n"
+        + " \\ \\   / /              | (_)   | |  (_) |               | |    _ / /\n"
+        + "  \\ \\_/ /__  _   _    __| |_  __| |   _| |_   _ __   ___ | |_  (_) | \n"
+        + "   \\   / _ \\| | | |  / _` | |/ _` |  | | __| | '_ \\ / _ \\| __|   | | \n"
+        + "    | | (_) | |_| | | (_| | | (_| |  | | |_  | | | | (_) | |_   _| | \n"
+        + "    |_|\\___/ \\__,_|  \\__,_|_|\\__,_|  |_|\\__| |_| |_|\\___/ \\__| (_) | \n"
+        + "                                                                  \\_\\\n");
+  }
+
   /**
    * Output a committed message in console. Deprecated! There should be a method for what you want
    * to do.
@@ -289,10 +321,15 @@ public class Output {
     printString(message);
   }
 
+  public void inputLine(){
+    System.out.print("> ");
+  }
+
   /**
    * Print a string to the console.
    */
   private void printString(String message) {
     System.out.println(message);
+    System.out.println("-------------------------------");
   }
 }

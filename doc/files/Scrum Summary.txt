@@ -1,0 +1,23 @@
+### Simone ###
+Accepted Stories: 11
+Features:         6
+Chores/Bugs:      5
+Total Points:     5
+
+### Niklas ###
+Accepted Stories: 9
+Features:         5
+Chores/Bugs:      4
+Total Points:     6
+
+### Tim ###
+Accepted Stories: 7
+Features:         5
+Chores/Bugs:      2
+Total Points:     4
+
+### Felix ###
+Accepted Stories: 13
+Features:         6
+Chores/Bugs:      7
+Total Points:     3

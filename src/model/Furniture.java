@@ -40,15 +40,16 @@ public class Furniture extends GameObject implements Approachable {
    * 
    * @return
    */
-  public List<Item> receiveItemsInSide(boolean takeOutItems) {
+  public List<Item> receiveItemsInSide() {
     if(obstalce == null || obstalce.isResolved()) {
-      if(takeOutItems) {
-        itemsInside = Collections.emptyList();
-      }
       return itemsInside;
     } else {
       return Collections.emptyList();
     }
+  }
+  
+  public void emptyOutFurniture() {
+    itemsInside = Collections.emptyList();
   }
   
 }

@@ -9,7 +9,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import model.Item;
-import model.Obstacle;
+import model.ItemObstacle;
 import model.Passage;
 import model.Place;
 import model.GameWorld;
@@ -116,7 +116,7 @@ public class XmlParser {
                 )
             );
             // Set items in current place.
-            places.get(placeCounter).addObjectToPlace(getIncludedItem(itemElement,items));
+            places.get(placeCounter).addObjectToPlace(getIncludedItem(itemElement, items));
 
           }
         }
@@ -158,7 +158,7 @@ public class XmlParser {
             debug("- - Required Item: " + obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
 
             // Create the obstacle for each passage.
-            passages.get(passageCounter).setObstacle(new Obstacle("",
+            passages.get(passageCounter).setObstacle(new ItemObstacle("",
                 obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
                 obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
                 getRequiredItem(items, obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent())
