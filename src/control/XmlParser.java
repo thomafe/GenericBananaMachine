@@ -253,6 +253,15 @@ public class XmlParser {
   }
 
   /**
+   * Getter for the Starting Place which must be given to the new Character.
+   *
+   * @return Place
+   */
+  public Place getStartingPlace() {
+    return startingPlace;
+  }
+
+  /**
    * Checks which Place is the Place before the current Passage and
    * returns the Place the Character comes from.
    *

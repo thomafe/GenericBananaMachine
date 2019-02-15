@@ -55,7 +55,7 @@ public class Place extends GameObject {
   /**
    * Adds a new thing to to place.
    * 
-   * @param object
+   * @param object GameObject
    */
   public void addObjectToPlace(GameObject object) {
     if (!thingsInTheRoom.contains(object)) {
