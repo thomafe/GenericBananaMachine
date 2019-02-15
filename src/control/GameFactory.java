@@ -27,7 +27,7 @@ public class GameFactory {
   /**
    * Create a new test game.
    * 
-   * @return
+   * @return GameControl
    */
   public static GameControl getTestGame() {
     return createNewGameController(testWorld());
@@ -36,14 +36,14 @@ public class GameFactory {
   /**
    * Create a new game from an XML File.
    * 
-   * @param filePath
-   * @return
+   * @param filePath String
+   * @return GameControl
    */
   public static GameControl getGameFromFile(String filePath) {
     GameControl newGame = null;
 
     XmlParser parser = new XmlParser();
-    parser.parseXml();
+    parser.initParser(filePath);
 
     if (parser.getStartingPlace() != null) {
       newGame = new GameControl(parser.getStartingPlace());
@@ -56,8 +56,8 @@ public class GameFactory {
    * Create a new game from local code. These are mostly old test worlds that are not ported or
    * worlds that contain features that are not included in the level.xmls yet.
    * 
-   * @param number
-   * @return
+   * @param number int
+   * @return GameControl
    */
   public static GameControl getLocalGame(int number) {
     GameControl newLocalGame = null;
@@ -78,8 +78,8 @@ public class GameFactory {
   /**
    * Create a new controller.
    * 
-   * @param startingPlace
-   * @return
+   * @param startingPlace Place
+   * @return Place
    */
   private static GameControl createNewGameController(Place startingPlace) {
     return new GameControl(startingPlace);
@@ -260,37 +260,36 @@ public class GameFactory {
     return room0;
   }
 
-  //
-  // @Deprecated
-  // public static Place oldTestWorld() {
-  // // Game World
-  // Place entrance = new Place("Entrance", "This is your starting area.");
-  // Place secondRoom =
-  // new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
-  // Place thirdRoom =
-  // new Place("Lighthouse", "You can't see anything in here because the light is blinding.");
-  //
-  // Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed",
-  // entrance, secondRoom);
-  // new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom,
-  // thirdRoom);
-  //
-  // Item lightsaber = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
-  // Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a
-  // monkey.");
-  // Item overcharger = new Item("Overcharger", "This thing just makes all gadgets go Uhweeeeee");
-  //
-  // Obstacle obstacle = new DoubleItemObstacle("Blastdoor", "A thick blast door that blocks the
-  // way",
-  // "You melt through the door with your lightsaber!", lightsaber, overcharger);
-  //
-  // pas1.setObstacle(obstacle);
-  //
-  // entrance.addObjectToPlace(lightsaber);
-  // entrance.addObjectToPlace(overcharger);
-  // secondRoom.addObjectToPlace(item2);
-  //
-  // return entrance;
-  // }
+/*
+  @Deprecated
+  public static Place oldTestWorld() {
+    // Game World
+    Place entrance = new Place("Entrance", "This is your starting area.");
+    Place secondRoom =
+        new Place("Hall of Doom", "This is the final Boss Room...not. It just sounds cool.");
+    Place thirdRoom =
+        new Place("Lighthouse", "You can't see anything in here because the light is blinding.");
+
+    Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed",
+        entrance, secondRoom);
+    new Passage("snake pit", "You are greeted by the lovely sound of zzzzzzzzz", secondRoom,
+        thirdRoom);
+
+    Item lightsaber = new Item("Lightsaber", "This is a powerful jedi melee weapon.");
+    Item item2 = new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
+    Item overcharger = new Item("Overcharger", "This thing just makes all gadgets go Uhweeeeee");
+
+    Obstacle obstacle = new Obstacle("Blastdoor", "A thick blast door that blocks the way",
+        "You melt through the door with your lightsaber!", lightsaber, overcharger);
+
+    pas1.setObstacle(obstacle);
+
+    entrance.addObjectToPlace(lightsaber);
+    entrance.addObjectToPlace(overcharger);
+    secondRoom.addObjectToPlace(item2);
+
+    return entrance;
+  }
+*/
 
 }

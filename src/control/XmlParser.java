@@ -12,6 +12,7 @@ import model.Item;
 import model.ItemObstacle;
 import model.Passage;
 import model.Place;
+import model.GameWorld;
 
 /**
  * Parse given XML file in a specific path.
@@ -21,19 +22,29 @@ import model.Place;
 public class XmlParser {
 
   private Place startingPlace = null;
+  private GameWorld world = new GameWorld();
 
   private boolean enableDebug = false;
+  private String storyName;
 
-  // TODO: (1) create getters of the variables which can be called in CreateWorld instead of pushing them to it.
-  private int numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
+  public void initParser(String file) {
+    if(checkFileExists(file)){
+      parseXml(file);
+    }
+  }
 
-  public void parseXml() {
+  /**
+   * Parse given XML file in /levels/ directory, generate objects, connections and GameWorld.
+   *
+   * @param file String
+   */
+  public void parseXml(String file) {
 
     try {
 
       debug("\n\nIn the beginning God created the heaven and the world...\n\n");
 
-      File fXmlFile = new File("./levels/game01.xml");
+      File fXmlFile = new File("./levels/" + file);
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
       Document doc = dBuilder.parse(fXmlFile);
@@ -43,30 +54,38 @@ public class XmlParser {
 
       NodeList placeList = doc.getElementsByTagName("place");
       NodeList passageList = doc.getElementsByTagName("passage");
+      NodeList storyList = doc.getElementsByTagName("story");
 
-      // TODO: reference to (1)
       // Create object arrays.
-      ArrayList<Place> places = new ArrayList<Place>();
-      ArrayList<Item> items = new ArrayList<Item>();
-      ArrayList<Passage> passages = new ArrayList<Passage>();
+      ArrayList<Place> places = new ArrayList<>();
+      ArrayList<Item> items = new ArrayList<>();
+      ArrayList<Passage> passages = new ArrayList<>();
+
+      // parse story text
+      Node storyNode = storyList.item(0);
+      Element storyElement = (Element) storyNode;
+      debug("Intro: " + storyElement.getElementsByTagName("introduction").item(0).getTextContent());
+      debug("Level: " + storyElement.getElementsByTagName("name").item(0).getTextContent());
+      debug("Version: " + storyElement.getElementsByTagName("version").item(0).getTextContent());
+      // add story elements to world
+      world.setIntroduction(storyElement.getElementsByTagName("introduction").item(0).getTextContent());
+      world.setLevelName(storyElement.getElementsByTagName("name").item(0).getTextContent());
+      world.setLevelVersion(storyElement.getElementsByTagName("version").item(0).getTextContent());
 
       // parse all existing Places
       for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
         Node placeNode = placeList.item(placeCounter);
-
-        // set number of places.
-        setNumberOfPlaces(placeList.getLength());
 
         debug("\nCurrent Element: " + placeNode.getNodeName());
 
         if (placeNode.getNodeType() == Node.ELEMENT_NODE) {
           Element placeElement = (Element) placeNode;
 
+          debug("- Ending: " + placeElement.getAttribute("end"));
           debug("- id: " + placeElement.getAttribute("id"));
           debug("- Name: " + placeElement.getElementsByTagName("name").item(0).getTextContent());
           debug("- Description: " + placeElement.getElementsByTagName("description").item(0).getTextContent());
 
-          // TODO: reference to (1)
           // Create Places.
           places.add(
               new Place(
@@ -75,14 +94,19 @@ public class XmlParser {
               )
           );
 
+          // add EndingPlace to World, set endingText to Places' Description
+          if(placeElement.getAttribute("end").equals("bad")) {
+            world.addEndingPlace(places.get(placeCounter), places.get(placeCounter).getDescription());
+          }
+
+          // Add current Place to GameWorld
+          world.addPlace(places.get(placeCounter));
+
           // parse all existing Place Items
           NodeList itemList = placeElement.getElementsByTagName("item");
 
           for (int itemCounter = 0; itemCounter < itemList.getLength(); itemCounter++) {
             Node itemNode = itemList.item(itemCounter);
-
-            // set number of items.
-            setNumberOfItems(itemList.getLength());
 
             Element itemElement = (Element) itemNode;
 
@@ -90,7 +114,6 @@ public class XmlParser {
             debug("- - Name: " + itemElement.getElementsByTagName("name").item(0).getTextContent());
             debug("- - Description: " + itemElement.getElementsByTagName("description").item(0).getTextContent());
 
-            // TODO: reference to (1)
             // Create items.
             items.add(
                 new Item(
@@ -109,9 +132,6 @@ public class XmlParser {
       for (int passageCounter = 0; passageCounter < passageList.getLength(); passageCounter++) {
         Node passageNode = passageList.item(passageCounter);
 
-        // set number of passages.
-        setNumberOfPassages(passageList.getLength());
-
         debug("\nCurrent Element: " + passageNode.getNodeName());
 
         if (passageNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -123,7 +143,6 @@ public class XmlParser {
           debug("- Comes from: " + passageElement.getElementsByTagName("comeFrom").item(0).getTextContent());
           debug("- Connects to: " + passageElement.getElementsByTagName("connectTo").item(0).getTextContent());
 
-          // TODO: reference to (1)
           // Create Passage with connected Places.
           passages.add(new Passage(passageElement.getElementsByTagName("name").item(0).getTextContent(),
               passageElement.getElementsByTagName("description").item(0).getTextContent(),
@@ -136,9 +155,6 @@ public class XmlParser {
 
           for (int obstacleCounter = 0; obstacleCounter < obstacleList.getLength(); obstacleCounter++) {
             Node obstacleNode = obstacleList.item(obstacleCounter);
-
-            // set number of obstacles.
-            setNumberOfObstacles(obstacleList.getLength());
 
             Element obstacleElement = (Element) obstacleNode;
 
@@ -160,6 +176,11 @@ public class XmlParser {
 
       startingPlace = places.get(0);
 
+      // set starting Place in GameWorld
+      if(world.getStartingPlace() == null) {
+        world.setStartingPlace(startingPlace);
+      }
+
       debug("\n\n");
       debug("World has successfully been created! God saw all that he had made, and it was good.");
       debug("\n\n\n\n");
@@ -168,42 +189,6 @@ public class XmlParser {
       e.printStackTrace();
     }
 
-  }
-
-  /**
-   * Setter for Number of Places.
-   *
-   * @param num int
-   */
-  private void setNumberOfPlaces(int num) {
-    numberOfPlaces = num;
-  }
-
-  /**
-   * Setter for Number of Items.
-   *
-   * @param num int
-   */
-  private void setNumberOfItems(int num) {
-    numberOfItems = num;
-  }
-
-  /**
-   * Setter for Number of Passages.
-   *
-   * @param num int
-   */
-  private void setNumberOfPassages(int num) {
-    numberOfPassages = num;
-  }
-
-  /**
-   * Setter for Number of Obstacles.
-   *
-   * @param num int
-   */
-  private void setNumberOfObstacles(int num) {
-    numberOfObstacles = num;
   }
 
   /**
@@ -295,6 +280,37 @@ public class XmlParser {
     if(enableDebug) {
       System.out.println(post);
     }
+  }
+
+  /**
+   * Setter for storyName.
+   */
+  public void setStoryName(String name) {
+    storyName = name;
+  }
+
+  /**
+   * Getter for storyName.
+   *
+   * @return String
+   */
+  private String getStoryName() {
+    return storyName;
+  }
+
+  /**
+   * Check if file in path exists and returns true if it does, false if not.
+   * @param file String
+   * @return boolean
+   */
+  private boolean checkFileExists(String file) {
+    boolean exist = false;
+    File tmpFile = new File("./levels/" + file);
+    if(tmpFile.exists()) {
+      //file exists
+      exist = true;
+    }
+    return exist;
   }
 
 }

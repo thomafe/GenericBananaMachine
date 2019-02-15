@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <world>
+  <story>
+    <name>Shipwrecked</name>
+    <version>1.0</version>
+    <introduction>Waddehaddedudeda</introduction>
+  </story>
+
   <places>
     <place id="0">
       <name>Beach</name>
@@ -57,15 +63,15 @@
       <name>Beach at the other side</name>
       <description>You found a way out of the jungle and enter the beach at the other side of the island. In the distance you can see the silhouette of a ship.</description>
     </place>
-    <place id="6">
+    <place id="6" end="good">
       <name>Ship of Coastguard</name>
       <description>You are saved by the coastguard. Just in the moment you feel saved and rescued, you realize that it is not the coastguard but pirates who seem to use you as their new slave.</description>
     </place>
-    <place id="7">
+    <place id="7" end="bad">
       <name>Bad Ending</name>
       <description>The wood is old and rotten. It instantly breaks after you tried to walk on it and you fall to death.</description>
     </place>
-    <place id="8">
+    <place id="8" end="bad">
       <name>Another Bad Ending</name>
       <description>After you fired your Signal Rocket, you are hit by arrows. An unfriendly civilization of Indians found another human meal.</description>
     </place>

@@ -12,7 +12,9 @@ import java.util.Map;
  */
 public class GameWorld {
 
-  private String indroduction = null;
+  private String introduction = null;
+  private String levelName = null;
+  private String levelVersion = null;
   private Map<Place, String> endings = null;
 
   private Place startingPlace = null;
@@ -30,38 +32,38 @@ public class GameWorld {
   /**
    * Create a new GameWorld with an introduction and a starting place.
    * 
-   * @param introdution
-   * @param startingPlace
+   * @param introduction String
+   * @param startingPlace Place
    */
-  public GameWorld(String introdution, Place startingPlace) {
+  public GameWorld(String introduction, Place startingPlace) {
     this();
 
-    this.indroduction = introdution;
+    this.introduction = introduction;
     this.startingPlace = startingPlace;
   }
 
   /**
    * Set the introduction to the game.
    * 
-   * @param introduction
+   * @param introduction String
    */
   public void setIntroduction(String introduction) {
-    this.indroduction = introduction;
+    this.introduction = introduction;
   }
 
   /**
    * Get the introduction to the game.
    * 
-   * @return
+   * @return String
    */
-  public String getIndroduction() {
-    return indroduction;
+  public String getIntroduction() {
+    return introduction;
   }
 
   /**
    * Set the starting place.
    * 
-   * @param startingPlace
+   * @param startingPlace Place
    */
   public void setStartingPlace(Place startingPlace) {
     this.startingPlace = startingPlace;
@@ -70,16 +72,52 @@ public class GameWorld {
   /**
    * Get the starting place.
    * 
-   * @return
+   * @return Place
    */
   public Place getStartingPlace() {
     return startingPlace;
   }
 
   /**
+   * Setter for levelName
+   *
+   * @param levelName String
+   */
+  public void setLevelName(String levelName) {
+    this.levelName = levelName;
+  }
+
+  /**
+   * Getter for levelName.
+   *
+   * @return String
+   */
+  public String getlevelName() {
+    return levelName;
+  }
+
+  /**
+   * Setter for levelVersion.
+   *
+   * @param version String
+   */
+  public void setLevelVersion(String version) {
+    this.levelVersion = version;
+  }
+
+  /**
+   * Getter for levelVersion.
+   *
+   * @return String
+   */
+  public String getLevelVersion() {
+    return levelVersion;
+  }
+
+  /**
    * Add a place to the GameWorld.
    * 
-   * @param newPlace
+   * @param newPlace Place
    */
   public void addPlace(Place newPlace) {
     places.add(newPlace);
@@ -88,19 +126,19 @@ public class GameWorld {
   /**
    * Add a passage to a place.
    * 
-   * @param passge
-   * @param place
+   * @param passage Passage
+   * @param place Place
    */
   @Deprecated
-  public void addPassageToPlace(Passage passge, Place place) {
-    place.addPassage(passge);
+  public void addPassageToPlace(Passage passage, Place place) {
+    place.addPassage(passage);
   }
 
   /**
    * Add an ending place.
    * 
-   * @param endingPlace
-   * @param endingText
+   * @param endingPlace Place
+   * @param endingText String
    */
   public void addEndingPlace(Place endingPlace, String endingText) {
     endings.put(endingPlace, endingText);
@@ -109,10 +147,10 @@ public class GameWorld {
   /**
    * Find out whether a place is an ending place.
    * 
-   * @param place
-   * @return
+   * @param place Place
+   * @return Place
    */
-  public boolean isEndingPlace(Place place) {
+  private boolean isEndingPlace(Place place) {
     return endings.containsKey(place);
   }
 
@@ -120,7 +158,7 @@ public class GameWorld {
    * Get the ending for a place.
    * 
    * @param endingPlace the Edning or null if the place is not an ending place.
-   * @return
+   * @return String
    */
   public String getEndingForPlace(Place endingPlace) {
     String endingText = null;
