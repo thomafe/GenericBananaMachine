@@ -49,8 +49,7 @@ public class GameLauncher {
         System.err.println("No valid game found...");
         break;
       } else {
-        gameControl.setInput(in);
-        gameControl.setOutput(out);
+        gameControl.setInputOutput(in, out);
       }
     } while (gameControl.runGame());
   }

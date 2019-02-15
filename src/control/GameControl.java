@@ -344,13 +344,12 @@ public class GameControl {
     return character.getCurrentPlace();
   }
   
-  public void setOutput(Output out) {
-    this.out = out;
-  }
-  
-  public void setInput(Input in) {
+  public void setInputOutput(Input in, Output out) {
     this.in = in;
+    this.out = out;
+    
     in.setControl(this);
   }
+
 
 }
