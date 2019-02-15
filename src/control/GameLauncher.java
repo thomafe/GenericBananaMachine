@@ -2,10 +2,18 @@ package control;
 
 import view.Input;
 import view.Output;
+import view.Output.errorType;
+import view.Output.options;
 
 public class GameLauncher {
-
-
+  
+  /**
+   * There are no objects of this class.
+   */
+  private GameLauncher() {
+    
+  }
+  
   /**
    * Main Method.
    * 
@@ -13,12 +21,43 @@ public class GameLauncher {
    */
   public static void main(String[] args) {
     GameControl gameControl = null;
-    boolean doTest = false;
-    String fileName = "level";
-    int localGameNumber = -1;
 
     Output out = new Output();
     Input in = new Input(out);
+
+    String[] mainOptions = {"Start Game", "Options", "Exit Game"};
+    String chosenOpt;
+    do {
+      chosenOpt = menuMain(out, in, mainOptions);
+
+      switch (chosenOpt) {
+        case "Exit Game":
+          System.exit(0);
+          break;
+        case "Options":
+          out.menuOptions(options.NOT_YET);
+          break;
+        case "Start Game":
+          getLevel(args, gameControl, in, out);
+          break;
+        default:
+          out.noSuccess(errorType.CANT_DO_THAT);
+          break;
+      }
+    } while (chosenOpt == "Options");
+  }
+
+  public static String menuMain(Output out, Input in, String[] options){
+    String chosenOpt = null;
+    out.mainMenuText(options);
+    chosenOpt = in.getStartOpt(options);
+    return chosenOpt;
+  }
+
+  public static void getLevel(String[] args, GameControl gC, Input in, Output out){
+    boolean doTest = false;
+    String fileName = "level";
+    int localGameNumber = -1;
 
     // args = new String[] {"-d"};
 
@@ -31,11 +70,13 @@ public class GameLauncher {
       } else if (args[i].equalsIgnoreCase("-n") && ++i < args.length) {
         localGameNumber = Integer.parseInt(args[i]);
       }
-
     }
 
-    // TODO Out and In probably should be created here, so we can do the play again stuff easily?
+    setLevel(doTest, fileName, localGameNumber, gC, in, out);
+  }
 
+  public static void setLevel(boolean doTest, String fileName, int localGameNumber,
+      GameControl gameControl, Input in, Output out){
     do {
       if (doTest) {
         gameControl = GameFactory.getTestGame();
