@@ -24,7 +24,7 @@ public class XmlParser {
   private Place startingPlace = null;
   private GameWorld world = new GameWorld();
 
-  private boolean enableDebug = true;
+  private boolean enableDebug = false;
 
   // TODO: (1) create getters of the variables which can be called in CreateWorld instead of pushing them to it.
   private int numberOfPlaces, numberOfPassages, numberOfItems, numberOfObstacles;
@@ -69,7 +69,7 @@ public class XmlParser {
       world.setIntroduction(storyElement.getElementsByTagName("introduction").item(0).getTextContent());
       world.setLevelName(storyElement.getElementsByTagName("name").item(0).getTextContent());
       world.setLevelVersion(storyElement.getElementsByTagName("version").item(0).getTextContent());
-      
+
       // parse all existing Places
       for (int placeCounter = 0; placeCounter < placeList.getLength(); placeCounter++) {
         Node placeNode = placeList.item(placeCounter);
