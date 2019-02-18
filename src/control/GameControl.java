@@ -87,6 +87,11 @@ public class GameControl {
     return restartGame;
   }
 
+  /**
+   * After game end, ask the player if he wants to play again.
+   * 
+   * @return
+   */
   public boolean playAgain() {
     out.exitingTheGame(endingType.TRY_AGAIN);
     return in.yesNo();
