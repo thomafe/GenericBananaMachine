@@ -29,6 +29,10 @@
           <name>Hammer of Thor</name>
           <description>The legendary hammer of God Thor. You can't handle the power nor touch it.</description>
         </content-item>
+        <content-item>
+          <name>Hand of God</name>
+          <description>Take him by the hand and become immortal.</description>
+        </content-item>
         <obstacle>
           <description>You need something to open it without getting hurt by the lightnings.</description>
           <resolution>You used the plank to open the chest.</resolution>

@@ -137,8 +137,22 @@ public class XmlParser {
             debug("- Furniture" + furnitureCounter);
             debug("- - Name: " + furnitureElement.getElementsByTagName("name").item(0).getTextContent());
             debug("- - Description: " + furnitureElement.getElementsByTagName("description").item(0).getTextContent());
-            debug("- - Conaining Item: " + furnitureElement.getElementsByTagName("content-item").item(0).getTextContent());
-            //TODO: Furiture Obstacles aso.
+
+            NodeList furnitureItemList = furnitureElement.getElementsByTagName("content-item");
+
+            // parse all Place Furniture Items
+            for (int furnitureItemCounter = 0; furnitureItemCounter < furnitureItemList.getLength(); furnitureItemCounter++) {
+              Node furnitureItemNode = furnitureItemList.item(furnitureItemCounter);
+
+              Element furnitureItemElement = (Element) furnitureItemNode;
+
+              debug("- - Content Items:");
+              debug("- - - Name: " + furnitureItemElement.getElementsByTagName("name").item(0).getTextContent());
+              debug("- - - Description: " + furnitureItemElement.getElementsByTagName("description").item(0).getTextContent());
+            }
+
+            //TODO: parse Furniture Obstacles
+
           }
 
         }
