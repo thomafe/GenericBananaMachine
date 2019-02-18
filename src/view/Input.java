@@ -14,7 +14,7 @@ import view.Output.errorTypeInput;
 import view.Output.successType;
 
 /**
- * processes input from user
+ * Processes input from user.
  *
  * @author Niklas
  */
@@ -22,9 +22,9 @@ public class Input {
   // TODO thomaf use interface and add methods for menu outside of that interface
 
   private int boxings = 0;
-  private Scanner scan = new Scanner(System.in);
-  private Output out;
-  private GameControl control;
+  private Scanner scan = null;
+  private Output out = null;
+  private GameControl control = null;
   private Passage lastPassage = null;
 
   // List for all the patterns/commands
@@ -38,7 +38,7 @@ public class Input {
   private Pattern patternGoBack = Pattern.compile("(?i)back");
 
   // Only in use while at obstacle
-  Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
+  private Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
 
   private Pattern[] possiblePatterns = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
       patternLookAt, patternInventory, patternActions, patternExitGame};
@@ -51,6 +51,8 @@ public class Input {
    */
   public Input(Output output) {
     out = output;
+
+    scan = new Scanner(System.in);
   }
 
   /**
@@ -201,7 +203,7 @@ public class Input {
   private void noMatch() {
     out.noSuccess(errorType.CANT_DO_THAT);
   }
-  
+
   /**
    * Takes the userInput and the hierachy of the caller(command-matcher) and searches the userInput
    * for commands with a hierachy lower than the caller. If any command matches with the input it
