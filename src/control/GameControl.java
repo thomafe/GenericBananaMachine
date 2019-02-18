@@ -42,6 +42,8 @@ public class GameControl {
    */
   public GameControl(Place startingPlace) {
     character = new Character(startingPlace);
+    
+    gameWorld = new GameWorld();
   }
 
   /**
@@ -53,7 +55,7 @@ public class GameControl {
    * @param startingPlace Place
    */
   public GameControl(Output out, Input in, Place startingPlace) {
-    character = new Character(startingPlace);
+    this(startingPlace);
 
     this.out = out;
     this.in = in;
@@ -303,7 +305,7 @@ public class GameControl {
   private void checkForGoodEnding() {
 
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
-      out.goodEnding();
+      out.goodEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
       endGame(true);
     }
   }
@@ -315,7 +317,7 @@ public class GameControl {
   private void checkForBadEnding() {
     if (character.getCurrentPlace().getName().equals("Bad Ending")
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
-      out.badEnding();
+      out.badEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
       endGame(true);
     }
   }

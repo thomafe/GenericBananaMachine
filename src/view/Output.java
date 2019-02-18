@@ -51,15 +51,24 @@ public class Output {
   /**
    * Ending sequence when the game is done, either because of succeed or because of death
    */
-  public void goodEnding() {
-    printString("Congraltulations, you've made it\n" + "You reached the end of the game \n"
-        + "passing many obstacles you fought your way through the world \n"
-        + "consider yourself a hero now\n");
+  public void goodEnding(String ending) {
+    if (ending != null && !ending.isEmpty()) {
+      printString("Congraltulations, you've made it\n" + "You reached the end of the game \n"
+          + "passing many obstacles you fought your way through the world \n"
+          + "consider yourself a hero now\n");
+    } else {
+      printString(ending);
+    }
     youDidItASCI();
   }
 
-  public void badEnding() {
-    printString("You failed\n This is the end of the game \n" + "This place brought death to you");
+  public void badEnding(String ending) {
+    if (ending != null && !ending.isEmpty()) {
+      printString(
+          "You failed\n This is the end of the game \n" + "This place brought death to you");
+    } else {
+      printString(ending);
+    }
     youDidItNotASCI();
   }
 
@@ -132,7 +141,7 @@ public class Output {
         passageList.append(" | ");
       }
     }
-    
+
 
     printString(passageList.toString());
 
@@ -171,15 +180,16 @@ public class Output {
    */
   public void lookAtGameObject(GameObject object) {
     // TODO does not work great with place. Go back to old method?
-    
+
     printString(object.getDescription());
   }
 
   /**
    * Takes an array with all Options and prints them out
+   * 
    * @param gameOptions Array
    */
-  public void mainMenuText(String[] gameOptions){
+  public void mainMenuText(String[] gameOptions) {
     StringBuilder mainMenuOptions = new StringBuilder();
     mainMenuOptions.append("Welcome to our Game!" + "\n");
     for (int i = 0; i < gameOptions.length; i++) {
@@ -305,15 +315,15 @@ public class Output {
     }
   }
 
-  public void menuOptions(options opt){
-    switch (opt){
+  public void menuOptions(options opt) {
+    switch (opt) {
       case NOT_YET:
         printString("There is nothing you can change yet!");
         break;
     }
   }
 
-  public void youDidItASCI(){
+  public void youDidItASCI() {
     printString(" __     __               _ _     _   _ _     __  \n"
         + " \\ \\   / /              | (_)   | | (_) |    \\ \\ \n"
         + "  \\ \\_/ /__  _   _    __| |_  __| |  _| |_  (_) |\n"
@@ -345,8 +355,7 @@ public class Output {
   }
 
   /**
-   * Creates a list from gameobject names, seperated by |
-   * name1 | name2 | name3
+   * Creates a list from gameobject names, seperated by | name1 | name2 | name3
    * 
    * @param gameObjects
    * @return

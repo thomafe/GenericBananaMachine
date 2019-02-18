@@ -5,7 +5,10 @@ import java.util.List;
 import model.superclasses.GameObject;
 
 /**
- * Are in a place, can contain items, may be blcoked by obatacles
+ * Are in a place, can contain items, may be blcoked by obatacles.
+ * 
+ * The name should describe the furniture.
+ * The obstacle follows the normal rules, but the resolution should mention the items being dropped into the room.
  *
  * @author thomafe
  */
