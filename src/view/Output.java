@@ -167,7 +167,7 @@ public class Output {
    * Shows GameObject's name / description in console or gives User an Exception if no such item
    * exists.
    *
-   * @param objectName String
+   * @param object GameObject
    */
   public void lookAtGameObject(GameObject object) {
     // TODO does not work great with place. Go back to old method?
