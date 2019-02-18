@@ -36,7 +36,7 @@ public class Input {
   Pattern patternExitGame = Pattern.compile("(?i)exit[\\w\\s]*");
   Pattern patternGoBack = Pattern.compile("(?i)back");
 
-  //Only in use while at obstacle
+  // Only in use while at obstacle
   Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
 
   private Pattern[] possiblePatterns = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
@@ -124,8 +124,9 @@ public class Input {
     GameObject foundObject = control.findGameObject(match.group(2));
 
     if (foundObject instanceof Passage) {
-      control.tryToMoveThroughPassage((Passage) foundObject);
-      lastPassage = (Passage) foundObject;
+      if (control.tryToMoveThroughPassage((Passage) foundObject)) {
+        lastPassage = (Passage) foundObject;
+      }
     } else if (foundObject instanceof Furniture) {
       control.interactWithFurniture((Furniture) foundObject);
     } else {
@@ -202,14 +203,15 @@ public class Input {
 
   /**
    * The method to get a yes/no decision from the player
+   * 
    * @return boolean
    */
-  public boolean yesNo(){
+  public boolean yesNo() {
     while (true) {
       String answer = readInSingleLine();
-      if (answer.matches("(?i)yes")){
+      if (answer.matches("(?i)yes")) {
         return true;
-      } else if (answer.matches("(?i)no")){
+      } else if (answer.matches("(?i)no")) {
         return false;
       } else {
         out.noSuccess(errorType.DECIDE);
@@ -248,7 +250,7 @@ public class Input {
     }
     return boxed;
   }
-  
+
   public void setControl(GameControl control) {
     this.control = control;
   }

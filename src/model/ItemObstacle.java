@@ -9,6 +9,7 @@ package model;
 public class ItemObstacle extends Obstacle {
 
   private Item requiredItem;
+  private boolean consumesItem = true;
 
   /**
    * Create a new obstacle that takes one item that will be consumed.
@@ -38,6 +39,20 @@ public class ItemObstacle extends Obstacle {
     }
     return correctItemUsed;
   }
+
+  protected void consume(Item itemToResolve) {
+    if (consumesItem) {
+      itemToResolve.consume();
+    }
+  }
+
+  /**
+   * Setter for Interactions with Obstacle
+   */
+  public void setConsumesItem(boolean consumesItem) {
+    this.consumesItem = consumesItem;
+  }
+
 }
 
 

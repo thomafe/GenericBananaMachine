@@ -3,7 +3,11 @@ package model;
 import model.superclasses.GameObject;
 
 /**
- * item can be picked up by the character, added to inventory, used to resolve obstacles, and be consumed
+ * Items can be picked up by the character, added to inventory, used to resolve obstacles, and be
+ * consumed.
+ * 
+ * An items name should describe it.
+ * An items description should give some clues about where to use it or at least be funny.
  *
  * @author Simone273
  */

@@ -4,7 +4,13 @@ import model.superclasses.GameObject;
 
 /**
  * Obstacle can block passages, can be solved with one or more item or a riddle, can react when
- * character interacts with it or when an item is used
+ * character interacts with it or when an item is used.
+ * 
+ * The name of the obstacle is not very important, the player never currently never sees it.
+ * The description should tell the player that he is blocked from progressing and give some clues how to solve it.
+ * The resolution should tell the player how he uses the item to clear the obstacle.
+ * The amount of damagepoints tells how much the character takes when failing to solve the obstacle.
+ * The reactions may contain some text that will be printed when the corrosponding action is taken (WIP).
  *
  * @author Simone273
  */
@@ -13,7 +19,6 @@ public abstract class Obstacle extends GameObject {
 
   private String resolution;
   protected boolean resolved = false;
-  private boolean consumesItem = true;
   private int damagepoints;
   private String contactWithItem;
   private String usedFalseItem;
@@ -36,17 +41,7 @@ public abstract class Obstacle extends GameObject {
   public String getResolution() {
     return resolution;
   }
-
-  /**
-   * Returns the state of resolution. If obstacle is successfully resolved, return true, else
-   * false.
-   *
-   * @return boolean
-   */
-  public boolean isResolved() {
-    return resolved;
-  }
-
+  
   /**
    * Set state of obstacle to true, when item has been used and needs to be consumed. Item can
    * either be consumed or not when resolving obstacle
@@ -57,19 +52,15 @@ public abstract class Obstacle extends GameObject {
     this.resolved = true;
   }
 
-  protected void consume(Item itemToResolve) {
-    if (consumesItem) {
-      itemToResolve.consume();
-    }
-  }
-
   /**
-   * Setter for Interactions with Obstacle
+   * Returns the state of resolution. If obstacle is successfully resolved, return true, else
+   * false.
+   *
+   * @return boolean
    */
-  public void setConsumesItem(boolean consumesItem) {
-    this.consumesItem = consumesItem;
+  public boolean isResolved() {
+    return resolved;
   }
-
 
   public void setContactWithItem(String contactWithItem){
     this.contactWithItem = contactWithItem;

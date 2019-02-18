@@ -14,7 +14,7 @@ import model.superclasses.GameObject;
 public class Output {
 
   public enum errorType {
-    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE, NO_PASSAGE
+    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE, NO_PASSAGE, EMPTY
   }
 
   public enum errorTypeInput {
@@ -195,7 +195,6 @@ public class Output {
     switch (type) {
       case CANT_DO_THAT:
         printString("You can't do that!");
-        listOptions();
         break;
       case DOES_NOT_WORK:
         printString("That doesn't work");
@@ -220,6 +219,9 @@ public class Output {
         break;
       case NO_PASSAGE:
         printString("You first have to go through a passage!");
+        break;
+      case EMPTY:
+        printString("There is nothing here.");
         break;
       default:
         printString("Quite impossible");
