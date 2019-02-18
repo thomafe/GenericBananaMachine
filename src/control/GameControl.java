@@ -65,10 +65,10 @@ public class GameControl {
    * @return whether the player wants to play again.
    */
   public boolean runGame() {
-    if(out == null || in == null) {
+    if (out == null || in == null) {
       return false;
     }
-    
+
     gameIntroduction();
 
     gameIsRunning = true;
@@ -134,12 +134,16 @@ public class GameControl {
   public void interactWithFurniture(Furniture furniture) {
     Obstacle obstacleOnFurniture = furniture.getObstacle();
 
-    // TODO feedback what's happening
+    out.lookAtGameObject(furniture);
     if (obstacleOnFurniture == null || obstacleOnFurniture.isResolved()
         || interactWithObstacle(obstacleOnFurniture)) {
-      furniture.receiveItemsInSide().forEach(getCurrentPlace()::addObjectToPlace);
-      furniture.emptyOutFurniture();
-    } 
+      if (furniture.receiveItemsInSide().isEmpty()) {
+        out.noSuccess(errorType.EMPTY);
+      } else {
+        furniture.receiveItemsInSide().forEach(getCurrentPlace()::addObjectToPlace);
+        furniture.emptyOutFurniture();
+      }
+    }
   }
 
   /**
@@ -344,11 +348,11 @@ public class GameControl {
   public Place getCurrentPlace() {
     return character.getCurrentPlace();
   }
-  
+
   public void setInputOutput(Input in, Output out) {
     this.in = in;
     this.out = out;
-    
+
     in.setControl(this);
   }
 
