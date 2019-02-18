@@ -5,39 +5,39 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import control.GameControl;
 import model.Furniture;
+import model.GameObject;
 import model.Item;
 import model.Passage;
-import model.superclasses.GameObject;
 import view.Output.endingType;
 import view.Output.errorType;
 import view.Output.errorTypeInput;
 import view.Output.successType;
 
 /**
- * processes input from user
+ * Processes input from user.
  *
  * @author Niklas
  */
 public class Input {
 
   private int boxings = 0;
-  Scanner scan = new Scanner(System.in);
-  Output out;
-  GameControl control;
-  Passage lastPassage = null;
+  private Scanner scan = null;
+  private Output out = null;
+  private GameControl control = null;
+  private Passage lastPassage = null;
 
   // List for all the patterns/commands
-  Pattern patternTakeItem = Pattern.compile("(?i)take\\s([\\w\\s]+)");
-  Pattern patternGotoPassage = Pattern.compile("(?i)(goto|use)\\s([\\w\\s]+)");
-  Pattern patternLookAtPlace = Pattern.compile("(?i)look\\s[\\w\\s]*around\\s*[\\w\\s]*");
-  Pattern patternLookAt = Pattern.compile("(?i)look\\s[\\w\\s]*at\\s([\\w\\s]*)");
-  Pattern patternInventory = Pattern.compile("(?i)inventory");
-  Pattern patternActions = Pattern.compile("(?i)actions");
-  Pattern patternExitGame = Pattern.compile("(?i)exit[\\w\\s]*");
-  Pattern patternGoBack = Pattern.compile("(?i)back");
+  private Pattern patternTakeItem = Pattern.compile("(?i)take\\s([\\w\\s]+)");
+  private Pattern patternGotoPassage = Pattern.compile("(?i)(goto|use)\\s([\\w\\s]+)");
+  private Pattern patternLookAtPlace = Pattern.compile("(?i)look\\s[\\w\\s]*around\\s*[\\w\\s]*");
+  private Pattern patternLookAt = Pattern.compile("(?i)look\\s[\\w\\s]*at\\s([\\w\\s]*)");
+  private Pattern patternInventory = Pattern.compile("(?i)inventory");
+  private Pattern patternActions = Pattern.compile("(?i)actions");
+  private Pattern patternExitGame = Pattern.compile("(?i)exit[\\w\\s]*");
+  private Pattern patternGoBack = Pattern.compile("(?i)back");
 
-  //Only in use while at obstacle
-  Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
+  // Only in use while at obstacle
+  private Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
 
   private Pattern[] possiblePatterns = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
       patternLookAt, patternInventory, patternActions, patternExitGame};
@@ -50,6 +50,8 @@ public class Input {
    */
   public Input(Output output) {
     out = output;
+
+    scan = new Scanner(System.in);
   }
 
   /**
@@ -106,80 +108,6 @@ public class Input {
     } else {
       noMatch();
     }
-
-  }
-
-  public void matchTakeItem(Matcher match) {
-    GameObject foundObject = control.findGameObject(match.group(1));
-
-    if (foundObject instanceof Item) {
-      control.pickUpItem((Item) foundObject);
-      out.success(match.group(1), successType.PICK_UP);
-    } else {
-      out.noSuccess(match.group(1), errorTypeInput.NO_ITEM);
-    }
-  }
-
-  public void matchGotoPassage(Matcher match) {
-    GameObject foundObject = control.findGameObject(match.group(2));
-
-    if (foundObject instanceof Passage) {
-      control.tryToMoveThroughPassage((Passage) foundObject);
-      lastPassage = (Passage) foundObject;
-    } else if (foundObject instanceof Furniture) {
-      control.interactWithFurniture((Furniture) foundObject);
-    } else {
-      out.noSuccess(match.group(2), errorTypeInput.THERE_IS_NONE);
-    }
-  }
-
-  public void matchLookAtPlace() {
-    out.lookAtGameObject(control.getCurrentPlace());
-    out.listObjectsInPlace(control.getCurrentPlace());
-    out.listPassages(control.getCurrentPlace());
-  }
-
-  public void matchLookAt(Matcher match) {
-    GameObject foundObject = control.findGameObject(match.group(1));
-
-    if (foundObject != null) {
-      out.lookAtGameObject(foundObject);
-    } else {
-      out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
-    }
-
-  }
-
-  public void matchInventory() {
-    out.listInventory(control.getCharacter().getItemsInInventory());
-  }
-
-  public void matchActions() {
-    out.listOptions();
-  }
-
-  public void matchExitGame() {
-    out.exitingTheGame(endingType.YOU_SURE);
-    if (yesNo()) {
-      out.exitingTheGame(endingType.YES);
-      control.endGame(false);
-    } else {
-      out.exitingTheGame(endingType.NO);
-    }
-  }
-
-  public void noMatch() {
-    out.noSuccess(errorType.CANT_DO_THAT);
-  }
-
-  /**
-   * !Not recommended to use outside of this class!
-   * 
-   * @return String
-   */
-  private String readInSingleLine() {
-    out.beforeInput();
-    return scan.nextLine();
   }
 
   /**
@@ -201,20 +129,78 @@ public class Input {
   }
 
   /**
-   * The method to get a yes/no decision from the player
-   * @return boolean
+   * Reads a single raw line of user input.
+   * 
+   * @return String
    */
-  public boolean yesNo(){
-    while (true) {
-      String answer = readInSingleLine();
-      if (answer.matches("(?i)yes")){
-        return true;
-      } else if (answer.matches("(?i)no")){
-        return false;
-      } else {
-        out.noSuccess(errorType.DECIDE);
-      }
+  private String readInSingleLine() {
+    out.beforeInput();
+    return scan.nextLine();
+  }
+
+
+  private void matchTakeItem(Matcher match) {
+    GameObject foundObject = control.findGameObject(match.group(1));
+
+    if (foundObject instanceof Item) {
+      control.pickUpItem((Item) foundObject);
+      out.success(match.group(1), successType.PICK_UP);
+    } else {
+      out.noSuccess(match.group(1), errorTypeInput.NO_ITEM);
     }
+  }
+
+  private void matchGotoPassage(Matcher match) {
+    GameObject foundObject = control.findGameObject(match.group(2));
+
+    if (foundObject instanceof Passage) {
+      if (control.tryToMoveThroughPassage((Passage) foundObject)) {
+        lastPassage = (Passage) foundObject;
+      }
+    } else if (foundObject instanceof Furniture) {
+      control.interactWithFurniture((Furniture) foundObject);
+    } else {
+      out.noSuccess(match.group(2), errorTypeInput.THERE_IS_NONE);
+    }
+  }
+
+  private void matchLookAtPlace() {
+    out.lookAtGameObject(control.getCurrentPlace());
+    out.listObjectsInPlace(control.getCurrentPlace());
+    out.listPassages(control.getCurrentPlace());
+  }
+
+  private void matchLookAt(Matcher match) {
+    GameObject foundObject = control.findGameObject(match.group(1));
+
+    if (foundObject != null) {
+      out.lookAtGameObject(foundObject);
+    } else {
+      out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
+    }
+
+  }
+
+  private void matchInventory() {
+    out.listInventory(control.getCharacter().getItemsInInventory());
+  }
+
+  private void matchActions() {
+    out.listOptions();
+  }
+
+  private void matchExitGame() {
+    out.exitingTheGame(endingType.YOU_SURE);
+    if (yesNo()) {
+      out.exitingTheGame(endingType.YES);
+      control.endGame(false);
+    } else {
+      out.exitingTheGame(endingType.NO);
+    }
+  }
+
+  private void noMatch() {
+    out.noSuccess(errorType.CANT_DO_THAT);
   }
 
   /**
@@ -226,7 +212,7 @@ public class Input {
    * @param hierachy the hierachy from the caller as integer
    * @return boolean
    */
-  public boolean testForBoxing(String userInput, int hierachy) {
+  private boolean testForBoxing(String userInput, int hierachy) {
     boolean boxed = false;
 
     for (int i = hierachy; i < possiblePatterns.length; i++) {
@@ -248,7 +234,26 @@ public class Input {
     }
     return boxed;
   }
-  
+
+  /**
+   * The method to get a yes/no decision from the player
+   * 
+   * @return boolean
+   */
+  public boolean yesNo() {
+    while (true) {
+      String answer = readInSingleLine();
+      if (answer.matches("(?i)yes")) {
+        return true;
+      } else if (answer.matches("(?i)no")) {
+        return false;
+      } else {
+        out.noSuccess(errorType.DECIDE);
+      }
+    }
+  }
+
+
   public void setControl(GameControl control) {
     this.control = control;
   }

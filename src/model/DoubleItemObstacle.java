@@ -1,9 +1,12 @@
 package model;
 
 /**
- * Obstacles that require two items to be resolved. Must be resolved so that they don't block
+ * Obstacles that require two items to be resolved, the second. Must be resolved so that they don't block
  * passages anymore.
- *
+ * 
+ * The name is still not relevant.
+ * The second object is needed first, the description should hint at that. (TODO thomaf Output for "first item correct)
+ * 
  * @author Simone
  */
 public class DoubleItemObstacle extends ItemObstacle {
@@ -26,10 +29,10 @@ public class DoubleItemObstacle extends ItemObstacle {
     this.additionalItem = additionalItem;
   }
 
-  @Override
   /**
    * Checks if additional item is correct, if yes run tryToUseItem in ItemObstacle
    */
+  @Override
   public boolean tryToUseItem(Item itemToTry) {
     boolean correctItemUsed = false;
 

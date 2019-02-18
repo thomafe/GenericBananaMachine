@@ -2,11 +2,12 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.superclasses.GameObject;
 
 /**
- *Character can be in place, can move from place to place via passages
- *an item can be in a place
+ * Character can be in place, can move from place to place via passages an item can be in a place.
+ *
+ * The name of the place should lead with "the" if needed and be short.
+ * The description of the place shouldn't be to long and set the feeling of the level.
  *
  * @author Simone273
  */

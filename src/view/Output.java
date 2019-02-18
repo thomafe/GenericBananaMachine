@@ -1,10 +1,10 @@
 package view;
 
 import java.util.List;
+import model.GameObject;
 import model.Item;
 import model.Obstacle;
 import model.Place;
-import model.superclasses.GameObject;
 
 /**
  * reacts to input from user with output
@@ -14,7 +14,7 @@ import model.superclasses.GameObject;
 public class Output {
 
   public enum errorType {
-    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE, NO_PASSAGE
+    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE, NO_PASSAGE, EMPTY
   }
 
   public enum errorTypeInput {
@@ -40,26 +40,38 @@ public class Output {
   /**
    * Introduction for the player at the start of the game.
    */
-  public void greeting() {
-    printString("Hello fellow player!\n"
-        + "In this glorious adventure game you can prove your bravery and smartness\n"
-        + "by passing the many obstacles that will come in your way\n"
-        + "Look for things along the way that might help you and you may stand a chance");
-
+  public void greeting(String introduction) {
+    if (introduction != null && !introduction.isEmpty()) {
+      printString(introduction);
+    } else {
+      printString("Hello fellow player!\n"
+          + "In this glorious adventure game you can prove your bravery and smartness\n"
+          + "by passing the many obstacles that will come in your way\n"
+          + "Look for things along the way that might help you and you may stand a chance");
+    }
   }
 
   /**
    * Ending sequence when the game is done, either because of succeed or because of death
    */
-  public void goodEnding() {
-    printString("Congraltulations, you've made it\n" + "You reached the end of the game \n"
-        + "passing many obstacles you fought your way through the world \n"
-        + "consider yourself a hero now\n");
+  public void goodEnding(String ending) {
+    if (ending != null && !ending.isEmpty()) {
+      printString(ending);
+    } else {
+      printString("Congraltulations, you've made it\n" + "You reached the end of the game \n"
+          + "passing many obstacles you fought your way through the world \n"
+          + "consider yourself a hero now\n");
+    }
     youDidItASCI();
   }
 
-  public void badEnding() {
-    printString("You failed\n This is the end of the game \n" + "This place brought death to you");
+  public void badEnding(String ending) {
+    if (ending != null && !ending.isEmpty()) {
+      printString(ending);
+    } else {
+      printString(
+          "You failed\n This is the end of the game \n" + "This place brought death to you");
+    }
     youDidItNotASCI();
   }
 
@@ -124,7 +136,6 @@ public class Output {
   public void listPassages(Place currentPlace) {
     StringBuilder passageList = new StringBuilder();
 
-    // TODO rework these to | styles lists. Make method for it
     passageList.append("These passages lead out of " + currentPlace.getName() + ":\n");
     for (int i = 0; i < currentPlace.getPassages().size(); i++) {
       passageList.append(currentPlace.getPassages().get(i));
@@ -132,7 +143,7 @@ public class Output {
         passageList.append(" | ");
       }
     }
-    
+
 
     printString(passageList.toString());
 
@@ -153,7 +164,6 @@ public class Output {
   /**
    * Look at the currentPlace. Use <code>lookAtGameObject()</code> instead
    */
-  @Deprecated
   public void lookAtCurrentPlace(Place currentPlace) {
     StringBuilder placeDescription = new StringBuilder();
 
@@ -171,15 +181,16 @@ public class Output {
    */
   public void lookAtGameObject(GameObject object) {
     // TODO does not work great with place. Go back to old method?
-    
+
     printString(object.getDescription());
   }
 
   /**
    * Takes an array with all Options and prints them out
+   * 
    * @param gameOptions Array
    */
-  public void mainMenuText(String[] gameOptions){
+  public void mainMenuText(String[] gameOptions) {
     StringBuilder mainMenuOptions = new StringBuilder();
     mainMenuOptions.append("Welcome to our Game!" + "\n");
     for (int i = 0; i < gameOptions.length; i++) {
@@ -195,7 +206,6 @@ public class Output {
     switch (type) {
       case CANT_DO_THAT:
         printString("You can't do that!");
-        listOptions();
         break;
       case DOES_NOT_WORK:
         printString("That doesn't work");
@@ -220,6 +230,9 @@ public class Output {
         break;
       case NO_PASSAGE:
         printString("You first have to go through a passage!");
+        break;
+      case EMPTY:
+        printString("There is nothing here.");
         break;
       default:
         printString("Quite impossible");
@@ -252,6 +265,8 @@ public class Output {
    * @param type
    */
   public void success(String userInput, successType type) {
+    // TODO maybe refactor these methods to be nicer to read, not so many & easier to find the
+    // correct enum from other classes
     switch (type) {
       case PICK_UP:
         printString("You have successfully picked up " + userInput);
@@ -303,15 +318,15 @@ public class Output {
     }
   }
 
-  public void menuOptions(options opt){
-    switch (opt){
+  public void menuOptions(options opt) {
+    switch (opt) {
       case NOT_YET:
         printString("There is nothing you can change yet!");
         break;
     }
   }
 
-  public void youDidItASCI(){
+  public void youDidItASCI() {
     printString(" __     __               _ _     _   _ _     __  \n"
         + " \\ \\   / /              | (_)   | | (_) |    \\ \\ \n"
         + "  \\ \\_/ /__  _   _    __| |_  __| |  _| |_  (_) |\n"
@@ -343,8 +358,7 @@ public class Output {
   }
 
   /**
-   * Creates a list from gameobject names, seperated by |
-   * name1 | name2 | name3
+   * Creates a list from gameobject names, seperated by | name1 | name2 | name3
    * 
    * @param gameObjects
    * @return

@@ -2,10 +2,12 @@ package model;
 
 import java.util.Collections;
 import java.util.List;
-import model.superclasses.GameObject;
 
 /**
- * Are in a place, can contain items, may be blcoked by obatacles
+ * Are in a place, can contain items, may be blcoked by obatacles.
+ * 
+ * The name should describe the furniture.
+ * The obstacle follows the normal rules, but the resolution should mention the items being dropped into the room.
  *
  * @author thomafe
  */
@@ -75,7 +77,7 @@ public class Furniture extends GameObject {
   }
 
   /**
-   * Clear collection of items.
+   * Clear the contents of the furniture.
    */
   public void emptyOutFurniture() {
     itemsInside = Collections.emptyList();

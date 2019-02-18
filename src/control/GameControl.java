@@ -3,6 +3,7 @@ package control;
 
 import model.Character;
 import model.Furniture;
+import model.GameObject;
 import model.GameWorld;
 import model.Item;
 import model.ItemObstacle;
@@ -10,7 +11,6 @@ import model.Obstacle;
 import model.Passage;
 import model.Place;
 import model.RiddleObstacle;
-import model.superclasses.GameObject;
 import view.Input;
 import view.Output;
 import view.Output.endingType;
@@ -42,6 +42,9 @@ public class GameControl {
    */
   public GameControl(Place startingPlace) {
     character = new Character(startingPlace);
+    
+    // TODO replace this with an actual gameWorld!
+    gameWorld = new GameWorld();
   }
 
   /**
@@ -53,7 +56,7 @@ public class GameControl {
    * @param startingPlace Place
    */
   public GameControl(Output out, Input in, Place startingPlace) {
-    character = new Character(startingPlace);
+    this(startingPlace);
 
     this.out = out;
     this.in = in;
@@ -65,10 +68,10 @@ public class GameControl {
    * @return whether the player wants to play again.
    */
   public boolean runGame() {
-    if(out == null || in == null) {
+    if (out == null || in == null) {
       return false;
     }
-    
+
     gameIntroduction();
 
     gameIsRunning = true;
@@ -84,6 +87,11 @@ public class GameControl {
     return restartGame;
   }
 
+  /**
+   * After game end, ask the player if he wants to play again.
+   * 
+   * @return
+   */
   public boolean playAgain() {
     out.exitingTheGame(endingType.TRY_AGAIN);
     return in.yesNo();
@@ -134,12 +142,16 @@ public class GameControl {
   public void interactWithFurniture(Furniture furniture) {
     Obstacle obstacleOnFurniture = furniture.getObstacle();
 
-    // TODO feedback what's happening
+    out.lookAtGameObject(furniture);
     if (obstacleOnFurniture == null || obstacleOnFurniture.isResolved()
         || interactWithObstacle(obstacleOnFurniture)) {
-      furniture.receiveItemsInSide().forEach(getCurrentPlace()::addObjectToPlace);
-      furniture.emptyOutFurniture();
-    } 
+      if (furniture.receiveItemsInSide().isEmpty()) {
+        out.noSuccess(errorType.EMPTY);
+      } else {
+        furniture.receiveItemsInSide().forEach(getCurrentPlace()::addObjectToPlace);
+        furniture.emptyOutFurniture();
+      }
+    }
   }
 
   /**
@@ -288,8 +300,7 @@ public class GameControl {
    * Is run once at game start to introduce the player to the game.
    */
   private void gameIntroduction() {
-    out.greeting();
-    // TODO use the introduction from the level
+    out.greeting(gameWorld.getIntroduction());
     out.listOptions();
   }
 
@@ -299,7 +310,7 @@ public class GameControl {
   private void checkForGoodEnding() {
 
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
-      out.goodEnding();
+      out.goodEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
       endGame(true);
     }
   }
@@ -311,7 +322,7 @@ public class GameControl {
   private void checkForBadEnding() {
     if (character.getCurrentPlace().getName().equals("Bad Ending")
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
-      out.badEnding();
+      out.badEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
       endGame(true);
     }
   }
@@ -344,11 +355,11 @@ public class GameControl {
   public Place getCurrentPlace() {
     return character.getCurrentPlace();
   }
-  
+
   public void setInputOutput(Input in, Output out) {
     this.in = in;
     this.out = out;
-    
+
     in.setControl(this);
   }
 

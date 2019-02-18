@@ -124,17 +124,6 @@ public class GameWorld {
   }
 
   /**
-   * Add a passage to a place.
-   * 
-   * @param passage Passage
-   * @param place Place
-   */
-  @Deprecated
-  public void addPassageToPlace(Passage passage, Place place) {
-    place.addPassage(passage);
-  }
-
-  /**
    * Add an ending place.
    * 
    * @param endingPlace Place
