@@ -81,6 +81,11 @@ public class Character {
     return itemsInInventory;
   }
 
+  /**
+   * Damage the character.
+   * 
+   * @param damagepoints
+   */
   public void takeDamage(int damagepoints) {
     lifepoints = lifepoints - damagepoints;
     if (lifepoints < 0) {
@@ -88,10 +93,20 @@ public class Character {
     }
   }
 
+  /**
+   * Heal the character.
+   * 
+   * @param healingpoints
+   */
   public void healDamage(int healingpoints) {
     lifepoints = lifepoints + healingpoints;
   }
 
+  /**
+   * Check if the character is dead.
+   * 
+   * @return
+   */
   public boolean isDead() {
     if (lifepoints == 0) {
       dead = true;
@@ -99,6 +114,11 @@ public class Character {
     return dead;
   }
 
+  /**
+   * Get the current lifepoints of the character.
+   * 
+   * @return
+   */
   public int getLifepoints() {
     return lifepoints;
   }

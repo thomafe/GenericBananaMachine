@@ -1,7 +1,5 @@
 package model;
 
-import model.superclasses.GameObject;
-
 /**
  * Items can be picked up by the character, added to inventory, used to resolve obstacles, and be
  * consumed.

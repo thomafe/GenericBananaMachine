@@ -2,7 +2,6 @@ package model;
 
 import java.util.Collections;
 import java.util.List;
-import model.superclasses.GameObject;
 
 /**
  * Are in a place, can contain items, may be blcoked by obatacles.
@@ -78,7 +77,7 @@ public class Furniture extends GameObject {
   }
 
   /**
-   * Clear collection of items.
+   * Clear the contents of the furniture.
    */
   public void emptyOutFurniture() {
     itemsInside = Collections.emptyList();

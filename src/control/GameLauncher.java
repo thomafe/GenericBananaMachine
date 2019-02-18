@@ -59,8 +59,6 @@ public class GameLauncher {
     String fileName = "level";
     int localGameNumber = -1;
 
-    // args = new String[] {"-d"};
-
     for (int i = 0; i < args.length; i++) {
       if (args[i].equalsIgnoreCase("-d")) {
         doTest = true;

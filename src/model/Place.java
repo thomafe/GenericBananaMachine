@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.superclasses.GameObject;
 
 /**
  * Character can be in place, can move from place to place via passages an item can be in a place.

@@ -40,6 +40,11 @@ public class ItemObstacle extends Obstacle {
     return correctItemUsed;
   }
 
+  /**
+   * Consume the correct item. Not all obstacles do consume the item(s). 
+   * 
+   * @param itemToResolve
+   */
   protected void consume(Item itemToResolve) {
     if (consumesItem) {
       itemToResolve.consume();

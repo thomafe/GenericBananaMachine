@@ -1,10 +1,10 @@
 package view;
 
 import java.util.List;
+import model.GameObject;
 import model.Item;
 import model.Obstacle;
 import model.Place;
-import model.superclasses.GameObject;
 
 /**
  * reacts to input from user with output

@@ -1,7 +1,5 @@
 package model;
 
-import model.superclasses.GameObject;
-
 /**
  * Connects places, can be blocked by obstacles.
  * 

@@ -5,9 +5,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import control.GameControl;
 import model.Furniture;
+import model.GameObject;
 import model.Item;
 import model.Passage;
-import model.superclasses.GameObject;
 import view.Output.endingType;
 import view.Output.errorType;
 import view.Output.errorTypeInput;
@@ -19,6 +19,7 @@ import view.Output.successType;
  * @author Niklas
  */
 public class Input {
+  // TODO thomaf use interface and add methods for menu outside of that interface
 
   private int boxings = 0;
   private Scanner scan = new Scanner(System.in);
