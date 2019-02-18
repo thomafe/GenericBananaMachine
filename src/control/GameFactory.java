@@ -107,7 +107,7 @@ public class GameFactory {
     Item itemInChest =
         new Item("Banana", "This is a powerful fruit which makes you feel like a monkey.");
 
-    // TODO would be nice to add item1 and item2 to characters inventory right away
+    // TODO thomaf would be nice to add item1 and item2 to characters inventory right away
     startingPlace.addObjectToPlace(item1);
     startingPlace.addObjectToPlace(item2);
     startingPlace.addObjectToPlace(itemOnFloor);

@@ -43,6 +43,7 @@ public class GameControl {
   public GameControl(Place startingPlace) {
     character = new Character(startingPlace);
     
+    // TODO replace this with an actual gameWorld!
     gameWorld = new GameWorld();
   }
 
@@ -294,8 +295,7 @@ public class GameControl {
    * Is run once at game start to introduce the player to the game.
    */
   private void gameIntroduction() {
-    out.greeting();
-    // TODO use the introduction from the level
+    out.greeting(gameWorld.getIntroduction());
     out.listOptions();
   }
 
