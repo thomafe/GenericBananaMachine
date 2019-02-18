@@ -164,7 +164,6 @@ public class Output {
   /**
    * Look at the currentPlace. Use <code>lookAtGameObject()</code> instead
    */
-  @Deprecated
   public void lookAtCurrentPlace(Place currentPlace) {
     StringBuilder placeDescription = new StringBuilder();
 
@@ -266,6 +265,8 @@ public class Output {
    * @param type
    */
   public void success(String userInput, successType type) {
+    // TODO maybe refactor these methods to be nicer to read, not so many & easier to find the
+    // correct enum from other classes
     switch (type) {
       case PICK_UP:
         printString("You have successfully picked up " + userInput);
