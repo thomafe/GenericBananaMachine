@@ -19,7 +19,6 @@ import view.Output.successType;
  * @author Niklas
  */
 public class Input {
-  // TODO thomaf use interface and add methods for menu outside of that interface
 
   private int boxings = 0;
   private Scanner scan = null;

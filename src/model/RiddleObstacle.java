@@ -1,5 +1,10 @@
 package model;
 
+/**
+ * 
+ * @author simone
+ *
+ */
 public class RiddleObstacle extends Obstacle {
 
   private String riddleAnswer;

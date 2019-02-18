@@ -4,7 +4,7 @@ package model;
  * Obstacle that can be resolved with using the correct item. When resolved, passage is not blocked
  * anymore.
  *
- * @author
+ * @author Simone
  */
 public class ItemObstacle extends Obstacle {
 
