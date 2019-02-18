@@ -146,18 +146,18 @@ Vorraussetzung: -
 Beschreibung:   Text Ein- und Ausgabe getrennt in einem simplen Fenster.
 ------------------------------------------------------
 ------------------------------------------------------
-Name:           Checkpunkte
-Priorität:      4
-Vorraussetzung: Tod
-Beschreibung:   Wenn der Character stirbt kann er statt in Startort in einem Checkpunkt Ort wieder einsteigen.
-------------------------------------------------------
-------------------------------------------------------
 Name:           Schwierigkeit
 Priorität:      4
 Vorraussetzung: Tod
 Beschreibung:   Bei Spielstart kann die Schwierigkeit des Spiels ausgewählt werden.
 ------------------------------------------------------
 --> Version 2.0
+------------------------------------------------------
+Name:           Checkpunkte
+Priorität:      5
+Vorraussetzung: Tod
+Beschreibung:   Wenn der Character stirbt kann er statt in Startort in einem Checkpunkt Ort wieder einsteigen.
+------------------------------------------------------
 ------------------------------------------------------
 Name:           Kampange
 Priorität:      5
