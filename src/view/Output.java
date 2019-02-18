@@ -40,12 +40,15 @@ public class Output {
   /**
    * Introduction for the player at the start of the game.
    */
-  public void greeting() {
-    printString("Hello fellow player!\n"
-        + "In this glorious adventure game you can prove your bravery and smartness\n"
-        + "by passing the many obstacles that will come in your way\n"
-        + "Look for things along the way that might help you and you may stand a chance");
-
+  public void greeting(String introduction) {
+    if (introduction != null && !introduction.isEmpty()) {
+      printString(introduction);
+    } else {
+      printString("Hello fellow player!\n"
+          + "In this glorious adventure game you can prove your bravery and smartness\n"
+          + "by passing the many obstacles that will come in your way\n"
+          + "Look for things along the way that might help you and you may stand a chance");
+    }
   }
 
   /**
@@ -53,21 +56,21 @@ public class Output {
    */
   public void goodEnding(String ending) {
     if (ending != null && !ending.isEmpty()) {
+      printString(ending);
+    } else {
       printString("Congraltulations, you've made it\n" + "You reached the end of the game \n"
           + "passing many obstacles you fought your way through the world \n"
           + "consider yourself a hero now\n");
-    } else {
-      printString(ending);
     }
     youDidItASCI();
   }
 
   public void badEnding(String ending) {
     if (ending != null && !ending.isEmpty()) {
+      printString(ending);
+    } else {
       printString(
           "You failed\n This is the end of the game \n" + "This place brought death to you");
-    } else {
-      printString(ending);
     }
     youDidItNotASCI();
   }
@@ -133,7 +136,6 @@ public class Output {
   public void listPassages(Place currentPlace) {
     StringBuilder passageList = new StringBuilder();
 
-    // TODO rework these to | styles lists. Make method for it
     passageList.append("These passages lead out of " + currentPlace.getName() + ":\n");
     for (int i = 0; i < currentPlace.getPassages().size(); i++) {
       passageList.append(currentPlace.getPassages().get(i));
