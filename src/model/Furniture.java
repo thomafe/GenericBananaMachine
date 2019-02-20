@@ -83,4 +83,13 @@ public class Furniture extends GameObject {
     itemsInside = Collections.emptyList();
   }
 
+  /**
+   * Add another item to the item list.
+   *
+   * @param item Item
+   */
+  public void addItem(Item item) {
+    this.itemsInside.add(item);
+  }
+
 }
