@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class Furniture extends GameObject {
 
   private Obstacle obstalce;
-  private List<Item> itemsInside = null;
+  private List<Item> itemsInside = new ArrayList<>();
 
   /**
    * Constructor for Furniture.
@@ -104,6 +105,15 @@ public class Furniture extends GameObject {
    */
   public void addItem(Item item) {
     this.itemsInside.add(item);
+  }
+
+  /**
+   * Setter for obstacle.
+   *
+   * @param obstacle Obstacle
+   */
+  public void setObstalce(Obstacle obstacle) {
+    this.obstalce = obstacle;
   }
 
 }
