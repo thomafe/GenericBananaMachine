@@ -54,6 +54,20 @@ public class Furniture extends GameObject {
   }
 
   /**
+   * Constructor for Furniture without ItemList.
+   * Currently Used in XML Parser.
+   *
+   * @param name String
+   * @param description String
+   * @param obstacle Obstacle
+   */
+  public Furniture(String name, String description, Obstacle obstacle) {
+    this(name, description);
+
+    this.obstalce = obstacle;
+  }
+
+  /**
    * Getter for Obstacle.
    *
    * @return Obstacle
@@ -81,6 +95,15 @@ public class Furniture extends GameObject {
    */
   public void emptyOutFurniture() {
     itemsInside = Collections.emptyList();
+  }
+
+  /**
+   * Add another item to the item list.
+   *
+   * @param item Item
+   */
+  public void addItem(Item item) {
+    this.itemsInside.add(item);
   }
 
 }
