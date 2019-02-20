@@ -24,7 +24,7 @@ public class XmlParser {
   private Place startingPlace = null;
   private GameWorld world = new GameWorld();
 
-  private boolean enableDebug = false;
+  private boolean enableDebug = true;
   private String storyName;
 
   public void initParser(String file) {
@@ -129,7 +129,7 @@ public class XmlParser {
         }
       }
 
-      // parse all Place furniture
+      // parse all furniture
       for (int furnitureCounter = 0; furnitureCounter < furnitureList.getLength(); furnitureCounter++) {
         Node furnitureNode = furnitureList.item(furnitureCounter);
 
@@ -138,12 +138,13 @@ public class XmlParser {
         debug("\nCurrent Element: " + furnitureNode.getNodeName());
 
         debug("- Furniture" + furnitureCounter);
+        debug("- - In Place: " + furnitureElement.getElementsByTagName("in-place").item(0).getTextContent());
         debug("- - Name: " + furnitureElement.getElementsByTagName("name").item(0).getTextContent());
         debug("- - Description: " + furnitureElement.getElementsByTagName("description").item(0).getTextContent());
 
         NodeList furnitureItemList = furnitureElement.getElementsByTagName("content-item");
 
-        // parse all Place Furniture Items
+        // parse all Furniture Items
         for (int furnitureItemCounter = 0; furnitureItemCounter < furnitureItemList.getLength(); furnitureItemCounter++) {
           Node furnitureItemNode = furnitureItemList.item(furnitureItemCounter);
 
@@ -156,7 +157,7 @@ public class XmlParser {
 
         NodeList furnitureObstacleList = furnitureElement.getElementsByTagName("obstacle");
 
-        // parse all Place Furniture Obstacles
+        // parse all Furniture Obstacles
         for(int furnitureObstacleCounter = 0; furnitureObstacleCounter < furnitureObstacleList.getLength(); furnitureObstacleCounter++) {
           Node furnitureObstacleNode = furnitureObstacleList.item(furnitureObstacleCounter);
 
@@ -167,7 +168,6 @@ public class XmlParser {
           debug("- - - Resolution: " + furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
           debug("- - - Requirement: " + furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
         }
-
 
       }
 
