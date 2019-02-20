@@ -24,7 +24,7 @@ public class XmlParser {
   private Place startingPlace = null;
   private GameWorld world = new GameWorld();
 
-  private boolean enableDebug = true;
+  private boolean enableDebug = false;
   private String storyName;
 
   public void initParser(String file) {
