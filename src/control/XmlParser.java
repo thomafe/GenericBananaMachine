@@ -24,7 +24,7 @@ public class XmlParser {
   private Place startingPlace = null;
   private GameWorld world = new GameWorld();
 
-  private boolean enableDebug = false;
+  private boolean enableDebug = true;
   private String storyName;
 
   public void initParser(String file) {
@@ -54,6 +54,7 @@ public class XmlParser {
 
       NodeList placeList = doc.getElementsByTagName("place");
       NodeList passageList = doc.getElementsByTagName("passage");
+      NodeList furnitureList = doc.getElementsByTagName("furniture");
       NodeList storyList = doc.getElementsByTagName("story");
 
       // Create object arrays.
@@ -99,9 +100,6 @@ public class XmlParser {
             world.addEndingPlace(places.get(placeCounter), places.get(placeCounter).getDescription());
           }
 
-          // Add current Place to GameWorld
-          world.addPlace(places.get(placeCounter));
-
           // parse all existing Place Items
           NodeList itemList = placeElement.getElementsByTagName("item");
 
@@ -125,50 +123,52 @@ public class XmlParser {
             places.get(placeCounter).addObjectToPlace(getIncludedItem(itemElement, items));
 
           }
-
-          // parse all Place furniture
-          NodeList furnitureList = placeElement.getElementsByTagName("furniture");
-
-          for (int furnitureCounter = 0; furnitureCounter < furnitureList.getLength(); furnitureCounter++) {
-            Node furnitureNode = furnitureList.item(furnitureCounter);
-
-            Element furnitureElement = (Element) furnitureNode;
-
-            debug("- Furniture" + furnitureCounter);
-            debug("- - Name: " + furnitureElement.getElementsByTagName("name").item(0).getTextContent());
-            debug("- - Description: " + furnitureElement.getElementsByTagName("description").item(0).getTextContent());
-
-            NodeList furnitureItemList = furnitureElement.getElementsByTagName("content-item");
-
-            // parse all Place Furniture Items
-            for (int furnitureItemCounter = 0; furnitureItemCounter < furnitureItemList.getLength(); furnitureItemCounter++) {
-              Node furnitureItemNode = furnitureItemList.item(furnitureItemCounter);
-
-              Element furnitureItemElement = (Element) furnitureItemNode;
-
-              debug("- - Content Items:");
-              debug("- - - Name: " + furnitureItemElement.getElementsByTagName("name").item(0).getTextContent());
-              debug("- - - Description: " + furnitureItemElement.getElementsByTagName("description").item(0).getTextContent());
-            }
-
-            //TODO: parse Furniture Obstacles
-            NodeList furnitureObstacleList = furnitureElement.getElementsByTagName("obstacle");
-
-            // parse all Place Furniture Obstacles
-            for(int furnitureObstacleCounter = 0; furnitureObstacleCounter < furnitureObstacleList.getLength(); furnitureObstacleCounter++) {
-              Node furnitureObstacleNode = furnitureObstacleList.item(furnitureObstacleCounter);
-
-              Element furnitureObstacleElement = (Element) furnitureObstacleNode;
-
-              debug("- - Obstacle:");
-              debug("- - - Description: " + furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent());
-              debug("- - - Resolution: " + furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
-              debug("- - - Requirement: " + furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
-            }
-
-          }
+          // Add current Place to GameWorld
+          world.addPlace(places.get(placeCounter));
 
         }
+      }
+
+      // parse all Place furniture
+      for (int furnitureCounter = 0; furnitureCounter < furnitureList.getLength(); furnitureCounter++) {
+        Node furnitureNode = furnitureList.item(furnitureCounter);
+
+        Element furnitureElement = (Element) furnitureNode;
+
+        debug("\nCurrent Element: " + furnitureNode.getNodeName());
+
+        debug("- Furniture" + furnitureCounter);
+        debug("- - Name: " + furnitureElement.getElementsByTagName("name").item(0).getTextContent());
+        debug("- - Description: " + furnitureElement.getElementsByTagName("description").item(0).getTextContent());
+
+        NodeList furnitureItemList = furnitureElement.getElementsByTagName("content-item");
+
+        // parse all Place Furniture Items
+        for (int furnitureItemCounter = 0; furnitureItemCounter < furnitureItemList.getLength(); furnitureItemCounter++) {
+          Node furnitureItemNode = furnitureItemList.item(furnitureItemCounter);
+
+          Element furnitureItemElement = (Element) furnitureItemNode;
+
+          debug("- - Content Items:");
+          debug("- - - Name: " + furnitureItemElement.getElementsByTagName("name").item(0).getTextContent());
+          debug("- - - Description: " + furnitureItemElement.getElementsByTagName("description").item(0).getTextContent());
+        }
+
+        NodeList furnitureObstacleList = furnitureElement.getElementsByTagName("obstacle");
+
+        // parse all Place Furniture Obstacles
+        for(int furnitureObstacleCounter = 0; furnitureObstacleCounter < furnitureObstacleList.getLength(); furnitureObstacleCounter++) {
+          Node furnitureObstacleNode = furnitureObstacleList.item(furnitureObstacleCounter);
+
+          Element furnitureObstacleElement = (Element) furnitureObstacleNode;
+
+          debug("- - Obstacle:");
+          debug("- - - Description: " + furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent());
+          debug("- - - Resolution: " + furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
+          debug("- - - Requirement: " + furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
+        }
+
+
       }
 
       // parse all existing passages
