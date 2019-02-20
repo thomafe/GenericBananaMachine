@@ -13,6 +13,7 @@ import model.ItemObstacle;
 import model.Passage;
 import model.Place;
 import model.GameWorld;
+import model.Furniture;
 
 /**
  * Parse given XML file in a specific path.
@@ -61,6 +62,7 @@ public class XmlParser {
       ArrayList<Place> places = new ArrayList<>();
       ArrayList<Item> items = new ArrayList<>();
       ArrayList<Passage> passages = new ArrayList<>();
+      ArrayList<Furniture> furnitures = new ArrayList<Furniture>();
 
       // parse story text
       Node storyNode = storyList.item(0);
@@ -142,6 +144,16 @@ public class XmlParser {
         debug("- - Name: " + furnitureElement.getElementsByTagName("name").item(0).getTextContent());
         debug("- - Description: " + furnitureElement.getElementsByTagName("description").item(0).getTextContent());
 
+        // Create furniture objects
+        furnitures.add(
+            new Furniture(
+                furnitureElement.getElementsByTagName("name").item(0).getTextContent(),   // name
+                furnitureElement.getElementsByTagName("description").item(0).getTextContent()    // description
+            )
+        );
+
+        // TODO: Add furniture to place!
+
         NodeList furnitureItemList = furnitureElement.getElementsByTagName("content-item");
 
         // parse all Furniture Items
@@ -153,12 +165,21 @@ public class XmlParser {
           debug("- - Content Items:");
           debug("- - - Name: " + furnitureItemElement.getElementsByTagName("name").item(0).getTextContent());
           debug("- - - Description: " + furnitureItemElement.getElementsByTagName("description").item(0).getTextContent());
+
+          // add current Item to furniture
+          furnitures.get(furnitureCounter).addItem(
+            new Item(
+              furnitureItemElement.getElementsByTagName("name").item(0).getTextContent(),
+              furnitureItemElement.getElementsByTagName("description").item(0).getTextContent()
+            )
+          );
+
         }
 
         NodeList furnitureObstacleList = furnitureElement.getElementsByTagName("obstacle");
 
         // parse all Furniture Obstacles
-        for(int furnitureObstacleCounter = 0; furnitureObstacleCounter < furnitureObstacleList.getLength(); furnitureObstacleCounter++) {
+        for (int furnitureObstacleCounter = 0; furnitureObstacleCounter < furnitureObstacleList.getLength(); furnitureObstacleCounter++) {
           Node furnitureObstacleNode = furnitureObstacleList.item(furnitureObstacleCounter);
 
           Element furnitureObstacleElement = (Element) furnitureObstacleNode;
@@ -167,6 +188,18 @@ public class XmlParser {
           debug("- - - Description: " + furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent());
           debug("- - - Resolution: " + furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
           debug("- - - Requirement: " + furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
+
+          // create furniture obstacle
+          furnitures.get(furnitureCounter).setObstalce(
+            new ItemObstacle(
+              "",
+              furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent(),
+              furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
+              getRequiredItem(items,
+                  furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent())
+            )
+          );
+
         }
 
       }
