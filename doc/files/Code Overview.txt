@@ -1,5 +1,0 @@
-Code Overview
-
-
-Total Code Lines: 			2620
-Total Amount of classes: 	22
