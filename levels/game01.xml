@@ -88,7 +88,7 @@
     <obstacle>
       <description>You need something to open it without getting hurt by the lightnings.</description>
       <resolution>You used the plank to open the chest.</resolution>
-      <requiredItem>Plank</requiredItem>
+      <requiredItem>Machete</requiredItem>
     </obstacle>
   </furniture>
 
