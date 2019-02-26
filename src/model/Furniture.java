@@ -16,6 +16,7 @@ public class Furniture extends GameObject {
 
   private Obstacle obstalce;
   private List<Item> itemsInside = new ArrayList<>();
+  private String linkedPlace;
 
   /**
    * Constructor for Furniture.
@@ -25,6 +26,18 @@ public class Furniture extends GameObject {
    */
   public Furniture(String name, String description) {
     super(name, description);
+  }
+
+  /**
+   * Constructor for Furniture.
+   * THis one is needed for Parser / Level Design!
+   *
+   * @param name String
+   * @param description String
+   */
+  public Furniture(String name, String description, String linkedPlace) {
+    super(name, description);
+    this.linkedPlace = linkedPlace;
   }
 
   /**
