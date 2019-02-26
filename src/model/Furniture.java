@@ -129,4 +129,22 @@ public class Furniture extends GameObject {
     this.obstalce = obstacle;
   }
 
+  /**
+   * Setter for linkedPlace String which is needed for Parser / Level Design.
+   *
+   * @param linkedPlace String
+   */
+  public void setLinkedPlace(String linkedPlace) {
+    this.linkedPlace = linkedPlace;
+  }
+
+  /**
+   * Getter for linkedPlace which is needed for Parser / Level Design.
+   *
+   * @return Place
+   */
+  public String getLinkedPlace() {
+    return linkedPlace;
+  }
+
 }
