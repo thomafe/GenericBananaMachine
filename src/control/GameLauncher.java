@@ -44,7 +44,7 @@ public class GameLauncher {
           out.noSuccess(errorType.CANT_DO_THAT);
           break;
       }
-    } while (chosenOpt == "Options");
+    } while (true);
   }
 
   public static String menuMain(Output out, Input in, String[] options){
