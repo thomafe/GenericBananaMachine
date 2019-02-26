@@ -125,9 +125,6 @@ public class XmlParser {
             places.get(placeCounter).addObjectToPlace(getIncludedItem(itemElement, items));
 
           }
-          // Add current Place to GameWorld
-          world.addPlace(places.get(placeCounter));
-
         }
       }
 
@@ -152,8 +149,6 @@ public class XmlParser {
                 furnitureElement.getElementsByTagName("in-place").item(0).getTextContent()
             )
         );
-
-        // TODO: Add furniture to place!
 
         NodeList furnitureItemList = furnitureElement.getElementsByTagName("content-item");
 
@@ -255,6 +250,9 @@ public class XmlParser {
       }
 
       startingPlace = places.get(0);
+
+      // Add Places to GameWorld
+      addPlacesToWorld(places, world);
 
       // set starting Place in GameWorld
       if(world.getStartingPlace() == null) {
@@ -407,6 +405,12 @@ public class XmlParser {
           places.get(j).addObjectToPlace(furnitures.get(i));
         }
       }
+    }
+  }
+
+  private void addPlacesToWorld(ArrayList<Place> places, GameWorld world) {
+    for(int i = 0; i < places.size(); i++) {
+      world.addPlace(places.get(i));
     }
   }
 
