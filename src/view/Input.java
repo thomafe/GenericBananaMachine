@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,7 +42,7 @@ public class Input {
   private Pattern patternUseItemObstacle = Pattern.compile("(?i)(use)*\\s*([\\w\\s]*)");
 
   private Pattern[] possiblePatterns = {patternTakeItem, patternGotoPassage, patternLookAtPlace,
-      patternLookAt, patternInventory, patternActions, patternExitGame};
+      patternLookAt, patternInventory, patternActions, patternExitGame, patternGoBack};
 
 
   /**
@@ -61,52 +63,50 @@ public class Input {
     String userInput = readInSingleLine();
     userInput = userInput.trim();
 
-    // The order in which the input is being matched
-    Matcher matcherTakeItem = patternTakeItem.matcher(userInput);
-    Matcher matcherGotoPassage = patternGotoPassage.matcher(userInput);
-    Matcher matcherLookAtPlace = patternLookAtPlace.matcher(userInput);
-    Matcher matcherLookAt = patternLookAt.matcher(userInput);
-    Matcher matcherInventory = patternInventory.matcher(userInput);
-    Matcher matcherActions = patternActions.matcher(userInput);
-    Matcher matcherExitGame = patternExitGame.matcher(userInput);
-    Matcher matcherGoBack = patternGoBack.matcher(userInput);
+    //Packing the matcher inside an ArrayList.
+    List<Matcher> matcher = new ArrayList<>();
+    for (Pattern pattern : possiblePatterns) {
+      matcher.add(pattern.matcher(userInput));
+    }
 
-    if (matcherTakeItem.find()) {
+    if (matcher.get(1).find()) {
       if (!testForBoxing(userInput, 1)) {
-        matchTakeItem(matcherTakeItem);
+        matchTakeItem(matcher.get(1));
       }
-    } else if (matcherGotoPassage.find()) {
+    } else if (matcher.get(2).find()) {
       if (!testForBoxing(userInput, 2)) {
-        matchGotoPassage(matcherGotoPassage);
+        matchGotoPassage(matcher.get(2));
       }
-    } else if (matcherLookAtPlace.find()) {
+    } else if (matcher.get(3).find()) {
       if (!testForBoxing(userInput, 3)) {
         matchLookAtPlace();
       }
-    } else if (matcherLookAt.find()) {
+    } else if (matcher.get(4).find()) {
       if (!testForBoxing(userInput, 4)) {
-        matchLookAt(matcherLookAt);
+        matchLookAt(matcher.get(4));
       }
-    } else if (matcherInventory.find()) {
+    } else if (matcher.get(5).find()) {
       if (!testForBoxing(userInput, 5)) {
         matchInventory();
       }
-    } else if (matcherActions.find()) {
+    } else if (matcher.get(6).find()) {
       if (!testForBoxing(userInput, 6)) {
         matchActions();
       }
-    } else if (matcherExitGame.find()) {
+    } else if (matcher.get(7).find()) {
       if (!testForBoxing(userInput, 7)) {
         matchExitGame();
       }
-    } else if (matcherGoBack.find()) {
-      if (lastPassage != null) {
-        control.tryToMoveThroughPassage(lastPassage);
+    } else if (matcher.get(8).find()) {
+      if (!testForBoxing(userInput, 8)) {
+        if (lastPassage != null) {
+          control.tryToMoveThroughPassage(lastPassage);
+        } else {
+          out.noSuccess(errorType.NO_PASSAGE);
+        }
       } else {
-        out.noSuccess(errorType.NO_PASSAGE);
+        noMatch();
       }
-    } else {
-      noMatch();
     }
   }
 
@@ -182,7 +182,11 @@ public class Input {
   }
 
   private void matchInventory() {
-    out.listInventory(control.getCharacter().getItemsInInventory());
+    if (!control.getCharacter().getItemsInInventory().isEmpty()) {
+      out.listOutput(control.getCharacter().getInventoryString());
+    } else {
+      out.noSuccess(errorType.EMPTY_INVENTORY);
+    }
   }
 
   private void matchActions() {

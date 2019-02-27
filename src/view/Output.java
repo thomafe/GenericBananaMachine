@@ -14,7 +14,8 @@ import model.Place;
 public class Output {
 
   public enum errorType {
-    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE, NO_PASSAGE, EMPTY
+    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE,
+    NO_PASSAGE, EMPTY, EMPTY_INVENTORY
   }
 
   public enum errorTypeInput {
@@ -103,30 +104,10 @@ public class Output {
       StringBuilder thingsOutput = new StringBuilder();
 
       thingsOutput.append("These things are in " + currentPlace.getName() + ":\n");
-      thingsOutput.append(createList(currentPlace.getObjectsInPlace()));
 
       printString(thingsOutput.toString());
-    }
-  }
 
-  /**
-   * Lists all items in characters inventory.
-   */
-  public void listInventory(List<Item> itemsInInventory) {
-    if (!itemsInInventory.isEmpty()) {
-      StringBuilder itemList = new StringBuilder();
-
-      itemList.append("These items are in your inventory:\n");
-      for (int i = 0; i < itemsInInventory.size(); i++) {
-        itemList.append(itemsInInventory.get(i));
-        if (i != itemsInInventory.size() - 1) {
-          itemList.append(" | ");
-        }
-      }
-
-      printString(itemList.toString());
-    } else {
-      printString("You have nothing in your inventory!");
+      listOutput(currentPlace.getObjectsString());
     }
   }
 
@@ -234,6 +215,8 @@ public class Output {
       case EMPTY:
         printString("There is nothing here.");
         break;
+      case EMPTY_INVENTORY:
+        printString("You have nothing in your inventory!");
       default:
         printString("Quite impossible");
     }
@@ -364,17 +347,33 @@ public class Output {
    * @return
    */
   // TODO why does this not work with List<Passage> etc??
-  private String createList(List<GameObject> gameObjects) {
+//  private String createList(List<GameObject> gameObjects) {
+//    StringBuilder gameObjectList = new StringBuilder();
+//
+//    for (int i = 0; i < gameObjects.size(); i++) {
+//      gameObjectList.append(gameObjects.get(i));
+//      if (i != gameObjects.size() - 1) {
+//        gameObjectList.append(" | ");
+//      }
+//    }
+//
+//    return gameObjectList.toString();
+//  }
+
+  public void listOutput(List<String> gameObjects) {
     StringBuilder gameObjectList = new StringBuilder();
 
-    for (int i = 0; i < gameObjects.size(); i++) {
-      gameObjectList.append(gameObjects.get(i));
-      if (i != gameObjects.size() - 1) {
+    if (gameObjects.size() >= 1) {
+      gameObjectList.append(gameObjects.get(1));
+    }
+    if (gameObjects.size() > 1) {
+      for (int i = 1; i < gameObjects.size(); i++) {
         gameObjectList.append(" | ");
+        gameObjectList.append(gameObjects.get(i));
       }
     }
 
-    return gameObjectList.toString();
+    printString(gameObjectList.toString());
   }
 
 }
