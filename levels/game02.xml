@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<world>
+  <story>
+    <name>Part of the crew...</name>
+    <version>1.0</version>
+    <introduction>You wake up in a dirty and messed up prison cell. You can hear a snoozing nearby. You look out of the tiny window and realize it's night.</introduction>
+  </story>
+
+  <places>
+    <place id="0">
+      <name>Prison Cell</name>
+      <description>The cell is small and dirty. Dead rats and skeletons lay on the ground.</description>
+      <item>
+        <name>Rusted Nail</name>
+        <description>This is a rusted nail which can be used to unlock a chest or something.</description>
+      </item>
+      <item>
+        <name>Chair</name>
+        <description>This is a wooden chair which can be used to sit on.</description>
+      </item>
+    </place>
+    <place id="1">
+      <name>Prison Floor</name>
+      <description>The ship's prison deck is dirty and forsaken. There is just a sleeping guard laying at the entrance.</description>
+      <item>
+        <name>Cooks Key</name>
+        <description>This key has an engraving which shows the letters 'Cook'. To which lock might it belong?</description>
+      </item>
+      <item>
+        <name>Gold Coin</name>
+        <description>This is a gold coin with sharp edges, which can be used as a screwdriver.</description>
+      </item>
+      <item>
+        <name>Lantern</name>
+        <description>A small candle lights this lantern up. Hurry till it burns out.</description>
+      </item>
+    </place>
+    <place id="2">
+      <name>Main Deck</name>
+      <description>The main deck of the ship. Some cannons, weapons and other stuff is laying around.</description>
+      <item>
+        <name>Knife</name>
+        <description>The blade is not very sharp but enough to cut something... over time.</description>
+      </item>
+      <item>
+        <name>Pistol</name>
+        <description>The barrel is silenced but it has only one bullet loaded.</description>
+      </item>
+    </place>
+    <place id="3">
+      <name>Crew Deck</name>
+      <description>The deck is full of hammocks but no crew member is in sight.</description>
+      <item>
+        <name>Util Key</name>
+        <description>This key has the engraving "UTIL." - where it might belong to?</description>
+      </item>
+    </place>
+    <place id="4">
+      <name>Utility Room</name>
+      <description>Most of the utilities seem unhandy, but there is no window to see the entire room.</description>
+    </place>
+    <place id="5">
+      <name>Captains Cabin</name>
+      <description>Here the captain might reside. You can hear someone snoozing nearby.</description>
+    </place>
+    <place id="6">
+      <name>Top Deck</name>
+      <description>The wind feels sharp in your neck and you hear the waves breaking against the ship.</description>
+    </place>
+    <place id="7" end="good">
+      <name>Another Dimension</name>
+      <description>You fall into a great, bottomless darkness. The time slows down and you get a strange feeling of being in another world or dimension.</description>
+    </place>
+  </places>
+
+  <furniture>
+    <in-place>Prison Cell</in-place>
+    <name>Table</name>
+    <description>This is a massive wooden table, but one plank isn't fixed.</description>
+    <content-item>
+      <name>Plank</name>
+      <description>This is a massive wooden plank. To be hit by that might hurt and knock you out for hours.</description>
+    </content-item>
+    <obstacle>
+      <description>You need something to screw the loose plank off.</description>
+      <resolution>You used the gold coin to receive a plank.</resolution>
+      <requiredItem>Gold Coin</requiredItem>
+    </obstacle>
+  </furniture>
+  <furniture>
+    <in-place>Prison Floor</in-place>
+    <name>Cable</name>
+    <description>A long cable is laying on the floor, no idea where it might end or start.</description>
+    <content-item>
+      <name>Wire</name>
+      <description>This can be used to pick a locked door or something.</description>
+    </content-item>
+    <obstacle>
+      <description>You need something to cut a wire out.</description>
+      <resolution>You used the Knife to cut a wire out.</resolution>
+      <requiredItem>Knife</requiredItem>
+    </obstacle>
+  </furniture>
+  <furniture>
+    <in-place>Main Deck</in-place>
+    <name>Cannon Ball Chest</name>
+    <description>The chest is very well locked with a specific key. You can't pick it.</description>
+    <content-item>
+      <name>Cannon Ball</name>
+      <description>A huge cannon ball which can be used to destroy ships.</description>
+    </content-item>
+    <obstacle>
+      <description>You need the specific key to open it.</description>
+      <resolution>You are a cheater! You can't open this one! Calling a Game Master...</resolution>
+      <requiredItem>Cannon Ball Key</requiredItem>
+    </obstacle>
+  </furniture>
+  <furniture>
+    <in-place>Crew Deck</in-place>
+    <name>Cooks Chest</name>
+    <description>There is a engraving "COOK" on the chest. Where might be the specific key for this?</description>
+    <content-item>
+      <name>Black Key</name>
+      <description>A mysterious black key which belongs to a specific lock.</description>
+    </content-item>
+    <obstacle>
+      <description>You need a specific key to open this.</description>
+      <resolution>You successfully opened the chest and receive a strange looking key.</resolution>
+      <requiredItem>Cooks Key</requiredItem>
+    </obstacle>
+  </furniture>
+  <furniture>
+    <in-place>Utility Room</in-place>
+    <name>Dark Corner</name>
+    <description>You can't see anything but darkness here.</description>
+    <content-item>
+      <name>Rope</name>
+      <description>A long rope which can be used to climb or tie something - or someone - up.</description>
+    </content-item>
+    <obstacle>
+      <description>You need something to lighten up the room.</description>
+      <resolution>You successfully used the last few moments of the burning lantern to look around and find a rope.</resolution>
+      <requiredItem>Lantern</requiredItem>
+    </obstacle>
+  </furniture>
+  <furniture>
+    <in-place>Captains Cabin</in-place>
+    <name>Black Chest</name>
+    <description>This is a black chest which vibrates strangely.</description>
+    <content-item>
+      <name>Magic Stick</name>
+      <description>This is a stick which glows magically. It might be used to do magic stuff.</description>
+    </content-item>
+    <obstacle>
+      <description>You need a specific key to open this.</description>
+      <resolution>You successfully used the black key and opened it. You receive a Magic Stick.</resolution>
+      <requiredItem>Black Key</requiredItem>
+    </obstacle>
+  </furniture>
+
+  <passages>
+    <passage id="0">
+      <name>Cell Door</name>
+      <description>The door hinge might be exploited with the right angle and something to heave it out.</description>
+      <comeFrom>Prison Cell</comeFrom>
+      <connectTo>Prison Floor</connectTo>
+      <obstacle>
+        <description>You need something to heave the door out of it's hinges.</description>
+        <resolution>You used the chair like the hero in a pirate movie you remember.</resolution>
+        <requiredItem>Chair</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="1">
+      <name>Prison Door</name>
+      <description>A sleeping and snoozing pirate guard lays at the door. He might wake up if you try to move away.</description>
+      <comeFrom>Prison Floor</comeFrom>
+      <connectTo>Main Deck</connectTo>
+      <obstacle>
+        <description>You need something to knock the sleeping guard out.</description>
+        <resolution>You used the plank to knock him out and are able to pass the door.</resolution>
+        <requiredItem>Plank</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="2">
+      <name>Quarters Door</name>
+      <description>The lock looks pretty old and simple. It might be picked easily.</description>
+      <comeFrom>Main Deck</comeFrom>
+      <connectTo>Crew Deck</connectTo>
+      <obstacle>
+        <description>You need something to pick the lock.</description>
+        <resolution>You used the wire and the door opens squeaking silently.</resolution>
+        <requiredItem>Wire</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="3">
+      <name>Utility Door</name>
+      <description>A massive iron door blocks the way.</description>
+      <comeFrom>Main Deck</comeFrom>
+      <connectTo>Utility Room</connectTo>
+      <obstacle>
+        <description>You need a specific key to open the door.</description>
+        <resolution>You used the Util Key.</resolution>
+        <requiredItem>Util Key</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="4">
+      <name>Captains Door</name>
+      <description>The door is locked by a strong padlock.</description>
+      <comeFrom>Main Deck</comeFrom>
+      <connectTo>Captains Cabin</connectTo>
+      <obstacle>
+        <description>You need something to open the padlock or destroy it.</description>
+        <resolution>You shot on the padlock with your pistol and it suddenly disappears.</resolution>
+        <requiredItem>Pistol</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="5">
+      <name>Sleeping Captain</name>
+      <description>The captain is sleeping snoozing. You can't risk moving over him without tying him up to get sure.</description>
+      <comeFrom>Captains Cabin</comeFrom>
+      <connectTo>Top Deck</connectTo>
+      <obstacle>
+        <description>You need something to tie the sleeping captain up before moving over him.</description>
+        <resolution>You tied him up with your rope and he didn't even notice. You might have overacted with your safety.</resolution>
+        <requiredItem>Rope</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="6">
+      <name>Inactive Portal</name>
+      <description>You read the engraved letters 'Usage by own risk, activation by magic'.</description>
+      <comeFrom>Top Deck</comeFrom>
+      <connectTo>Another Dimension</connectTo>
+      <obstacle>
+        <description>You need something to activate the mysterious portal.</description>
+        <resolution>You used the magic stick while calling 'Stupor!' and the portal activates.</resolution>
+        <requiredItem>Magic Stickt</requiredItem>
+      </obstacle>
+    </passage>
+  </passages>
+</world>
