@@ -29,7 +29,7 @@ public class GameLauncher {
     Input in = new Input(out);
 
     List<String> mainOptions = new ArrayList<String>(Arrays.asList("Start Game", "Options",
-        "Exit Game"));
+        "Credits", "Exit Game"));
     String chosenOpt;
     do {
       chosenOpt = menuMain(out, in, mainOptions);
@@ -43,6 +43,9 @@ public class GameLauncher {
           break;
         case "Start Game":
           getLevel(args, gameControl, in, out);
+          break;
+        case "Credits":
+          out.credits();
           break;
         default:
           out.noSuccess(errorType.CANT_DO_THAT);

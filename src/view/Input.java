@@ -69,35 +69,35 @@ public class Input {
       matcher.add(pattern.matcher(userInput));
     }
 
-    if (matcher.get(1).find()) {
+    if (matcher.get(0).find()) {
       if (!testForBoxing(userInput, 1)) {
-        matchTakeItem(matcher.get(1));
+        matchTakeItem(matcher.get(0));
+      }
+    } else if (matcher.get(1).find()) {
+      if (!testForBoxing(userInput, 2)) {
+        matchGotoPassage(matcher.get(1));
       }
     } else if (matcher.get(2).find()) {
-      if (!testForBoxing(userInput, 2)) {
-        matchGotoPassage(matcher.get(2));
-      }
-    } else if (matcher.get(3).find()) {
       if (!testForBoxing(userInput, 3)) {
         matchLookAtPlace();
       }
-    } else if (matcher.get(4).find()) {
+    } else if (matcher.get(3).find()) {
       if (!testForBoxing(userInput, 4)) {
         matchLookAt(matcher.get(4));
       }
-    } else if (matcher.get(5).find()) {
+    } else if (matcher.get(4).find()) {
       if (!testForBoxing(userInput, 5)) {
         matchInventory();
       }
-    } else if (matcher.get(6).find()) {
+    } else if (matcher.get(5).find()) {
       if (!testForBoxing(userInput, 6)) {
         matchActions();
       }
-    } else if (matcher.get(7).find()) {
+    } else if (matcher.get(6).find()) {
       if (!testForBoxing(userInput, 7)) {
         matchExitGame();
       }
-    } else if (matcher.get(8).find()) {
+    } else if (matcher.get(7).find()) {
       if (!testForBoxing(userInput, 8)) {
         if (lastPassage != null) {
           control.tryToMoveThroughPassage(lastPassage);

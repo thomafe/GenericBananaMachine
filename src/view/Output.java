@@ -334,9 +334,8 @@ public class Output {
   public void listOutput(List<String> gameObjects) {
     StringBuilder gameObjectList = new StringBuilder();
 
-    if (gameObjects.size() >= 1) {
-      gameObjectList.append(gameObjects.get(1));
-    }
+    gameObjectList.append(gameObjects.get(0));
+
     if (gameObjects.size() > 1) {
       for (int i = 1; i < gameObjects.size(); i++) {
         gameObjectList.append(" | ");
@@ -345,6 +344,13 @@ public class Output {
     }
 
     printString(gameObjectList.toString());
+  }
+
+  public void credits(){
+    printString("Project Manager: Felix Jan Thoma\n");
+    printString("Creative Writer: Simone Maag\n");
+    printString("Level Designer: Tim Hendrik Lehmeier\n");
+    printString("Lead Developer: Niklas Grethler");
   }
 
 }
