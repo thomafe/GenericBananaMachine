@@ -2,7 +2,6 @@ package view;
 
 import java.util.List;
 import model.GameObject;
-import model.Item;
 import model.Obstacle;
 import model.Place;
 
@@ -14,7 +13,8 @@ import model.Place;
 public class Output {
 
   public enum errorType {
-    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE, NO_PASSAGE, EMPTY
+    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE,
+    NO_PASSAGE, EMPTY, EMPTY_INVENTORY
   }
 
   public enum errorTypeInput {
@@ -103,30 +103,10 @@ public class Output {
       StringBuilder thingsOutput = new StringBuilder();
 
       thingsOutput.append("These things are in " + currentPlace.getName() + ":\n");
-      thingsOutput.append(createList(currentPlace.getObjectsInPlace()));
 
       printString(thingsOutput.toString());
-    }
-  }
 
-  /**
-   * Lists all items in characters inventory.
-   */
-  public void listInventory(List<Item> itemsInInventory) {
-    if (!itemsInInventory.isEmpty()) {
-      StringBuilder itemList = new StringBuilder();
-
-      itemList.append("These items are in your inventory:\n");
-      for (int i = 0; i < itemsInInventory.size(); i++) {
-        itemList.append(itemsInInventory.get(i));
-        if (i != itemsInInventory.size() - 1) {
-          itemList.append(" | ");
-        }
-      }
-
-      printString(itemList.toString());
-    } else {
-      printString("You have nothing in your inventory!");
+      listOutput(currentPlace.getObjectsString());
     }
   }
 
@@ -186,20 +166,6 @@ public class Output {
   }
 
   /**
-   * Takes an array with all Options and prints them out
-   * 
-   * @param gameOptions Array
-   */
-  public void mainMenuText(String[] gameOptions) {
-    StringBuilder mainMenuOptions = new StringBuilder();
-    mainMenuOptions.append("Welcome to our Game!" + "\n");
-    for (int i = 0; i < gameOptions.length; i++) {
-      mainMenuOptions.append(gameOptions[i] + " | ");
-    }
-    printString(mainMenuOptions.toString());
-  }
-
-  /**
    * Standard output for unsuccessful operations
    */
   public void noSuccess(errorType type) {
@@ -234,6 +200,8 @@ public class Output {
       case EMPTY:
         printString("There is nothing here.");
         break;
+      case EMPTY_INVENTORY:
+        printString("You have nothing in your inventory!");
       default:
         printString("Quite impossible");
     }
@@ -357,24 +325,32 @@ public class Output {
     System.out.println(message);
   }
 
-  /**
-   * Creates a list from gameobject names, seperated by | name1 | name2 | name3
-   * 
-   * @param gameObjects
-   * @return
-   */
   // TODO why does this not work with List<Passage> etc??
-  private String createList(List<GameObject> gameObjects) {
+
+  /**
+   * Standard output method for lists.
+   * @param gameObjects a string list of GameObjects.
+   */
+  public void listOutput(List<String> gameObjects) {
     StringBuilder gameObjectList = new StringBuilder();
 
-    for (int i = 0; i < gameObjects.size(); i++) {
-      gameObjectList.append(gameObjects.get(i));
-      if (i != gameObjects.size() - 1) {
+    gameObjectList.append(gameObjects.get(0));
+
+    if (gameObjects.size() > 1) {
+      for (int i = 1; i < gameObjects.size(); i++) {
         gameObjectList.append(" | ");
+        gameObjectList.append(gameObjects.get(i));
       }
     }
 
-    return gameObjectList.toString();
+    printString(gameObjectList.toString());
+  }
+
+  public void credits(){
+    printString("Project Manager: Felix Jan Thoma\n");
+    printString("Creative Writer: Simone Maag\n");
+    printString("Level Designer: Tim Hendrik Lehmeier\n");
+    printString("Lead Developer: Niklas Grethler");
   }
 
 }

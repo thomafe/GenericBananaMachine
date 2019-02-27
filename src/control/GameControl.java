@@ -169,7 +169,7 @@ public class GameControl {
 
     while (!obstacleResolved && gameIsRunning) {
       out.listOptionsObstacleInteraction(currentObstacle);
-      out.listInventory(character.getItemsInInventory());
+      out.listOutput(character.getInventoryString());
       answerString = in.readItemForObstacle();
 
       if (answerString.equalsIgnoreCase("leave")) {
