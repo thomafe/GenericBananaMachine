@@ -262,12 +262,12 @@ public class Input {
     this.control = control;
   }
 
-  public String getStartOpt(String[] options) {
+  public String getStartOpt(List<String> options) {
     String userInput = readInSingleLine();
     String chosenOpt = null;
-    for (int i = 0; i < options.length; i++) {
-      if (userInput.matches("(?i)" + options[i])) {
-        chosenOpt = options[i];
+    for (int i = 0; i < options.size(); i++) {
+      if (userInput.matches("(?i)" + options.get(i))) {
+        chosenOpt = options.get(i);
         break;
       }
     }

@@ -1,5 +1,8 @@
 package control;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import view.Input;
 import view.Output;
 import view.Output.errorType;
@@ -25,7 +28,8 @@ public class GameLauncher {
     Output out = new Output();
     Input in = new Input(out);
 
-    String[] mainOptions = {"Start Game", "Options", "Exit Game"};
+    List<String> mainOptions = new ArrayList<String>(Arrays.asList("Start Game", "Options",
+        "Exit Game"));
     String chosenOpt;
     do {
       chosenOpt = menuMain(out, in, mainOptions);
@@ -47,9 +51,9 @@ public class GameLauncher {
     } while (true);
   }
 
-  public static String menuMain(Output out, Input in, String[] options){
+  public static String menuMain(Output out, Input in, List<String> options){
     String chosenOpt = null;
-    out.mainMenuText(options);
+    out.listOutput(options);
     chosenOpt = in.getStartOpt(options);
     return chosenOpt;
   }

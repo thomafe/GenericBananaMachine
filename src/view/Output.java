@@ -2,7 +2,6 @@ package view;
 
 import java.util.List;
 import model.GameObject;
-import model.Item;
 import model.Obstacle;
 import model.Place;
 
@@ -167,20 +166,6 @@ public class Output {
   }
 
   /**
-   * Takes an array with all Options and prints them out
-   * 
-   * @param gameOptions Array
-   */
-  public void mainMenuText(String[] gameOptions) {
-    StringBuilder mainMenuOptions = new StringBuilder();
-    mainMenuOptions.append("Welcome to our Game!" + "\n");
-    for (int i = 0; i < gameOptions.length; i++) {
-      mainMenuOptions.append(gameOptions[i] + " | ");
-    }
-    printString(mainMenuOptions.toString());
-  }
-
-  /**
    * Standard output for unsuccessful operations
    */
   public void noSuccess(errorType type) {
@@ -340,26 +325,12 @@ public class Output {
     System.out.println(message);
   }
 
-  /**
-   * Creates a list from gameobject names, seperated by | name1 | name2 | name3
-   * 
-   * @param gameObjects
-   * @return
-   */
   // TODO why does this not work with List<Passage> etc??
-//  private String createList(List<GameObject> gameObjects) {
-//    StringBuilder gameObjectList = new StringBuilder();
-//
-//    for (int i = 0; i < gameObjects.size(); i++) {
-//      gameObjectList.append(gameObjects.get(i));
-//      if (i != gameObjects.size() - 1) {
-//        gameObjectList.append(" | ");
-//      }
-//    }
-//
-//    return gameObjectList.toString();
-//  }
 
+  /**
+   * Standard output method for lists.
+   * @param gameObjects a string list of GameObjects.
+   */
   public void listOutput(List<String> gameObjects) {
     StringBuilder gameObjectList = new StringBuilder();
 
