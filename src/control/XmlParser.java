@@ -233,7 +233,7 @@ public class XmlParser {
 
             Element obstacleElement = (Element) obstacleNode;
 
-            debug("- Obstacle" + obstacleCounter + ":");
+            debug("- Obstacle" + passageCounter + ":");
             debug("- - Description: " + obstacleElement.getElementsByTagName("description").item(0).getTextContent());
             debug("- - Resolution: " + obstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
             debug("- - Required Item: " + obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
