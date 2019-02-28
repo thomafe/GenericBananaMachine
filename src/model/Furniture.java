@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +15,8 @@ import java.util.List;
 public class Furniture extends GameObject {
 
   private Obstacle obstalce;
-  private List<Item> itemsInside = null;
+  private List<Item> itemsInside = new ArrayList<>();
+  private String linkedPlace;
 
   /**
    * Constructor for Furniture.
@@ -24,6 +26,18 @@ public class Furniture extends GameObject {
    */
   public Furniture(String name, String description) {
     super(name, description);
+  }
+
+  /**
+   * Constructor for Furniture.
+   * THis one is needed for Parser / Level Design!
+   *
+   * @param name String
+   * @param description String
+   */
+  public Furniture(String name, String description, String linkedPlace) {
+    super(name, description);
+    this.linkedPlace = linkedPlace;
   }
 
   /**
@@ -49,6 +63,20 @@ public class Furniture extends GameObject {
    */
   public Furniture(String name, String description, List<Item> itemsInside, Obstacle obstacle) {
     this(name, description, itemsInside);
+
+    this.obstalce = obstacle;
+  }
+
+  /**
+   * Constructor for Furniture without ItemList.
+   * Currently Used in XML Parser.
+   *
+   * @param name String
+   * @param description String
+   * @param obstacle Obstacle
+   */
+  public Furniture(String name, String description, Obstacle obstacle) {
+    this(name, description);
 
     this.obstalce = obstacle;
   }
@@ -81,6 +109,42 @@ public class Furniture extends GameObject {
    */
   public void emptyOutFurniture() {
     itemsInside = Collections.emptyList();
+  }
+
+  /**
+   * Add another item to the item list.
+   *
+   * @param item Item
+   */
+  public void addItem(Item item) {
+    this.itemsInside.add(item);
+  }
+
+  /**
+   * Setter for obstacle.
+   *
+   * @param obstacle Obstacle
+   */
+  public void setObstalce(Obstacle obstacle) {
+    this.obstalce = obstacle;
+  }
+
+  /**
+   * Setter for linkedPlace String which is needed for Parser / Level Design.
+   *
+   * @param linkedPlace String
+   */
+  public void setLinkedPlace(String linkedPlace) {
+    this.linkedPlace = linkedPlace;
+  }
+
+  /**
+   * Getter for linkedPlace which is needed for Parser / Level Design.
+   *
+   * @return Place
+   */
+  public String getLinkedPlace() {
+    return linkedPlace;
   }
 
 }

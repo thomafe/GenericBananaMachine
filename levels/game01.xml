@@ -22,23 +22,6 @@
           <name>Rope</name>
           <description>This is a long rope which has an iron hook at the end which can be used to climb.</description>
         </item>
-      <furniture>
-        <name>Lightning Chest</name>
-        <description>This is a huge black chest which is surrounded by lightnings.</description>
-        <content-item>
-          <name>Hammer of Thor</name>
-          <description>The legendary hammer of God Thor. You can't handle the power nor touch it.</description>
-        </content-item>
-        <content-item>
-          <name>Hand of God</name>
-          <description>Take him by the hand and become immortal.</description>
-        </content-item>
-        <obstacle>
-          <description>You need something to open it without getting hurt by the lightnings.</description>
-          <resolution>You used the plank to open the chest.</resolution>
-          <requiredItem>Plank</requiredItem>
-        </obstacle>
-      </furniture>
     </place>
     <place id="1">
       <name>Coast</name>
@@ -93,6 +76,21 @@
       <description>After you fired your Signal Rocket, you are hit by arrows. An unfriendly civilization of Indians found another human meal.</description>
     </place>
   </places>
+
+  <furniture>
+    <in-place>Beach</in-place>
+    <name>Lightning Chest</name>
+    <description>This is a huge black chest which is surrounded by lightnings.</description>
+    <content-item>
+      <name>Hammer of Thor</name>
+      <description>The legendary hammer of God Thor. You can't handle the power nor touch it.</description>
+    </content-item>
+    <obstacle>
+      <description>You need something to open it without getting hurt by the lightnings.</description>
+      <resolution>You used the plank to open the chest.</resolution>
+      <requiredItem>Machete</requiredItem>
+    </obstacle>
+  </furniture>
 
   <passages>
     <passage id="0">
