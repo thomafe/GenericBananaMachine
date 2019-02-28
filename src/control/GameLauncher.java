@@ -28,7 +28,9 @@ public class GameLauncher {
     String[] mainOptions = {"Start Game", "Options", "Exit Game"};
     String chosenOpt;
     do {
-      chosenOpt = menuMain(out, in, mainOptions);
+      do {
+        chosenOpt = menuMain(out, in, mainOptions);
+      } while (chosenOpt == null);
 
       switch (chosenOpt) {
         case "Exit Game":
