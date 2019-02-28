@@ -129,7 +129,7 @@ public class Character {
       items.add(item.getName());
     }
 
-    return getInventoryString();
+    return items;
   }
 }
 

@@ -63,7 +63,7 @@ public class GameLauncher {
 
   public static void getLevel(String[] args, GameControl gC, Input in, Output out){
     boolean doTest = false;
-    String fileName = "level";
+    String fileName = "game01.xml";
     int localGameNumber = -1;
 
     for (int i = 0; i < args.length; i++) {
