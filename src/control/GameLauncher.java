@@ -28,7 +28,7 @@ public class GameLauncher {
     Output out = new Output();
     Input in = new Input(out);
 
-    List<String> mainOptions = new ArrayList<String>(Arrays.asList("Start Game", "Options",
+    List<String> mainOptions = new ArrayList<>(Arrays.asList("Start Game", "Options",
         "Credits", "Exit Game"));
     String chosenOpt;
     do {
