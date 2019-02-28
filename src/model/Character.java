@@ -122,5 +122,14 @@ public class Character {
   public int getLifepoints() {
     return lifepoints;
   }
+
+  public List<String> getInventoryString(){
+    List<String> items = new ArrayList<>();
+    for (Item item : getItemsInInventory()) {
+      items.add(item.getName());
+    }
+
+    return items;
+  }
 }
 

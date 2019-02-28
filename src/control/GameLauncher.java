@@ -1,5 +1,8 @@
 package control;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import view.Input;
 import view.Output;
 import view.Output.errorType;
@@ -25,7 +28,8 @@ public class GameLauncher {
     Output out = new Output();
     Input in = new Input(out);
 
-    String[] mainOptions = {"Start Game", "Options", "Exit Game"};
+    List<String> mainOptions = new ArrayList<>(Arrays.asList("Start Game", "Options",
+        "Credits", "Exit Game"));
     String chosenOpt;
     do {
       chosenOpt = menuMain(out, in, mainOptions);
@@ -40,23 +44,26 @@ public class GameLauncher {
         case "Start Game":
           getLevel(args, gameControl, in, out);
           break;
+        case "Credits":
+          out.credits();
+          break;
         default:
           out.noSuccess(errorType.CANT_DO_THAT);
           break;
       }
-    } while (chosenOpt == "Options");
+    } while (true);
   }
 
-  public static String menuMain(Output out, Input in, String[] options){
+  public static String menuMain(Output out, Input in, List<String> options){
     String chosenOpt = null;
-    out.mainMenuText(options);
+    out.listOutput(options);
     chosenOpt = in.getStartOpt(options);
     return chosenOpt;
   }
 
   public static void getLevel(String[] args, GameControl gC, Input in, Output out){
     boolean doTest = false;
-    String fileName = "level";
+    String fileName = "game01.xml";
     int localGameNumber = -1;
 
     for (int i = 0; i < args.length; i++) {

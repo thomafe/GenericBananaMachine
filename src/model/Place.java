@@ -75,4 +75,13 @@ public class Place extends GameObject {
       passages.add(newPassage);
     }
   }
+
+  public List<String> getObjectsString() {
+    List<String> objects = new ArrayList<>();
+    for (GameObject gameObject : getObjectsInPlace()) {
+      objects.add(gameObject.getName());
+    }
+
+    return objects;
+  }
 }

@@ -125,9 +125,6 @@ public class XmlParser {
             places.get(placeCounter).addObjectToPlace(getIncludedItem(itemElement, items));
 
           }
-          // Add current Place to GameWorld
-          world.addPlace(places.get(placeCounter));
-
         }
       }
 
@@ -148,11 +145,10 @@ public class XmlParser {
         furnitures.add(
             new Furniture(
                 furnitureElement.getElementsByTagName("name").item(0).getTextContent(),   // name
-                furnitureElement.getElementsByTagName("description").item(0).getTextContent()    // description
+                furnitureElement.getElementsByTagName("description").item(0).getTextContent(),    // description
+                furnitureElement.getElementsByTagName("in-place").item(0).getTextContent()
             )
         );
-
-        // TODO: Add furniture to place!
 
         NodeList furnitureItemList = furnitureElement.getElementsByTagName("content-item");
 
@@ -204,6 +200,9 @@ public class XmlParser {
 
       }
 
+      // TODO: Add furniture to linked places
+      setFurnitureInPlace(furnitures, places);
+
       // parse all existing passages
       for (int passageCounter = 0; passageCounter < passageList.getLength(); passageCounter++) {
         Node passageNode = passageList.item(passageCounter);
@@ -234,7 +233,7 @@ public class XmlParser {
 
             Element obstacleElement = (Element) obstacleNode;
 
-            debug("- Obstacle" + obstacleCounter + ":");
+            debug("- Obstacle" + passageCounter + ":");
             debug("- - Description: " + obstacleElement.getElementsByTagName("description").item(0).getTextContent());
             debug("- - Resolution: " + obstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
             debug("- - Required Item: " + obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
@@ -251,6 +250,9 @@ public class XmlParser {
       }
 
       startingPlace = places.get(0);
+
+      // Add Places to GameWorld
+      addPlacesToWorld(places, world);
 
       // set starting Place in GameWorld
       if(world.getStartingPlace() == null) {
@@ -387,6 +389,29 @@ public class XmlParser {
       exist = true;
     }
     return exist;
+  }
+
+  /**
+   * Check which Furniture belongs to which Place and add specific Furniture to chosen Place.
+   *
+   * @param furnitures furniture
+   * @param places place
+   */
+  private void setFurnitureInPlace(ArrayList<Furniture> furnitures, ArrayList<Place> places) {
+    for(int i = 0; i < furnitures.size(); i++) {
+      for(int j = 0; j < places.size(); j++) {
+        if(places.get(j).getName().equals(furnitures.get(i).getLinkedPlace())) {
+          // is linked Place
+          places.get(j).addObjectToPlace(furnitures.get(i));
+        }
+      }
+    }
+  }
+
+  private void addPlacesToWorld(ArrayList<Place> places, GameWorld world) {
+    for(int i = 0; i < places.size(); i++) {
+      world.addPlace(places.get(i));
+    }
   }
 
 }
