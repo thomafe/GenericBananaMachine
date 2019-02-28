@@ -202,6 +202,7 @@ public class Output {
         break;
       case EMPTY_INVENTORY:
         printString("You have nothing in your inventory!");
+        break;
       default:
         printString("Quite impossible");
     }
