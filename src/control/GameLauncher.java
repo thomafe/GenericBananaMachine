@@ -9,14 +9,13 @@ import view.Output.errorType;
 import view.Output.options;
 
 public class GameLauncher {
-  
+
   /**
    * There are no objects of this class.
    */
   private GameLauncher() {
-    
   }
-  
+
   /**
    * Main Method.
    * 
@@ -28,8 +27,8 @@ public class GameLauncher {
     Output out = new Output();
     Input in = new Input(out);
 
-    List<String> mainOptions = new ArrayList<>(Arrays.asList("Start Game", "Options",
-        "Credits", "Exit Game"));
+    List<String> mainOptions =
+        new ArrayList<>(Arrays.asList("Start Game", "Options", "Credits", "Exit Game"));
     String chosenOpt;
     do {
       chosenOpt = menuMain(out, in, mainOptions);
@@ -54,14 +53,14 @@ public class GameLauncher {
     } while (true);
   }
 
-  public static String menuMain(Output out, Input in, List<String> options){
+  public static String menuMain(Output out, Input in, List<String> options) {
     String chosenOpt = null;
     out.listOutput(options);
     chosenOpt = in.getStartOpt(options);
     return chosenOpt;
   }
 
-  public static void getLevel(String[] args, GameControl gC, Input in, Output out){
+  public static void getLevel(String[] args, GameControl gC, Input in, Output out) {
     boolean doTest = false;
     String fileName = "game01.xml";
     int localGameNumber = -1;
@@ -81,7 +80,7 @@ public class GameLauncher {
   }
 
   public static void setLevel(boolean doTest, String fileName, int localGameNumber,
-      GameControl gameControl, Input in, Output out){
+      GameControl gameControl, Input in, Output out) {
     do {
       if (doTest) {
         gameControl = GameFactory.getTestGame();
