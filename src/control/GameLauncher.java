@@ -32,7 +32,8 @@ public class GameLauncher {
     String chosenOpt;
     do {
       do {
-        chosenOpt = menuMain(out, in, mainOptions);
+        out.listOutput(mainOptions);
+        chosenOpt = in.getStartOpt(mainOptions);
       } while (chosenOpt == null);
 
       switch (chosenOpt) {
@@ -55,14 +56,7 @@ public class GameLauncher {
     } while (true);
   }
 
-  public static String menuMain(Output out, Input in, List<String> options) {
-    String chosenOpt = null;
-    out.listOutput(options);
-    chosenOpt = in.getStartOpt(options);
-    return chosenOpt;
-  }
-
-  public static void getLevel(String[] args, GameControl gC, Input in, Output out) {
+  private static void getLevel(String[] args, GameControl gC, Input in, Output out) {
     boolean doTest = false;
     String fileName = "game01.xml";
     int localGameNumber = -1;
@@ -81,7 +75,7 @@ public class GameLauncher {
     setLevel(doTest, fileName, localGameNumber, gC, in, out);
   }
 
-  public static void setLevel(boolean doTest, String fileName, int localGameNumber,
+  private static void setLevel(boolean doTest, String fileName, int localGameNumber,
       GameControl gameControl, Input in, Output out) {
     do {
       if (doTest) {
