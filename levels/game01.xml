@@ -112,12 +112,12 @@
       </obstacle>
     </passage>
     <passage id="3">
-      <name>Dirty Signpost</name>
-      <description>You look at a very dirty and old signpost. You can't read it because it's so dirty. You need something to clean it.</description>
+      <name>Glade</name>
+      <description>The glade is small but divides the way into several splits. Which way might be the right one?</description>
       <comeFrom>Jungle</comeFrom>
       <connectTo>Outback</connectTo>
       <obstacle>
-        <description>You need to remove the dirt from the signpost.</description>
+        <description>You look at a very dirty and old signpost. You can't read it because it's so dirty. You need something to clean it.</description>
         <resolution>You used the cloth to clean the signpost. You can hear human voices in the distance.</resolution>
         <requiredItem>Cloth</requiredItem>
       </obstacle>
