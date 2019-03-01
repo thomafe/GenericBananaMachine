@@ -33,7 +33,7 @@ resolution: take alga, through around tree, pull himself out
 passage2: big stream, leads to place: waterfall,
 character can die here.
 
-Obstacle: water- can do damagepoints. You've been getting cold in the water. Therefore Damagepoint. 
+Obstacle: water- can do damagepoints. You've been getting cold in the water. Therefore Damagepoint.
 
 
 
