@@ -116,7 +116,6 @@ public class GameControl {
    * @param destinationPassage String
    * @return whether the character moved or not
    */
-
   public boolean tryToMoveThroughPassage(Passage destinationPassage) {
     boolean characterMoved = false;
 
