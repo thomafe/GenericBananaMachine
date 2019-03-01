@@ -1,0 +1,28 @@
+Level 3
+
+Starting point
+
+Place 1: haunted house
+You are in a haunted house
+You hear the howling of some wolves, combined with some more human like sounds. You need to get out of there.
+
+Item:
+stone - This is a stone. It is heavy but you can lift it up and it may help you to destroy things.
+rope- This is a rope. It can be tied to something.
+
+
+Passage: window
+Obstacle: glass window is closed
+
+Resolution: Use stone to smash a window. Use rope to climb out.
+Reaction of obstacle: you cut yourself with a piece of the glass from the broken window. Damage points.
+
+
+Place2: cold river
+You jump out of the window and land in a cold river. The water is pushing you around, you need to get out of there.
+
+Obstacle: water- can do damagepoints
+Use rope to get out of there.
+
+
+Vulcano with lava bubbles flying around because in Space and no gravity there

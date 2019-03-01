@@ -21,7 +21,7 @@ public class Output {
   }
 
   public enum successType {
-    PICK_UP, OBSTACLE_RESOLUTION, OBSTACLE_REACT_FALSE, OBSTACLE_REACT_RIGHT, OBSTACLE_WALK_AWAY
+    PICK_UP, MOVE_THROUGH, AT_PLACE, OBSTACLE_RESOLUTION, OBSTACLE_REACT_FALSE, OBSTACLE_REACT_RIGHT, OBSTACLE_WALK_AWAY
   }
 
   public enum endingType {
@@ -159,13 +159,9 @@ public class Output {
    * @param object GameObject
    */
   public void lookAtGameObject(GameObject object) {
-    if (object instanceof Place) {
-      printString("You are in " + object.getName());
-    }
-
     printString(object.getDescription());
   }
-
+  
   /**
    * Standard output for unsuccessful operations.
    */
@@ -231,15 +227,19 @@ public class Output {
   /**
    * Standard output for successful operations.
    * 
-   * @param userInput
+   * @param interactedObject
    * @param type
    */
-  public void success(String userInput, successType type) {
-    // TODO maybe refactor these methods to be nicer to read, not so many & easier to find the
-    // correct enum from other classes
+  public void successfulInteraction(String interactedObject, successType type) {
     switch (type) {
       case PICK_UP:
-        printString("You have successfully picked up " + userInput);
+        printString("You have successfully picked up " + interactedObject);
+        break;
+      case MOVE_THROUGH:
+        printString("You go through " + interactedObject);
+        break;
+      case AT_PLACE:
+        printString("You are in " + interactedObject);
         break;
       default:
         printString("Yeah, you did it!");
@@ -341,8 +341,6 @@ public class Output {
       System.out.println(message);
     }
   }
-
-  // TODO why does this not work with List<Passage> etc??
 
   /**
    * Standard output method for lists.

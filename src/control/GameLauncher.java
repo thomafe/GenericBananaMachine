@@ -63,7 +63,6 @@ public class GameLauncher {
     GameControl gameControl = null;
     boolean doTest = false;
     String fileName = "game01.xml";
-    int localGameNumber = -1;
 
     for (int i = 0; i < args.length; i++) {
       if (args[i].equalsIgnoreCase("-d")) {
