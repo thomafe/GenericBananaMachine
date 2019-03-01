@@ -172,6 +172,7 @@ public class GameControl {
       answerString = in.readItemForObstacle();
 
       if (answerString.equalsIgnoreCase("leave")) {
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_WALK_AWAY);
         out.noSuccess(errorType.GO_BACK);
         break;
       } else {
