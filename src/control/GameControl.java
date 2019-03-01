@@ -6,11 +6,9 @@ import model.Furniture;
 import model.GameObject;
 import model.GameWorld;
 import model.Item;
-import model.ItemObstacle;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
-import model.RiddleObstacle;
 import view.Input;
 import view.Output;
 import view.Output.endingType;
@@ -195,13 +193,13 @@ public class GameControl {
 
     Item chosenItem = findItemInInventory(userInput);
 
-    if (chosenItem != null && currentObstacle instanceof ItemObstacle) {
-      correctObject = ((ItemObstacle) currentObstacle).tryToUseItem(chosenItem);
+    if (chosenItem != null) {
+      correctObject = currentObstacle.tryToSolve(chosenItem);
       if (correctObject && chosenItem.isConsumed()) {
         character.removeItem(chosenItem);
       }
-    } else if (currentObstacle instanceof RiddleObstacle) {
-      ((RiddleObstacle) currentObstacle).tryToAnswerRiddle(userInput);
+    } else {
+      currentObstacle.tryToSolve(userInput);
     }
 
     if (currentObstacle.isResolved()) {
