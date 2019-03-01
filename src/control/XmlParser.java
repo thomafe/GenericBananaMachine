@@ -26,7 +26,6 @@ public class XmlParser {
   private GameWorld world = new GameWorld();
 
   private boolean enableDebug = false;
-  private String storyName;
 
   /**
    * Initialize Parser, check if file exists and runs parsing if true.
@@ -62,9 +61,7 @@ public class XmlParser {
       debug("Intro: " + storyElement.getElementsByTagName("introduction").item(0).getTextContent());
       debug("Level: " + storyElement.getElementsByTagName("name").item(0).getTextContent());
       debug("Version: " + storyElement.getElementsByTagName("version").item(0).getTextContent());
-      // add story elements to world
-      String storyName = storyElement.getElementsByTagName("name").item(0).getTextContent();
-
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
