@@ -21,8 +21,19 @@ Reaction of obstacle: you cut yourself with a piece of the glass from the broken
 Place2: cold river
 You jump out of the window and land in a cold river. The water is pushing you around, you need to get out of there.
 
-Obstacle: water- can do damagepoints
-Use rope to get out of there.
+items:
+stinky rotten fish- this fish stinks so bad, it may scare away everybody
+crab- this mean little monster can do severe damage by tweaking
+alga- those alga are tearproof, you can pull as hard as you can
+
+passage 1: smaller side river, good to reach the shore here
+obstacle: it's slippery you can't get out
+resolution: take alga, through around tree, pull himself out
+
+passage2: big stream, leads to place: waterfall,
+character can die here.
+
+Obstacle: water- can do damagepoints. You've been getting cold in the water. Therefore Damagepoint.
 
 
-Vulcano with lava bubbles flying around because in Space and no gravity there
+
