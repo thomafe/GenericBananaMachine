@@ -38,11 +38,9 @@ public class GameControl {
    * 
    * @param startingPlace Place
    */
+  @Deprecated
   public GameControl(Place startingPlace) {
-    character = new Character(startingPlace);
 
-    // TODO replace this with an actual gameWorld!
-    gameWorld = new GameWorld();
   }
 
   /**
@@ -53,11 +51,12 @@ public class GameControl {
    * @param in Inpout
    * @param startingPlace Place
    */
-  public GameControl(Output out, Input in, Place startingPlace) {
-    this(startingPlace);
-
+  public GameControl(Output out, Input in, GameWorld gameWorld) {
+    this.gameWorld = gameWorld;
     this.out = out;
     this.in = in;
+
+    character = new Character(gameWorld.getStartingPlace());
   }
 
   /**
