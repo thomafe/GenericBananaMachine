@@ -83,7 +83,7 @@
     </content-item>
     <obstacle>
       <description>You need something to screw the loose plank off.</description>
-      <resolution>You used the gold coin to receive a plank.</resolution>
+      <resolution>You used the gold coin as a screwdriver and a wooden plank drops on the floor.</resolution>
       <requiredItem>Gold Coin</requiredItem>
     </obstacle>
   </furniture>
@@ -97,7 +97,7 @@
     </content-item>
     <obstacle>
       <description>You need something to cut a wire out.</description>
-      <resolution>You used the Knife to cut a wire out.</resolution>
+      <resolution>You used the Knife to cut a wire out which lies on the ground.</resolution>
       <requiredItem>Knife</requiredItem>
     </obstacle>
   </furniture>
@@ -111,7 +111,7 @@
     </content-item>
     <obstacle>
       <description>You need a specific key to open this.</description>
-      <resolution>You successfully opened the chest and receive a strange looking key.</resolution>
+      <resolution>You successfully opened the chest and you see a strange looking key is lying on the ground.</resolution>
       <requiredItem>Cooks Key</requiredItem>
     </obstacle>
   </furniture>
@@ -125,7 +125,7 @@
     </content-item>
     <obstacle>
       <description>You need something to lighten up the room.</description>
-      <resolution>You successfully used the last few moments of the burning lantern to look around and find a rope.</resolution>
+      <resolution>You successfully used the last few moments of the burning lantern to look around and see a rope laying on the floor.</resolution>
       <requiredItem>Lantern</requiredItem>
     </obstacle>
   </furniture>
@@ -139,7 +139,7 @@
     </content-item>
     <obstacle>
       <description>You need a specific key to open this.</description>
-      <resolution>You successfully used the black key and opened it. You receive a Magic Stick.</resolution>
+      <resolution>You successfully used the black key and opened it. You see a Magic Stick lying on the ground.</resolution>
       <requiredItem>Black Key</requiredItem>
     </obstacle>
   </furniture>
