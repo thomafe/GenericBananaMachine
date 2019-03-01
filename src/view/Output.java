@@ -29,7 +29,7 @@ public class Output {
   }
 
   public enum options {
-    NOT_YET
+    NOT_YET, WHICH_LEVEL
   }
 
   private static final String[] ACTIONS =
@@ -101,7 +101,7 @@ public class Output {
     } else {
       StringBuilder thingsOutput = new StringBuilder();
 
-      thingsOutput.append("These things are in " + currentPlace.getName() + ":\n");
+      thingsOutput.append("These things are in " + currentPlace.getName() + ":");
 
       printString(thingsOutput.toString());
 
@@ -306,6 +306,9 @@ public class Output {
       case NOT_YET:
         printString("There is nothing you can change yet!");
         break;
+      case WHICH_LEVEL:
+        printString("Which level do you want to play?");
+        break;
     }
   }
 
@@ -330,7 +333,7 @@ public class Output {
   }
 
   public void beforeInput() {
-    System.out.print("-------------------------------\n> ");
+    System.out.print("-----------------------------------------\n> ");
   }
 
   /**
@@ -362,10 +365,10 @@ public class Output {
     printString(gameObjectList.toString());
   }
 
-  public void credits() {
-    printString("Project Manager: Felix Jan Thoma\n");
-    printString("Creative Writer: Simone Maag\n");
-    printString("Level Designer: Tim Hendrik Lehmeier\n");
+  public void credits(){
+    printString("Project Manager: Felix Jan Thoma");
+    printString("Creative Writer: Simone Maag");
+    printString("Level Designer: Tim Hendrik Lehmeier");
     printString("Lead Developer: Niklas Grethler");
   }
 

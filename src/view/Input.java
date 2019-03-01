@@ -47,7 +47,7 @@ public class Input {
 
   /**
    * Constructor.
-   * 
+   *
    * @param output Output
    */
   public Input(Output output) {
@@ -104,9 +104,9 @@ public class Input {
         } else {
           out.noSuccess(errorType.NO_PASSAGE);
         }
-      } else {
-        noMatch();
       }
+    } else {
+      noMatch();
     }
   }
 
@@ -130,7 +130,7 @@ public class Input {
 
   /**
    * Reads a single raw line of user input.
-   * 
+   *
    * @return String
    */
   private String readInSingleLine() {
@@ -211,7 +211,7 @@ public class Input {
    * Takes the userInput and the hierachy of the caller(command-matcher) and searches the userInput
    * for commands with a hierachy lower than the caller. If any command matches with the input it
    * return true, else it returns false.
-   * 
+   *
    * @param userInput command from the user as string
    * @param hierachy the hierachy from the caller as integer
    * @return boolean
