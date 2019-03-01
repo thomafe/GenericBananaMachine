@@ -175,6 +175,8 @@ public class Input {
 
     if (foundObject != null) {
       out.lookAtGameObject(foundObject);
+    } else if (match.group(1).equalsIgnoreCase("myself")) {
+      out.lookAtSelf(control.getCharacter());
     } else {
       out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
     }
