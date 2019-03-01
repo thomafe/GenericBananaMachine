@@ -314,6 +314,7 @@ public class GameControl {
    * Is run once at game start to introduce the player to the game.
    */
   private void gameIntroduction() {
+    // TODO make this display only after the second room is reached.
     out.greeting(gameWorld.getIntroduction());
     out.listOptions();
   }
