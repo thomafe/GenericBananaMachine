@@ -34,6 +34,32 @@ public class XmlParser {
     }
   }
 
+  public String getStoryName(String file) {
+    try {
+      File fXmlFile = new File("./levels/" + file);
+      DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+      DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+      Document doc = dBuilder.parse(fXmlFile);
+
+      doc.getDocumentElement().normalize();
+
+      NodeList storyList = doc.getElementsByTagName("story");
+
+      // parse story text
+      Node storyNode = storyList.item(0);
+      Element storyElement = (Element) storyNode;
+      debug("Intro: " + storyElement.getElementsByTagName("introduction").item(0).getTextContent());
+      debug("Level: " + storyElement.getElementsByTagName("name").item(0).getTextContent());
+      debug("Version: " + storyElement.getElementsByTagName("version").item(0).getTextContent());
+      // add story elements to world
+      String storyName = storyElement.getElementsByTagName("name").item(0).getTextContent();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return storyName;
+  }
+
   /**
    * Parse given XML file in /levels/ directory, generate objects, connections and GameWorld.
    *
