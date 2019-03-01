@@ -383,22 +383,6 @@ public class XmlParser {
   }
 
   /**
-   * Setter for storyName.
-   */
-  public void setStoryName(String name) {
-    storyName = name;
-  }
-
-  /**
-   * Getter for storyName.
-   *
-   * @return String
-   */
-  private String getStoryName() {
-    return storyName;
-  }
-
-  /**
    * Check if file in path exists and returns true if it does, false if not.
    * @param file String
    * @return boolean
