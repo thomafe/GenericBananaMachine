@@ -78,15 +78,18 @@ public class GameLauncher {
     Map<String, String> allLevels;
     List<String> levelList = new ArrayList<>();
     allLevels = listAllLevels();
-
-    out.menuOptions(options.WHICH_LEVEL);
+    String chosenLevel;
 
     for (Map.Entry<String, String> entry : allLevels.entrySet()) {
       levelList.add(entry.getKey());
     }
-    out.listOutput(levelList);
+    do {
+      out.menuOptions(options.WHICH_LEVEL);
+      out.listOutput(levelList);
+      chosenLevel = allLevels.get(in.getStartOpt(levelList));
+    } while (chosenLevel == null);
 
-    return allLevels.get(in.getStartOpt(levelList));
+    return chosenLevel;
   }
 
   /**
