@@ -296,14 +296,34 @@ public class XmlParser {
             debug("- Obstacle" + passageCounter + ":");
             debug("- - Description: " + obstacleElement.getElementsByTagName("description").item(0).getTextContent());
             debug("- - Resolution: " + obstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
-            debug("- - Required Item: " + obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
+            //debug("- - Required Item: " + obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
 
             // Create the obstacle for each passage.
-            passages.get(passageCounter).setObstacle(new ItemObstacle("",
-                obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
-                obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
-                getRequiredItem(items, obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent())
-            ));
+            if(obstacleElement.getAttribute("type").equals("double")){
+              // double Item obstacle
+              passages.get(passageCounter).setObstacle(new DoubleItemObstacle("",
+                  obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
+                  obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
+                  getRequiredItem(items, obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent()),
+                  getRequiredItem(items, obstacleElement.getElementsByTagName("additionalItem").item(0).getTextContent())
+              ));
+
+            } else if(obstacleElement.getAttribute("type").equals("riddle")) {
+              // riddle Obstacle
+              passages.get(passageCounter).setObstacle(new RiddleObstacle("",
+                  obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
+                  obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
+                  obstacleElement.getElementsByTagName("requiredAnswer").item(0).getTextContent()
+              ));
+
+            } else {
+              // normal Obstacle
+              passages.get(passageCounter).setObstacle(new ItemObstacle("",
+                  obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
+                  obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
+                  getRequiredItem(items, obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent())
+              ));
+            }
 
           }
         }
