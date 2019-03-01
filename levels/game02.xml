@@ -201,12 +201,12 @@
       </obstacle>
     </passage>
     <passage id="5">
-      <name>Sleeping Captain</name>
-      <description>The captain is sleeping snoozing. You can't risk moving over him without tying him up to get sure.</description>
+      <name>Top Deck Door</name>
+      <description>The captain is sleeping snoozing and blocking your way. You can't risk moving over him without tying him up to get sure.</description>
       <comeFrom>Captains Cabin</comeFrom>
       <connectTo>Top Deck</connectTo>
       <obstacle>
-        <description>You need something to tie the sleeping captain up before moving over him.</description>
+        <description>You need something to tie the sleeping captain up before passing him.</description>
         <resolution>You tied him up with your rope and he didn't even notice. You might have overacted with your safety.</resolution>
         <requiredItem>Rope</requiredItem>
       </obstacle>
