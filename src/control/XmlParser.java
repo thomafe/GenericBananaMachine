@@ -456,5 +456,9 @@ public class XmlParser {
     // add items to items list
     items.add(tmpItem);
   }
+  
+  public GameWorld getGameWorld() {
+    return world;
+  }
 
 }

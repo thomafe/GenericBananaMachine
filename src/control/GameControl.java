@@ -1,6 +1,5 @@
 package control;
 
-
 import model.Character;
 import model.Furniture;
 import model.GameObject;
@@ -38,9 +37,10 @@ public class GameControl {
    * 
    * @param startingPlace Place
    */
-  @Deprecated
-  public GameControl(Place startingPlace) {
+  public GameControl(GameWorld gameWorld) {
+    this.gameWorld = gameWorld;
 
+    character = new Character(gameWorld.getStartingPlace());
   }
 
   /**
@@ -52,11 +52,10 @@ public class GameControl {
    * @param startingPlace Place
    */
   public GameControl(Output out, Input in, GameWorld gameWorld) {
-    this.gameWorld = gameWorld;
+    this(gameWorld);
+
     this.out = out;
     this.in = in;
-
-    character = new Character(gameWorld.getStartingPlace());
   }
 
   /**
