@@ -42,7 +42,7 @@ public class GameControl {
    */
   public GameControl(Place startingPlace) {
     character = new Character(startingPlace);
-    
+
     // TODO replace this with an actual gameWorld!
     gameWorld = new GameWorld();
   }
@@ -163,12 +163,11 @@ public class GameControl {
    */
   public boolean interactWithObstacle(Obstacle currentObstacle) {
     String answerString = null;
-    Item chosenItem = null;
-    boolean obstacleResolved = false;
 
-    while (!obstacleResolved && gameIsRunning) {
+    while (!currentObstacle.isResolved() && gameIsRunning) {
+      // TODO only for item obstacles
       out.listOptionsObstacleInteraction(currentObstacle);
-      if (character.getItemsInInventory().size() > 0) {
+      if (!character.getItemsInInventory().isEmpty()) {
         out.listOutput(character.getInventoryString());
       } else {
         out.noSuccess(errorType.EMPTY_INVENTORY);
@@ -178,27 +177,43 @@ public class GameControl {
       if (answerString.equalsIgnoreCase("leave")) {
         out.noSuccess(errorType.GO_BACK);
         break;
-      }
-
-      chosenItem = findItemInInventory(answerString);
-
-      if (chosenItem != null && currentObstacle instanceof ItemObstacle) {
-        if (((ItemObstacle) currentObstacle).tryToUseItem(chosenItem) && chosenItem.isConsumed()) {
-          character.removeItem(chosenItem);
-        }
-      } else if (currentObstacle instanceof RiddleObstacle) {
-        ((RiddleObstacle) currentObstacle).tryToAnswerRiddle(answerString);
-      }
-
-      if (currentObstacle.isResolved()) {
-        out.obstacleOut(currentObstacle, successType.OBSTACLE_RESOLUTION);
-        obstacleResolved = true;
       } else {
-        distributeDamage(currentObstacle.getDamagepoints());
+        tryToSolveObstacle(currentObstacle, answerString);
       }
     }
 
-    return obstacleResolved;
+    return currentObstacle.isResolved();
+  }
+
+  /**
+   * 
+   * @param currentObstacle
+   * @param userInput
+   */
+  private void tryToSolveObstacle(Obstacle currentObstacle, String userInput) {
+    boolean correctObject = false;
+
+    Item chosenItem = findItemInInventory(userInput);
+
+    if (chosenItem != null && currentObstacle instanceof ItemObstacle) {
+      correctObject = ((ItemObstacle) currentObstacle).tryToUseItem(chosenItem);
+      if (correctObject && chosenItem.isConsumed()) {
+        character.removeItem(chosenItem);
+      }
+    } else if (currentObstacle instanceof RiddleObstacle) {
+      ((RiddleObstacle) currentObstacle).tryToAnswerRiddle(userInput);
+    }
+
+    if (currentObstacle.isResolved()) {
+      out.obstacleOut(currentObstacle, successType.OBSTACLE_RESOLUTION);
+    } else {
+      if (correctObject) {
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_REACT_RIGHT);
+      } else {
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_REACT_FALSE);
+        distributeDamage(currentObstacle.getDamagepoints());
+      }
+    }
   }
 
   /**
