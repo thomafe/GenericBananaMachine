@@ -102,20 +102,6 @@
     </obstacle>
   </furniture>
   <furniture>
-    <in-place>Main Deck</in-place>
-    <name>Cannon Ball Chest</name>
-    <description>The chest is very well locked with a specific key. You can't pick it.</description>
-    <content-item>
-      <name>Cannon Ball</name>
-      <description>A huge cannon ball which can be used to destroy ships.</description>
-    </content-item>
-    <obstacle>
-      <description>You need the specific key to open it.</description>
-      <resolution>You are a cheater! You can't open this one! Calling a Game Master...</resolution>
-      <requiredItem>Cannon Ball Key</requiredItem>
-    </obstacle>
-  </furniture>
-  <furniture>
     <in-place>Crew Deck</in-place>
     <name>Cooks Chest</name>
     <description>There is a engraving "COOK" on the chest. Where might be the specific key for this?</description>
