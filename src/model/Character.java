@@ -120,7 +120,7 @@ public class Character {
    * 
    * @return
    */
-  public int getLifepoints() {
+  public int getHitpoints() {
     return hitpoints;
   }
 

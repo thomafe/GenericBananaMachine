@@ -8,14 +8,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import model.DoubleItemObstacle;
 import model.Furniture;
 import model.GameWorld;
 import model.Item;
 import model.ItemObstacle;
-import model.DoubleItemObstacle;
-import model.RiddleObstacle;
 import model.Passage;
 import model.Place;
+import model.RiddleObstacle;
 
 /**
  * Parse given XML file in a specific path.
@@ -44,12 +44,12 @@ public class XmlParser {
   /**
    * Parses XML file and returns the Story name.
    *
-   * @param file String
+   * @param path String
    * @return String
    */
-  public String getStoryName(String file) {
+  public String getStoryName(String path) {
     try {
-      File fXmlFile = new File("./levels/" + file);
+      File fXmlFile = new File(path);
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
       Document doc = dBuilder.parse(fXmlFile);

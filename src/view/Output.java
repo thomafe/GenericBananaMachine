@@ -1,6 +1,7 @@
 package view;
 
 import java.util.List;
+import model.Character;
 import model.GameObject;
 import model.Obstacle;
 import model.Place;
@@ -160,6 +161,15 @@ public class Output {
    */
   public void lookAtGameObject(GameObject object) {
     printString(object.getDescription());
+  }
+  
+  /**
+   * Look at the character itself.
+   * 
+   * @param character
+   */
+  public void lookAtSelf(Character character) {
+    printString("You look at yourself. You have " + character.getHitpoints() + " hitpoints left.");
   }
   
   /**
@@ -366,9 +376,9 @@ public class Output {
   }
 
   public void credits(){
-    printString("Project Manager: Felix Jan Thoma");
-    printString("Creative Writer: Simone Maag");
-    printString("Level Designer: Tim Hendrik Lehmeier");
+    printString("Project Manager: Felix Jan Thoma\n");
+    printString("Creative Writer: Simone Maag\n");
+    printString("Level Designer: Tim Hendrik Lehmeier\n");
     printString("Lead Developer: Niklas Grethler");
   }
 

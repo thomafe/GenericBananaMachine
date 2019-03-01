@@ -3,6 +3,7 @@ package control;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,8 +59,7 @@ public class GameLauncher {
           out.menuOptions(options.NOT_YET);
           break;
         case "Start Game":
-          String level = chooseLevel();
-          startLevel(level);
+          startLevel(chooseLevel());
           break;
         case "Credits":
           out.credits();
@@ -113,10 +113,11 @@ public class GameLauncher {
   private static Map<String, String> listAllLevels() {
     XmlParser parser = new XmlParser();
     Map<String, String> allLevels = new HashMap<>();
+  
     File levels = new File("./levels");
     for (File level : levels.listFiles()) {
       if (level.isFile()) {
-        allLevels.put(parser.getStoryName(level.getName()), level.getName());
+        allLevels.put(parser.getStoryName(level.getAbsolutePath()), level.getName());
       }
     }
     return allLevels;
