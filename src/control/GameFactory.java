@@ -12,9 +12,9 @@ import model.Place;
 import model.RiddleObstacle;
 
 /**
+ * Created playable games. 
  * 
  * @author thomafe
- *
  */
 public class GameFactory {
 

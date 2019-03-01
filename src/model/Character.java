@@ -6,14 +6,14 @@ import java.util.List;
 /**
  * Character can be in a place, pick up items, move through passages and resolve obstacles.
  * He has a certain amount of lifepoints and can get more of them or loose them.
- * If no lifepoints are left, character is dead.
+ * If no hitpoints are left, character is dead.
  *
  * @author Simone273
  */
 public class Character {
   private Place currentPlace = null;
   private List<Item> itemsInInventory = new ArrayList<>();
-  private int lifepoints;
+  private int hitpoints;
   private boolean dead = false;
 
   /**
@@ -30,10 +30,10 @@ public class Character {
    *
    * @param startingPlace Place
    */
-  public Character(Place startingPlace, int lifepoints) {
+  public Character(Place startingPlace, int hitpoints) {
     itemsInInventory = new ArrayList<>();
     currentPlace = startingPlace;
-    this.lifepoints = lifepoints;
+    this.hitpoints = hitpoints;
   }
 
   /**
@@ -88,9 +88,9 @@ public class Character {
    * @param damagepoints
    */
   public void takeDamage(int damagepoints) {
-    lifepoints = lifepoints - damagepoints;
-    if (lifepoints < 0) {
-      lifepoints = 0;
+    hitpoints = hitpoints - damagepoints;
+    if (hitpoints < 0) {
+      hitpoints = 0;
     }
   }
 
@@ -100,7 +100,7 @@ public class Character {
    * @param healingpoints
    */
   public void healDamage(int healingpoints) {
-    lifepoints = lifepoints + healingpoints;
+    hitpoints = hitpoints + healingpoints;
   }
 
   /**
@@ -109,7 +109,7 @@ public class Character {
    * @return
    */
   public boolean isDead() {
-    if (lifepoints == 0) {
+    if (hitpoints == 0) {
       dead = true;
     }
     return dead;
@@ -121,7 +121,7 @@ public class Character {
    * @return
    */
   public int getLifepoints() {
-    return lifepoints;
+    return hitpoints;
   }
 
   public List<String> getInventoryString(){

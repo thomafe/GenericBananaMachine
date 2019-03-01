@@ -10,15 +10,20 @@ import view.Input;
 import view.Output;
 import view.Output.errorType;
 import view.Output.options;
-import control.XmlParser;
 
+/**
+ * Launches the GBM and displays the main menu. By passing the argument "-d" it is possible to
+ * access a debug mode.
+ * 
+ * @author fthoma, Niklas
+ *
+ */
 public class GameLauncher {
 
   /**
    * There are no objects of this class.
    */
-  private GameLauncher() {
-  }
+  private GameLauncher() {}
 
   /**
    * Main Method.
@@ -65,10 +70,11 @@ public class GameLauncher {
       }
     } while (true);
   }
-  private static String chooseLevel(){
+
+  private static String chooseLevel() {
 
     Output out = new Output();
-    Input in  = new Input(out);
+    Input in = new Input(out);
     Map<String, String> allLevels;
     List<String> levelList = new ArrayList<>();
     allLevels = listAllLevels();
@@ -85,6 +91,7 @@ public class GameLauncher {
 
   /**
    * Starts a Level depending on the program-arguments.
+   * 
    * @param level
    */
   private static void startLevel(String level) {
@@ -103,7 +110,7 @@ public class GameLauncher {
     } while (gameControl.runGame());
   }
 
-  private static Map<String, String> listAllLevels(){
+  private static Map<String, String> listAllLevels() {
     XmlParser parser = new XmlParser();
     Map<String, String> allLevels = new HashMap<>();
     File levels = new File("./levels");

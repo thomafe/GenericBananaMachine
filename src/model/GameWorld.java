@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A data class that contains a GameWorld.
+ * A data class that contains the GameWorld.
  *
  * @author thomafe
  */

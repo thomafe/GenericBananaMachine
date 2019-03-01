@@ -16,7 +16,7 @@ import view.Output.errorTypeInput;
 import view.Output.successType;
 
 /**
- * Processes input from user.
+ * Processes input from the user.
  *
  * @author Niklas
  */
