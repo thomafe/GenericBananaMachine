@@ -281,7 +281,6 @@ public class GameControl {
   private Passage findPassageInPlace(String passageName) {
     Passage foundPassage = null;
 
-    // TODO thomaf add passages to the things in a room and rework?
     for (Passage gameObject : character.getCurrentPlace().getPassages()) {
       if (gameObject.getName().equalsIgnoreCase(passageName)) {
         foundPassage = gameObject;

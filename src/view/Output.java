@@ -235,8 +235,6 @@ public class Output {
    * @param type
    */
   public void success(String userInput, successType type) {
-    // TODO maybe refactor these methods to be nicer to read, not so many & easier to find the
-    // correct enum from other classes
     switch (type) {
       case PICK_UP:
         printString("You have successfully picked up " + userInput);
@@ -341,8 +339,6 @@ public class Output {
       System.out.println(message);
     }
   }
-
-  // TODO why does this not work with List<Passage> etc??
 
   /**
    * Standard output method for lists.
