@@ -25,6 +25,7 @@ public class RiddleObstacle extends Obstacle {
    * Check if the answer for the riddle is correct. If yes, return 'true' fo obstacleResolved so that
    * Obstacle gets resolved. If no return 'false'.
    */
+  @Override
   public boolean tryToSolve(Object answerForRiddle) {
     if (answerForRiddle instanceof String && riddleAnswer.equalsIgnoreCase((String)answerForRiddle)) {
       resolve();
