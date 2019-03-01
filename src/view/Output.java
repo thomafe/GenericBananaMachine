@@ -353,7 +353,7 @@ public class Output {
    * Print a string to the console.
    */
   private void printString(String message) {
-    if (!message.isEmpty()) {
+    if (!isEmpty(message)) {
       System.out.println(message);
     }
   }

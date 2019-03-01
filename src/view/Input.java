@@ -83,7 +83,7 @@ public class Input {
       }
     } else if (matcher.get(3).find()) {
       if (!testForBoxing(userInput, 4)) {
-        matchLookAt(matcher.get(4));
+        matchLookAt(matcher.get(3));
       }
     } else if (matcher.get(4).find()) {
       if (!testForBoxing(userInput, 5)) {
@@ -175,12 +175,12 @@ public class Input {
   private void matchLookAt(Matcher match) {
     GameObject foundObject = control.findGameObject(match.group(1));
 
-    if (foundObject != null) {
-      out.lookAtGameObject(foundObject);
+    if (foundObject == null) {
+      out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
     } else if (match.group(1).equalsIgnoreCase("myself")) {
       out.lookAtSelf(control.getCharacter());
     } else {
-      out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
+      out.lookAtGameObject(foundObject);
     }
 
   }
