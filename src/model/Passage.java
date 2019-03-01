@@ -1,20 +1,16 @@
 package model;
 
-import model.superclasses.Approachable;
-import model.superclasses.GameObject;
-
-// class mit name passage
-
 /**
- * connects places, can be blocked by passages
+ * Connects places, can be blocked by obstacles.
+ * 
+ * The name should describe the passage, not the obstacle.
+ * The description should hint at the obstacle and maybe be funny.
  *
  * @author Simone273
  */
-public class Passage extends GameObject implements Approachable{
+public class Passage extends GameObject{
 
-  // attribute
   private Place[] connectingRooms = new Place[2];
-
   private Obstacle obstacle = null;
 
   /**
@@ -40,8 +36,6 @@ public class Passage extends GameObject implements Approachable{
    * @return Object
    */
   public Place usePassage(Place comingFromPlace) {
-    
-    // Returns the place the passage will lead to
     if (comingFromPlace.equals(connectingRooms[0])) {
       return connectingRooms[1];
     } else if (comingFromPlace.equals(connectingRooms[1])) {
@@ -61,7 +55,7 @@ public class Passage extends GameObject implements Approachable{
   }
 
   /**
-   * Setter for obstacle. Sets committed obstacle to
+   * Setter for obstacle. Sets committed obstacle too.
    *
    * @param obstacle Obstacle
    */
@@ -86,5 +80,4 @@ public class Passage extends GameObject implements Approachable{
   public boolean hasObstacle() {
     return obstacle != null;
   }
-
 }

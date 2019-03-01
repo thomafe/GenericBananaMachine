@@ -1,19 +1,19 @@
 package model;
-/**
- * character moves through the world, picks up items, moves through passages and resolves obstacles
- * has lifepoints, can get more or use them, dies if no lifepoints left
- *
- * @author Simone273
- */
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Character can be in a place, pick up items, move through passages and resolve obstacles.
+ * He has a certain amount of lifepoints and can get more of them or loose them.
+ * If no hitpoints are left, character is dead.
+ *
+ * @author Simone273
+ */
 public class Character {
-
   private Place currentPlace = null;
   private List<Item> itemsInInventory = new ArrayList<>();
-  private int lifepoints;
+  private int hitpoints;
   private boolean dead = false;
 
   /**
@@ -30,10 +30,10 @@ public class Character {
    *
    * @param startingPlace Place
    */
-  public Character(Place startingPlace, int lifepoints) {
+  public Character(Place startingPlace, int hitpoints) {
     itemsInInventory = new ArrayList<>();
     currentPlace = startingPlace;
-    this.lifepoints = lifepoints;
+    this.hitpoints = hitpoints;
   }
 
   /**
@@ -41,7 +41,6 @@ public class Character {
    *
    * @param passage Passage
    */
-  // bei gang durch passage wird current place zum neuen place
   public void move(Passage passage) {
     currentPlace = passage.usePassage(currentPlace);
   }
@@ -59,16 +58,11 @@ public class Character {
    * Removes an item from the characters inventory. If that item isn't in the players inventory,
    * nothing happens.
    *
-   * @param itemToRemove - The item to be removed from the characters inventory
+   * @param itemToRemove - The item to be removed from the characters inventory.
    */
   public void removeItem(Item itemToRemove) {
     itemsInInventory.remove(itemToRemove);
   }
-
-  /**
-   * Use Item to solve Obstocle.
-   */
-  public void useItem(Item item) {}
 
   /**
    * Getter for current Place.
@@ -76,7 +70,6 @@ public class Character {
    * @return Place
    */
   public Place getCurrentPlace() {
-
     return currentPlace;
   }
 
@@ -89,29 +82,55 @@ public class Character {
     return itemsInInventory;
   }
 
+  /**
+   * Damage the character.
+   * 
+   * @param damagepoints
+   */
   public void takeDamage(int damagepoints) {
-    lifepoints = lifepoints - damagepoints;
-    if (lifepoints < 0) {
-      lifepoints = 0;
+    hitpoints = hitpoints - damagepoints;
+    if (hitpoints < 0) {
+      hitpoints = 0;
     }
   }
 
+  /**
+   * Heal the character.
+   * 
+   * @param healingpoints
+   */
   public void healDamage(int healingpoints) {
-    lifepoints = lifepoints + healingpoints;
+    hitpoints = hitpoints + healingpoints;
   }
 
+  /**
+   * Check if the character is dead.
+   * 
+   * @return
+   */
   public boolean isDead() {
-    if (lifepoints == 0) {
+    if (hitpoints == 0) {
       dead = true;
     }
     return dead;
-
   }
 
-  public int getLifepoints() {
-    return lifepoints;
+  /**
+   * Get the current lifepoints of the character.
+   * 
+   * @return
+   */
+  public int getHitpoints() {
+    return hitpoints;
   }
 
+  public List<String> getInventoryString(){
+    List<String> items = new ArrayList<>();
+    for (Item item : getItemsInInventory()) {
+      items.add(item.getName());
+    }
 
+    return items;
+  }
 }
 

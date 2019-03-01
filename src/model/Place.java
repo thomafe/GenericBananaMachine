@@ -2,20 +2,17 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.superclasses.GameObject;
 
 /**
- *Character can be in place, can move from place to place via passages
- *an item can be in a place
+ * Place is something the character can be in. He can move between places by using passages. In a place there can be items.
+ *
+ * The name of the place should lead with "the" if needed and be short.
+ * The description of the place shouldn't be to long and set the feeling of the level.
  *
  * @author Simone273
  */
-
 public class Place extends GameObject {
-
-  // Attribute
   private List<Passage> passages;
-
   private List<GameObject> thingsInTheRoom;
 
   /**
@@ -36,26 +33,13 @@ public class Place extends GameObject {
    * @return Passage List
    */
   public List<Passage> getPassages() {
-    // thingsInTheRoom.stream().filter(o -> o instanceof Passage).collect(collector);
-
-    // getter for passages
     return passages;
-  }
-
-  /**
-   * Add a single item to the item list. Deprecated! Use <code>addObjectToPlace()</code> instead
-   *
-   * @param item Item
-   */
-  @Deprecated
-  public void addItemOnTheFloor(Item item) {
-    thingsInTheRoom.add(item);
   }
 
   /**
    * Adds a new thing to to place.
    * 
-   * @param object
+   * @param object GameObject
    */
   public void addObjectToPlace(GameObject object) {
     if (!thingsInTheRoom.contains(object)) {
@@ -73,7 +57,7 @@ public class Place extends GameObject {
   }
 
   /**
-   * Getter for Items on the floor
+   * Getter for Items on the floor.
    * 
    * @return itemsOnTheFloor
    */
@@ -90,5 +74,14 @@ public class Place extends GameObject {
     if (!passages.contains(newPassage)) {
       passages.add(newPassage);
     }
+  }
+
+  public List<String> getObjectsString() {
+    List<String> objects = new ArrayList<>();
+    for (GameObject gameObject : getObjectsInPlace()) {
+      objects.add(gameObject.getName());
+    }
+
+    return objects;
   }
 }

@@ -1,0 +1,32 @@
+--- Output behavior ---
+
+Always:
+ - Wrong Command: Can't do that
+ - Wrong Paramter: Doesn't work
+ 
+Take:
+ - Feedback about taking item
+ 
+Goto:
+ - Feedback of whats happening
+  - Go through
+  - Obstacle there
+  - Furniture
+  
+Passage:
+ - Go through: Nothing
+ - Obstacle: Obstacle
+
+Furniture:
+ - Resolved OR Empty: Nothing here
+ - Obstacle: Obstacle. Resolve: Feedback about putting items in place
+ - Resolved but not empty: Feedback about putting items in place
+ 
+Obstacle:
+ - Tell player about his options.
+ - Correct thing: Feedback correct thing
+  - If resolved: Feedback about resolve and what happens next
+ - Wrong thing: feedback about wrong thing, reaction
+ - Resolved: Nothing?
+
+ 

@@ -1,0 +1,84 @@
+This document gives a rough overview of the work done in this project.
+It is updated manually and therefore not always up to date.
+
+---Project Overview---
+
+Total Code Lines: 			2620
+Total Amount of classes: 	22
+Non-Code Lines in project:	450
+
+
+---Git stats---
+
+### Simone ###
+Commits:		76
+Lines added:	2158
+Lines deleted:	1761
+
+### Niklas ###
+Commits:		68
+Lines added:	2597
+Lines deleted:	2262
+
+### Tim ###
+Commits:		109
+Lines added:	2011
+Lines deleted:	1685
+
+### Felix ###
+Commits:		151
+Lines added:	5598
+Lines deleted:	3829
+
+
+---SCRUM Accomplishments---
+
+### Simone ###
+Accepted Stories: 16
+Features:         10
+Chores/Bugs:      6
+Total Points:     9
+
+### Niklas ###
+Accepted Stories: 16
+Features:         11
+Chores/Bugs:      5
+Total Points:     10
+
+### Tim ###
+Accepted Stories: 11
+Features:         9
+Chores/Bugs:      2
+Total Points:     12
+
+### Felix ###
+Accepted Stories: 22
+Features:         14
+Chores/Bugs:      8
+Total Points:     13
+
+
+---Work overview---
+
+### Simone ###
+Implemented the methods and functionality of almost all model classes.
+Did a bunch of documentation work inside the whole project.
+Created the GitHub Wiki.
+Wrote the story for the final level.
+
+### Niklas ###
+Developed all of the Input and Output classes. Lots of reworking took place.
+Did lots of testing of input robustness and correct program behavior.
+Implemented the main menu.
+
+### Tim ###
+Took care of the early control classes. Later switched to the development of
+the XML Parser and Level Design. Wrote the whole XML parser.
+Frequently did small code cleanups and commenting.
+Implemented all the levels in XML files.
+
+### Felix ###
+Created the class structure and filled in method bodys.
+Implemented the later and current versions of the control classes.
+Lots of formatting, code cleanup and commenting.
+Also added most of the metadata files and documents.

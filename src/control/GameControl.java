@@ -1,14 +1,13 @@
 package control;
 
-
 import model.Character;
 import model.Furniture;
+import model.GameObject;
 import model.GameWorld;
 import model.Item;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
-import model.superclasses.GameObject;
 import view.Input;
 import view.Output;
 import view.Output.endingType;
@@ -33,32 +32,27 @@ public class GameControl {
   private boolean gameIsRunning = false;
   private boolean restartGame = false;
 
-  public enum decision_type {
-    CANT_DECIDE, YES, NO, NO_MATCH
-  }
-
   /**
    * Create a new controller with local Input and output.
    * 
-   * @param startingPlace
+   * @param startingPlace Place
    */
-  public GameControl(Place startingPlace) {
-    character = new Character(startingPlace);
+  public GameControl(GameWorld gameWorld) {
+    this.gameWorld = gameWorld;
 
-    out = new Output();
-    in = new Input(out, this);
+    character = new Character(gameWorld.getStartingPlace());
   }
 
   /**
    * Create new controller and use provided input and output. Currently not usable as Input needs a
    * reference to control.
    * 
-   * @param out
-   * @param in
-   * @param startingPlace
+   * @param out Output
+   * @param in Inpout
+   * @param startingPlace Place
    */
-  public GameControl(Output out, Input in, Place startingPlace) {
-    character = new Character(startingPlace);
+  public GameControl(Output out, Input in, GameWorld gameWorld) {
+    this(gameWorld);
 
     this.out = out;
     this.in = in;
@@ -70,6 +64,10 @@ public class GameControl {
    * @return whether the player wants to play again.
    */
   public boolean runGame() {
+    if (out == null || in == null) {
+      return false;
+    }
+
     gameIntroduction();
 
     gameIsRunning = true;
@@ -77,7 +75,6 @@ public class GameControl {
     // Game Loop
     while (gameIsRunning) {
 
-      out.lookAtCurrentPlace(getCurrentPlace());
       in.readInput();
       checkForBadEnding();
       checkForGoodEnding();
@@ -86,6 +83,11 @@ public class GameControl {
     return restartGame;
   }
 
+  /**
+   * After game end, ask the player if he wants to play again.
+   * 
+   * @return
+   */
   public boolean playAgain() {
     out.exitingTheGame(endingType.TRY_AGAIN);
     return in.yesNo();
@@ -94,10 +96,12 @@ public class GameControl {
   /**
    * Asks the player if he wants to leave the game. Takes an yes/no answer from input.
    */
-  public void endGame() {
+  public void endGame(boolean askTryAgain) {
     gameIsRunning = false;
-    
-    restartGame = playAgain();
+
+    if (askTryAgain) {
+      restartGame = playAgain();
+    }
   }
 
   /**
@@ -105,10 +109,9 @@ public class GameControl {
    * first interacts with that obstacle. If there is no obstacle or the obstacle gets resolved the
    * character moves to the next room.
    *
-   * @param passageName String
+   * @param destinationPassage String
    * @return whether the character moved or not
    */
-
   public boolean tryToMoveThroughPassage(Passage destinationPassage) {
     boolean characterMoved = false;
 
@@ -117,7 +120,9 @@ public class GameControl {
     if (obstacleInPassage == null || obstacleInPassage.isResolved()
         || interactWithObstacle(obstacleInPassage)) {
       character.move(destinationPassage);
+      out.successfulInteraction(destinationPassage.getName(), successType.MOVE_THROUGH);
       characterMoved = true;
+      out.successfulInteraction(getCurrentPlace().getName(), successType.AT_PLACE);
     }
 
     return characterMoved;
@@ -128,15 +133,20 @@ public class GameControl {
    * interacts with it. If not or it gets resolved all items from within the furniture are put into
    * the room.
    * 
-   * @param furniture
+   * @param furniture Furniture
    */
   public void interactWithFurniture(Furniture furniture) {
     Obstacle obstacleOnFurniture = furniture.getObstacle();
 
+    out.lookAtGameObject(furniture);
     if (obstacleOnFurniture == null || obstacleOnFurniture.isResolved()
         || interactWithObstacle(obstacleOnFurniture)) {
-      furniture.receiveItemsInSide().forEach(getCurrentPlace()::addObjectToPlace);
-      furniture.emptyOutFurniture();
+      if (furniture.receiveItemsInSide().isEmpty()) {
+        out.noSuccess(errorType.EMPTY);
+      } else {
+        furniture.receiveItemsInSide().forEach(getCurrentPlace()::addObjectToPlace);
+        furniture.emptyOutFurniture();
+      }
     }
   }
 
@@ -150,44 +160,63 @@ public class GameControl {
    */
   public boolean interactWithObstacle(Obstacle currentObstacle) {
     String answerString = null;
-    Item chosenItem = null;
-    boolean obstacleResolved = false;
 
-    while (!obstacleResolved && gameIsRunning) {
+    while (!currentObstacle.isResolved() && gameIsRunning) {
       out.listOptionsObstacleInteraction(currentObstacle);
-      out.listInventory(character.getItemsInInventory());
+      if (!character.getItemsInInventory().isEmpty()) {
+        out.listOutput(character.getInventoryString());
+      } else {
+        out.noSuccess(errorType.EMPTY_INVENTORY);
+      }
       answerString = in.readItemForObstacle();
 
       if (answerString.equalsIgnoreCase("leave")) {
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_WALK_AWAY);
+        out.noSuccess(errorType.GO_BACK);
         break;
-      }
-
-      chosenItem = findItemInInventory(answerString);
-
-      if (chosenItem != null) {
-        if (currentObstacle.tryToUseItem(chosenItem) && chosenItem.isConsumed()) {
-          character.removeItem(chosenItem);
-        }
       } else {
-        currentObstacle.tryToAnswerRiddle(answerString);
-        // TODO when we can tell riddle and item obstacles apart, rework this
-      }
-
-      if (currentObstacle.isResolved()) {
-        out.obstacleOut(currentObstacle, successType.OBSTACLE_RESOLUTION);
-        obstacleResolved = true;
-      } else {
-        distributeDamage(currentObstacle.getDamagepoints());
+        tryToSolveObstacle(currentObstacle, answerString);
       }
     }
 
-    return obstacleResolved;
+    return currentObstacle.isResolved();
+  }
+
+  /**
+   * 
+   * @param currentObstacle
+   * @param userInput
+   */
+  private void tryToSolveObstacle(Obstacle currentObstacle, String userInput) {
+    boolean correctObject = false;
+
+    Item chosenItem = findItemInInventory(userInput);
+
+    if (chosenItem != null) {
+      correctObject = currentObstacle.tryToSolve(chosenItem);
+      if (correctObject && chosenItem.isConsumed()) {
+        character.removeItem(chosenItem);
+      }
+    } else {
+      currentObstacle.tryToSolve(userInput);
+    }
+
+    if (currentObstacle.isResolved()) {
+      out.obstacleOut(currentObstacle, successType.OBSTACLE_RESOLUTION);
+    } else {
+      if (correctObject) {
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_REACT_RIGHT);
+      } else {
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_REACT_FALSE);
+        distributeDamage(currentObstacle.getDamagepoints());
+      }
+    }
   }
 
   /**
    * Tells the character to pick up an item
    *
-   * @param itemName String
+   * @param itemToPickUp String
    */
   public void pickUpItem(Item itemToPickUp) {
     character.takeItem(itemToPickUp);
@@ -197,7 +226,7 @@ public class GameControl {
   /**
    * Deals damage to the character, then checks for death.
    * 
-   * @param damage
+   * @param damage int
    */
   public void distributeDamage(int damage) {
     character.takeDamage(damage);
@@ -228,8 +257,8 @@ public class GameControl {
   /**
    * Look for a thing in the current place
    * 
-   * @param objectName
-   * @return
+   * @param objectName String
+   * @return GameObject
    */
   private GameObject findThingInPlace(String objectName) {
     GameObject foundObject = null;
@@ -247,13 +276,12 @@ public class GameControl {
   /**
    * Look for a thing in the current place
    * 
-   * @param objectName
-   * @return
+   * @param passageName String
+   * @return Passage
    */
   private Passage findPassageInPlace(String passageName) {
     Passage foundPassage = null;
 
-    // TODO thomaf add passages to the things in a room and rework?
     for (Passage gameObject : character.getCurrentPlace().getPassages()) {
       if (gameObject.getName().equalsIgnoreCase(passageName)) {
         foundPassage = gameObject;
@@ -286,7 +314,7 @@ public class GameControl {
    * Is run once at game start to introduce the player to the game.
    */
   private void gameIntroduction() {
-    out.greeting();
+    out.greeting(gameWorld.getIntroduction());
     out.listOptions();
   }
 
@@ -296,8 +324,8 @@ public class GameControl {
   private void checkForGoodEnding() {
 
     if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
-      out.goodEnding();
-      endGame();
+      out.goodEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
+      endGame(true);
     }
   }
 
@@ -308,8 +336,8 @@ public class GameControl {
   private void checkForBadEnding() {
     if (character.getCurrentPlace().getName().equals("Bad Ending")
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
-      out.badEnding();
-      endGame();
+      out.badEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
+      endGame(true);
     }
   }
 
@@ -320,7 +348,7 @@ public class GameControl {
   private void checkIfCharacterDead() {
     if (character.isDead()) {
       out.noSuccess(errorType.YOU_DEAD);
-      endGame();
+      endGame(true);
     }
   }
 
@@ -336,10 +364,18 @@ public class GameControl {
   /**
    * Getter for the place the character is currently in.
    * 
-   * @return
+   * @return Place
    */
   public Place getCurrentPlace() {
     return character.getCurrentPlace();
   }
+
+  public void setInputOutput(Input in, Output out) {
+    this.in = in;
+    this.out = out;
+
+    in.setControl(this);
+  }
+
 
 }

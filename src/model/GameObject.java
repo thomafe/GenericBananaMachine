@@ -1,5 +1,5 @@
 
-package model.superclasses;
+package model;
 
 /**
  * ingame object with a game and a description
@@ -38,6 +38,11 @@ public abstract class GameObject {
    */
   public String getDescription() {
     return description;
+  }
+  
+  @Override
+  public String toString() {
+    return getName();
   }
 
 }

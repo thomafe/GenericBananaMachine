@@ -2,61 +2,77 @@ package view;
 
 import java.util.List;
 import model.Character;
-import model.Item;
+import model.GameObject;
 import model.Obstacle;
-import model.Passage;
 import model.Place;
-import model.superclasses.GameObject;
 
 /**
- * reacts to input from user with output
+ * Reacts to input from user with output.
  *
  * @author Niklas
  */
 public class Output {
 
   public enum errorType {
-    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD,
-    DECIDE
+    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE, NO_PASSAGE, EMPTY, EMPTY_INVENTORY
   }
 
   public enum errorTypeInput {
-    NO_ITEM, NO_PASSAGE, THERE_IS_NONE
+    NO_ITEM, NO_PASSAGE, THERE_IS_NONE, NOT_AN_ITEM
   }
 
   public enum successType {
-    PICK_UP, OBSTACLE_RESOLUTION, OBSTACLE_REACTION
+    PICK_UP, MOVE_THROUGH, AT_PLACE, OBSTACLE_RESOLUTION, OBSTACLE_REACT_FALSE, OBSTACLE_REACT_RIGHT, OBSTACLE_WALK_AWAY
   }
 
   public enum endingType {
     YOU_SURE, NO, YES, TRY_AGAIN
   }
 
-  private Character character = null;
+  public enum options {
+    NOT_YET, WHICH_LEVEL
+  }
 
-  private static final String[] ACTIONS = {"Look at <something>", "Look around",
-      "Goto <Passage | Furniture Name>", "Take <Item Name>", "Inventory", "Actions" , "Exit"};
+  private static final String[] ACTIONS =
+      {"Look at <something>", "Look around", "Goto/Use <Passage/Furniture Name>",
+          "Go back to the last passage", "Take <Item Name>", "Inventory", "Actions", "Exit"};
 
   /**
    * Introduction for the player at the start of the game.
    */
-  public void greeting() {
-    printString("Hello fellow player!\n"
-        + " In this glorious adventure game you can prove your bravery and smartness\n by passing the many obstacles that will come in your way\n"
-        + "Look for things along the way that might help you and you may stand a chance");
-
+  public void greeting(String introduction) {
+    if (introduction != null && !introduction.isEmpty()) {
+      printString(introduction);
+    } else {
+      printString("Hello fellow player!\n"
+          + "In this glorious adventure game you can prove your bravery and smartness\n"
+          + "by passing the many obstacles that will come in your way\n"
+          + "Look for things along the way that might help you and you may stand a chance");
+    }
   }
 
   /**
-   * Ending sequence when the game is done, either because of succeed or because of death
+   * Ending sequence when the game is done, either because of succeed or because of death.
    */
-  public void goodEnding() {
-    printString(
-        "Congraltulations, you've made it\n You reached the end of the game \n passing many obstacles you fought your way through the world \nconsider yourself a hero now");
+  public void goodEnding(String ending) {
+    if (ending != null && !ending.isEmpty()) {
+      printString(ending);
+    } else {
+      printString("Congraltulations, you've made it\n" + "You reached the end of the game \n"
+          + "passing many obstacles you fought your way through the world \n"
+          + "consider yourself a hero now\n");
+    }
+    youDidItASCI();
   }
 
-  public void badEnding() {
-    printString("You failed\n This is the end of the game \n This place brought death to you");
+  public void badEnding(String ending) {
+    if (ending != null && !ending.isEmpty()) {
+      printString(ending);
+    } else {
+      printString(
+          "You failed\n This is the end of the game \n" + "This place brought death to you");
+    }
+    youDidItNotASCI();
   }
 
   /**
@@ -86,31 +102,11 @@ public class Output {
     } else {
       StringBuilder thingsOutput = new StringBuilder();
 
-      thingsOutput.append(
-          "These things are in " + currentPlace.getName() + ": \n");
-      for (GameObject object : currentPlace.getObjectsInPlace()) {
-        thingsOutput.append(" - " + object.getName() + "\n");
-      }
+      thingsOutput.append("These things are in " + currentPlace.getName() + ":");
 
       printString(thingsOutput.toString());
-    }
-  }
 
-  /**
-   * Lists all items in characters inventory.
-   */
-  public void listInventory(List<Item> itemsInInventory) {
-    if (!itemsInInventory.isEmpty()) {
-      StringBuilder itemList = new StringBuilder();
-
-      itemList.append("These items are in your inventory:\n");
-      for (Item item : itemsInInventory) {
-        itemList.append(" - " + item.getName() + "\n");
-      }
-
-      printString(itemList.toString());
-    } else {
-      printString("You have nothing in your inventory!");
+      listOutput(currentPlace.getObjectsString());
     }
   }
 
@@ -120,30 +116,33 @@ public class Output {
   public void listPassages(Place currentPlace) {
     StringBuilder passageList = new StringBuilder();
 
-    passageList.append(
-        "These passages lead out of " + currentPlace.getName() + ":\n");
-    for (Passage passage : currentPlace.getPassages()) {
-      passageList.append(" - " + passage.getName() + "\n");
+    passageList.append("These passages lead out of " + currentPlace.getName() + ":\n");
+    for (int i = 0; i < currentPlace.getPassages().size(); i++) {
+      passageList.append(currentPlace.getPassages().get(i));
+      if (i != currentPlace.getPassages().size() - 1) {
+        passageList.append(" | ");
+      }
     }
+
 
     printString(passageList.toString());
 
   }
 
   /**
-   * List the options to interact with an obstacle
+   * List the options to interact with an obstacle.
    */
   public void listOptionsObstacleInteraction(Obstacle obstacle) {
     StringBuilder obstacleOptions = new StringBuilder();
 
     obstacleOptions.append(obstacle.getDescription() + "\n");
-    obstacleOptions.append("Do you want to \"use\" an item or do you want to \"leave\"?");
+    obstacleOptions.append("Do you want to use an item or do you want to \"leave\"?");
 
     printString(obstacleOptions.toString());
   }
 
   /**
-   * Look at the currentPlace.
+   * Look at the currentPlace. Use <code>lookAtGameObject()</code> instead.
    */
   public void lookAtCurrentPlace(Place currentPlace) {
     StringBuilder placeDescription = new StringBuilder();
@@ -158,25 +157,28 @@ public class Output {
    * Shows GameObject's name / description in console or gives User an Exception if no such item
    * exists.
    *
-   * @param objectName String
+   * @param object GameObject
    */
   public void lookAtGameObject(GameObject object) {
-      StringBuilder gameObjectDescription = new StringBuilder();
-
-      gameObjectDescription.append("You look at " + object.getName() + "\n");
-      gameObjectDescription.append(object.getDescription());
-
-      printString(gameObjectDescription.toString());
+    printString(object.getDescription());
   }
-
+  
   /**
-   * Standard output for unsuccessful operations
+   * Look at the character itself.
+   * 
+   * @param character
+   */
+  public void lookAtSelf(Character character) {
+    printString("You look at yourself. You have " + character.getHitpoints() + " hitpoints left.");
+  }
+  
+  /**
+   * Standard output for unsuccessful operations.
    */
   public void noSuccess(errorType type) {
     switch (type) {
       case CANT_DO_THAT:
         printString("You can't do that!");
-        listOptions();
         break;
       case DOES_NOT_WORK:
         printString("That doesn't work");
@@ -185,7 +187,7 @@ public class Output {
         printString("You don't have this item!");
         break;
       case GO_BACK:
-        printString("You decided to go back to " + character.getCurrentPlace().getName());
+        printString("You decided to go back");
         break;
       case DONT_MIX:
         printString("Don't mix the bloody commands!");
@@ -199,13 +201,22 @@ public class Output {
       case DECIDE:
         printString("You can't do both!");
         break;
+      case NO_PASSAGE:
+        printString("You first have to go through a passage!");
+        break;
+      case EMPTY:
+        printString("There is nothing here.");
+        break;
+      case EMPTY_INVENTORY:
+        printString("You have nothing in your inventory!");
+        break;
       default:
         printString("Quite impossible");
     }
   }
 
   /**
-   * Standard output for unsuccessful operations
+   * Standard output for unsuccessful operations.
    */
   public void noSuccess(String userInput, errorTypeInput type) {
     switch (type) {
@@ -218,20 +229,30 @@ public class Output {
       case THERE_IS_NONE:
         printString("There is no " + userInput + " here.");
         break;
+      case NOT_AN_ITEM:
+        printString(userInput + " is not an item!");
+        break;
       default:
         printString("That's not here!");
     }
   }
 
   /**
-   * Standard output for successful operations
-   * @param userInput
+   * Standard output for successful operations.
+   * 
+   * @param interactedObject
    * @param type
    */
-  public void success(String userInput, successType type) {
+  public void successfulInteraction(String interactedObject, successType type) {
     switch (type) {
       case PICK_UP:
-        printString("You have successfully picked up " + userInput);
+        printString("You have successfully picked up " + interactedObject);
+        break;
+      case MOVE_THROUGH:
+        printString("You go through " + interactedObject);
+        break;
+      case AT_PLACE:
+        printString("You are in " + interactedObject);
         break;
       default:
         printString("Yeah, you did it!");
@@ -239,7 +260,8 @@ public class Output {
   }
 
   /**
-   * Standard output for obstacle interactions
+   * Standard output for obstacle interactions.
+   * 
    * @param obstacle
    * @param type
    */
@@ -248,9 +270,22 @@ public class Output {
       case OBSTACLE_RESOLUTION:
         printString(obstacle.getResolution());
         break;
-      case OBSTACLE_REACTION:
-//        printString(obstacle.getReactionToFalseItem(););
-        obstacle.getReactionToFalseItem();
+      case OBSTACLE_REACT_RIGHT:
+        if (!isEmpty(obstacle.getReactionToCorrectItem())) {
+          printString(obstacle.getReactionToCorrectItem());
+        } else {
+          printString("That was correct!");
+        }
+        break;
+      case OBSTACLE_REACT_FALSE:
+        if (!isEmpty(obstacle.getReactionToFalseItem())) {
+          printString(obstacle.getReactionToFalseItem());
+        } else {
+          noSuccess(errorType.DOES_NOT_WORK);
+        }
+        break;
+      case OBSTACLE_WALK_AWAY:
+        printString(obstacle.getWalkAwayReaction());
         break;
       default:
         printString("Yeah, you did it!");
@@ -258,11 +293,12 @@ public class Output {
   }
 
   /**
-   * Standard output for game endings
+   * Standard output for game endings.
+   * 
    * @param type
    */
-  public void exitingTheGame(endingType type){
-    switch (type){
+  public void exitingTheGame(endingType type) {
+    switch (type) {
       case YOU_SURE:
         printString("Are you sure you want to exit the game?[YES/NO]");
         break;
@@ -278,21 +314,79 @@ public class Output {
     }
   }
 
-  /**
-   * Output a committed message in console. Deprecated! There should be a method for what you want
-   * to do.
-   *
-   * @param message String
-   */
-  @Deprecated
-  public void doOutput(String message) {
-    printString(message);
+  public void menuOptions(options opt) {
+    switch (opt) {
+      case NOT_YET:
+        printString("There is nothing you can change yet!");
+        break;
+      case WHICH_LEVEL:
+        printString("Which level do you want to play?");
+        break;
+    }
+  }
+
+  public void youDidItASCI() {
+    printString(" __     __               _ _     _   _ _     __  \n"
+        + " \\ \\   / /              | (_)   | | (_) |    \\ \\ \n"
+        + "  \\ \\_/ /__  _   _    __| |_  __| |  _| |_  (_) |\n"
+        + "   \\   / _ \\| | | |  / _` | |/ _` | | | __|   | |\n"
+        + "    | | (_) | |_| | | (_| | | (_| | | | |_   _| |\n"
+        + "    |_|\\___/ \\__,_|  \\__,_|_|\\__,_| |_|\\__| (_) |\n"
+        + "                                             /_/ \n");
+  }
+
+  public void youDidItNotASCI() {
+    printString(" __     __               _ _     _    _ _                 _        __\n"
+        + " \\ \\   / /              | (_)   | |  (_) |               | |    _ / /\n"
+        + "  \\ \\_/ /__  _   _    __| |_  __| |   _| |_   _ __   ___ | |_  (_) | \n"
+        + "   \\   / _ \\| | | |  / _` | |/ _` |  | | __| | '_ \\ / _ \\| __|   | | \n"
+        + "    | | (_) | |_| | | (_| | | (_| |  | | |_  | | | | (_) | |_   _| | \n"
+        + "    |_|\\___/ \\__,_|  \\__,_|_|\\__,_|  |_|\\__| |_| |_|\\___/ \\__| (_) | \n"
+        + "                                                                  \\_\\\n");
+  }
+
+  public void beforeInput() {
+    System.out.print("-----------------------------------------\n> ");
   }
 
   /**
    * Print a string to the console.
    */
   private void printString(String message) {
-    System.out.println(message);
+    if (!message.isEmpty()) {
+      System.out.println(message);
+    }
   }
+
+  /**
+   * Standard output method for lists.
+   * 
+   * @param gameObjects a string list of GameObjects.
+   */
+  public void listOutput(List<String> gameObjects) {
+    StringBuilder gameObjectList = new StringBuilder();
+
+    gameObjectList.append(gameObjects.get(0));
+
+    if (gameObjects.size() > 1) {
+      for (int i = 1; i < gameObjects.size(); i++) {
+        gameObjectList.append(" | ");
+        gameObjectList.append(gameObjects.get(i));
+      }
+    }
+
+    printString(gameObjectList.toString());
+  }
+
+  public void credits(){
+    printString("Project Manager: Felix Jan Thoma\n");
+    printString("Creative Writer: Simone Maag\n");
+    printString("Level Designer: Tim Hendrik Lehmeier\n");
+    printString("Lead Developer: Niklas Grethler");
+  }
+
+  private boolean isEmpty(String string) {
+    return string == null || string.isEmpty();
+  }
+
 }

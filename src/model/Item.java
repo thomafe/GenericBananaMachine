@@ -1,15 +1,16 @@
 package model;
 
-import model.superclasses.GameObject;
-
 /**
- * item can be picked up by the character, added to inventory, used to resolve obstacles, and be consumed
+ * Items can be picked up by the character, added to inventory, used to resolve obstacles, and be
+ * consumed.
+ * 
+ * An items name should describe it.
+ * An items description should give some clues about where to use it or at least be funny.
  *
  * @author Simone273
  */
 public class Item extends GameObject {
 
-  // Attribute
   private boolean consumed = false;
 
   /**
@@ -20,7 +21,6 @@ public class Item extends GameObject {
    */
   public Item(String name, String description) {
     super(name, description);
-
   }
 
   /**
@@ -38,5 +38,4 @@ public class Item extends GameObject {
   public void consume() {
     this.consumed = true;
   }
-
 }
