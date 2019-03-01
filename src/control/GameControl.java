@@ -120,8 +120,9 @@ public class GameControl {
     if (obstacleInPassage == null || obstacleInPassage.isResolved()
         || interactWithObstacle(obstacleInPassage)) {
       character.move(destinationPassage);
+      out.successfulInteraction(destinationPassage.getName(), successType.MOVE_THROUGH);
       characterMoved = true;
-      out.lookAtGameObject(getCurrentPlace());
+      out.successfulInteraction(getCurrentPlace().getName(), successType.AT_PLACE);
     }
 
     return characterMoved;
