@@ -3,7 +3,9 @@ package control;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import view.Input;
 import view.Output;
 import view.Output.errorType;
@@ -44,9 +46,7 @@ public class GameLauncher {
           out.menuOptions(options.NOT_YET);
           break;
         case "Start Game":
-          out.menuOptions(options.WHICH_LEVEL);
-          out.listOutput(listAllLevels());
-          String level = in.getStartOpt(listAllLevels());
+          String level = chooseLevel();
           startLevel(level, in, out);
           break;
         case "Credits":
@@ -57,6 +57,23 @@ public class GameLauncher {
           break;
       }
     } while (true);
+  }
+  private static String chooseLevel(){
+
+    Output out = new Output();
+    Input in  = new Input(out);
+    Map<String, String> allLevels;
+    List<String> levelList = new ArrayList<>();
+    allLevels = listAllLevels();
+
+    out.menuOptions(options.WHICH_LEVEL);
+
+    for (Map.Entry<String, String> entry : allLevels.entrySet()) {
+      levelList.add(entry.getKey());
+    }
+    out.listOutput(levelList);
+
+    return allLevels.get(in.getStartOpt(levelList));
   }
 
   /**
@@ -84,22 +101,21 @@ public class GameLauncher {
         gameControl = GameFactory.getTestGame();
         gameControl.setInputOutput(in, out);
       } else {
-        gameControl = GameFactory.getGameFromFile(level + "xml");
+        gameControl = GameFactory.getGameFromFile(level);
         gameControl.setInputOutput(in, out);
       }
     } while (gameControl.runGame());
   }
 
-  private static List<String> listAllLevels(){
+  private static Map<String, String> listAllLevels(){
     XmlParser parser = new XmlParser();
-    List<String> allLevels = new ArrayList<>();
+    Map<String, String> allLevels = new HashMap<>();
     File levels = new File("./levels");
     for (File level : levels.listFiles()) {
       if (level.isFile()) {
-        allLevels.add(parser.getStoryName(level.getName()));
+        allLevels.put(parser.getStoryName(level.getName()), level.getName());
       }
     }
     return allLevels;
   }
-
 }
