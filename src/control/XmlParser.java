@@ -170,6 +170,14 @@ public class XmlParser {
             )
           );
 
+          // add items to items list
+          items.add(
+              new Item(
+                  furnitureItemElement.getElementsByTagName("name").item(0).getTextContent(),
+                  furnitureItemElement.getElementsByTagName("description").item(0).getTextContent()
+              )
+          );
+
         }
 
         NodeList furnitureObstacleList = furnitureElement.getElementsByTagName("obstacle");
