@@ -25,6 +25,13 @@ public class GameLauncher {
    */
   public static void main(String[] args) {
 
+    for (String arg : args) {
+      if (arg.equalsIgnoreCase("-d")) {
+        startLevel("Debug");
+        break;
+      }
+    }
+
     Output out = new Output();
     Input in = new Input(out);
 
@@ -47,7 +54,7 @@ public class GameLauncher {
           break;
         case "Start Game":
           String level = chooseLevel();
-          startLevel(level, in, out);
+          startLevel(level);
           break;
         case "Credits":
           out.credits();
@@ -79,23 +86,12 @@ public class GameLauncher {
   /**
    * Starts a Level depending on the program-arguments.
    * @param level
-   * @param in
-   * @param out
    */
-  private static void startLevel(String level, Input in, Output out) {
+  private static void startLevel(String level) {
     GameControl gameControl = null;
+    Output out = new Output();
+    Input in = new Input(out);
 
-    //setting the game
-//    for (int i = 0; i < args.length; i++) {
-//      if (args[i].equalsIgnoreCase("-d")) {
-//        doTest = true;
-//        break;
-//      } else if (args[i].equalsIgnoreCase("-f") && ++i < args.length) {
-//        fileName = args[i];
-//      }
-//    }
-
-    //running the game
     do {
       if (level.equals("Debug")) {
         gameControl = GameFactory.getTestGame();

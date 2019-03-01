@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * character moves through the world, picks up items, moves through passages and resolves obstacles
- * has lifepoints, can get more or use them, dies if no lifepoints left
+ * Character can be in a place, pick up items, move through passages and resolve obstacles.
+ * He has a certain amount of lifepoints and can get more of them or loose them.
+ * If no lifepoints are left, character is dead.
  *
  * @author Simone273
  */
@@ -57,7 +58,7 @@ public class Character {
    * Removes an item from the characters inventory. If that item isn't in the players inventory,
    * nothing happens.
    *
-   * @param itemToRemove - The item to be removed from the characters inventory
+   * @param itemToRemove - The item to be removed from the characters inventory.
    */
   public void removeItem(Item itemToRemove) {
     itemsInInventory.remove(itemToRemove);

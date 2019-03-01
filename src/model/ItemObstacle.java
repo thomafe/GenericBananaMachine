@@ -12,7 +12,7 @@ public class ItemObstacle extends Obstacle {
   private boolean consumesItem = true;
 
   /**
-   * Create a new obstacle that takes one item that will be consumed.
+   * Create a new obstacle that takes one item which will be consumed.
    *
    * @param name String
    * @param description String
@@ -24,7 +24,7 @@ public class ItemObstacle extends Obstacle {
   }
 
   /**
-   * Checks if required item is correct, if yes resolves Obstacle
+   * Checks if required item is correct, if yes resolves Obstacle.
    *
    * @param itemToTry Item
    * @return boolean
