@@ -3,16 +3,16 @@
   <story>
     <name>Shipwrecked</name>
     <version>1.0</version>
-    <introduction>Waddehaddedudeda</introduction>
+    <introduction>You wake up lying on the beach of a foreign island. You realize that you've been shipwrecked and can't remember what exactly happened, nor where you are.</introduction>
   </story>
 
   <places>
     <place id="0">
       <name>Beach</name>
-      <description>You look around and see a bunch of equipment stuff laying on the ground.</description>
+      <description>The beach looks very strange, the sand is colored in a mix of orange and blue.</description>
         <item>
           <name>Machete</name>
-          <description>This is a sharp meele weapon which can also be used to cut plants.</description>
+          <description>This is a sharp melee weapon which can also be used to cut plants.</description>
         </item>
         <item>
           <name>Flashlight</name>
@@ -25,7 +25,7 @@
     </place>
     <place id="1">
       <name>Coast</name>
-      <description>You enter a barren Coast which borders on a deep Jungle.</description>
+      <description>The Coast is very rocky and harsh and borders to a deep Jungle.</description>
       <item>
         <name>Cloth</name>
         <description>This is a part of a cloth which can be used as a bandage or to clean yourself or something else.</description>
@@ -33,7 +33,7 @@
     </place>
     <place id="2">
       <name>Jungle</name>
-      <description>You got lost in the downs of the deep Jungle. You can't orientate yourself.</description>
+      <description>The jungle seems very deep and you can't see the sun nor stars through the covert.</description>
       <item>
         <name>Plank</name>
         <description>This is a wooden plank which lied in the water at the beach.</description>
@@ -45,7 +45,7 @@
     </place>
     <place id="3">
       <name>Cave</name>
-      <description>You enter a dark cave. You can hear a drumming noise from the deeper inside.</description>
+      <description>The cave is entirely dark. You can hear a drumming noise from the deeper inside.</description>
       <item>
         <name>Compass</name>
         <description>The needle always sign to north. Now you can orientate yourself in the jungle.</description>
@@ -53,7 +53,7 @@
     </place>
     <place id="4">
       <name>Outback</name>
-      <description>After you followed the signed path, you enter the jungle's outback, which is less deep as the upper lands.</description>
+      <description>The jungle's outback is less deep than the upper lands. You can feel the warming sun on your skin.</description>
       <item>
         <name>Signal Rocket</name>
         <description>There is one missile left which can be used to call someones attention.</description>
@@ -61,7 +61,7 @@
     </place>
     <place id="5">
       <name>Beach at the other side</name>
-      <description>You found a way out of the jungle and enter the beach at the other side of the island. In the distance you can see the silhouette of a ship.</description>
+      <description>The beach at the other side of the island looks as strange as the original one. The color mix is made of blue and green sand. In the distance you can see the silhouette of a ship.</description>
     </place>
     <place id="6" end="good">
       <name>Ship of Coastguard</name>
@@ -76,21 +76,6 @@
       <description>After you fired your Signal Rocket, you are hit by arrows. An unfriendly civilization of Indians found another human meal.</description>
     </place>
   </places>
-
-  <furniture>
-    <in-place>Beach</in-place>
-    <name>Lightning Chest</name>
-    <description>This is a huge black chest which is surrounded by lightnings.</description>
-    <content-item>
-      <name>Hammer of Thor</name>
-      <description>The legendary hammer of God Thor. You can't handle the power nor touch it.</description>
-    </content-item>
-    <obstacle>
-      <description>You need something to open it without getting hurt by the lightnings.</description>
-      <resolution>You used the plank to open the chest.</resolution>
-      <requiredItem>Machete</requiredItem>
-    </obstacle>
-  </furniture>
 
   <passages>
     <passage id="0">

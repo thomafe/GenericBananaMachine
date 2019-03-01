@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Obstacle can block passages, can be solved with one or more item or a riddle, can react when
+ * Obstacle can block passages. They can be solved with one or more item or a riddle. They can react when
  * character interacts with it or when an item is used.
  * 
  * The name of the obstacle is not very important, the player never currently never sees it.
@@ -13,7 +13,6 @@ package model;
  * @author Simone273
  */
 public abstract class Obstacle extends GameObject {
-  // TODO use a "tryToUse(Object)" method? More inheritance tricks!!
 
   private String resolution;
   protected boolean resolved = false;
@@ -49,7 +48,7 @@ public abstract class Obstacle extends GameObject {
   
   /**
    * Set state of obstacle to true, when item has been used and needs to be consumed. Item can
-   * either be consumed or not when resolving obstacle
+   * either be consumed or not when resolving obstacle.
    *
    * @param itemToResolve Item
    */

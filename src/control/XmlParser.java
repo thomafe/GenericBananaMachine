@@ -12,6 +12,8 @@ import model.Furniture;
 import model.GameWorld;
 import model.Item;
 import model.ItemObstacle;
+import model.DoubleItemObstacle;
+import model.RiddleObstacle;
 import model.Passage;
 import model.Place;
 
@@ -218,15 +220,41 @@ public class XmlParser {
           debug("- - - Requirement: " + furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
 
           // create furniture obstacle
-          furnitures.get(furnitureCounter).setObstalce(
-            new ItemObstacle(
-              "",
-              furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent(),
-              furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
-              getRequiredItem(items,
+          if(furnitureObstacleElement.getAttribute("type").equals("double")){
+            // double Item obstacle
+            furnitures.get(furnitureCounter).setObstalce(
+              new DoubleItemObstacle(
+                "",
+                furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent(),
+                furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
+                getRequiredItem(items, furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent()),
+                getRequiredItem(items, furnitureObstacleElement.getElementsByTagName("additionalItem").item(0).getTextContent())
+              )
+            );
+
+          } else if(furnitureObstacleElement.getAttribute("type").equals("riddle")) {
+            // riddle Obstacle
+            furnitures.get(furnitureCounter).setObstalce(
+              new RiddleObstacle(
+                "",
+                furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent(),
+                furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
+                  furnitureObstacleElement.getElementsByTagName("requiredAnswer").item(0).getTextContent()
+              )
+            );
+
+          } else {
+            // normal Obstacle
+            furnitures.get(furnitureCounter).setObstalce(
+              new ItemObstacle(
+                "",
+                furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent(),
+                furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
+                getRequiredItem(items,
                   furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent())
-            )
-          );
+              )
+            );
+          }
 
         }
 

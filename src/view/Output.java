@@ -6,7 +6,7 @@ import model.Obstacle;
 import model.Place;
 
 /**
- * reacts to input from user with output
+ * Reacts to input from user with output.
  *
  * @author Niklas
  */
@@ -21,7 +21,7 @@ public class Output {
   }
 
   public enum successType {
-    PICK_UP, OBSTACLE_RESOLUTION, OBSTACLE_REACT_FALSE, OBSTACLE_REACT_RIGHT, OBSTACLE_WALK_AWAY
+    PICK_UP, MOVE_THROUGH, AT_PLACE, OBSTACLE_RESOLUTION, OBSTACLE_REACT_FALSE, OBSTACLE_REACT_RIGHT, OBSTACLE_WALK_AWAY
   }
 
   public enum endingType {
@@ -51,7 +51,7 @@ public class Output {
   }
 
   /**
-   * Ending sequence when the game is done, either because of succeed or because of death
+   * Ending sequence when the game is done, either because of succeed or because of death.
    */
   public void goodEnding(String ending) {
     if (ending != null && !ending.isEmpty()) {
@@ -129,7 +129,7 @@ public class Output {
   }
 
   /**
-   * List the options to interact with an obstacle
+   * List the options to interact with an obstacle.
    */
   public void listOptionsObstacleInteraction(Obstacle obstacle) {
     StringBuilder obstacleOptions = new StringBuilder();
@@ -141,7 +141,7 @@ public class Output {
   }
 
   /**
-   * Look at the currentPlace. Use <code>lookAtGameObject()</code> instead
+   * Look at the currentPlace. Use <code>lookAtGameObject()</code> instead.
    */
   public void lookAtCurrentPlace(Place currentPlace) {
     StringBuilder placeDescription = new StringBuilder();
@@ -159,15 +159,11 @@ public class Output {
    * @param object GameObject
    */
   public void lookAtGameObject(GameObject object) {
-    if (object instanceof Place) {
-      printString("You are in " + object.getName());
-    }
-
     printString(object.getDescription());
   }
-
+  
   /**
-   * Standard output for unsuccessful operations
+   * Standard output for unsuccessful operations.
    */
   public void noSuccess(errorType type) {
     switch (type) {
@@ -210,7 +206,7 @@ public class Output {
   }
 
   /**
-   * Standard output for unsuccessful operations
+   * Standard output for unsuccessful operations.
    */
   public void noSuccess(String userInput, errorTypeInput type) {
     switch (type) {
@@ -229,17 +225,21 @@ public class Output {
   }
 
   /**
-   * Standard output for successful operations
+   * Standard output for successful operations.
    * 
-   * @param userInput
+   * @param interactedObject
    * @param type
    */
-  public void success(String userInput, successType type) {
-    // TODO maybe refactor these methods to be nicer to read, not so many & easier to find the
-    // correct enum from other classes
+  public void successfulInteraction(String interactedObject, successType type) {
     switch (type) {
       case PICK_UP:
-        printString("You have successfully picked up " + userInput);
+        printString("You have successfully picked up " + interactedObject);
+        break;
+      case MOVE_THROUGH:
+        printString("You go through " + interactedObject);
+        break;
+      case AT_PLACE:
+        printString("You are in " + interactedObject);
         break;
       default:
         printString("Yeah, you did it!");
@@ -247,7 +247,7 @@ public class Output {
   }
 
   /**
-   * Standard output for obstacle interactions
+   * Standard output for obstacle interactions.
    * 
    * @param obstacle
    * @param type
@@ -280,7 +280,7 @@ public class Output {
   }
 
   /**
-   * Standard output for game endings
+   * Standard output for game endings.
    * 
    * @param type
    */
@@ -344,8 +344,6 @@ public class Output {
       System.out.println(message);
     }
   }
-
-  // TODO why does this not work with List<Passage> etc??
 
   /**
    * Standard output method for lists.
