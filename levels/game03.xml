@@ -1,0 +1,37 @@
+<world>
+  <story>
+    <name>Part of the crew...</name>
+    <version>1.0</version>
+    <introduction>You wake up in a dirty and messed up prison cell. You can hear a snoozing nearby. You look out of the tiny window and realize it's night.</introduction>
+  </story>
+
+  <places>
+    <place id="0">
+      <name>Prison Cell</name>
+      <description>The cell is small and dirty. Dead rats and skeletons lay on the ground.</description>
+      <item>
+        <name>Rusted Nail</name>
+        <description>This is a rusted nail which can be used to unlock a chest or something.</description>
+      </item>
+      <item>
+        <name>Chair</name>
+        <description>This is a wooden chair which can be used to sit on.</description>
+      </item>
+    </place>
+  </places>
+
+  <furniture>
+    <in-place>Prison Cell</in-place>
+    <name>Table</name>
+    <description>This is a massive wooden table, but one plank isn't fixed.</description>
+    <content-item>
+      <name>Plank</name>
+      <description>This is a massive wooden plank. To be hit by that might hurt and knock you out for hours.</description>
+    </content-item>
+    <obstacle type="riddle">
+      <description>You need something to screw the loose plank off.</description>
+      <resolution>You used the gold coin as a screwdriver and a wooden plank drops on the floor.</resolution>
+      <requiredAnswer>Test</requiredAnswer>
+    </obstacle>
+  </furniture>
+</world>

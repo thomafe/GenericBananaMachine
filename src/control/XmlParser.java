@@ -217,7 +217,7 @@ public class XmlParser {
           debug("- - Obstacle:");
           debug("- - - Description: " + furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent());
           debug("- - - Resolution: " + furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
-          debug("- - - Requirement: " + furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
+          //debug("- - - Requirement: " + furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
 
           // create furniture obstacle
           if(furnitureObstacleElement.getAttribute("type").equals("double")){
@@ -239,7 +239,7 @@ public class XmlParser {
                 "",
                 furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent(),
                 furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
-                  furnitureObstacleElement.getElementsByTagName("requiredAnswer").item(0).getTextContent()
+                furnitureObstacleElement.getElementsByTagName("requiredAnswer").item(0).getTextContent()
               )
             );
 
