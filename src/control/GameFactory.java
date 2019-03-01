@@ -59,6 +59,7 @@ public class GameFactory {
    * @param number int
    * @return GameControl
    */
+  @Deprecated
   public static GameControl getLocalGame(int number) {
     GameControl newLocalGame = null;
 
