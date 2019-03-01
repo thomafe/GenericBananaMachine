@@ -18,7 +18,7 @@ public class Output {
   }
 
   public enum errorTypeInput {
-    NO_ITEM, NO_PASSAGE, THERE_IS_NONE
+    NO_ITEM, NO_PASSAGE, THERE_IS_NONE, NOT_AN_ITEM
   }
 
   public enum successType {
@@ -228,6 +228,9 @@ public class Output {
         break;
       case THERE_IS_NONE:
         printString("There is no " + userInput + " here.");
+        break;
+      case NOT_AN_ITEM:
+        printString(userInput + " is not an item!");
         break;
       default:
         printString("That's not here!");
