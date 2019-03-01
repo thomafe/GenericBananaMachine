@@ -13,8 +13,7 @@ import model.Place;
 public class Output {
 
   public enum errorType {
-    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE,
-    NO_PASSAGE, EMPTY, EMPTY_INVENTORY
+    CANT_DO_THAT, DOES_NOT_WORK, DONT_HAVE_ITEM, GO_BACK, DONT_MIX, DONT_MIX_MAD, YOU_DEAD, DECIDE, NO_PASSAGE, EMPTY, EMPTY_INVENTORY
   }
 
   public enum errorTypeInput {
@@ -22,7 +21,7 @@ public class Output {
   }
 
   public enum successType {
-    PICK_UP, OBSTACLE_RESOLUTION, OBSTACLE_REACTION
+    PICK_UP, OBSTACLE_RESOLUTION, OBSTACLE_REACT_FALSE, OBSTACLE_REACT_RIGHT, OBSTACLE_WALK_AWAY
   }
 
   public enum endingType {
@@ -160,7 +159,9 @@ public class Output {
    * @param object GameObject
    */
   public void lookAtGameObject(GameObject object) {
-    // TODO does not work great with place. Go back to old method?
+    if (object instanceof Place) {
+      printString("You are in " + object.getName());
+    }
 
     printString(object.getDescription());
   }
@@ -256,9 +257,22 @@ public class Output {
       case OBSTACLE_RESOLUTION:
         printString(obstacle.getResolution());
         break;
-      case OBSTACLE_REACTION:
-        // printString(obstacle.getReactionToFalseItem(););
-        obstacle.getReactionToFalseItem();
+      case OBSTACLE_REACT_RIGHT:
+        if (!isEmpty(obstacle.getReactionToCorrectItem())) {
+          printString(obstacle.getReactionToCorrectItem());
+        } else {
+          printString("That was correct!");
+        }
+        break;
+      case OBSTACLE_REACT_FALSE:
+        if (!isEmpty(obstacle.getReactionToFalseItem())) {
+          printString(obstacle.getReactionToFalseItem());
+        } else {
+          noSuccess(errorType.DOES_NOT_WORK);
+        }
+        break;
+      case OBSTACLE_WALK_AWAY:
+        printString(obstacle.getWalkAwayReaction());
         break;
       default:
         printString("Yeah, you did it!");
@@ -326,13 +340,16 @@ public class Output {
    * Print a string to the console.
    */
   private void printString(String message) {
-    System.out.println(message);
+    if (!message.isEmpty()) {
+      System.out.println(message);
+    }
   }
 
   // TODO why does this not work with List<Passage> etc??
 
   /**
    * Standard output method for lists.
+   * 
    * @param gameObjects a string list of GameObjects.
    */
   public void listOutput(List<String> gameObjects) {
@@ -355,6 +372,10 @@ public class Output {
     printString("Creative Writer: Simone Maag");
     printString("Level Designer: Tim Hendrik Lehmeier");
     printString("Lead Developer: Niklas Grethler");
+  }
+
+  private boolean isEmpty(String string) {
+    return string == null || string.isEmpty();
   }
 
 }

@@ -3,6 +3,7 @@ package control;
 import java.util.Collections;
 import model.DoubleItemObstacle;
 import model.Furniture;
+import model.GameWorld;
 import model.Item;
 import model.ItemObstacle;
 import model.Obstacle;
@@ -30,7 +31,7 @@ public class GameFactory {
    * @return GameControl
    */
   public static GameControl getTestGame() {
-    return createNewGameController(testWorld());
+    return new GameControl(testWorld());
   }
 
   /**
@@ -46,45 +47,35 @@ public class GameFactory {
     parser.initParser(filePath);
 
     if (parser.getStartingPlace() != null) {
-      newGame = new GameControl(parser.getStartingPlace());
+      newGame = new GameControl(parser.getGameWorld());
     }
 
     return newGame;
   }
 
-  /**
-   * Create a new game from local code. These are mostly old test worlds that are not ported or
-   * worlds that contain features that are not included in the level.xmls yet.
-   * 
-   * @param number int
-   * @return GameControl
-   */
-  @Deprecated
-  public static GameControl getLocalGame(int number) {
-    GameControl newLocalGame = null;
-
-    switch (number) {
-      // case 0:
-      // newLocalGame = new GameControl(oldTestWorld());
-      // break;
-      case 1:
-        newLocalGame = new GameControl(shipwreckedWorld());
-        break;
-      default:
-    }
-
-    return newLocalGame;
-  }
-
-  /**
-   * Create a new controller.
-   * 
-   * @param startingPlace Place
-   * @return Place
-   */
-  private static GameControl createNewGameController(Place startingPlace) {
-    return new GameControl(startingPlace);
-  }
+//  /**
+//   * Create a new game from local code. These are mostly old test worlds that are not ported or
+//   * worlds that contain features that are not included in the level.xmls yet.
+//   * 
+//   * @param number int
+//   * @return GameControl
+//   */
+//  @Deprecated
+//  public static GameControl getLocalGame(int number) {
+//    GameControl newLocalGame = null;
+//
+//    switch (number) {
+//      // case 0:
+//      // newLocalGame = new GameControl(oldTestWorld());
+//      // break;
+//      case 1:
+//        newLocalGame = new GameControl(shipwreckedWorld());
+//        break;
+//      default:
+//    }
+//
+//    return newLocalGame;
+//  }
 
   /* ----------------------------------------------------------------------------------------- */
   /* --------------------------------- Local Levels ------------------------------------------ */
@@ -93,7 +84,9 @@ public class GameFactory {
   /**
    * Create a test world.
    */
-  private static Place testWorld() {
+  private static GameWorld testWorld() {
+   GameWorld testWorld = new GameWorld();
+    
     Place startingPlace = new Place("Entrance", "Starting Place");
     Place room1 = new Place("Room 1", "Test Room 1");
     Place room2 = new Place("Room 2", "Test Room 2");
@@ -101,6 +94,16 @@ public class GameFactory {
     Place room4 = new Place("Room 4", "Test Room 4");
     Place room5 = new Place("Room 5", "Test Room 5");
     Place endingPlace = new Place("Ship of Coastguard", "It all ends here...");
+    
+    testWorld.addPlace(startingPlace);
+    testWorld.addPlace(room1);
+    testWorld.addPlace(room2);
+    testWorld.addPlace(room3);
+    testWorld.addPlace(room4);
+    testWorld.addPlace(room5);
+    testWorld.addPlace(endingPlace);
+    testWorld.setStartingPlace(startingPlace);
+    testWorld.addEndingPlace(endingPlace, "This is the end.");
 
     Item item1 = new Item("Required Item", "Required Item");
     Item item2 = new Item("Additional Item", "Additional Item");
@@ -117,11 +120,14 @@ public class GameFactory {
         new ItemObstacle("One Item Obstacle", "This obstalce takes one item", "It worked!", item1);
     Obstacle doulbeItemObstacle = new DoubleItemObstacle("Two Item Obstacle",
         "This obstalce takes one item, addtitional Item first!", "It worked!!!", item1, item2);
+    doulbeItemObstacle.setUsedCorrectItem("Now use required item.");
     Obstacle riddleObstacle =
         new RiddleObstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!!", "Shoe");
     Obstacle dangerousObstacle = new ItemObstacle("Dangerous Obstacle", "This will kill you.",
         "You should never read this", new Item("Void Item", "This is nowhere"));
     dangerousObstacle.setDamagepoints(9001);
+    dangerousObstacle.setUsedFalseItem("You dun goofed!");
+    dangerousObstacle.setWalkingAway("I WILL get you.");
 
 
     Furniture chest = new Furniture("Chest", "A dirty old chest",
@@ -140,7 +146,7 @@ public class GameFactory {
         .setObstacle(dangerousObstacle);
     new Passage("Ending Passage", "Leads to the end", startingPlace, endingPlace);
 
-    return startingPlace;
+    return testWorld;
   }
 
 

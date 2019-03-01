@@ -33,15 +33,15 @@ public class DoubleItemObstacle extends ItemObstacle {
    * Checks if additional item is correct, if yes run tryToUseItem in ItemObstacle
    */
   @Override
-  public boolean tryToUseItem(Item itemToTry) {
+  public boolean tryToSolve(Object itemToTry) {
     boolean correctItemUsed = false;
 
-    if (additionalItem.equals(itemToTry)) {
-      consume(itemToTry);
+    if (itemToTry instanceof Item && additionalItem.equals(itemToTry)) {
+      consume((Item) itemToTry);
       correctItemUsed = true;
       additionalItemResolved = true;
     } else if (additionalItemResolved) {
-      correctItemUsed = super.tryToUseItem(itemToTry);
+      correctItemUsed = super.tryToSolve(itemToTry);
     }
     return correctItemUsed;
   }

@@ -18,7 +18,6 @@ public abstract class Obstacle extends GameObject {
   private String resolution;
   protected boolean resolved = false;
   private int damagepoints;
-  private String contactWithItem;
   private String usedFalseItem;
   private String usedCorrectItem;
   private String walkingAway;
@@ -30,6 +29,14 @@ public abstract class Obstacle extends GameObject {
     super(name, description);
     this.resolution = resolution;
   }
+
+  /**
+   * 
+   * 
+   * @param object
+   * @return
+   */
+  public abstract boolean tryToSolve(Object object);
 
   /**
    * Getter for resolution which describes the resolution of the obstacle.
@@ -60,10 +67,6 @@ public abstract class Obstacle extends GameObject {
     return resolved;
   }
 
-  public void setContactWithItem(String contactWithItem){
-    this.contactWithItem = contactWithItem;
-  }
-
   public void setUsedFalseItem(String usedFalseItem) {
     this.usedFalseItem = usedFalseItem;
   }
@@ -78,14 +81,6 @@ public abstract class Obstacle extends GameObject {
 
   public void setResolution(String resolution) {
     this.resolution = resolution;
-  }
-
-  /**
-   * Method that will be run when Character gets in Contact with Item Obstacle reacts to contact
-   * then
-   */
-  public String getReactionToContact() {
-    return contactWithItem;
   }
 
   /**

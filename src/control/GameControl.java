@@ -1,16 +1,13 @@
 package control;
 
-
 import model.Character;
 import model.Furniture;
 import model.GameObject;
 import model.GameWorld;
 import model.Item;
-import model.ItemObstacle;
 import model.Obstacle;
 import model.Passage;
 import model.Place;
-import model.RiddleObstacle;
 import view.Input;
 import view.Output;
 import view.Output.endingType;
@@ -40,11 +37,10 @@ public class GameControl {
    * 
    * @param startingPlace Place
    */
-  public GameControl(Place startingPlace) {
-    character = new Character(startingPlace);
-    
-    // TODO replace this with an actual gameWorld!
-    gameWorld = new GameWorld();
+  public GameControl(GameWorld gameWorld) {
+    this.gameWorld = gameWorld;
+
+    character = new Character(gameWorld.getStartingPlace());
   }
 
   /**
@@ -55,8 +51,8 @@ public class GameControl {
    * @param in Inpout
    * @param startingPlace Place
    */
-  public GameControl(Output out, Input in, Place startingPlace) {
-    this(startingPlace);
+  public GameControl(Output out, Input in, GameWorld gameWorld) {
+    this(gameWorld);
 
     this.out = out;
     this.in = in;
@@ -116,7 +112,6 @@ public class GameControl {
    * @param destinationPassage String
    * @return whether the character moved or not
    */
-
   public boolean tryToMoveThroughPassage(Passage destinationPassage) {
     boolean characterMoved = false;
 
@@ -164,12 +159,10 @@ public class GameControl {
    */
   public boolean interactWithObstacle(Obstacle currentObstacle) {
     String answerString = null;
-    Item chosenItem = null;
-    boolean obstacleResolved = false;
 
-    while (!obstacleResolved && gameIsRunning) {
+    while (!currentObstacle.isResolved() && gameIsRunning) {
       out.listOptionsObstacleInteraction(currentObstacle);
-      if (character.getItemsInInventory().size() > 0) {
+      if (!character.getItemsInInventory().isEmpty()) {
         out.listOutput(character.getInventoryString());
       } else {
         out.noSuccess(errorType.EMPTY_INVENTORY);
@@ -177,29 +170,46 @@ public class GameControl {
       answerString = in.readItemForObstacle();
 
       if (answerString.equalsIgnoreCase("leave")) {
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_WALK_AWAY);
         out.noSuccess(errorType.GO_BACK);
         break;
-      }
-
-      chosenItem = findItemInInventory(answerString);
-
-      if (chosenItem != null && currentObstacle instanceof ItemObstacle) {
-        if (((ItemObstacle) currentObstacle).tryToUseItem(chosenItem) && chosenItem.isConsumed()) {
-          character.removeItem(chosenItem);
-        }
-      } else if (currentObstacle instanceof RiddleObstacle) {
-        ((RiddleObstacle) currentObstacle).tryToAnswerRiddle(answerString);
-      }
-
-      if (currentObstacle.isResolved()) {
-        out.obstacleOut(currentObstacle, successType.OBSTACLE_RESOLUTION);
-        obstacleResolved = true;
       } else {
-        distributeDamage(currentObstacle.getDamagepoints());
+        tryToSolveObstacle(currentObstacle, answerString);
       }
     }
 
-    return obstacleResolved;
+    return currentObstacle.isResolved();
+  }
+
+  /**
+   * 
+   * @param currentObstacle
+   * @param userInput
+   */
+  private void tryToSolveObstacle(Obstacle currentObstacle, String userInput) {
+    boolean correctObject = false;
+
+    Item chosenItem = findItemInInventory(userInput);
+
+    if (chosenItem != null) {
+      correctObject = currentObstacle.tryToSolve(chosenItem);
+      if (correctObject && chosenItem.isConsumed()) {
+        character.removeItem(chosenItem);
+      }
+    } else {
+      currentObstacle.tryToSolve(userInput);
+    }
+
+    if (currentObstacle.isResolved()) {
+      out.obstacleOut(currentObstacle, successType.OBSTACLE_RESOLUTION);
+    } else {
+      if (correctObject) {
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_REACT_RIGHT);
+      } else {
+        out.obstacleOut(currentObstacle, successType.OBSTACLE_REACT_FALSE);
+        distributeDamage(currentObstacle.getDamagepoints());
+      }
+    }
   }
 
   /**
