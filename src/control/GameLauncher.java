@@ -10,20 +10,32 @@ import view.Input;
 import view.Output;
 import view.Output.errorType;
 import view.Output.options;
-import control.XmlParser;
 
+/**
+ * Launches the GBM and displays the main menu. By passing the argument "-d" it is possible to
+ * access a debug mode.
+ * 
+ * @author fthoma, Niklas
+ *
+ */
 public class GameLauncher {
 
   /**
    * There are no objects of this class.
    */
-  private GameLauncher() {
-  }
+  private GameLauncher() {}
 
   /**
    * Main Method.
    */
   public static void main(String[] args) {
+
+    for (String arg : args) {
+      if (arg.equalsIgnoreCase("-d")) {
+        startLevel("Debug");
+        break;
+      }
+    }
 
     Output out = new Output();
     Input in = new Input(out);
@@ -47,7 +59,7 @@ public class GameLauncher {
           break;
         case "Start Game":
           String level = chooseLevel();
-          startLevel(level, in, out);
+          startLevel(level);
           break;
         case "Credits":
           out.credits();
@@ -58,10 +70,11 @@ public class GameLauncher {
       }
     } while (true);
   }
-  private static String chooseLevel(){
+
+  private static String chooseLevel() {
 
     Output out = new Output();
-    Input in  = new Input(out);
+    Input in = new Input(out);
     Map<String, String> allLevels;
     List<String> levelList = new ArrayList<>();
     allLevels = listAllLevels();
@@ -78,24 +91,14 @@ public class GameLauncher {
 
   /**
    * Starts a Level depending on the program-arguments.
+   * 
    * @param level
-   * @param in
-   * @param out
    */
-  private static void startLevel(String level, Input in, Output out) {
+  private static void startLevel(String level) {
     GameControl gameControl = null;
+    Output out = new Output();
+    Input in = new Input(out);
 
-    //setting the game
-//    for (int i = 0; i < args.length; i++) {
-//      if (args[i].equalsIgnoreCase("-d")) {
-//        doTest = true;
-//        break;
-//      } else if (args[i].equalsIgnoreCase("-f") && ++i < args.length) {
-//        fileName = args[i];
-//      }
-//    }
-
-    //running the game
     do {
       if (level.equals("Debug")) {
         gameControl = GameFactory.getTestGame();
@@ -107,7 +110,7 @@ public class GameLauncher {
     } while (gameControl.runGame());
   }
 
-  private static Map<String, String> listAllLevels(){
+  private static Map<String, String> listAllLevels() {
     XmlParser parser = new XmlParser();
     Map<String, String> allLevels = new HashMap<>();
     File levels = new File("./levels");
