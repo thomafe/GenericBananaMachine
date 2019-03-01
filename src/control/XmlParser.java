@@ -162,21 +162,9 @@ public class XmlParser {
           debug("- - - Name: " + furnitureItemElement.getElementsByTagName("name").item(0).getTextContent());
           debug("- - - Description: " + furnitureItemElement.getElementsByTagName("description").item(0).getTextContent());
 
-          // add current Item to furniture
-          furnitures.get(furnitureCounter).addItem(
-            new Item(
-              furnitureItemElement.getElementsByTagName("name").item(0).getTextContent(),
-              furnitureItemElement.getElementsByTagName("description").item(0).getTextContent()
-            )
-          );
+          addItems(furnitureItemElement, furnitures, items, furnitureCounter);
 
-          // add items to items list
-          items.add(
-              new Item(
-                  furnitureItemElement.getElementsByTagName("name").item(0).getTextContent(),
-                  furnitureItemElement.getElementsByTagName("description").item(0).getTextContent()
-              )
-          );
+
 
         }
 
@@ -420,6 +408,19 @@ public class XmlParser {
     for(int i = 0; i < places.size(); i++) {
       world.addPlace(places.get(i));
     }
+  }
+
+  private void addItems(Element furnitureItemElement, ArrayList<Furniture> furnitures, ArrayList<Item> items, int counter) {
+    Item tmpItem = new Item(
+        furnitureItemElement.getElementsByTagName("name").item(0).getTextContent(),
+        furnitureItemElement.getElementsByTagName("description").item(0).getTextContent()
+    );
+
+    // add current Item to furniture
+    furnitures.get(counter).addItem(tmpItem);
+
+    // add items to items list
+    items.add(tmpItem);
   }
 
 }
