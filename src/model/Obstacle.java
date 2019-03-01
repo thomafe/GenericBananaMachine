@@ -31,8 +31,7 @@ public abstract class Obstacle extends GameObject {
 
   /**
    *
-   * @param object
-   * @return
+   * @param object Object
    */
   public abstract boolean tryToSolve(Object object);
 
@@ -49,7 +48,6 @@ public abstract class Obstacle extends GameObject {
    * Set state of obstacle to true, when item has been used and needs to be consumed. Item can
    * either be consumed or not when resolving obstacle.
    *
-   * @param itemToResolve Item
    */
   protected void resolve() {
     this.resolved = true;
