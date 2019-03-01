@@ -145,6 +145,8 @@ public class Input {
     if (foundObject instanceof Item) {
       control.pickUpItem((Item) foundObject);
       out.successfulInteraction(match.group(1), successType.PICK_UP);
+    } else if (foundObject != null) {
+      out.noSuccess(foundObject.getName(), errorTypeInput.NOT_AN_ITEM);
     } else {
       out.noSuccess(match.group(1), errorTypeInput.NO_ITEM);
     }
