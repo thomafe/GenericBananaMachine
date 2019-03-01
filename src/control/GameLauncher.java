@@ -59,8 +59,7 @@ public class GameLauncher {
           out.menuOptions(options.NOT_YET);
           break;
         case "Start Game":
-          String level = chooseLevel();
-          startLevel(level);
+          startLevel(chooseLevel());
           break;
         case "Credits":
           out.credits();
@@ -85,7 +84,6 @@ public class GameLauncher {
     for (Map.Entry<String, String> entry : allLevels.entrySet()) {
       levelList.add(entry.getKey());
     }
-    Collections.sort(levelList);
     out.listOutput(levelList);
 
     return allLevels.get(in.getStartOpt(levelList));
