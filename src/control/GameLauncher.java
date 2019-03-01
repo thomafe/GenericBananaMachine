@@ -3,6 +3,7 @@ package control;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,9 +83,9 @@ public class GameLauncher {
     out.menuOptions(options.WHICH_LEVEL);
 
     for (Map.Entry<String, String> entry : allLevels.entrySet()) {
-      levelList.add(0, entry.getKey());
+      levelList.add(entry.getKey());
     }
-    levelList.
+    Collections.sort(levelList);
     out.listOutput(levelList);
 
     return allLevels.get(in.getStartOpt(levelList));
