@@ -84,6 +84,7 @@ public class GameLauncher {
     for (Map.Entry<String, String> entry : allLevels.entrySet()) {
       levelList.add(entry.getKey());
     }
+    levelList.
     out.listOutput(levelList);
 
     return allLevels.get(in.getStartOpt(levelList));
