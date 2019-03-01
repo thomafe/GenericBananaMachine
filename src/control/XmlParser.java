@@ -255,6 +255,10 @@ public class XmlParser {
               )
             );
           }
+          // add damage points to obstacle
+          if(!furnitureObstacleElement.getAttribute("damage").equals("")) {
+            passages.get(furnitureCounter).getObstacle().setDamagepoints(Integer.parseInt(furnitureObstacleElement.getAttribute("damage")));
+          }
 
         }
 
@@ -324,6 +328,12 @@ public class XmlParser {
                   getRequiredItem(items, obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent())
               ));
             }
+
+            // add damage points to obstacle
+            if(!obstacleElement.getAttribute("damage").equals("")) {
+              passages.get(passageCounter).getObstacle().setDamagepoints(Integer.parseInt(obstacleElement.getAttribute("damage")));
+            }
+
 
           }
         }
