@@ -1,9 +1,9 @@
 package model;
 
 /**
- * 
- * @author simone
+ *  Solves the Obstacle if correct answer to riddle is given.
  *
+ * @author simone
  */
 public class RiddleObstacle extends Obstacle {
 
@@ -22,8 +22,8 @@ public class RiddleObstacle extends Obstacle {
   }
 
   /**
-   * Check if the answer for the riddle is correct if yes return true fo obstacleResolved so that
-   * Obstacle gets resolved if no return false
+   * Check if the answer for the riddle is correct. If yes, return 'true' fo obstacleResolved so that
+   * Obstacle gets resolved. If no return 'false'.
    */
   public boolean tryToSolve(Object answerForRiddle) {
     if (answerForRiddle instanceof String && riddleAnswer.equalsIgnoreCase((String)answerForRiddle)) {

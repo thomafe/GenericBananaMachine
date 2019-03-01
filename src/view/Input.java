@@ -112,7 +112,7 @@ public class Input {
 
   /**
    * Searches for "use <item>" and returns <item> in input else it searches for "leave" and returns
-   * "leave" in input if nothing matches it returns null
+   * "leave" in input if nothing matches it returns null.
    * 
    * @return String
    */
@@ -240,7 +240,7 @@ public class Input {
   }
 
   /**
-   * The method to get a yes/no decision from the player
+   * The method to get a yes/no decision from the player.
    * 
    * @return boolean
    */
