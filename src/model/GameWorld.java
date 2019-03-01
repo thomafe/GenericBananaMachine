@@ -12,6 +12,8 @@ import java.util.Map;
  */
 public class GameWorld {
 
+  public static final String PASSWORD_PLACE_NAME = "Password";
+
   private String introduction = null;
   private String levelName = null;
   private String levelVersion = null;
@@ -19,6 +21,8 @@ public class GameWorld {
 
   private Place startingPlace = null;
   private List<Place> places = null;
+
+  private int startingHitpoints = 10;
 
   /**
    * Create a new empty GameWorld with no introduction or starting place.
@@ -61,12 +65,26 @@ public class GameWorld {
   }
 
   /**
-   * Set the starting place.
+   * Set the starting place. If the starting place is names PASSWORD, it isn't part of the acctual
+   * game, so it's passages is turned into a one way passage.
    * 
    * @param startingPlace Place
    */
   public void setStartingPlace(Place startingPlace) {
     this.startingPlace = startingPlace;
+
+    if (startingPlace.getName().equals(PASSWORD_PLACE_NAME)) {
+
+      Passage passage = startingPlace.getPassages().get(0);
+      Place secondPlace;
+      if (passage.getConnectingRooms()[0].equals(startingPlace)) {
+        secondPlace = passage.getConnectingRooms()[0];
+      } else {
+        secondPlace = passage.getConnectingRooms()[1];
+      }
+
+      secondPlace.removePassage(passage);
+    }
   }
 
   /**
@@ -157,6 +175,14 @@ public class GameWorld {
     }
 
     return endingText;
+  }
+
+  public void setStartingHitpoints(int startingHitpoints) {
+    this.startingHitpoints = startingHitpoints;
+  }
+
+  public int getStartingHitpoints() {
+    return startingHitpoints;
   }
 
 }

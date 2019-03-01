@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import control.GameControl;
 import model.Furniture;
 import model.GameObject;
+import model.GameWorld;
 import model.Item;
 import model.Passage;
 import view.Output.endingType;
@@ -154,7 +155,7 @@ public class Input {
     GameObject foundObject = control.findGameObject(match.group(2));
 
     if (foundObject instanceof Passage) {
-      if (control.tryToMoveThroughPassage((Passage) foundObject)) {
+      if (control.tryToMoveThroughPassage((Passage) foundObject) && !foundObject.getName().equals(GameWorld.PASSWORD_PLACE_NAME)) {
         lastPassage = (Passage) foundObject;
       }
     } else if (foundObject instanceof Furniture) {

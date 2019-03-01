@@ -84,4 +84,8 @@ public class Place extends GameObject {
 
     return objects;
   }
+  
+  public void removePassage(Passage passage) {
+    passages.remove(passage);
+  }
 }
