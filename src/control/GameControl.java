@@ -163,7 +163,6 @@ public class GameControl {
     String answerString = null;
 
     while (!currentObstacle.isResolved() && gameIsRunning) {
-      // TODO only for item obstacles
       out.listOptionsObstacleInteraction(currentObstacle);
       if (!character.getItemsInInventory().isEmpty()) {
         out.listOutput(character.getInventoryString());

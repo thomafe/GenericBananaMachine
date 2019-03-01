@@ -21,7 +21,7 @@ public class Output {
   }
 
   public enum successType {
-    PICK_UP, OBSTACLE_RESOLUTION, OBSTACLE_REACT_FALSE, OBSTACLE_REACT_RIGHT
+    PICK_UP, OBSTACLE_RESOLUTION, OBSTACLE_REACT_FALSE, OBSTACLE_REACT_RIGHT, OBSTACLE_WALK_AWAY
   }
 
   public enum endingType {
@@ -271,6 +271,9 @@ public class Output {
           noSuccess(errorType.DOES_NOT_WORK);
         }
         break;
+      case OBSTACLE_WALK_AWAY:
+        printString(obstacle.getWalkAwayReaction());
+        break;
       default:
         printString("Yeah, you did it!");
     }
@@ -334,7 +337,9 @@ public class Output {
    * Print a string to the console.
    */
   private void printString(String message) {
-    System.out.println(message);
+    if (!message.isEmpty()) {
+      System.out.println(message);
+    }
   }
 
   // TODO why does this not work with List<Passage> etc??

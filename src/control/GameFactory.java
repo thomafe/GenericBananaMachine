@@ -116,11 +116,14 @@ public class GameFactory {
         new ItemObstacle("One Item Obstacle", "This obstalce takes one item", "It worked!", item1);
     Obstacle doulbeItemObstacle = new DoubleItemObstacle("Two Item Obstacle",
         "This obstalce takes one item, addtitional Item first!", "It worked!!!", item1, item2);
+    doulbeItemObstacle.setUsedCorrectItem("Now use required item.");
     Obstacle riddleObstacle =
         new RiddleObstacle("Riddle Obstacle", "The answere is \"Shoe\"", "It worked!!", "Shoe");
     Obstacle dangerousObstacle = new ItemObstacle("Dangerous Obstacle", "This will kill you.",
         "You should never read this", new Item("Void Item", "This is nowhere"));
     dangerousObstacle.setDamagepoints(9001);
+    dangerousObstacle.setUsedFalseItem("You dun goofed!");
+    dangerousObstacle.setWalkingAway("I WILL get you.");
 
 
     Furniture chest = new Furniture("Chest", "A dirty old chest",
