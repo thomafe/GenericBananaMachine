@@ -59,6 +59,8 @@ public class GameFactory {
    */
   private static GameWorld testWorld() {
    GameWorld testWorld = new GameWorld();
+   
+   testWorld.setIntroduction("This is the gobsmacking test Intro!");
     
     Place startingPlace = new Place("Entrance", "Starting Place");
     Place room1 = new Place("Room 1", "Test Room 1");
