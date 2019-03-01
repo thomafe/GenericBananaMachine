@@ -28,6 +28,11 @@ public class XmlParser {
   private boolean enableDebug = false;
   private String storyName;
 
+  /**
+   * Initialize Parser, check if file exists and runs parsing if true.
+   *
+   * @param file String
+   */
   public void initParser(String file) {
     if(checkFileExists(file)){
       parseXml(file);
@@ -35,7 +40,40 @@ public class XmlParser {
   }
 
   /**
+   * Parses XML file and returns the Story name.
+   *
+   * @param file String
+   * @return String
+   */
+  public String getStoryName(String file) {
+    try {
+      File fXmlFile = new File("./levels/" + file);
+      DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+      DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+      Document doc = dBuilder.parse(fXmlFile);
+
+      doc.getDocumentElement().normalize();
+
+      NodeList storyList = doc.getElementsByTagName("story");
+
+      // parse story text
+      Node storyNode = storyList.item(0);
+      Element storyElement = (Element) storyNode;
+      debug("Intro: " + storyElement.getElementsByTagName("introduction").item(0).getTextContent());
+      debug("Level: " + storyElement.getElementsByTagName("name").item(0).getTextContent());
+      debug("Version: " + storyElement.getElementsByTagName("version").item(0).getTextContent());
+      // add story elements to world
+      String storyName = storyElement.getElementsByTagName("name").item(0).getTextContent();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return storyName;
+  }
+
+  /**
    * Parse given XML file in /levels/ directory, generate objects, connections and GameWorld.
+   * NOTE: Duplicate Code is needed for debugging.
    *
    * @param file String
    */
@@ -58,7 +96,7 @@ public class XmlParser {
       NodeList furnitureList = doc.getElementsByTagName("furniture");
       NodeList storyList = doc.getElementsByTagName("story");
 
-      // Create object arrays.
+      // Create object arrays
       ArrayList<Place> places = new ArrayList<>();
       ArrayList<Item> items = new ArrayList<>();
       ArrayList<Passage> passages = new ArrayList<>();
@@ -162,21 +200,7 @@ public class XmlParser {
           debug("- - - Name: " + furnitureItemElement.getElementsByTagName("name").item(0).getTextContent());
           debug("- - - Description: " + furnitureItemElement.getElementsByTagName("description").item(0).getTextContent());
 
-          // add current Item to furniture
-          furnitures.get(furnitureCounter).addItem(
-            new Item(
-              furnitureItemElement.getElementsByTagName("name").item(0).getTextContent(),
-              furnitureItemElement.getElementsByTagName("description").item(0).getTextContent()
-            )
-          );
-
-          // add items to items list
-          items.add(
-              new Item(
-                  furnitureItemElement.getElementsByTagName("name").item(0).getTextContent(),
-                  furnitureItemElement.getElementsByTagName("description").item(0).getTextContent()
-              )
-          );
+          addItems(furnitureItemElement, furnitures, items, furnitureCounter);
 
         }
 
@@ -208,7 +232,7 @@ public class XmlParser {
 
       }
 
-      // TODO: Add furniture to linked places
+      // Add current furniture to its containing Place
       setFurnitureInPlace(furnitures, places);
 
       // parse all existing passages
@@ -369,22 +393,6 @@ public class XmlParser {
   }
 
   /**
-   * Setter for storyName.
-   */
-  public void setStoryName(String name) {
-    storyName = name;
-  }
-
-  /**
-   * Getter for storyName.
-   *
-   * @return String
-   */
-  private String getStoryName() {
-    return storyName;
-  }
-
-  /**
    * Check if file in path exists and returns true if it does, false if not.
    * @param file String
    * @return boolean
@@ -416,10 +424,37 @@ public class XmlParser {
     }
   }
 
+  /**
+   * Add all parsed Places to World Object.
+   *
+   * @param places ArrayList
+   * @param world GameWorld
+   */
   private void addPlacesToWorld(ArrayList<Place> places, GameWorld world) {
     for(int i = 0; i < places.size(); i++) {
       world.addPlace(places.get(i));
     }
+  }
+
+  /**
+   * Add parsed items to furniture and itemlist.
+   *
+   * @param furnitureItemElement Element
+   * @param furnitures ArrayList
+   * @param items ArrayList
+   * @param counter int
+   */
+  private void addItems(Element furnitureItemElement, ArrayList<Furniture> furnitures, ArrayList<Item> items, int counter) {
+    Item tmpItem = new Item(
+        furnitureItemElement.getElementsByTagName("name").item(0).getTextContent(),
+        furnitureItemElement.getElementsByTagName("description").item(0).getTextContent()
+    );
+
+    // add current Item to furniture
+    furnitures.get(counter).addItem(tmpItem);
+
+    // add items to items list
+    items.add(tmpItem);
   }
 
 }

@@ -29,11 +29,12 @@ public class ItemObstacle extends Obstacle {
    * @param itemToTry Item
    * @return boolean
    */
-  public boolean tryToUseItem(Item itemToTry) {
+  @Override
+  public boolean tryToSolve(Object itemToTry) {
     boolean correctItemUsed = false;
 
-    if (requiredItem.equals(itemToTry)) {
-      consume(itemToTry);
+    if (itemToTry instanceof Item && requiredItem.equals(itemToTry)) {
+      consume((Item)itemToTry);
       correctItemUsed = true;
       resolve();
     }

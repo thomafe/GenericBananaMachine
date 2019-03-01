@@ -31,6 +31,8 @@ public abstract class Obstacle extends GameObject {
     this.resolution = resolution;
   }
 
+  public abstract boolean tryToSolve(Object object);
+
   /**
    * Getter for resolution which describes the resolution of the obstacle.
    *

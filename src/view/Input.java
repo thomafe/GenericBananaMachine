@@ -265,9 +265,9 @@ public class Input {
   public String getStartOpt(List<String> options) {
     String userInput = readInSingleLine();
     String chosenOpt = null;
-    for (int i = 0; i < options.size(); i++) {
-      if (userInput.matches("(?i)" + options.get(i))) {
-        chosenOpt = options.get(i);
+    for (String option : options) {
+      if (userInput.matches("(?i)" + option)) {
+        chosenOpt = option;
         break;
       }
     }
