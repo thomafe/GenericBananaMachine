@@ -26,6 +26,7 @@ public class XmlParser {
   private GameWorld world = new GameWorld();
 
   private boolean enableDebug = false;
+  private String storyName;
 
   /**
    * Initialize Parser, check if file exists and runs parsing if true.
