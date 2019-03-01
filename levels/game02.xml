@@ -219,7 +219,7 @@
       <obstacle>
         <description>You need something to activate the mysterious portal.</description>
         <resolution>You used the magic stick while calling 'Stupor!' and the portal activates.</resolution>
-        <requiredItem>Magic Stickt</requiredItem>
+        <requiredItem>Magic Stick</requiredItem>
       </obstacle>
     </passage>
   </passages>
