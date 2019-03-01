@@ -36,7 +36,7 @@ public class XmlParser {
    * @param file String
    */
   public void initParser(String file) {
-    if(checkFileExists(file)){
+    if (checkFileExists(file)) {
       parseXml(file);
     }
   }
@@ -74,8 +74,8 @@ public class XmlParser {
   }
 
   /**
-   * Parse given XML file in /levels/ directory, generate objects, connections and GameWorld.
-   * NOTE: Duplicate Code is needed for debugging.
+   * Parse given XML file in /levels/ directory, generate objects, connections and GameWorld. NOTE:
+   * Duplicate Code is needed for debugging.
    *
    * @param file String
    */
@@ -111,7 +111,8 @@ public class XmlParser {
       debug("Level: " + storyElement.getElementsByTagName("name").item(0).getTextContent());
       debug("Version: " + storyElement.getElementsByTagName("version").item(0).getTextContent());
       // add story elements to world
-      world.setIntroduction(storyElement.getElementsByTagName("introduction").item(0).getTextContent());
+      world.setIntroduction(
+          storyElement.getElementsByTagName("introduction").item(0).getTextContent());
       world.setLevelName(storyElement.getElementsByTagName("name").item(0).getTextContent());
       world.setLevelVersion(storyElement.getElementsByTagName("version").item(0).getTextContent());
 
@@ -127,19 +128,17 @@ public class XmlParser {
           debug("- Ending: " + placeElement.getAttribute("end"));
           debug("- id: " + placeElement.getAttribute("id"));
           debug("- Name: " + placeElement.getElementsByTagName("name").item(0).getTextContent());
-          debug("- Description: " + placeElement.getElementsByTagName("description").item(0).getTextContent());
+          debug("- Description: "
+              + placeElement.getElementsByTagName("description").item(0).getTextContent());
 
           // Create Places.
-          places.add(
-              new Place(
-                  placeElement.getElementsByTagName("name").item(0).getTextContent(),
-                  placeElement.getElementsByTagName("description").item(0).getTextContent()
-              )
-          );
+          places.add(new Place(placeElement.getElementsByTagName("name").item(0).getTextContent(),
+              placeElement.getElementsByTagName("description").item(0).getTextContent()));
 
           // add EndingPlace to World, set endingText to Places' Description
-          if(placeElement.getAttribute("end").equals("bad")) {
-            world.addEndingPlace(places.get(placeCounter), places.get(placeCounter).getDescription());
+          if (placeElement.getAttribute("end").equals("bad")) {
+            world.addEndingPlace(places.get(placeCounter),
+                places.get(placeCounter).getDescription());
           }
 
           // parse all existing Place Items
@@ -152,15 +151,12 @@ public class XmlParser {
 
             debug("- Item" + itemCounter + ":");
             debug("- - Name: " + itemElement.getElementsByTagName("name").item(0).getTextContent());
-            debug("- - Description: " + itemElement.getElementsByTagName("description").item(0).getTextContent());
+            debug("- - Description: "
+                + itemElement.getElementsByTagName("description").item(0).getTextContent());
 
             // Create items.
-            items.add(
-                new Item(
-                    itemElement.getElementsByTagName("name").item(0).getTextContent(),
-                    itemElement.getElementsByTagName("description").item(0).getTextContent()
-                )
-            );
+            items.add(new Item(itemElement.getElementsByTagName("name").item(0).getTextContent(),
+                itemElement.getElementsByTagName("description").item(0).getTextContent()));
             // Set items in current place.
             places.get(placeCounter).addObjectToPlace(getIncludedItem(itemElement, items));
 
@@ -169,7 +165,8 @@ public class XmlParser {
       }
 
       // parse all furniture
-      for (int furnitureCounter = 0; furnitureCounter < furnitureList.getLength(); furnitureCounter++) {
+      for (int furnitureCounter = 0; furnitureCounter < furnitureList
+          .getLength(); furnitureCounter++) {
         Node furnitureNode = furnitureList.item(furnitureCounter);
 
         Element furnitureElement = (Element) furnitureNode;
@@ -177,30 +174,33 @@ public class XmlParser {
         debug("\nCurrent Element: " + furnitureNode.getNodeName());
 
         debug("- Furniture" + furnitureCounter);
-        debug("- - In Place: " + furnitureElement.getElementsByTagName("in-place").item(0).getTextContent());
-        debug("- - Name: " + furnitureElement.getElementsByTagName("name").item(0).getTextContent());
-        debug("- - Description: " + furnitureElement.getElementsByTagName("description").item(0).getTextContent());
+        debug("- - In Place: "
+            + furnitureElement.getElementsByTagName("in-place").item(0).getTextContent());
+        debug(
+            "- - Name: " + furnitureElement.getElementsByTagName("name").item(0).getTextContent());
+        debug("- - Description: "
+            + furnitureElement.getElementsByTagName("description").item(0).getTextContent());
 
         // Create furniture objects
         furnitures.add(
-            new Furniture(
-                furnitureElement.getElementsByTagName("name").item(0).getTextContent(),   // name
-                furnitureElement.getElementsByTagName("description").item(0).getTextContent(),    // description
-                furnitureElement.getElementsByTagName("in-place").item(0).getTextContent()
-            )
-        );
+            new Furniture(furnitureElement.getElementsByTagName("name").item(0).getTextContent(), // name
+                furnitureElement.getElementsByTagName("description").item(0).getTextContent(), // description
+                furnitureElement.getElementsByTagName("in-place").item(0).getTextContent()));
 
         NodeList furnitureItemList = furnitureElement.getElementsByTagName("content-item");
 
         // parse all Furniture Items
-        for (int furnitureItemCounter = 0; furnitureItemCounter < furnitureItemList.getLength(); furnitureItemCounter++) {
+        for (int furnitureItemCounter = 0; furnitureItemCounter < furnitureItemList
+            .getLength(); furnitureItemCounter++) {
           Node furnitureItemNode = furnitureItemList.item(furnitureItemCounter);
 
           Element furnitureItemElement = (Element) furnitureItemNode;
 
           debug("- - Content Items:");
-          debug("- - - Name: " + furnitureItemElement.getElementsByTagName("name").item(0).getTextContent());
-          debug("- - - Description: " + furnitureItemElement.getElementsByTagName("description").item(0).getTextContent());
+          debug("- - - Name: "
+              + furnitureItemElement.getElementsByTagName("name").item(0).getTextContent());
+          debug("- - - Description: "
+              + furnitureItemElement.getElementsByTagName("description").item(0).getTextContent());
 
           addItems(furnitureItemElement, furnitures, items, furnitureCounter);
 
@@ -209,51 +209,61 @@ public class XmlParser {
         NodeList furnitureObstacleList = furnitureElement.getElementsByTagName("obstacle");
 
         // parse all Furniture Obstacles
-        for (int furnitureObstacleCounter = 0; furnitureObstacleCounter < furnitureObstacleList.getLength(); furnitureObstacleCounter++) {
+        for (int furnitureObstacleCounter = 0; furnitureObstacleCounter < furnitureObstacleList
+            .getLength(); furnitureObstacleCounter++) {
           Node furnitureObstacleNode = furnitureObstacleList.item(furnitureObstacleCounter);
 
           Element furnitureObstacleElement = (Element) furnitureObstacleNode;
 
           debug("- - Obstacle:");
-          debug("- - - Description: " + furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent());
-          debug("- - - Resolution: " + furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
-          //debug("- - - Requirement: " + furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
+          debug("- - - Description: " + furnitureObstacleElement.getElementsByTagName("description")
+              .item(0).getTextContent());
+          debug("- - - Resolution: " + furnitureObstacleElement.getElementsByTagName("resolution")
+              .item(0).getTextContent());
+          // debug("- - - Requirement: " +
+          // furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
 
           // create furniture obstacle
-          if(furnitureObstacleElement.getAttribute("type").equals("double")){
+          if (furnitureObstacleElement.getAttribute("type").equals("double")) {
             // double Item obstacle
-            furnitures.get(furnitureCounter).setObstalce(
-              new DoubleItemObstacle(
-                "",
-                furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent(),
-                furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
-                getRequiredItem(items, furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent()),
-                getRequiredItem(items, furnitureObstacleElement.getElementsByTagName("additionalItem").item(0).getTextContent())
-              )
-            );
+            furnitures.get(furnitureCounter)
+                .setObstalce(new DoubleItemObstacle("",
+                    furnitureObstacleElement.getElementsByTagName("description").item(0)
+                        .getTextContent(),
+                    furnitureObstacleElement.getElementsByTagName("resolution").item(0)
+                        .getTextContent(),
+                    getRequiredItem(items,
+                        furnitureObstacleElement.getElementsByTagName("requiredItem").item(0)
+                            .getTextContent()),
+                    getRequiredItem(items, furnitureObstacleElement
+                        .getElementsByTagName("additionalItem").item(0).getTextContent())));
 
-          } else if(furnitureObstacleElement.getAttribute("type").equals("riddle")) {
+          } else if (furnitureObstacleElement.getAttribute("type").equals("riddle")) {
             // riddle Obstacle
-            furnitures.get(furnitureCounter).setObstalce(
-              new RiddleObstacle(
-                "",
-                furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent(),
-                furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
-                furnitureObstacleElement.getElementsByTagName("requiredAnswer").item(0).getTextContent()
-              )
-            );
+            furnitures.get(furnitureCounter)
+                .setObstalce(new RiddleObstacle("",
+                    furnitureObstacleElement.getElementsByTagName("description").item(0)
+                        .getTextContent(),
+                    furnitureObstacleElement.getElementsByTagName("resolution").item(0)
+                        .getTextContent(),
+                    furnitureObstacleElement.getElementsByTagName("requiredAnswer").item(0)
+                        .getTextContent()));
 
           } else {
             // normal Obstacle
-            furnitures.get(furnitureCounter).setObstalce(
-              new ItemObstacle(
-                "",
-                furnitureObstacleElement.getElementsByTagName("description").item(0).getTextContent(),
-                furnitureObstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
-                getRequiredItem(items,
-                  furnitureObstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent())
-              )
-            );
+            furnitures.get(furnitureCounter)
+                .setObstalce(new ItemObstacle("",
+                    furnitureObstacleElement.getElementsByTagName("description").item(0)
+                        .getTextContent(),
+                    furnitureObstacleElement.getElementsByTagName("resolution").item(0)
+                        .getTextContent(),
+                    getRequiredItem(items, furnitureObstacleElement
+                        .getElementsByTagName("requiredItem").item(0).getTextContent())));
+          }
+          // add damage points to obstacle
+          if (!furnitureObstacleElement.getAttribute("damage").equals("")) {
+            passages.get(furnitureCounter).getObstacle()
+                .setDamagepoints(Integer.parseInt(furnitureObstacleElement.getAttribute("damage")));
           }
 
         }
@@ -274,56 +284,74 @@ public class XmlParser {
 
           debug("- id: " + passageElement.getAttribute("id"));
           debug("- Name: " + passageElement.getElementsByTagName("name").item(0).getTextContent());
-          debug("- Description: " + passageElement.getElementsByTagName("description").item(0).getTextContent());
-          debug("- Comes from: " + passageElement.getElementsByTagName("comeFrom").item(0).getTextContent());
-          debug("- Connects to: " + passageElement.getElementsByTagName("connectTo").item(0).getTextContent());
+          debug("- Description: "
+              + passageElement.getElementsByTagName("description").item(0).getTextContent());
+          debug("- Comes from: "
+              + passageElement.getElementsByTagName("comeFrom").item(0).getTextContent());
+          debug("- Connects to: "
+              + passageElement.getElementsByTagName("connectTo").item(0).getTextContent());
 
           // Create Passage with connected Places.
-          passages.add(new Passage(passageElement.getElementsByTagName("name").item(0).getTextContent(),
-              passageElement.getElementsByTagName("description").item(0).getTextContent(),
-              getFromPlace(passageElement, places),    // from this Place
-              getFollowPlace(passageElement, places))    // to that Place
+          passages
+              .add(new Passage(passageElement.getElementsByTagName("name").item(0).getTextContent(),
+                  passageElement.getElementsByTagName("description").item(0).getTextContent(),
+                  getFromPlace(passageElement, places), // from this Place
+                  getFollowPlace(passageElement, places)) // to that Place
           );
 
           // parse all existing Passage Obstacles
           NodeList obstacleList = passageElement.getElementsByTagName("obstacle");
 
-          for (int obstacleCounter = 0; obstacleCounter < obstacleList.getLength(); obstacleCounter++) {
+          for (int obstacleCounter = 0; obstacleCounter < obstacleList
+              .getLength(); obstacleCounter++) {
             Node obstacleNode = obstacleList.item(obstacleCounter);
 
             Element obstacleElement = (Element) obstacleNode;
 
             debug("- Obstacle" + passageCounter + ":");
-            debug("- - Description: " + obstacleElement.getElementsByTagName("description").item(0).getTextContent());
-            debug("- - Resolution: " + obstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
-            //debug("- - Required Item: " + obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
+            debug("- - Description: "
+                + obstacleElement.getElementsByTagName("description").item(0).getTextContent());
+            debug("- - Resolution: "
+                + obstacleElement.getElementsByTagName("resolution").item(0).getTextContent());
+            // debug("- - Required Item: " +
+            // obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent());
 
             // Create the obstacle for each passage.
-            if(obstacleElement.getAttribute("type").equals("double")){
+            if (obstacleElement.getAttribute("type").equals("double")) {
               // double Item obstacle
-              passages.get(passageCounter).setObstacle(new DoubleItemObstacle("",
-                  obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
-                  obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
-                  getRequiredItem(items, obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent()),
-                  getRequiredItem(items, obstacleElement.getElementsByTagName("additionalItem").item(0).getTextContent())
-              ));
+              passages.get(passageCounter)
+                  .setObstacle(new DoubleItemObstacle("",
+                      obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
+                      obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
+                      getRequiredItem(items,
+                          obstacleElement.getElementsByTagName("requiredItem").item(0)
+                              .getTextContent()),
+                      getRequiredItem(items, obstacleElement.getElementsByTagName("additionalItem")
+                          .item(0).getTextContent())));
 
-            } else if(obstacleElement.getAttribute("type").equals("riddle")) {
+            } else if (obstacleElement.getAttribute("type").equals("riddle")) {
               // riddle Obstacle
               passages.get(passageCounter).setObstacle(new RiddleObstacle("",
                   obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
                   obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
-                  obstacleElement.getElementsByTagName("requiredAnswer").item(0).getTextContent()
-              ));
+                  obstacleElement.getElementsByTagName("requiredAnswer").item(0).getTextContent()));
 
             } else {
               // normal Obstacle
-              passages.get(passageCounter).setObstacle(new ItemObstacle("",
-                  obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
-                  obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
-                  getRequiredItem(items, obstacleElement.getElementsByTagName("requiredItem").item(0).getTextContent())
-              ));
+              passages.get(passageCounter)
+                  .setObstacle(new ItemObstacle("",
+                      obstacleElement.getElementsByTagName("description").item(0).getTextContent(),
+                      obstacleElement.getElementsByTagName("resolution").item(0).getTextContent(),
+                      getRequiredItem(items, obstacleElement.getElementsByTagName("requiredItem")
+                          .item(0).getTextContent())));
             }
+
+            // add damage points to obstacle
+            if (!obstacleElement.getAttribute("damage").equals("")) {
+              passages.get(passageCounter).getObstacle()
+                  .setDamagepoints(Integer.parseInt(obstacleElement.getAttribute("damage")));
+            }
+
 
           }
         }
@@ -335,7 +363,7 @@ public class XmlParser {
       addPlacesToWorld(places, world);
 
       // set starting Place in GameWorld
-      if(world.getStartingPlace() == null) {
+      if (world.getStartingPlace() == null) {
         world.setStartingPlace(startingPlace);
       }
 
@@ -350,16 +378,16 @@ public class XmlParser {
   }
 
   /**
-   * Getter for required item for obstacle.
-   * Gets all items and returns the item which has the equal name as the needed one.
+   * Getter for required item for obstacle. Gets all items and returns the item which has the equal
+   * name as the needed one.
    *
    * @param items Item
    */
   private Item getRequiredItem(ArrayList<Item> items, String requiredItemName) {
     Item requirement = null;
 
-    for(int i=0; i <= items.size()-1; i++) {
-      if(items.get(i).getName().equals(requiredItemName)) {
+    for (int i = 0; i <= items.size() - 1; i++) {
+      if (items.get(i).getName().equals(requiredItemName)) {
         requirement = items.get(i);
       }
     }
@@ -376,17 +404,18 @@ public class XmlParser {
   }
 
   /**
-   * Checks which Place is the Place before the current Passage and
-   * returns the Place the Character comes from.
+   * Checks which Place is the Place before the current Passage and returns the Place the Character
+   * comes from.
    *
    * @param passageElement Element
    * @param places ArrayList
    * @return Place
    */
-  private Place getFromPlace (Element passageElement, ArrayList<Place> places) {
+  private Place getFromPlace(Element passageElement, ArrayList<Place> places) {
     Place start = null;
-    for(int i = 0; i <= places.size()-1; i++) {
-      if(passageElement.getElementsByTagName("comeFrom").item(0).getTextContent().equals(places.get(i).getName())){
+    for (int i = 0; i <= places.size() - 1; i++) {
+      if (passageElement.getElementsByTagName("comeFrom").item(0).getTextContent()
+          .equals(places.get(i).getName())) {
         start = places.get(i);
       }
     }
@@ -394,17 +423,18 @@ public class XmlParser {
   }
 
   /**
-   * Checks which Place is the Place after the current Passage and
-   * returns the Place the Character can enter.
+   * Checks which Place is the Place after the current Passage and returns the Place the Character
+   * can enter.
    *
    * @param passageElement Element
    * @param places ArrayList
    * @return Place
    */
-  private Place getFollowPlace (Element passageElement, ArrayList<Place> places) {
+  private Place getFollowPlace(Element passageElement, ArrayList<Place> places) {
     Place follow = null;
-    for(int i = 0; i <= places.size()-1; i++) {
-      if(passageElement.getElementsByTagName("connectTo").item(0).getTextContent().equals(places.get(i).getName())){
+    for (int i = 0; i <= places.size() - 1; i++) {
+      if (passageElement.getElementsByTagName("connectTo").item(0).getTextContent()
+          .equals(places.get(i).getName())) {
         follow = places.get(i);
       }
     }
@@ -412,17 +442,17 @@ public class XmlParser {
   }
 
   /**
-   * Checks which Item is included in the current Place and
-   * returns the included item.
+   * Checks which Item is included in the current Place and returns the included item.
    *
    * @param itemElement Element
    * @param items ArrayList
    * @return Item
    */
-  private Item getIncludedItem (Element itemElement, ArrayList<Item> items) {
+  private Item getIncludedItem(Element itemElement, ArrayList<Item> items) {
     Item include = null;
-    for(int i = 0; i <= items.size()-1; i++) {
-      if(items.get(i).getName().equals(itemElement.getElementsByTagName("name").item(0).getTextContent())) {
+    for (int i = 0; i <= items.size() - 1; i++) {
+      if (items.get(i).getName()
+          .equals(itemElement.getElementsByTagName("name").item(0).getTextContent())) {
         include = items.get(i);
       }
     }
@@ -435,21 +465,22 @@ public class XmlParser {
    * @param post String
    */
   private void debug(String post) {
-    if(enableDebug) {
+    if (enableDebug) {
       System.out.println(post);
     }
   }
 
   /**
    * Check if file in path exists and returns true if it does, false if not.
+   * 
    * @param file String
    * @return boolean
    */
   private boolean checkFileExists(String file) {
     boolean exist = false;
     File tmpFile = new File("./levels/" + file);
-    if(tmpFile.exists()) {
-      //file exists
+    if (tmpFile.exists()) {
+      // file exists
       exist = true;
     }
     return exist;
@@ -462,9 +493,9 @@ public class XmlParser {
    * @param places place
    */
   private void setFurnitureInPlace(ArrayList<Furniture> furnitures, ArrayList<Place> places) {
-    for(int i = 0; i < furnitures.size(); i++) {
-      for(int j = 0; j < places.size(); j++) {
-        if(places.get(j).getName().equals(furnitures.get(i).getLinkedPlace())) {
+    for (int i = 0; i < furnitures.size(); i++) {
+      for (int j = 0; j < places.size(); j++) {
+        if (places.get(j).getName().equals(furnitures.get(i).getLinkedPlace())) {
           // is linked Place
           places.get(j).addObjectToPlace(furnitures.get(i));
         }
@@ -479,7 +510,7 @@ public class XmlParser {
    * @param world GameWorld
    */
   private void addPlacesToWorld(ArrayList<Place> places, GameWorld world) {
-    for(int i = 0; i < places.size(); i++) {
+    for (int i = 0; i < places.size(); i++) {
       world.addPlace(places.get(i));
     }
   }
@@ -492,11 +523,11 @@ public class XmlParser {
    * @param items ArrayList
    * @param counter int
    */
-  private void addItems(Element furnitureItemElement, ArrayList<Furniture> furnitures, ArrayList<Item> items, int counter) {
-    Item tmpItem = new Item(
-        furnitureItemElement.getElementsByTagName("name").item(0).getTextContent(),
-        furnitureItemElement.getElementsByTagName("description").item(0).getTextContent()
-    );
+  private void addItems(Element furnitureItemElement, ArrayList<Furniture> furnitures,
+      ArrayList<Item> items, int counter) {
+    Item tmpItem =
+        new Item(furnitureItemElement.getElementsByTagName("name").item(0).getTextContent(),
+            furnitureItemElement.getElementsByTagName("description").item(0).getTextContent());
 
     // add current Item to furniture
     furnitures.get(counter).addItem(tmpItem);
@@ -504,7 +535,7 @@ public class XmlParser {
     // add items to items list
     items.add(tmpItem);
   }
-  
+
   public GameWorld getGameWorld() {
     return world;
   }

@@ -41,7 +41,19 @@ item: a fork
 item: a mouse
 item: freeze pistol
 
-passages: 'the'
+passages: 'the bush '- leads to place: 'cave'
+obstacle: the bush is to overgrown, you can't get through
+resolution: use the crab to pinch off the branches
+
+place: 'cave'- this is a dark and moisty cave but something smells very delicious in here.
+passage: dark tunnel- leads to volcano cave
+obstacle: big delicious cake that blocks the hole tunnel
+resolution: mouse eats through the cake
+(forks doesn't work because damagepoints because getting too fat)
+
+place: volcano cave 
+
+
 
 
 

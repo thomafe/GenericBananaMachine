@@ -45,7 +45,7 @@
     <description>The door hinge might be exploited with the right angle and something to heave it out.</description>
     <comeFrom>First Place</comeFrom>
     <connectTo>2nd Place</connectTo>
-    <obstacle type="riddle">
+    <obstacle type="riddle" damage="2">
       <description>What is the master password?</description>
       <resolution>You used the chair like the hero in a pirate movie you remember.</resolution>
       <requiredAnswer>Password</requiredAnswer>
