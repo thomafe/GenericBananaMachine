@@ -30,15 +30,14 @@ public abstract class Obstacle extends GameObject {
   }
 
   /**
-   * 
-   * 
+   *
    * @param object
    * @return
    */
   public abstract boolean tryToSolve(Object object);
 
   /**
-   * Getter for resolution which describes the resolution of the obstacle.
+   * Getter for resolution, which describes the resolution of the obstacle.
    *
    * @return String
    */
@@ -83,28 +82,28 @@ public abstract class Obstacle extends GameObject {
   }
 
   /**
-   * Reaction of Obstacle when somebody used the false item
+   * Reaction of Obstacle when somebody used the false item.
    */
   public String getReactionToFalseItem() {
     return usedFalseItem;
   }
 
   /**
-   * Reaction of Obstacle when someone used the correct item
+   * Reaction of Obstacle when someone used the correct item.
    */
   public String getReactionToCorrectItem() {
     return usedCorrectItem;
   }
 
   /**
-   * Character walks away, Obstacle reacts
+   * Character walks away, Obstacle reacts.
    */
   public String getWalkAwayReaction() {
     return walkingAway;
   }
 
   /**
-   * Set the damage an Obstacle does and return the damagepoints done to the character
+   * Set the damage an Obstacle does and return the damagepoints done to the character.
    */
   public void setDamagepoints(int damage) {
     damagepoints = damage;
