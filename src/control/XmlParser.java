@@ -8,12 +8,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import model.Furniture;
+import model.GameWorld;
 import model.Item;
 import model.ItemObstacle;
 import model.Passage;
 import model.Place;
-import model.GameWorld;
-import model.Furniture;
 
 /**
  * Parse given XML file in a specific path.
