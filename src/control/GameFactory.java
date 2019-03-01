@@ -96,8 +96,13 @@ public class GameFactory {
     Place endingPlace = new Place("Ship of Coastguard", "It all ends here...");
     
     testWorld.addPlace(startingPlace);
-    testWorld.setStartingPlace(startingPlace);
+    testWorld.addPlace(room1);
+    testWorld.addPlace(room2);
+    testWorld.addPlace(room3);
+    testWorld.addPlace(room4);
+    testWorld.addPlace(room5);
     testWorld.addPlace(endingPlace);
+    testWorld.setStartingPlace(startingPlace);
     testWorld.addEndingPlace(endingPlace, "This is the end.");
 
     Item item1 = new Item("Required Item", "Required Item");
