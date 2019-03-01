@@ -3,7 +3,7 @@ package model;
 /**
  * Connects places, can be blocked by obstacles.
  * 
- * The name should describe the passage, not the obstacle!
+ * The name should describe the passage, not the obstacle.
  * The description should hint at the obstacle and maybe be funny.
  *
  * @author Simone273
@@ -55,7 +55,7 @@ public class Passage extends GameObject{
   }
 
   /**
-   * Setter for obstacle. Sets committed obstacle to
+   * Setter for obstacle. Sets committed obstacle too.
    *
    * @param obstacle Obstacle
    */

@@ -240,7 +240,7 @@ public class Input {
   }
 
   /**
-   * The method to get a yes/no decision from the player
+   * The method to get a yes/no decision from the player.
    * 
    * @return boolean
    */

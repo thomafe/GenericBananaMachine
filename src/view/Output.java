@@ -6,7 +6,7 @@ import model.Obstacle;
 import model.Place;
 
 /**
- * reacts to input from user with output
+ * Reacts to input from user with output.
  *
  * @author Niklas
  */
@@ -51,7 +51,7 @@ public class Output {
   }
 
   /**
-   * Ending sequence when the game is done, either because of succeed or because of death
+   * Ending sequence when the game is done, either because of succeed or because of death.
    */
   public void goodEnding(String ending) {
     if (ending != null && !ending.isEmpty()) {
@@ -129,7 +129,7 @@ public class Output {
   }
 
   /**
-   * List the options to interact with an obstacle
+   * List the options to interact with an obstacle.
    */
   public void listOptionsObstacleInteraction(Obstacle obstacle) {
     StringBuilder obstacleOptions = new StringBuilder();
@@ -141,7 +141,7 @@ public class Output {
   }
 
   /**
-   * Look at the currentPlace. Use <code>lookAtGameObject()</code> instead
+   * Look at the currentPlace. Use <code>lookAtGameObject()</code> instead.
    */
   public void lookAtCurrentPlace(Place currentPlace) {
     StringBuilder placeDescription = new StringBuilder();
@@ -167,7 +167,7 @@ public class Output {
   }
 
   /**
-   * Standard output for unsuccessful operations
+   * Standard output for unsuccessful operations.
    */
   public void noSuccess(errorType type) {
     switch (type) {
@@ -210,7 +210,7 @@ public class Output {
   }
 
   /**
-   * Standard output for unsuccessful operations
+   * Standard output for unsuccessful operations.
    */
   public void noSuccess(String userInput, errorTypeInput type) {
     switch (type) {
@@ -229,7 +229,7 @@ public class Output {
   }
 
   /**
-   * Standard output for successful operations
+   * Standard output for successful operations.
    * 
    * @param userInput
    * @param type
@@ -247,7 +247,7 @@ public class Output {
   }
 
   /**
-   * Standard output for obstacle interactions
+   * Standard output for obstacle interactions.
    * 
    * @param obstacle
    * @param type
@@ -280,7 +280,7 @@ public class Output {
   }
 
   /**
-   * Standard output for game endings
+   * Standard output for game endings.
    * 
    * @param type
    */
