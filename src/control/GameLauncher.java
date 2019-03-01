@@ -18,11 +18,8 @@ public class GameLauncher {
 
   /**
    * Main Method.
-   * 
-   * @param args
    */
   public static void main(String[] args) {
-    GameControl gameControl = null;
 
     Output out = new Output();
     Input in = new Input(out);
@@ -44,7 +41,7 @@ public class GameLauncher {
           out.menuOptions(options.NOT_YET);
           break;
         case "Start Game":
-          getLevel(args, gameControl, in, out);
+          startLevel(args, in, out);
           break;
         case "Credits":
           out.credits();
@@ -56,7 +53,14 @@ public class GameLauncher {
     } while (true);
   }
 
-  private static void getLevel(String[] args, GameControl gC, Input in, Output out) {
+  /**
+   * Starts a Level depending on the program-arguments.
+   * @param args
+   * @param in
+   * @param out
+   */
+  private static void startLevel(String[] args, Input in, Output out) {
+    GameControl gameControl = null;
     boolean doTest = false;
     String fileName = "game01.xml";
     int localGameNumber = -1;
@@ -67,30 +71,19 @@ public class GameLauncher {
         break;
       } else if (args[i].equalsIgnoreCase("-f") && ++i < args.length) {
         fileName = args[i];
-      } else if (args[i].equalsIgnoreCase("-n") && ++i < args.length) {
-        localGameNumber = Integer.parseInt(args[i]);
       }
     }
 
-    setLevel(doTest, fileName, localGameNumber, gC, in, out);
-  }
-
-  private static void setLevel(boolean doTest, String fileName, int localGameNumber,
-      GameControl gameControl, Input in, Output out) {
     do {
       if (doTest) {
         gameControl = GameFactory.getTestGame();
+        gameControl.setInputOutput(in, out);
       } else if (!fileName.isEmpty()) {
         gameControl = GameFactory.getGameFromFile(fileName);
-      } else if (localGameNumber >= 0) {
-        gameControl = GameFactory.getLocalGame(localGameNumber);
-      }
-
-      if (gameControl == null) {
+        gameControl.setInputOutput(in, out);
+      } else {
         System.err.println("No valid game found...");
         break;
-      } else {
-        gameControl.setInputOutput(in, out);
       }
     } while (gameControl.runGame());
   }
