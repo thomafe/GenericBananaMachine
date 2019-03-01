@@ -120,8 +120,9 @@ public class GameControl {
     if (obstacleInPassage == null || obstacleInPassage.isResolved()
         || interactWithObstacle(obstacleInPassage)) {
       character.move(destinationPassage);
+      out.successfulInteraction(destinationPassage.getName(), successType.MOVE_THROUGH);
       characterMoved = true;
-      out.lookAtGameObject(getCurrentPlace());
+      out.successfulInteraction(getCurrentPlace().getName(), successType.AT_PLACE);
     }
 
     return characterMoved;
@@ -281,7 +282,6 @@ public class GameControl {
   private Passage findPassageInPlace(String passageName) {
     Passage foundPassage = null;
 
-    // TODO thomaf add passages to the things in a room and rework?
     for (Passage gameObject : character.getCurrentPlace().getPassages()) {
       if (gameObject.getName().equalsIgnoreCase(passageName)) {
         foundPassage = gameObject;

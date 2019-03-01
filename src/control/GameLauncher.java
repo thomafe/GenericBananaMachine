@@ -1,12 +1,16 @@
 package control;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import view.Input;
 import view.Output;
 import view.Output.errorType;
 import view.Output.options;
+import control.XmlParser;
 
 public class GameLauncher {
 
@@ -27,6 +31,7 @@ public class GameLauncher {
     List<String> mainOptions =
         new ArrayList<>(Arrays.asList("Start Game", "Options", "Credits", "Exit Game"));
     String chosenOpt;
+
     do {
       do {
         out.listOutput(mainOptions);
@@ -41,7 +46,8 @@ public class GameLauncher {
           out.menuOptions(options.NOT_YET);
           break;
         case "Start Game":
-          startLevel(args, in, out);
+          String level = chooseLevel();
+          startLevel(level, in, out);
           break;
         case "Credits":
           out.credits();
@@ -52,39 +58,64 @@ public class GameLauncher {
       }
     } while (true);
   }
+  private static String chooseLevel(){
+
+    Output out = new Output();
+    Input in  = new Input(out);
+    Map<String, String> allLevels;
+    List<String> levelList = new ArrayList<>();
+    allLevels = listAllLevels();
+
+    out.menuOptions(options.WHICH_LEVEL);
+
+    for (Map.Entry<String, String> entry : allLevels.entrySet()) {
+      levelList.add(entry.getKey());
+    }
+    out.listOutput(levelList);
+
+    return allLevels.get(in.getStartOpt(levelList));
+  }
 
   /**
    * Starts a Level depending on the program-arguments.
-   * @param args
+   * @param level
    * @param in
    * @param out
    */
-  private static void startLevel(String[] args, Input in, Output out) {
+  private static void startLevel(String level, Input in, Output out) {
     GameControl gameControl = null;
-    boolean doTest = false;
-    String fileName = "game01.xml";
-    int localGameNumber = -1;
 
-    for (int i = 0; i < args.length; i++) {
-      if (args[i].equalsIgnoreCase("-d")) {
-        doTest = true;
-        break;
-      } else if (args[i].equalsIgnoreCase("-f") && ++i < args.length) {
-        fileName = args[i];
-      }
-    }
+    //setting the game
+//    for (int i = 0; i < args.length; i++) {
+//      if (args[i].equalsIgnoreCase("-d")) {
+//        doTest = true;
+//        break;
+//      } else if (args[i].equalsIgnoreCase("-f") && ++i < args.length) {
+//        fileName = args[i];
+//      }
+//    }
 
+    //running the game
     do {
-      if (doTest) {
+      if (level.equals("Debug")) {
         gameControl = GameFactory.getTestGame();
         gameControl.setInputOutput(in, out);
-      } else if (!fileName.isEmpty()) {
-        gameControl = GameFactory.getGameFromFile(fileName);
-        gameControl.setInputOutput(in, out);
       } else {
-        System.err.println("No valid game found...");
-        break;
+        gameControl = GameFactory.getGameFromFile(level);
+        gameControl.setInputOutput(in, out);
       }
     } while (gameControl.runGame());
+  }
+
+  private static Map<String, String> listAllLevels(){
+    XmlParser parser = new XmlParser();
+    Map<String, String> allLevels = new HashMap<>();
+    File levels = new File("./levels");
+    for (File level : levels.listFiles()) {
+      if (level.isFile()) {
+        allLevels.put(parser.getStoryName(level.getName()), level.getName());
+      }
+    }
+    return allLevels;
   }
 }

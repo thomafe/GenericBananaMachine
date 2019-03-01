@@ -21,7 +21,7 @@ public class Output {
   }
 
   public enum successType {
-    PICK_UP, OBSTACLE_RESOLUTION, OBSTACLE_REACT_FALSE, OBSTACLE_REACT_RIGHT, OBSTACLE_WALK_AWAY
+    PICK_UP, MOVE_THROUGH, AT_PLACE, OBSTACLE_RESOLUTION, OBSTACLE_REACT_FALSE, OBSTACLE_REACT_RIGHT, OBSTACLE_WALK_AWAY
   }
 
   public enum endingType {
@@ -29,7 +29,7 @@ public class Output {
   }
 
   public enum options {
-    NOT_YET
+    NOT_YET, WHICH_LEVEL
   }
 
   private static final String[] ACTIONS =
@@ -101,7 +101,7 @@ public class Output {
     } else {
       StringBuilder thingsOutput = new StringBuilder();
 
-      thingsOutput.append("These things are in " + currentPlace.getName() + ":\n");
+      thingsOutput.append("These things are in " + currentPlace.getName() + ":");
 
       printString(thingsOutput.toString());
 
@@ -159,13 +159,9 @@ public class Output {
    * @param object GameObject
    */
   public void lookAtGameObject(GameObject object) {
-    if (object instanceof Place) {
-      printString("You are in " + object.getName());
-    }
-
     printString(object.getDescription());
   }
-
+  
   /**
    * Standard output for unsuccessful operations.
    */
@@ -231,15 +227,19 @@ public class Output {
   /**
    * Standard output for successful operations.
    * 
-   * @param userInput
+   * @param interactedObject
    * @param type
    */
-  public void success(String userInput, successType type) {
-    // TODO maybe refactor these methods to be nicer to read, not so many & easier to find the
-    // correct enum from other classes
+  public void successfulInteraction(String interactedObject, successType type) {
     switch (type) {
       case PICK_UP:
-        printString("You have successfully picked up " + userInput);
+        printString("You have successfully picked up " + interactedObject);
+        break;
+      case MOVE_THROUGH:
+        printString("You go through " + interactedObject);
+        break;
+      case AT_PLACE:
+        printString("You are in " + interactedObject);
         break;
       default:
         printString("Yeah, you did it!");
@@ -306,6 +306,9 @@ public class Output {
       case NOT_YET:
         printString("There is nothing you can change yet!");
         break;
+      case WHICH_LEVEL:
+        printString("Which level do you want to play?");
+        break;
     }
   }
 
@@ -330,7 +333,7 @@ public class Output {
   }
 
   public void beforeInput() {
-    System.out.print("-------------------------------\n> ");
+    System.out.print("-----------------------------------------\n> ");
   }
 
   /**
@@ -341,8 +344,6 @@ public class Output {
       System.out.println(message);
     }
   }
-
-  // TODO why does this not work with List<Passage> etc??
 
   /**
    * Standard output method for lists.
@@ -364,10 +365,10 @@ public class Output {
     printString(gameObjectList.toString());
   }
 
-  public void credits() {
-    printString("Project Manager: Felix Jan Thoma\n");
-    printString("Creative Writer: Simone Maag\n");
-    printString("Level Designer: Tim Hendrik Lehmeier\n");
+  public void credits(){
+    printString("Project Manager: Felix Jan Thoma");
+    printString("Creative Writer: Simone Maag");
+    printString("Level Designer: Tim Hendrik Lehmeier");
     printString("Lead Developer: Niklas Grethler");
   }
 

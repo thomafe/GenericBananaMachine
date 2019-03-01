@@ -5,7 +5,7 @@ package model;
  * passages anymore.
  * 
  * The name is still not relevant.
- * The second object is needed first, the description should hint at that. (TODO thomaf Output for "first item correct)
+ * The second object is needed first, the description should hint at that.
  * 
  * @author Simone
  */
