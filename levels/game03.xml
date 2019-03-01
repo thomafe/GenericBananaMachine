@@ -1,13 +1,13 @@
 <world>
   <story>
-    <name>Part of the crew...</name>
+    <name>Test</name>
     <version>1.0</version>
     <introduction>You wake up in a dirty and messed up prison cell. You can hear a snoozing nearby. You look out of the tiny window and realize it's night.</introduction>
   </story>
 
   <places>
     <place id="0">
-      <name>Prison Cell</name>
+      <name>First Place</name>
       <description>The cell is small and dirty. Dead rats and skeletons lay on the ground.</description>
       <item>
         <name>Rusted Nail</name>
@@ -17,6 +17,10 @@
         <name>Chair</name>
         <description>This is a wooden chair which can be used to sit on.</description>
       </item>
+    </place>
+    <place id="1">
+      <name>2nd Place</name>
+      <description>The cell is small and dirty. Dead rats and skeletons lay on the ground.</description>
     </place>
   </places>
 
@@ -34,4 +38,18 @@
       <requiredAnswer>Test</requiredAnswer>
     </obstacle>
   </furniture>
+
+  <passages>
+  <passage id="0">
+    <name>Door</name>
+    <description>The door hinge might be exploited with the right angle and something to heave it out.</description>
+    <comeFrom>First Place</comeFrom>
+    <connectTo>2nd Place</connectTo>
+    <obstacle type="riddle">
+      <description>What is the master password?</description>
+      <resolution>You used the chair like the hero in a pirate movie you remember.</resolution>
+      <requiredAnswer>Password</requiredAnswer>
+    </obstacle>
+  </passage>
+  </passages>
 </world>
