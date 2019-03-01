@@ -113,10 +113,11 @@ public class GameLauncher {
   private static Map<String, String> listAllLevels() {
     XmlParser parser = new XmlParser();
     Map<String, String> allLevels = new HashMap<>();
+  
     File levels = new File("./levels");
     for (File level : levels.listFiles()) {
       if (level.isFile()) {
-        allLevels.put(parser.getStoryName(level.getName()), level.getName());
+        allLevels.put(parser.getStoryName(level.getAbsolutePath()), level.getName());
       }
     }
     return allLevels;
