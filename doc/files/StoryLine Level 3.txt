@@ -51,8 +51,15 @@ obstacle: big delicious cake that blocks the hole tunnel
 resolution: mouse eats through the cake
 (forks doesn't work because damagepoints because getting too fat)
 
-place: volcano cave 
+place: 'volcano cave' - there is a currently exploding vulcano in this place, as you enter, gravity starts to shift.
+You start hovering over the ground. The lava that erupts out of the vulcano is also affected by the loss of gravity.
+Hot orange lava bubbles are flying around everywhere.
 
+
+passage: wormhole, leads to place'space'
+obstacle: lava bubbles
+resolution: use the freeze pistol
+items in room: spacesuit
 
 
 
