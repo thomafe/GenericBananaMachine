@@ -82,7 +82,7 @@ public class GameLauncher {
     out.menuOptions(options.WHICH_LEVEL);
 
     for (Map.Entry<String, String> entry : allLevels.entrySet()) {
-      levelList.add(entry.getKey());
+      levelList.add(0, entry.getKey());
     }
     out.listOutput(levelList);
 
