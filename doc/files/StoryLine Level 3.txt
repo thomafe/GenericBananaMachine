@@ -11,11 +11,11 @@ stone - This is a stone. It is heavy but you can lift it up and it may help you 
 rope- This is a rope. It can be tied to something.
 
 
-Passage: window
+Passage: window - leads to 'cold river'
 Obstacle: glass window is closed
 
 Resolution: Use stone to smash a window. Use rope to climb out.
-Reaction of obstacle: you cut yourself with a piece of the glass from the broken window. Damage points.
+Reaction of obstacle: you cut yourself with a piece of the glass from the broken window. Damage points?.
 
 
 Place2: cold river
@@ -26,14 +26,23 @@ stinky rotten fish- this fish stinks so bad, it may scare away everybody
 crab- this mean little monster can do severe damage by tweaking
 alga- those alga are tearproof, you can pull as hard as you can
 
-passage 1: smaller side river, good to reach the shore here
+passage: 'smaller side river', good to reach the shore here leads to 'the woods'
 obstacle: it's slippery you can't get out
 resolution: take alga, through around tree, pull himself out
 
 passage2: big stream, leads to place: waterfall,
-character can die here.
-
+character dies here.
 Obstacle: water- can do damagepoints. You've been getting cold in the water. Therefore Damagepoint.
+
+place: 'the woods'- you are in the woods, the trees are looking dark and rotten. You hear the howling from earlier again.
+You have to hurry.
+
+item: a fork
+item: a mouse
+item: freeze pistol
+
+passages: 'the'
+
 
 
 
