@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A data class that contains a GameWorld
+ * A data class that contains a GameWorld.
  *
  * @author thomafe
  */
@@ -79,7 +79,7 @@ public class GameWorld {
   }
 
   /**
-   * Setter for levelName
+   * Setter for levelName.
    *
    * @param levelName String
    */
@@ -146,7 +146,7 @@ public class GameWorld {
   /**
    * Get the ending for a place.
    * 
-   * @param endingPlace the Edning or null if the place is not an ending place.
+   * @param endingPlace the Ending or null if the place is not an ending place.
    * @return String
    */
   public String getEndingForPlace(Place endingPlace) {

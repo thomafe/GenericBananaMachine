@@ -53,33 +53,6 @@ public class GameFactory {
     return newGame;
   }
 
-//  /**
-//   * Create a new game from local code. These are mostly old test worlds that are not ported or
-//   * worlds that contain features that are not included in the level.xmls yet.
-//   * 
-//   * @param number int
-//   * @return GameControl
-//   */
-//  @Deprecated
-//  public static GameControl getLocalGame(int number) {
-//    GameControl newLocalGame = null;
-//
-//    switch (number) {
-//      // case 0:
-//      // newLocalGame = new GameControl(oldTestWorld());
-//      // break;
-//      case 1:
-//        newLocalGame = new GameControl(shipwreckedWorld());
-//        break;
-//      default:
-//    }
-//
-//    return newLocalGame;
-//  }
-
-  /* ----------------------------------------------------------------------------------------- */
-  /* --------------------------------- Local Levels ------------------------------------------ */
-  /* ----------------------------------------------------------------------------------------- */
 
   /**
    * Create a test world.
@@ -266,6 +239,9 @@ public class GameFactory {
     return room0;
   }
 
+  /**
+   * TODO: Delete the comments below when not needed anymore
+   */
 /*
   @Deprecated
   public static Place oldTestWorld() {

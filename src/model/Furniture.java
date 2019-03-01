@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Are in a place, can contain items, may be blcoked by obatacles.
+ * Are in a place, can contain items, may be blocked by obstacles.
  * 
  * The name should describe the furniture.
  * The obstacle follows the normal rules, but the resolution should mention the items being dropped into the room.

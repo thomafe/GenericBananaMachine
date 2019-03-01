@@ -30,7 +30,7 @@ public class DoubleItemObstacle extends ItemObstacle {
   }
 
   /**
-   * Checks if additional item is correct, if yes run tryToUseItem in ItemObstacle
+   * Checks if additional item is correct, if yes, run 'tryToUseItem' in ItemObstacle.
    */
   @Override
   public boolean tryToSolve(Object itemToTry) {
