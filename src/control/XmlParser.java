@@ -61,7 +61,9 @@ public class XmlParser {
       debug("Intro: " + storyElement.getElementsByTagName("introduction").item(0).getTextContent());
       debug("Level: " + storyElement.getElementsByTagName("name").item(0).getTextContent());
       debug("Version: " + storyElement.getElementsByTagName("version").item(0).getTextContent());
-      
+      // add story elements to world
+      String storyName = storyElement.getElementsByTagName("name").item(0).getTextContent();
+
     } catch (Exception e) {
       e.printStackTrace();
     }
