@@ -41,7 +41,7 @@ public class GameLauncher {
     Input in = new Input(out);
 
     List<String> mainOptions =
-        new ArrayList<>(Arrays.asList("Start Game", "Options", "Credits", "Exit Game"));
+        new ArrayList<>(Arrays.asList("Start Game","Introduction" "Options", "Credits", "Exit Game"));
     String chosenOpt;
 
     do {
@@ -63,6 +63,9 @@ public class GameLauncher {
         case "Credits":
           out.credits();
           break;
+        case "Introduction":
+          out.introduction();
+          break; 
         default:
           out.noSuccess(errorType.CANT_DO_THAT);
           break;

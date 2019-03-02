@@ -385,6 +385,10 @@ public class Output {
     printString("Lead Developer: Niklas Grethler");
   }
 
+  public void introduction(){
+    printString();
+  }
+
   private boolean isEmpty(String string) {
     return string == null || string.isEmpty();
   }
