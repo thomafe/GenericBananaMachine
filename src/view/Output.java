@@ -392,7 +392,7 @@ public class Output {
         + "You can find items in a place if you look around. It's always a good idea to take them with you.\n"
         + "There can also be furniture in a place, which you might find helpful, if you go to it and look at it more closely.\n"
         + "If you don't know what to do, it's always a good idea to enter 'actions' to get your options,to look around or to look at something more closely.\n"
-        + "Make wise decisions, or you will get some damage or even die.\nGood luck!!\n");
+        + "Make wise decisions, or your character will die.\nGood luck!!\n");
   }
 
   private boolean isEmpty(String string) {
