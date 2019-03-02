@@ -386,7 +386,13 @@ public class Output {
   }
 
   public void introduction(){
-    printString();
+    printString("This is a text adventure game.\nYou are taking the role of a character.\n"
+        + "The character can move from place to place. To do so, you have to use passages, for example doors etc.\n"
+        + "The passages can be blocked by Obstacles. To resolve those, you have to use one or more item or answer a question correctly.\n"
+        + "You can find items in a place if you look around. It's always a good idea to take them with you.\n"
+        + "There can also be furniture in a place, which you might find helpful, if you go to it and look at it more closely.\n"
+        + "If you don't know what to do, it's always a good idea to enter 'actions' to get your options,to look around or to look at something more closely.\n"
+        + "Make wise decisions, or you will get some damage or even die.\nGood luck!!\n");
   }
 
   private boolean isEmpty(String string) {
