@@ -106,20 +106,20 @@ Beschreibung:   Formatierter Text, Einheitliche Fehler.
 ------------------------------------------------------
 ------------------------------------------------------
 Name:           Modulare Spielwelten
-Priorität:      2
+Priorität:      3
 Vorraussetzung: Spielwelt
 Beschreibung:   Die Spielwelt kann bei Programmstart ausgewählt werden. Das Spiel baut danach die Welt auf.
                 Solche Spielwelten werden in Datein gelesen (vmtl XML).
 ------------------------------------------------------
 ------------------------------------------------------
-Name:           Hindrniss Reaktionen
+Name:           Hinderniss Reaktionen
 Priorität:      2
 Vorraussetzung: Hindernisse
 Beschreibung:   Auf Aktionen vom Spieler kann ein Hinderniss reagieren.
 ------------------------------------------------------
 ------------------------------------------------------
 Name:           Tod
-Priorität:      2
+Priorität:      3
 Vorraussetzung: Character
 Beschreibung:   Der Character kann sterben. Falls dies passiert endet das Spiel.
 ------------------------------------------------------
@@ -146,18 +146,18 @@ Vorraussetzung: -
 Beschreibung:   Text Ein- und Ausgabe getrennt in einem simplen Fenster.
 ------------------------------------------------------
 ------------------------------------------------------
-Name:           Checkpunkte
-Priorität:      4
-Vorraussetzung: Tod
-Beschreibung:   Wenn der Character stirbt kann er statt in Startort in einem Checkpunkt Ort wieder einsteigen.
-------------------------------------------------------
-------------------------------------------------------
 Name:           Schwierigkeit
 Priorität:      4
 Vorraussetzung: Tod
 Beschreibung:   Bei Spielstart kann die Schwierigkeit des Spiels ausgewählt werden.
 ------------------------------------------------------
 --> Version 2.0
+------------------------------------------------------
+Name:           Checkpunkte
+Priorität:      5
+Vorraussetzung: Tod
+Beschreibung:   Wenn der Character stirbt kann er statt in Startort in einem Checkpunkt Ort wieder einsteigen.
+------------------------------------------------------
 ------------------------------------------------------
 Name:           Kampange
 Priorität:      5

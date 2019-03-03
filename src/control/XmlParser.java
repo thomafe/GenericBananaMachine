@@ -27,7 +27,7 @@ public class XmlParser {
   private Place startingPlace = null;
   private GameWorld world = new GameWorld();
 
-  private boolean enableDebug = false;
+  // The debug flag is now globally set in GameLauncher
   private String storyName;
 
   /**
@@ -136,7 +136,7 @@ public class XmlParser {
               placeElement.getElementsByTagName("description").item(0).getTextContent()));
 
           // add EndingPlace to World, set endingText to Places' Description
-          if (placeElement.getAttribute("end").equals("bad")) {
+          if (placeElement.getAttribute("end").equals("bad") || placeElement.getAttribute("end").equals("good")) {
             world.addEndingPlace(places.get(placeCounter),
                 places.get(placeCounter).getDescription());
           }
@@ -465,7 +465,7 @@ public class XmlParser {
    * @param post String
    */
   private void debug(String post) {
-    if (enableDebug) {
+    if (GameLauncher.isDebugging()) {
       System.out.println(post);
     }
   }
