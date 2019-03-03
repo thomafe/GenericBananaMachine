@@ -393,7 +393,7 @@ public class Output {
   }
 
   public void credits() {
-    printString("Version " + GameLauncher.VERSION);
+    printString("Generic Banana Machine Version " + GameLauncher.VERSION);
     printString("Project Manager: Felix Jan Thoma\n");
     printString("Creative Writer: Simone Maag\n");
     printString("Level Designer: Tim Hendrik Lehmeier\n");
