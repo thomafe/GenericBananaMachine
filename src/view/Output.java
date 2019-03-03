@@ -160,7 +160,7 @@ public class Output {
   public void lookAtGameObject(GameObject object) {
     printString(object.getDescription());
   }
-  
+
   /**
    * Look at the character itself.
    * 
@@ -169,7 +169,7 @@ public class Output {
   public void lookAtSelf(Character character) {
     printString("You look at yourself. You have " + character.getHitpoints() + " hitpoints left.");
   }
-  
+
   /**
    * Standard output for unsuccessful operations.
    */
@@ -298,7 +298,7 @@ public class Output {
   public void exitingTheGame(endingType type) {
     switch (type) {
       case YOU_SURE:
-        printString("Are you sure you want to exit the game?[YES/NO]");
+        printString("Are you sure you want to exit the game?");
         break;
       case NO:
         printString("Glad you're still here!");
@@ -358,6 +358,15 @@ public class Output {
       System.out.println(message);
     }
   }
+  
+  /**
+   * Static printout for errors.
+   * 
+   * @param error
+   */
+  public static void printError(String error) {
+    System.err.println(error);
+  }
 
   /**
    * Standard output method for lists.
@@ -379,14 +388,14 @@ public class Output {
     printString(gameObjectList.toString());
   }
 
-  public void credits(){
+  public void credits() {
     printString("Project Manager: Felix Jan Thoma\n");
     printString("Creative Writer: Simone Maag\n");
     printString("Level Designer: Tim Hendrik Lehmeier\n");
     printString("Lead Developer: Niklas Grethler");
   }
 
-  public void introduction(){
+  public void introduction() {
     printString("This is a text adventure game.\nYou are taking the role of a character.\n"
         + "The character can move from place to place. To do so, you have to use passages, for example doors etc.\n"
         + "The passages can be blocked by Obstacles. To resolve those, you have to use one or more item or answer a question correctly.\n"

@@ -1,6 +1,7 @@
 package model;
 
 import control.GameLauncher;
+import view.Output;
 
 /**
  * Obstacle that can be resolved with using the correct item. When resolved, passage is not blocked
@@ -25,7 +26,7 @@ public class ItemObstacle extends Obstacle {
     this.requiredItem = requiredItem;
     
     if(requiredItem == null && GameLauncher.isDebugging()) {
-      System.err.println("---[new ItemObstacle(" + name + ")] WARNING! Required item may not be null!!!---");
+      Output.printError("---[new ItemObstacle(" + name + ")] WARNING! Required item may not be null!!!---");
     }
   }
 
