@@ -25,7 +25,7 @@ public class ItemObstacle extends Obstacle {
     this.requiredItem = requiredItem;
     
     if(requiredItem == null) {
-      Output.printError("---[new ItemObstacle(" + name + ")] WARNING! Required item may not be null!!!---");
+      Output.printError("---[new ItemObstacle(" + description.substring(0, 10) + ")] WARNING! Required item may not be null!!!---");
     }
   }
 
