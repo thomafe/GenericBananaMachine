@@ -325,7 +325,7 @@ public class GameControl {
   private void checkForGoodEnding() {
     if (gameWorld.isGoodEnding(character.getCurrentPlace())) {
       out.goodEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
-      endGame(true);
+      endGame(false);
     }
   }
 
@@ -334,7 +334,6 @@ public class GameControl {
    * 
    */
   private void checkForBadEnding() {
-    // TODO don't say the name of the room and such? Are endings used??
     if (gameWorld.isBadEnding(character.getCurrentPlace())) {
       out.badEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
       endGame(true);
