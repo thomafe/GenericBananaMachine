@@ -13,7 +13,7 @@ import view.Output.options;
 
 /**
  * Launches the GBM and displays the main menu. By passing the argument "-d" it is possible to
- * access a debug mode.
+ * access a debug level.
  * 
  * @author fthoma, Niklas
  *
