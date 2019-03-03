@@ -274,7 +274,7 @@ public class Output {
         if (!isEmpty(obstacle.getReactionToCorrectItem())) {
           printString(obstacle.getReactionToCorrectItem());
         } else {
-          printString("That was correct!");
+          printString("That was the correct first item!");
         }
         break;
       case OBSTACLE_REACT_FALSE:

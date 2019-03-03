@@ -25,7 +25,7 @@ public class ItemObstacle extends Obstacle {
     this.requiredItem = requiredItem;
     
     if(requiredItem == null && GameLauncher.isDebugging()) {
-      System.err.println("---[new ItemObstacle] WARNING! Required item may not be null!!!---");
+      System.err.println("---[new ItemObstacle(" + name + ")] WARNING! Required item may not be null!!!---");
     }
   }
 

@@ -23,7 +23,7 @@ public class RiddleObstacle extends Obstacle {
     this.riddleAnswer = riddleAnswere;
     
     if(riddleAnswere == null && GameLauncher.isDebugging()) {
-      System.err.println("---[new RiddleObstacle] WARNING! Riddle Answere may not be null!!!---");
+      System.err.println("---[new RiddleObstacle(" + name + ")] WARNING! Riddle Answere may not be null!!!---");
     }
   }
 
