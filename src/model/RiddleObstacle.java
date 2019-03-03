@@ -1,5 +1,7 @@
 package model;
 
+import control.GameLauncher;
+
 /**
  *  Solves the Obstacle if correct answer to riddle is given.
  *
@@ -19,6 +21,10 @@ public class RiddleObstacle extends Obstacle {
   public RiddleObstacle(String name, String description, String resolution, String riddleAnswere) {
     super(name, description, resolution);
     this.riddleAnswer = riddleAnswere;
+    
+    if(riddleAnswere == null && GameLauncher.isDebugging()) {
+      System.err.println("---[new RiddleObstacle] WARNING! Riddle Answere may not be null!!!---");
+    }
   }
 
   /**

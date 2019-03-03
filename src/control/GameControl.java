@@ -321,7 +321,7 @@ public class GameControl {
   }
 
   /**
-   * Checks if a good ending was entered
+   * Checks if a good ending was entered.
    */
   private void checkForGoodEnding() {
 
@@ -345,7 +345,7 @@ public class GameControl {
   }
 
   /**
-   * Checks if Character is dead
+   * Checks if Character is dead.
    *
    */
   private void checkIfCharacterDead() {
