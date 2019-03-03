@@ -12,6 +12,7 @@ import view.Input;
 import view.Output;
 import view.Output.endingType;
 import view.Output.errorType;
+import view.Output.options;
 import view.Output.successType;
 
 /**
@@ -74,7 +75,6 @@ public class GameControl {
 
     // Game Loop
     while (gameIsRunning) {
-      out.successfulInteraction(getCurrentPlace().getName(), successType.AT_PLACE);
       in.readInput();
       checkForBadEnding();
       checkForGoodEnding();
@@ -122,6 +122,7 @@ public class GameControl {
       character.move(destinationPassage);
       out.successfulInteraction(destinationPassage.getName(), successType.MOVE_THROUGH);
       characterMoved = true;
+      out.successfulInteraction(getCurrentPlace().getName(), successType.AT_PLACE);
     }
 
     return characterMoved;
@@ -325,6 +326,9 @@ public class GameControl {
   private void checkForGoodEnding() {
     if (gameWorld.isGoodEnding(character.getCurrentPlace())) {
       out.goodEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
+      
+      waitForContinue();
+      out.youDidItASCI();
       endGame(false);
     }
   }
@@ -336,6 +340,9 @@ public class GameControl {
   private void checkForBadEnding() {
     if (gameWorld.isBadEnding(character.getCurrentPlace())) {
       out.badEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
+      
+      waitForContinue();
+      out.youDidItNotASCI();
       endGame(true);
     }
   }
@@ -347,8 +354,16 @@ public class GameControl {
   private void checkIfCharacterDead() {
     if (character.isDead()) {
       out.noSuccess(errorType.YOU_DEAD);
+      
+      waitForContinue();
+      out.youDidItNotASCI();
       endGame(true);
     }
+  }
+  
+  private void waitForContinue() {
+    out.menuOptions(options.PRESS_ENTER);
+    in.waitForEnter();
   }
 
   /**

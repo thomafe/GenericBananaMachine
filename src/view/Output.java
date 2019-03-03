@@ -30,7 +30,7 @@ public class Output {
   }
 
   public enum options {
-    NOT_YET, WHICH_LEVEL
+    NOT_YET, WHICH_LEVEL, PRESS_ENTER
   }
 
   private static final String[] ACTIONS =
@@ -62,7 +62,6 @@ public class Output {
           + "passing many obstacles you fought your way through the world \n"
           + "consider yourself a hero now\n");
     }
-    youDidItASCI();
   }
 
   public void badEnding(String ending) {
@@ -72,7 +71,6 @@ public class Output {
       printString(
           "You failed\n This is the end of the game \n" + "This place brought death to you");
     }
-    youDidItNotASCI();
   }
 
   /**
@@ -321,6 +319,9 @@ public class Output {
         break;
       case WHICH_LEVEL:
         printString("Which level do you want to play?");
+        break;
+      case PRESS_ENTER:
+        printString("Press Enter to continue");
         break;
     }
   }

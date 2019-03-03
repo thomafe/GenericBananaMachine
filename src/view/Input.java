@@ -137,8 +137,14 @@ public class Input {
     out.beforeInput();
     return scan.nextLine();
   }
-
-
+  
+  /**
+   * Waits until the user presses ENTER.
+   */
+  public void waitForEnter() {
+    scan.nextLine();
+  }
+  
   private void matchTakeItem(Matcher match) {
     GameObject foundObject = control.findGameObject(match.group(1));
 
