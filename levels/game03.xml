@@ -139,20 +139,6 @@
 
   <furniture>
     <in-place>River</in-place>
-    <name>Swarm</name>
-    <description>This is a swarm of giant crabs.</description>
-    <content-item>
-      <name>Crab</name>
-      <description>This is a giant crab which can be used to cut through things.</description>
-    </content-item>
-    <obstacle>
-      <description>You need something to fish a crab out.</description>
-      <resolution>You used the fishing rod to fish a crab out of the water which lays at your feet.</resolution>
-      <requiredItem>Rod</requiredItem>
-    </obstacle>
-  </furniture>
-  <furniture>
-    <in-place>River</in-place>
     <name>Alga Plant</name>
     <description>This is a plant which usually grows in the sea.</description>
     <content-item>
@@ -191,6 +177,20 @@
       <description>You need some kind of tool or weapon to open the chest.</description>
       <resolution>You used the lightsaber and cut the chest open.</resolution>
       <requiredItem>Lightsaber</requiredItem>
+    </obstacle>
+  </furniture>
+  <furniture>
+    <in-place>River</in-place>
+    <name>Swarm</name>
+    <description>This is a swarm of giant crabs.</description>
+    <content-item>
+      <name>Crab</name>
+      <description>This is a giant crab which can be used to cut through things.</description>
+    </content-item>
+    <obstacle>
+      <description>You need something to fish a crab out.</description>
+      <resolution>You used the fishing rod to fish a crab out of the water which lays at your feet.</resolution>
+      <requiredItem>Rod</requiredItem>
     </obstacle>
   </furniture>
 
