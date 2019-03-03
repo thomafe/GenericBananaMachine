@@ -3,41 +3,40 @@ It is updated manually and therefore not always up to date.
 
 ---Project Overview---
 
-Total Code Lines: 			2620
+Total Code Lines: 			2,957
 Total Amount of classes: 	22
-Non-Code Lines in project:	450
+Non-Code Lines in project:	1,710
 
 
 ---Git stats---
 
 ### Simone ###
-Commits:		76
-Lines added:	2158
-Lines deleted:	1761
+Commits:		91
+Lines added:	2,526
+Lines deleted:	2,145
 
 ### Niklas ###
-Commits:		68
-Lines added:	2597
-Lines deleted:	2262
+Commits:		91
+Lines added:	3,015
+Lines deleted:	2,523
 
 ### Tim ###
-Commits:		109
-Lines added:	2011
-Lines deleted:	1685
+Commits:		110
+Lines added:	3,336
+Lines deleted:	2,057
 
 ### Felix ###
-Commits:		151
-Lines added:	5598
-Lines deleted:	3829
-
+Commits:		209
+Lines added:	7,373
+Lines deleted:	5,287 
 
 ---SCRUM Accomplishments---
 
 ### Simone ###
-Accepted Stories: 16
-Features:         10
+Accepted Stories: 17
+Features:         11
 Chores/Bugs:      6
-Total Points:     9
+Total Points:     10
 
 ### Niklas ###
 Accepted Stories: 16
@@ -52,9 +51,9 @@ Chores/Bugs:      2
 Total Points:     12
 
 ### Felix ###
-Accepted Stories: 22
-Features:         14
-Chores/Bugs:      8
+Accepted Stories: 25
+Features:         16
+Chores/Bugs:      9
 Total Points:     13
 
 
