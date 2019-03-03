@@ -31,7 +31,7 @@ public class DoubleItemObstacle extends ItemObstacle {
     this.additionalItem = additionalItem;
     
     if(additionalItem == null) {
-      Output.printError("---[new DoubleItemObstacle(" + name + ")] WARNING! Additional item may not be null!!!---");
+      Output.printError("---[new DoubleItemObstacle(" + description.substring(0, 10) + ")] WARNING! Additional item may not be null!!!---");
     }
   }
 
