@@ -20,6 +20,8 @@ public class GameWorld {
 
   private Place startingPlace = null;
   private List<Place> places = null;
+  
+  private int startingHitpoints = 10;
 
   /**
    * Create a new empty GameWorld with no introduction or starting place.
@@ -181,6 +183,14 @@ public class GameWorld {
     }
 
     return endingText;
+  }
+  
+  public int getStartingHitpoints() {
+    return startingHitpoints;
+  }
+
+  public void setStartingHitpoints(int startingHitpoints) {
+    this.startingHitpoints = startingHitpoints;
   }
 
 }
