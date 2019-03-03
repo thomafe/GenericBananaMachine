@@ -140,7 +140,7 @@ public class XmlParser {
             world.addBadEnding(places.get(placeCounter),
                 places.get(placeCounter).getDescription());
           } else if(placeElement.getAttribute("end").equals("good")) {
-            world.setGoodEnding(places.get(placeCounter),
+            world.addGoodEnding(places.get(placeCounter),
                 places.get(placeCounter).getDescription());
           }
           

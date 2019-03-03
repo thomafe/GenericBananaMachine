@@ -78,7 +78,7 @@ public class GameFactory {
     testWorld.addPlace(room5);
     testWorld.addPlace(endingPlace);
     testWorld.setStartingPlace(startingPlace);
-    testWorld.setGoodEnding(endingPlace, "This is the end.");
+    testWorld.addGoodEnding(endingPlace, "This is the end.");
 
     Item item1 = new Item("Required Item", "Required Item");
     Item item2 = new Item("Additional Item", "Additional Item");

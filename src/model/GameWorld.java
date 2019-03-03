@@ -141,8 +141,7 @@ public class GameWorld {
    * @param endingPlace
    * @param endingText
    */
-  public void setGoodEnding(Place endingPlace, String endingText) {
-    goodEnding.clear();
+  public void addGoodEnding(Place endingPlace, String endingText) {
     goodEnding.put(endingPlace, endingText);
   }
 
