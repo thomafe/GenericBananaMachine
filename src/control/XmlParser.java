@@ -133,14 +133,17 @@ public class XmlParser {
 
           // Create Places.
           places.add(new Place(placeElement.getElementsByTagName("name").item(0).getTextContent(),
-              placeElement.getElementsByTagName("description").item(0).getTextContent()));
+              placeElement.getElementsByTagName("description").item(0).getTextContent().replace("\\n", "\n")));
 
           // add EndingPlace to World, set endingText to Places' Description
           if (placeElement.getAttribute("end").equals("bad")) {
-            world.addEndingPlace(places.get(placeCounter),
+            world.addBadEnding(places.get(placeCounter),
+                places.get(placeCounter).getDescription());
+          } else if(placeElement.getAttribute("end").equals("good")) {
+            world.addGoodEnding(places.get(placeCounter),
                 places.get(placeCounter).getDescription());
           }
-
+          
           // parse all existing Place Items
           NodeList itemList = placeElement.getElementsByTagName("item");
 

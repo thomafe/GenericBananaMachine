@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<world>
+	<story>
+		<name>Ancient</name>
+		<version>1.0</version>
+		<introduction>This is the first prototype we made.</introduction>
+	</story>
+
+	<places>
+		<place id="0">
+			<name>Entrance</name>
+			<description>This is your starting area.</description>
+			<item>
+				<name>Lightsaber</name>
+				<description>This is a powerful jedi melee weapon.</description>
+			</item>
+			<item>
+				<name>Overcharger</name>
+				<description>This thing just makes all gadgets go Uhweeeeee
+				</description>
+			</item>
+		</place>
+		<place id="1">
+			<name>Hall of Doom</name>
+			<description>This is the final Boss Room...not. It just sounds cool.
+			</description>
+			<item>
+				<name>Banana</name>
+				<description>This is a powerful fruit which makes you feel like a monkey.
+				</description>
+			</item>
+		</place>
+		<place id="2">
+			<name>Lighthouse</name>
+			<description>You can't see anything in here because the light is blinding.
+			</description>
+		</place>
+	</places>
+	<passages>
+		<passage id="0">
+			<name>Door of Doom</name>
+			<description>This Door seems to be very heavy and doomed.
+			</description>
+			<comeFrom>Entrance</comeFrom>
+			<connectTo>Hall of Doom</connectTo>
+			<obstacle type="double">
+				<description>A thick blast door that blocks the way
+				</description>
+				<resolution>You melt through the door with your lightsaber!</resolution>
+				<requiredItem>Lightsaber</requiredItem>
+				<additionalItem>Overcharger</additionalItem>
+			</obstacle>
+		</passage>
+		<passage id="1">
+			<name>Snake Pit</name>
+			<description>You are greeted by the lovely sound of zzzzzzzzz
+			</description>
+			<comeFrom>Hall of Doom</comeFrom>
+			<connectTo>Lighthouse</connectTo>
+		</passage>
+	</passages>
+</world>
+   

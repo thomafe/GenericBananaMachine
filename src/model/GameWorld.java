@@ -15,17 +15,21 @@ public class GameWorld {
   private String introduction = null;
   private String levelName = null;
   private String levelVersion = null;
-  private Map<Place, String> endings = null;
+  private Map<Place, String> badEndings = null;
+  private Map<Place, String> goodEnding = null;
 
   private Place startingPlace = null;
   private List<Place> places = null;
+  
+  private int startingHitpoints = 10;
 
   /**
    * Create a new empty GameWorld with no introduction or starting place.
    * 
    */
   public GameWorld() {
-    endings = new HashMap<>();
+    badEndings = new HashMap<>();
+    goodEnding = new HashMap<>();
     places = new ArrayList<>();
   }
 
@@ -124,23 +128,43 @@ public class GameWorld {
   }
 
   /**
-   * Add an ending place.
+   * Add a bad ending place.
    * 
    * @param endingPlace Place
    * @param endingText String
    */
-  public void addEndingPlace(Place endingPlace, String endingText) {
-    endings.put(endingPlace, endingText);
+  public void addBadEnding(Place endingPlace, String endingText) {
+    badEndings.put(endingPlace, endingText);
   }
 
   /**
-   * Find out whether a place is an ending place.
+   * Set the good ending place.
+   * 
+   * @param endingPlace
+   * @param endingText
+   */
+  public void addGoodEnding(Place endingPlace, String endingText) {
+    goodEnding.put(endingPlace, endingText);
+  }
+
+  /**
+   * Find out whether a place is a bad ending place.
    * 
    * @param place Place
    * @return Place
    */
-  private boolean isEndingPlace(Place place) {
-    return endings.containsKey(place);
+  public boolean isBadEnding(Place place) {
+    return badEndings.containsKey(place);
+  }
+
+  /**
+   * Find out whether a place is the good ending place.
+   * 
+   * @param place
+   * @return
+   */
+  public boolean isGoodEnding(Place place) {
+    return goodEnding.containsKey(place);
   }
 
   /**
@@ -152,11 +176,21 @@ public class GameWorld {
   public String getEndingForPlace(Place endingPlace) {
     String endingText = null;
 
-    if (isEndingPlace(endingPlace)) {
-      endingText = endings.get(endingPlace);
+    if (isBadEnding(endingPlace)) {
+      endingText = badEndings.get(endingPlace);
+    } else if (isGoodEnding(endingPlace)) {
+      endingText = goodEnding.get(endingPlace);
     }
 
     return endingText;
+  }
+  
+  public int getStartingHitpoints() {
+    return startingHitpoints;
+  }
+
+  public void setStartingHitpoints(int startingHitpoints) {
+    this.startingHitpoints = startingHitpoints;
   }
 
 }

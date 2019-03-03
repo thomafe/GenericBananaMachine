@@ -1,14 +1,16 @@
 package model;
 
+import view.Output;
+
 /**
  * Connects places, can be blocked by obstacles.
  * 
- * The name should describe the passage, not the obstacle.
- * The description should hint at the obstacle and maybe be funny.
+ * The name should describe the passage, not the obstacle. The description should hint at the
+ * obstacle and maybe be funny.
  *
  * @author Simone273
  */
-public class Passage extends GameObject{
+public class Passage extends GameObject {
 
   private Place[] connectingRooms = new Place[2];
   private Obstacle obstacle = null;
@@ -25,8 +27,14 @@ public class Passage extends GameObject{
     super(name, description);
     this.connectingRooms[0] = place1;
     this.connectingRooms[1] = place2;
-    place1.addPassage(this);
-    place2.addPassage(this);
+
+    if (connectingRooms[0] == null || connectingRooms[1] == null) {
+      Output.printError(
+          "---[new Passage(" + name + ")]--- WARNING! None of the connecting places may be null)");
+    } else {
+      place1.addPassage(this);
+      place2.addPassage(this);
+    }
   }
 
   /**

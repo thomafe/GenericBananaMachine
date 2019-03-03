@@ -1,0 +1,376 @@
+
+<world>
+  <story>
+    <name>Matrix</name>
+    <version>1.0</version>
+    <introduction>This is part 3 of the story.
+You wake up in a dirty and sleazy house. You hear a mysterious whispering around which frightens you.</introduction>
+  </story>
+
+  <places>
+    <place id="0">
+      <name>Haunted House</name>
+      <description>You hear the howling of some wolves, combined with some more human like sounds. You need to get out of there.</description>
+      <item>
+        <name>Stone</name>
+        <description>This is a heavy stone which can be used to destroy things.</description>
+      </item>
+      <item>
+        <name>Knife</name>
+        <description>This is a sharp knife which can be used to cut things off or to defend your life against enemies.</description>
+      </item>
+      <item>
+        <name>Rope</name>
+        <description>This is a rope which can be rused to tie up somebody or to climb on things. Don't use it in the water!</description>
+      </item>
+      <item>
+        <name>Machete</name>
+        <description>This is a melee weapon which also can be used to cut through plants or something.</description>
+      </item>
+      <item>
+        <name>Plank</name>
+        <description>This is a large wooden plank which can swim on water.</description>
+      </item>
+    </place>
+    <place id="1">
+      <name>River</name>
+      <description>The water is very cold and you see several streams guiding different ways.</description>
+      <item>
+        <name>Fish</name>
+        <description>This fish is already dead but still seems to work as food.</description>
+      </item>
+    </place>
+    <place id="2">
+      <name>Spring</name>
+      <description>The water is very clear and not very deep.</description>
+      <item>
+        <name>Potion</name>
+        <description>You taste a few of it and your skin gets scales and your fingers and feet become fins for a moment. This potion might turn you into a fish or something.</description>
+      </item>
+    </place>
+    <place id="3" end="bad">
+      <name>Waterfall</name>
+      <description>The stream ends into a high waterfall. You can't handle the situation and fall down to death.</description>
+    </place>
+    <place id="4">
+      <name>Woods</name>
+      <description>The woods are very deep and you can't see the sun through the trees.</description>
+      <item>
+        <name>Pistol</name>
+        <description>This is a ranged weapon which shoots an infinite amount of freezing bullets. What a strange thing!</description>
+      </item>
+      <item>
+        <name>Fork</name>
+        <description>This is a ordinary fork which is used to eat food. You can also stab someone with it but don't be a psychopath!</description>
+      </item>
+      <item>
+        <name>Mouse</name>
+        <description>This is a still living and very hungry animal. Anything you feed to it will be eaten nearly instantly.</description>
+      </item>
+    </place>
+    <place id="5">
+      <name>Cave</name>
+      <description>This is a dark and moisty cave but something smells very delicious in here.</description>
+      <item>
+        <name>Lightsaber</name>
+        <description>This is a melee weapon which turns light energy into a controlled laser blade.</description>
+      </item>
+    </place>
+    <place id="5">
+      <name>Volcano Cave</name>
+      <description>There is a currently exploding vulcano in this place, as you enter, gravity starts to shift.\nYou start hovering over the ground. The lava that erupts out of the volcano is also affected by the loss of gravity.\nHot orange lava bubbles are flying around everywhere.</description>
+      <item>
+        <name>Space Suit</name>
+        <description>This is a suit which allows you to move through space.</description>
+      </item>
+      <item>
+        <name>Towel</name>
+        <description>More or less the most useful item to travel in space with. This tells The Hitchhiker's Guide to the Galaxy.</description>
+      </item>
+    </place>
+    <place id="6" end="bad">
+      <name>Lava</name>
+      <description>Even if you can freeze lava, you cannot swim in it!</description>
+    </place>
+    <place id="7">
+      <name>Matrix Vortex</name>
+      <description>You float in a strange looking white room fronting three different doors. You might remember this room from a movie you might have seen.</description>
+    </place>
+    <place id="8" end="bad">
+      <name>Abyss</name>
+      <description>The high pressure of the abyss sea is too high. Your entire body is pressed together and you die.</description>
+    </place>
+    <place id="9">
+      <name>Space</name>
+      <description>You enter space and see a starship nearby.</description>
+    </place>
+    <place id="10">
+      <name>Starship</name>
+      <description>The starship obviously is a pirate starship but you can't see any crew member here.</description>
+      <item>
+        <name>Wing Suit</name>
+        <description>This is a suit which can be used to fly in heaven with.</description>
+      </item>
+    </place>
+    <place id="11" end="good">
+      <name>Bed</name>
+      <description>Your alarm clock rings and you wake up in your bed. You look around and see a space suit helmet laying under your bed. Was it all just a dream?</description>
+    </place>
+    <place id="11">
+      <name>Underworld</name>
+      <description>The underworld is hot and lost. Ashes are falling from the sky like snow.</description>
+    </place>
+    <place id="12">
+      <name>Heaven</name>
+      <description>The silver city of heaven lays in front of you. Angels sing about your arrival and everyone seems to be happy here.</description>
+      <item>
+        <name>Papyrus</name>
+        <description>This is a paper which has some letters on it: KNOCK on heaven's door for eternal freedom.</description>
+      </item>
+    </place>
+    <place id="13" end="bad">
+      <name>Sky</name>
+      <description>Your wing suit is old and doesn't even work. You crash and fall down to death.</description>
+    </place>
+    <place id="14" end="good">
+      <name>Olympus</name>
+      <description>God takes you by the hand and guides you to eternal freedom. You will never wake up again, relaxing at the garden of Eden... Hey, this is a good ending, isn't it?</description>
+    </place>
+  </places>
+
+  <furniture>
+    <in-place>River</in-place>
+    <name>Alga Plant</name>
+    <description>This is a plant which usually grows in the sea.</description>
+    <content-item>
+      <name>Alga</name>
+      <description>This alga is tearproof, you can pull as hard as you can.</description>
+    </content-item>
+    <obstacle>
+      <description>You need something to cut an alga off.</description>
+      <resolution>You used the knife and an alga drops to your feet.</resolution>
+      <requiredItem>Knife</requiredItem>
+    </obstacle>
+  </furniture>
+  <furniture>
+    <in-place>Spring</in-place>
+    <name>Scrub</name>
+    <description>This is a huge scrub which includes a fishing rod which might be helpful.</description>
+    <content-item>
+      <name>Rod</name>
+      <description>This is a fishing rod which allows you to fish animals.</description>
+    </content-item>
+    <obstacle>
+      <description>You need something to cut the huge scrub.</description>
+      <resolution>You used the Machete and the fishing rod lays on the ground in front of you.</resolution>
+      <requiredItem>Machete</requiredItem>
+    </obstacle>
+  </furniture>
+  <furniture>
+    <in-place>Matrix Vortex</in-place>
+    <name>Dimension Chest</name>
+    <description>This is a very well closed chest which only can be opened with a very strong tool.</description>
+    <content-item>
+      <name>Bait</name>
+      <description>This is a bait to distract animals. It smells very strong and disgusting.</description>
+    </content-item>
+    <obstacle>
+      <description>You need some kind of tool or weapon to open the chest.</description>
+      <resolution>You used the lightsaber and cut the chest open.</resolution>
+      <requiredItem>Lightsaber</requiredItem>
+    </obstacle>
+  </furniture>
+  <furniture>
+    <in-place>River</in-place>
+    <name>Swarm</name>
+    <description>This is a swarm of giant crabs.</description>
+    <content-item>
+      <name>Crab</name>
+      <description>This is a giant crab which can be used to cut through things.</description>
+    </content-item>
+    <obstacle>
+      <description>You need something to fish a crab out.</description>
+      <resolution>You used the fishing rod to fish a crab out of the water which lays at your feet.</resolution>
+      <requiredItem>Rod</requiredItem>
+    </obstacle>
+  </furniture>
+
+  <passages>
+    <passage id="0">
+      <name>Window</name>
+      <description>The window is made of glass which might break being hit of something.</description>
+      <comeFrom>Haunted House</comeFrom>
+      <connectTo>River</connectTo>
+      <obstacle damage="1">
+        <description>You need something to crash the window with.</description>
+        <resolution>You used the stone and the window crashes into pieces. You are unfortunately hit by some shards.</resolution>
+        <requiredItem>Stone</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="1">
+      <name>Downstream</name>
+      <description>This way of the river seems to be reached very easily. Where might it guide to?</description>
+      <comeFrom>River</comeFrom>
+      <connectTo>Waterfall</connectTo>
+      <obstacle>
+        <description>You need something to swim on not to drown.</description>
+        <resolution>You used the wooden plank which works like a raft.</resolution>
+        <requiredItem>Plank</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="2">
+      <name>Upstream</name>
+      <description>This way of the river seems to be reached very difficultly. Will you be rewarded for your afford?</description>
+      <comeFrom>River</comeFrom>
+      <connectTo>Spring</connectTo>
+      <obstacle damage="1">
+        <description>You need something to tie yourself not to be carried away by the strong stream.</description>
+        <resolution>You used the alga which works like a better rope.</resolution>
+        <requiredItem>Alga</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="3">
+      <name>Shore</name>
+      <description>The shore is very rocky and borders to a forest.</description>
+      <comeFrom>Spring</comeFrom>
+      <connectTo>Woods</connectTo>
+      <obstacle damage="1">
+        <description>You realize that you haven't eaten anything for hours. You need something to eat now!</description>
+        <resolution>You ate the fish you've found. Unfortunately it was old and you got poisoned slightly.</resolution>
+        <requiredItem>Fish</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="4">
+      <name>Underwood</name>
+      <description>The underwood seems to be very deep.</description>
+      <comeFrom>Woods</comeFrom>
+      <connectTo>Cave</connectTo>
+      <obstacle>
+        <description>You need something to cut through the blocking underwood.</description>
+        <resolution>You used the giant crab which cut a path through and escaped after it.</resolution>
+        <requiredItem>Crab</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="5">
+      <name>Tunnel</name>
+      <description>By your surprising the tunnel is well illuminated.</description>
+      <comeFrom>Cave</comeFrom>
+      <connectTo>Volcano Cave</connectTo>
+      <obstacle>
+        <description>A huge cake is blocking your way. You need something to remove or eat it.</description>
+        <resolution>You used the hungry mouse which ate through the cake and explodes after it.</resolution>
+        <requiredItem>Mouse</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="6">
+      <name>Lavafall</name>
+      <description>A giant lavafall extends to the half cave.</description>
+      <comeFrom>Volcano Cave</comeFrom>
+      <connectTo>Lava</connectTo>
+      <obstacle>
+        <description>You need something to block the falling lava not to hit and burn you.</description>
+        <resolution>You used the freezing pistol but in that moment the ammunition runs out and you are flooded by lava.</resolution>
+        <requiredItem>Pistol</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="7">
+      <name>Wormhole</name>
+      <description>One of the lava bubbles contains a wormhole which guides to another dimension.</description>
+      <comeFrom>Volcano Cave</comeFrom>
+      <connectTo>Matrix Vortex</connectTo>
+      <obstacle damage="1">
+        <description>You need something to destroy the lava bubble to enter the wormhole.</description>
+        <resolution>You used the freezing pistol and entered the wormhole.</resolution>
+        <requiredItem>Pistol</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="8">
+      <name>Aqua Door</name>
+      <description>This door has an engravement: Atlantis.</description>
+      <comeFrom>Matrix Vortex</comeFrom>
+      <connectTo>Abyss</connectTo>
+      <obstacle>
+        <description>There might be water behind the door. You need something to breath under water.</description>
+        <resolution>You drank the potion which allowed you to breath under water.</resolution>
+        <requiredItem>Potion</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="9">
+      <name>Space Door</name>
+      <description>This door has an engraving: Space.</description>
+      <comeFrom>Matrix Vortex</comeFrom>
+      <connectTo>Space</connectTo>
+      <obstacle>
+        <description>There might be space behind the door. You need something to move through space.</description>
+        <resolution>You put the space suit on and enter space.</resolution>
+        <requiredItem>Space Suit</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="10">
+      <name>Starship Ramp</name>
+      <description>The ramp of the spaceship might be the right entrance.</description>
+      <comeFrom>Space</comeFrom>
+      <connectTo>Starship</connectTo>
+      <obstacle damage="1">
+        <description>An alien guard asks you to identify yourself. You need something to show him.</description>
+        <resolution>You showed him your towel and he lets you enter the ship. Unfortunately you slipped on a banana laying on the ground, hitting the ground, but nothing else happened.</resolution>
+        <requiredItem>Towel</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="11">
+      <name>Portal</name>
+      <description>This is a portal which guides to another dimension... again.</description>
+      <comeFrom>Starship</comeFrom>
+      <connectTo>Bed</connectTo>
+      <obstacle>
+        <description>An alien guard is sleeping in front of the portal. You need something to tie him up to get sure that he can't hinder you if he wakes up.</description>
+        <resolution>You finally used the rope you dragged the whole way along and entered the portal.</resolution>
+        <requiredItem>Rope</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="12">
+      <name>Hades Door</name>
+      <description>This door has an engraving: Underworld.</description>
+      <comeFrom>Matrix Vortex</comeFrom>
+      <connectTo>Underworld</connectTo>
+      <obstacle>
+        <description>There is an altar with an engraving: Sacrifice your blood to enter. You need something to sacrifice your blood.</description>
+        <resolution>You pierced yourself with the fork and the door opened instantly after your blood dropped on the altar.</resolution>
+        <requiredItem>Fork</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="13">
+      <name>Stairway</name>
+      <description>This is the stairway to heaven... it seems so... obviously... Just don't ask why that's here!</description>
+      <comeFrom>Underworld</comeFrom>
+      <connectTo>Heaven</connectTo>
+      <obstacle damage="1">
+        <description>A huge three-headed dog guards the stairway. You need something to distract it from you.</description>
+        <resolution>You threw the bait and ran along Unfortunately you slipped over a banana and hit the ground, but nothing else happened.</resolution>
+        <requiredItem>Bait</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="14">
+      <name>Cloud</name>
+      <description>This is a fluffy cloud which attracts you to lay on.</description>
+      <comeFrom>Heaven</comeFrom>
+      <connectTo>Sky</connectTo>
+      <obstacle>
+        <description>You need something to fly on the cloud.</description>
+        <resolution>You put the wing suit on and jumped on the cloud.</resolution>
+        <requiredItem>Wing Suit</requiredItem>
+      </obstacle>
+    </passage>
+    <passage id="15">
+      <name>Heavens Door</name>
+      <description>This door has an engraving: Bob Dylan.</description>
+      <comeFrom>Heaven</comeFrom>
+      <connectTo>Olympus</connectTo>
+      <obstacle type="riddle" damage="1">
+        <description>A guarding angel ask you for the password to enter. That might be the keyword to access.</description>
+        <resolution>You sang the entire song Knocking on Heavens Door and the angel danced aside.</resolution>
+        <requiredAnswer>KNOCK</requiredAnswer>
+      </obstacle>
+    </passage>
+  </passages>
+</world>

@@ -1,6 +1,7 @@
 package view;
 
 import java.util.List;
+import control.GameLauncher;
 import model.Character;
 import model.GameObject;
 import model.Obstacle;
@@ -30,7 +31,7 @@ public class Output {
   }
 
   public enum options {
-    NOT_YET, WHICH_LEVEL
+    NOT_YET, WHICH_LEVEL, PRESS_ENTER
   }
 
   private static final String[] ACTIONS =
@@ -62,7 +63,6 @@ public class Output {
           + "passing many obstacles you fought your way through the world \n"
           + "consider yourself a hero now\n");
     }
-    youDidItASCI();
   }
 
   public void badEnding(String ending) {
@@ -72,7 +72,6 @@ public class Output {
       printString(
           "You failed\n This is the end of the game \n" + "This place brought death to you");
     }
-    youDidItNotASCI();
   }
 
   /**
@@ -162,7 +161,7 @@ public class Output {
   public void lookAtGameObject(GameObject object) {
     printString(object.getDescription());
   }
-  
+
   /**
    * Look at the character itself.
    * 
@@ -171,7 +170,7 @@ public class Output {
   public void lookAtSelf(Character character) {
     printString("You look at yourself. You have " + character.getHitpoints() + " hitpoints left.");
   }
-  
+
   /**
    * Standard output for unsuccessful operations.
    */
@@ -196,7 +195,7 @@ public class Output {
         printString("Are you stupid? I said: \"DONT MIX THE BLOODY COMMANDS!\"");
         break;
       case YOU_DEAD:
-        printString("You are dieded :(");
+        printString("You are dead :(");
         break;
       case DECIDE:
         printString("You can't do both!");
@@ -274,7 +273,7 @@ public class Output {
         if (!isEmpty(obstacle.getReactionToCorrectItem())) {
           printString(obstacle.getReactionToCorrectItem());
         } else {
-          printString("That was correct!");
+          printString("That was the correct first item!");
         }
         break;
       case OBSTACLE_REACT_FALSE:
@@ -282,6 +281,9 @@ public class Output {
           printString(obstacle.getReactionToFalseItem());
         } else {
           noSuccess(errorType.DOES_NOT_WORK);
+        }
+        if(obstacle.getDamagepoints() > 0) {
+          printString("You take " + obstacle.getDamagepoints() + " points of damage.");
         }
         break;
       case OBSTACLE_WALK_AWAY:
@@ -300,7 +302,7 @@ public class Output {
   public void exitingTheGame(endingType type) {
     switch (type) {
       case YOU_SURE:
-        printString("Are you sure you want to exit the game?[YES/NO]");
+        printString("Are you sure you want to exit the game?");
         break;
       case NO:
         printString("Glad you're still here!");
@@ -321,6 +323,9 @@ public class Output {
         break;
       case WHICH_LEVEL:
         printString("Which level do you want to play?");
+        break;
+      case PRESS_ENTER:
+        printString("Press Enter to continue");
         break;
     }
   }
@@ -357,6 +362,15 @@ public class Output {
       System.out.println(message);
     }
   }
+  
+  /**
+   * Static printout for errors.
+   * 
+   * @param error
+   */
+  public static void printError(String error) {
+    System.err.println(error);
+  }
 
   /**
    * Standard output method for lists.
@@ -378,11 +392,22 @@ public class Output {
     printString(gameObjectList.toString());
   }
 
-  public void credits(){
+  public void credits() {
+    printString("Generic Banana Machine Version " + GameLauncher.VERSION);
     printString("Project Manager: Felix Jan Thoma\n");
     printString("Creative Writer: Simone Maag\n");
     printString("Level Designer: Tim Hendrik Lehmeier\n");
-    printString("Lead Developer: Niklas Grethler");
+    printString("Developer: Niklas Grethler");
+  }
+
+  public void introduction() {
+    printString("This is a text adventure game.\nYou are taking the role of a character.\n"
+        + "The character can move from place to place. To do so, you have to use passages, for example doors etc.\n"
+        + "The passages can be blocked by Obstacles. To resolve those, you have to use one or more item or answer a question correctly.\n"
+        + "You can find items in a place if you look around. It's always a good idea to take them with you.\n"
+        + "There can also be furniture in a place, which you might find helpful, if you go to it and look at it more closely.\n"
+        + "If you don't know what to do, it's always a good idea to enter 'actions' to get your options,to look around or to look at something more closely. You can also look at \"yourself\"\n"
+        + "Make wise decisions, or your character will die.\nGood luck!!\n");
   }
 
   private boolean isEmpty(String string) {

@@ -3,7 +3,8 @@
   <story>
     <name>Part of the crew...</name>
     <version>1.0</version>
-    <introduction>You wake up in a dirty and messed up prison cell. You can hear a snoozing nearby. You look out of the tiny window and realize it's night.</introduction>
+    <introduction>This is part 2 of the story.
+You wake up in a dirty and messed up prison cell. You can hear a snoozing nearby. You look out of the tiny window and realize it's night.</introduction>
   </story>
 
   <places>
@@ -202,22 +203,22 @@
     </passage>
     <passage id="5">
       <name>Sleeping Captain</name>
-      <description>The captain is sleeping snoozing. You can't risk moving over him without tying him up to get sure.</description>
+      <description>The captain is sleeping snoozing. You can't risk moving past him without tying him up to get sure.</description>
       <comeFrom>Captains Cabin</comeFrom>
       <connectTo>Top Deck</connectTo>
       <obstacle>
-        <description>You need something to tie the sleeping captain up before moving over him.</description>
+        <description>You need something to tie the sleeping captain up before moving past him.</description>
         <resolution>You tied him up with your rope and he didn't even notice. You might have overacted with your safety.</resolution>
         <requiredItem>Rope</requiredItem>
       </obstacle>
     </passage>
     <passage id="6">
-      <name>Inactive Portal</name>
+      <name>Mysterious Portal</name>
       <description>You read the engraved letters 'Usage by own risk, activation by magic'.</description>
       <comeFrom>Top Deck</comeFrom>
       <connectTo>Another Dimension</connectTo>
       <obstacle>
-        <description>You need something to activate the mysterious portal.</description>
+        <description>The portal is inactive. You need something to activate it.</description>
         <resolution>You used the magic stick while calling 'Stupor!' and the portal activates.</resolution>
         <requiredItem>Magic Stick</requiredItem>
       </obstacle>

@@ -12,7 +12,7 @@ import model.Place;
 import model.RiddleObstacle;
 
 /**
- * Created playable games. 
+ * Created playable games.
  * 
  * @author thomafe
  */
@@ -58,18 +58,18 @@ public class GameFactory {
    * Create a test world.
    */
   private static GameWorld testWorld() {
-   GameWorld testWorld = new GameWorld();
-   
-   testWorld.setIntroduction("This is the gobsmacking test Intro!");
-    
+    GameWorld testWorld = new GameWorld();
+
+    testWorld.setIntroduction("This is the gobsmacking test Intro!");
+
     Place startingPlace = new Place("Entrance", "Starting Place");
     Place room1 = new Place("Room 1", "Test Room 1");
     Place room2 = new Place("Room 2", "Test Room 2");
     Place room3 = new Place("Room 3", "Test Room 3");
     Place room4 = new Place("Room 4", "Test Room 4");
     Place room5 = new Place("Room 5", "Test Room 5");
-    Place endingPlace = new Place("Ship of Coastguard", "It all ends here...");
-    
+    Place endingPlace = new Place("Ending", "The end room");
+
     testWorld.addPlace(startingPlace);
     testWorld.addPlace(room1);
     testWorld.addPlace(room2);
@@ -78,7 +78,7 @@ public class GameFactory {
     testWorld.addPlace(room5);
     testWorld.addPlace(endingPlace);
     testWorld.setStartingPlace(startingPlace);
-    testWorld.addEndingPlace(endingPlace, "This is the end.");
+    testWorld.addGoodEnding(endingPlace, "This is the end.");
 
     Item item1 = new Item("Required Item", "Required Item");
     Item item2 = new Item("Additional Item", "Additional Item");
@@ -122,4 +122,5 @@ public class GameFactory {
 
     return testWorld;
   }
+
 }

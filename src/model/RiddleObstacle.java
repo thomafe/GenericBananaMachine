@@ -1,6 +1,6 @@
 package model;
 
-import control.GameLauncher;
+import view.Output;
 
 /**
  *  Solves the Obstacle if correct answer to riddle is given.
@@ -22,8 +22,8 @@ public class RiddleObstacle extends Obstacle {
     super(name, description, resolution);
     this.riddleAnswer = riddleAnswere;
     
-    if(riddleAnswere == null && GameLauncher.isDebugging()) {
-      System.err.println("---[new RiddleObstacle] WARNING! Riddle Answere may not be null!!!---");
+    if(riddleAnswere == null) {
+      Output.printError("---[new RiddleObstacle(" + description.substring(0, 10) + ")] WARNING! Riddle Answere may not be null!!!---");
     }
   }
 

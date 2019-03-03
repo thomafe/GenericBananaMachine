@@ -13,12 +13,14 @@ import view.Output.options;
 
 /**
  * Launches the GBM and displays the main menu. By passing the argument "-d" it is possible to
- * access a debug mode.
+ * access a debug level.
  * 
  * @author fthoma, Niklas
  *
  */
 public class GameLauncher {
+  
+  public static final String VERSION = "v1.2";
   
   private static boolean debugging = true;
 
@@ -43,7 +45,7 @@ public class GameLauncher {
     Input in = new Input(out);
 
     List<String> mainOptions =
-        new ArrayList<>(Arrays.asList("Start Game", "Options", "Credits", "Exit Game"));
+        new ArrayList<>(Arrays.asList("Start Game","Introduction", "Options", "Credits", "Exit Game"));
     String chosenOpt;
 
     do {
@@ -64,6 +66,9 @@ public class GameLauncher {
           break;
         case "Credits":
           out.credits();
+          break;
+        case "Introduction":
+          out.introduction();
           break;
         default:
           out.noSuccess(errorType.CANT_DO_THAT);

@@ -1,6 +1,6 @@
 package model;
 
-import control.GameLauncher;
+import view.Output;
 
 /**
  * Obstacles that require two items to be resolved, the second. Must be resolved so that they don't block
@@ -30,8 +30,8 @@ public class DoubleItemObstacle extends ItemObstacle {
     super(name, description, resolution, requiredItem);
     this.additionalItem = additionalItem;
     
-    if(additionalItem == null && GameLauncher.isDebugging()) {
-      System.err.println("---[new DoubleItemObstacle] WARNING! Additional item may not be null!!!---");
+    if(additionalItem == null) {
+      Output.printError("---[new DoubleItemObstacle(" + description.substring(0, 10) + ")] WARNING! Additional item may not be null!!!---");
     }
   }
 
