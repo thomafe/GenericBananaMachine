@@ -68,7 +68,7 @@ public class GameFactory {
     Place room3 = new Place("Room 3", "Test Room 3");
     Place room4 = new Place("Room 4", "Test Room 4");
     Place room5 = new Place("Room 5", "Test Room 5");
-    Place endingPlace = new Place("Ship of Coastguard", "It all ends here...");
+    Place endingPlace = new Place("Ending", "The end room");
 
     testWorld.addPlace(startingPlace);
     testWorld.addPlace(room1);
@@ -78,7 +78,7 @@ public class GameFactory {
     testWorld.addPlace(room5);
     testWorld.addPlace(endingPlace);
     testWorld.setStartingPlace(startingPlace);
-    testWorld.addEndingPlace(endingPlace, "This is the end.");
+    testWorld.setGoodEnding(endingPlace, "This is the end.");
 
     Item item1 = new Item("Required Item", "Required Item");
     Item item2 = new Item("Additional Item", "Additional Item");

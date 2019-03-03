@@ -74,7 +74,7 @@ public class GameControl {
 
     // Game Loop
     while (gameIsRunning) {
-
+      out.successfulInteraction(getCurrentPlace().getName(), successType.AT_PLACE);
       in.readInput();
       checkForBadEnding();
       checkForGoodEnding();
@@ -122,7 +122,6 @@ public class GameControl {
       character.move(destinationPassage);
       out.successfulInteraction(destinationPassage.getName(), successType.MOVE_THROUGH);
       characterMoved = true;
-      out.successfulInteraction(getCurrentPlace().getName(), successType.AT_PLACE);
     }
 
     return characterMoved;
@@ -322,10 +321,9 @@ public class GameControl {
 
   /**
    * Checks if a good ending was entered.
-   */
+   */   
   private void checkForGoodEnding() {
-
-    if (character.getCurrentPlace().getName().equals("Ship of Coastguard")) {
+    if (gameWorld.isGoodEnding(character.getCurrentPlace())) {
       out.goodEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
       endGame(true);
     }
@@ -337,8 +335,7 @@ public class GameControl {
    */
   private void checkForBadEnding() {
     // TODO don't say the name of the room and such? Are endings used??
-    if (character.getCurrentPlace().getName().equals("Bad Ending")
-        || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
+    if (gameWorld.isBadEnding(character.getCurrentPlace())) {
       out.badEnding(gameWorld.getEndingForPlace(getCurrentPlace()));
       endGame(true);
     }
