@@ -194,7 +194,7 @@ public class Output {
         printString("Are you stupid? I said: \"DONT MIX THE BLOODY COMMANDS!\"");
         break;
       case YOU_DEAD:
-        printString("You are dieded :(");
+        printString("You are dead :(");
         break;
       case DECIDE:
         printString("You can't do both!");

@@ -41,7 +41,7 @@ public class GameControl {
   public GameControl(GameWorld gameWorld) {
     this.gameWorld = gameWorld;
 
-    character = new Character(gameWorld.getStartingPlace());
+    character = new Character(gameWorld.getStartingPlace(), gameWorld.getStartingHitpoints());
   }
 
   /**
