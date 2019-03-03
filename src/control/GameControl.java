@@ -174,6 +174,8 @@ public class GameControl {
         out.obstacleOut(currentObstacle, successType.OBSTACLE_WALK_AWAY);
         out.noSuccess(errorType.GO_BACK);
         break;
+      } else if(answerString.equalsIgnoreCase("d") && GameLauncher.isDebugging()) {
+        return true;
       } else {
         tryToSolveObstacle(currentObstacle, answerString);
       }
@@ -334,6 +336,7 @@ public class GameControl {
    * 
    */
   private void checkForBadEnding() {
+    // TODO don't say the name of the room and such? Are endings used??
     if (character.getCurrentPlace().getName().equals("Bad Ending")
         || character.getCurrentPlace().getName().equals("Another Bad Ending")) {
       out.badEnding(gameWorld.getEndingForPlace(getCurrentPlace()));

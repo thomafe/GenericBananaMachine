@@ -27,7 +27,7 @@ public class XmlParser {
   private Place startingPlace = null;
   private GameWorld world = new GameWorld();
 
-  private boolean enableDebug = false;
+  // The debug flag is now globally set in GameLauncher
   private String storyName;
 
   /**
@@ -465,7 +465,7 @@ public class XmlParser {
    * @param post String
    */
   private void debug(String post) {
-    if (enableDebug) {
+    if (GameLauncher.isDebugging()) {
       System.out.println(post);
     }
   }

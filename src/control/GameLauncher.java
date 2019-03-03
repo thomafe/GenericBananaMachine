@@ -19,6 +19,8 @@ import view.Output.options;
  *
  */
 public class GameLauncher {
+  
+  private static boolean debugging = true;
 
   /**
    * There are no objects of this class.
@@ -29,7 +31,7 @@ public class GameLauncher {
    * Main Method.
    */
   public static void main(String[] args) {
-
+    
     for (String arg : args) {
       if (arg.equalsIgnoreCase("-d")) {
         startLevel("Debug");
@@ -123,5 +125,9 @@ public class GameLauncher {
       }
     }
     return allLevels;
+  }
+  
+  public static boolean isDebugging() {
+    return debugging;
   }
 }
