@@ -77,7 +77,7 @@
     </place>
     <place id="5">
       <name>Volcano Cave</name>
-      <description>there is a currently exploding vulcano in this place, as you enter, gravity starts to shift.\nYou start hovering over the ground. The lava that erupts out of the volcano is also affected by the loss of gravity. \nHot orange lava bubbles are flying around everywhere.</description>
+      <description>There is a currently exploding vulcano in this place, as you enter, gravity starts to shift.\nYou start hovering over the ground. The lava that erupts out of the volcano is also affected by the loss of gravity.\nHot orange lava bubbles are flying around everywhere.</description>
       <item>
         <name>Space Suit</name>
         <description>This is a suit which allows you to move through space.</description>
