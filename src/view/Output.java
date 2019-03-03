@@ -281,6 +281,9 @@ public class Output {
         } else {
           noSuccess(errorType.DOES_NOT_WORK);
         }
+        if(obstacle.getDamagepoints() > 0) {
+          printString("You take " + obstacle.getDamagepoints() + " points of damage.");
+        }
         break;
       case OBSTACLE_WALK_AWAY:
         printString(obstacle.getWalkAwayReaction());
