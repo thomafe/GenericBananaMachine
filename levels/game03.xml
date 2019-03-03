@@ -223,7 +223,7 @@ You wake up in a dirty and sleazy house. You hear a mysterious whispering around
       <description>This way of the river seems to be reached very difficultly. Will you be rewarded for your afford?</description>
       <comeFrom>River</comeFrom>
       <connectTo>Spring</connectTo>
-      <obstacle damage="2">
+      <obstacle damage="1">
         <description>You need something to tie yourself not to be carried away by the strong stream.</description>
         <resolution>You used the alga which works like a better rope.</resolution>
         <requiredItem>Alga</requiredItem>
@@ -234,7 +234,7 @@ You wake up in a dirty and sleazy house. You hear a mysterious whispering around
       <description>The shore is very rocky and borders to a forest.</description>
       <comeFrom>Spring</comeFrom>
       <connectTo>Woods</connectTo>
-      <obstacle damage="2">
+      <obstacle damage="1">
         <description>You realize that you haven't eaten anything for hours. You need something to eat now!</description>
         <resolution>You ate the fish you've found. Unfortunately it was old and you got poisoned slightly.</resolution>
         <requiredItem>Fish</requiredItem>
@@ -311,7 +311,7 @@ You wake up in a dirty and sleazy house. You hear a mysterious whispering around
       <description>The ramp of the spaceship might be the right entrance.</description>
       <comeFrom>Space</comeFrom>
       <connectTo>Starship</connectTo>
-      <obstacle damage="2">
+      <obstacle damage="1">
         <description>An alien guard asks you to identify yourself. You need something to show him.</description>
         <resolution>You showed him your towel and he lets you enter the ship. Unfortunately you slipped on a banana laying on the ground, hitting the ground, but nothing else happened.</resolution>
         <requiredItem>Towel</requiredItem>
@@ -366,7 +366,7 @@ You wake up in a dirty and sleazy house. You hear a mysterious whispering around
       <description>This door has an engraving: Bob Dylan.</description>
       <comeFrom>Heaven</comeFrom>
       <connectTo>Olympus</connectTo>
-      <obstacle type="riddle">
+      <obstacle type="riddle" damage="1">
         <description>A guarding angel ask you for the password to enter. That might be the keyword to access.</description>
         <resolution>You sang the entire song Knocking on Heavens Door and the angel danced aside.</resolution>
         <requiredAnswer>KNOCK</requiredAnswer>
