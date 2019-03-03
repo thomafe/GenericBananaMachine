@@ -395,7 +395,7 @@ public class Output {
     printString("Project Manager: Felix Jan Thoma\n");
     printString("Creative Writer: Simone Maag\n");
     printString("Level Designer: Tim Hendrik Lehmeier\n");
-    printString("Lead Developer: Niklas Grethler");
+    printString("Developer: Niklas Grethler");
   }
 
   public void introduction() {
