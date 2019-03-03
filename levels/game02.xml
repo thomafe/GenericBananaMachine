@@ -212,12 +212,12 @@
       </obstacle>
     </passage>
     <passage id="6">
-      <name>Inactive Portal</name>
+      <name>Mysterious Portal</name>
       <description>You read the engraved letters 'Usage by own risk, activation by magic'.</description>
       <comeFrom>Top Deck</comeFrom>
       <connectTo>Another Dimension</connectTo>
       <obstacle>
-        <description>You need something to activate the mysterious portal.</description>
+        <description>The portal is inactive. You need something to activate it.</description>
         <resolution>You used the magic stick while calling 'Stupor!' and the portal activates.</resolution>
         <requiredItem>Magic Stick</requiredItem>
       </obstacle>
