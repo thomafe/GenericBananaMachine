@@ -20,9 +20,9 @@ import view.Output.options;
  */
 public class GameLauncher {
   
-  public static final String VERSION = "v1.2";
+  public static final String VERSION = "v1.3";
   
-  private static boolean debugging = true;
+  private static boolean debugging = false;
 
   /**
    * There are no objects of this class.
@@ -45,7 +45,7 @@ public class GameLauncher {
     Input in = new Input(out);
 
     List<String> mainOptions =
-        new ArrayList<>(Arrays.asList("Start Game","Introduction", "Options", "Credits", "Exit Game"));
+        new ArrayList<>(Arrays.asList("Start Game","Introduction", "Credits", "Exit Game"));
     String chosenOpt;
 
     do {
@@ -57,9 +57,6 @@ public class GameLauncher {
       switch (chosenOpt) {
         case "Exit Game":
           System.exit(0);
-          break;
-        case "Options":
-          out.menuOptions(options.NOT_YET);
           break;
         case "Start Game":
           startLevel(chooseLevel());

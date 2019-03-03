@@ -393,11 +393,29 @@ public class Output {
   }
 
   public void credits() {
-    printString("Generic Banana Machine Version " + GameLauncher.VERSION);
-    printString("Project Manager: Felix Jan Thoma\n");
-    printString("Creative Writer: Simone Maag\n");
-    printString("Level Designer: Tim Hendrik Lehmeier\n");
-    printString("Developer: Niklas Grethler");
+    printString("Generic Banana Machine Version " + GameLauncher.VERSION + " (03.03.2019)\r\n" +
+        "\r\n" + 
+        "---Simone Maag---\r\n" + 
+        "    Developer - Model Backend\r\n" + 
+        "    Creative Writing\r\n" + 
+        "    Technical Docmentation\r\n" + 
+        "\r\n" + 
+        "---Niklas Grethler---\r\n" + 
+        "    Developer - Input/Output\r\n" + 
+        "    Research and Development\r\n" + 
+        "    Useability and User Experience\r\n" + 
+        "\r\n" + 
+        "---Tim Lehmeier---\r\n" + 
+        "    Developer - Level Parser\r\n" + 
+        "    Level Design\r\n" + 
+        "    Quality Management\r\n" + 
+        "\r\n" + 
+        "---Felix Thoma---\r\n" + 
+        "    Developer - Game Logic\r\n" + 
+        "    Infrastructure\r\n" + 
+        "    Project Management\r\n" + 
+        "\r\n" + 
+        "see: https://github.com/thomafe/GenericBananaMachine\r\n");
   }
 
   public void introduction() {
@@ -406,8 +424,10 @@ public class Output {
         + "The passages can be blocked by Obstacles. To resolve those, you have to use one or more item or answer a question correctly.\n"
         + "You can find items in a place if you look around. It's always a good idea to take them with you.\n"
         + "There can also be furniture in a place, which you might find helpful, if you go to it and look at it more closely.\n"
-        + "If you don't know what to do, it's always a good idea to enter 'actions' to get your options,to look around or to look at something more closely. You can also look at \"yourself\"\n"
-        + "Make wise decisions, or your character will die.\nGood luck!!\n");
+        + "If you don't know what to do, it's always a good idea to enter 'actions' to get your options,to look around or to look at something more closely.\n"
+        + "You can also look at \"yourself\".\n"
+        + "Make wise decisions, or your character will die.\n"
+        + "Good luck!!\n");
   }
 
   private boolean isEmpty(String string) {
