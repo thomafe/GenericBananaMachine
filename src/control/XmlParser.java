@@ -136,7 +136,7 @@ public class XmlParser {
               placeElement.getElementsByTagName("description").item(0).getTextContent()));
 
           // add EndingPlace to World, set endingText to Places' Description
-          if (placeElement.getAttribute("end").equals("bad")) {
+          if (placeElement.getAttribute("end").equals("bad") || placeElement.getAttribute("end").equals("good")) {
             world.addEndingPlace(places.get(placeCounter),
                 places.get(placeCounter).getDescription());
           }
