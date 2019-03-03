@@ -1,6 +1,5 @@
 package model;
 
-import control.GameLauncher;
 import view.Output;
 
 /**
@@ -23,7 +22,7 @@ public class RiddleObstacle extends Obstacle {
     super(name, description, resolution);
     this.riddleAnswer = riddleAnswere;
     
-    if(riddleAnswere == null && GameLauncher.isDebugging()) {
+    if(riddleAnswere == null) {
       Output.printError("---[new RiddleObstacle(" + name + ")] WARNING! Riddle Answere may not be null!!!---");
     }
   }

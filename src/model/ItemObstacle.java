@@ -1,6 +1,5 @@
 package model;
 
-import control.GameLauncher;
 import view.Output;
 
 /**
@@ -25,7 +24,7 @@ public class ItemObstacle extends Obstacle {
     super(name, description, resolution);
     this.requiredItem = requiredItem;
     
-    if(requiredItem == null && GameLauncher.isDebugging()) {
+    if(requiredItem == null) {
       Output.printError("---[new ItemObstacle(" + name + ")] WARNING! Required item may not be null!!!---");
     }
   }
