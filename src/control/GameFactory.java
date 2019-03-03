@@ -12,7 +12,7 @@ import model.Place;
 import model.RiddleObstacle;
 
 /**
- * Created playable games. 
+ * Created playable games.
  * 
  * @author thomafe
  */
@@ -58,10 +58,10 @@ public class GameFactory {
    * Create a test world.
    */
   private static GameWorld testWorld() {
-   GameWorld testWorld = new GameWorld();
-   
-   testWorld.setIntroduction("This is the gobsmacking test Intro!");
-    
+    GameWorld testWorld = new GameWorld();
+
+    testWorld.setIntroduction("This is the gobsmacking test Intro!");
+
     Place startingPlace = new Place("Entrance", "Starting Place");
     Place room1 = new Place("Room 1", "Test Room 1");
     Place room2 = new Place("Room 2", "Test Room 2");
@@ -69,7 +69,7 @@ public class GameFactory {
     Place room4 = new Place("Room 4", "Test Room 4");
     Place room5 = new Place("Room 5", "Test Room 5");
     Place endingPlace = new Place("Ship of Coastguard", "It all ends here...");
-    
+
     testWorld.addPlace(startingPlace);
     testWorld.addPlace(room1);
     testWorld.addPlace(room2);
@@ -122,4 +122,32 @@ public class GameFactory {
 
     return testWorld;
   }
+
+  /**
+   * TODO: Delete the comments below when not needed anymore
+   */
+  /*
+   * @Deprecated public static Place oldTestWorld() { // Game World Place entrance = new
+   * Place("Entrance", "This is your starting area."); Place secondRoom = new Place("Hall of Doom",
+   * "This is the final Boss Room...not. It just sounds cool."); Place thirdRoom = new
+   * Place("Lighthouse", "You can't see anything in here because the light is blinding.");
+   * 
+   * Passage pas1 = new Passage("Door of Doom", "This Door seems to be very heavy and doomed",
+   * entrance, secondRoom); new Passage("snake pit",
+   * "You are greeted by the lovely sound of zzzzzzzzz", secondRoom, thirdRoom);
+   * 
+   * Item lightsaber = new Item("Lightsaber", "This is a powerful jedi melee weapon."); Item item2 =
+   * new Item("Banana", "This is a powerful fruit which makes you feel like a monkey."); Item
+   * overcharger = new Item("Overcharger", "This thing just makes all gadgets go Uhweeeeee");
+   * 
+   * Obstacle obstacle = new Obstacle("Blastdoor", "A thick blast door that blocks the way",
+   * "You melt through the door with your lightsaber!", lightsaber, overcharger);
+   * 
+   * pas1.setObstacle(obstacle);
+   * 
+   * entrance.addObjectToPlace(lightsaber); entrance.addObjectToPlace(overcharger);
+   * secondRoom.addObjectToPlace(item2);
+   * 
+   * return entrance; }
+   */
 }

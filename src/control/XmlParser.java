@@ -140,7 +140,7 @@ public class XmlParser {
             world.addEndingPlace(places.get(placeCounter),
                 places.get(placeCounter).getDescription());
           }
-
+          
           // parse all existing Place Items
           NodeList itemList = placeElement.getElementsByTagName("item");
 
