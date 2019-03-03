@@ -63,7 +63,7 @@ public class Input {
     String userInput = readInSingleLine();
     userInput = userInput.trim();
 
-    //Packing the matcher inside an ArrayList.
+    // Packing the matcher inside an ArrayList.
     List<Matcher> matcher = new ArrayList<>();
     for (Pattern pattern : possiblePatterns) {
       matcher.add(pattern.matcher(userInput));
@@ -137,14 +137,14 @@ public class Input {
     out.beforeInput();
     return scan.nextLine();
   }
-  
+
   /**
    * Waits until the user presses ENTER.
    */
   public void waitForEnter() {
     scan.nextLine();
   }
-  
+
   private void matchTakeItem(Matcher match) {
     GameObject foundObject = control.findGameObject(match.group(1));
 
@@ -181,10 +181,10 @@ public class Input {
   private void matchLookAt(Matcher match) {
     GameObject foundObject = control.findGameObject(match.group(1));
 
-    if (foundObject == null) {
-      out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
-    } else if (match.group(1).equalsIgnoreCase("myself")) {
+    if (match.group(1).equalsIgnoreCase("yourself")) {
       out.lookAtSelf(control.getCharacter());
+    } else if (foundObject == null) {
+      out.noSuccess(match.group(1), errorTypeInput.THERE_IS_NONE);
     } else {
       out.lookAtGameObject(foundObject);
     }

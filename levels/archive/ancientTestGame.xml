@@ -26,15 +26,13 @@
 			</description>
 			<item>
 				<name>Banana</name>
-				<description>This is a powerful fruit which makes you feel like a
-					monkey.
+				<description>This is a powerful fruit which makes you feel like a monkey.
 				</description>
 			</item>
 		</place>
 		<place id="2">
 			<name>Lighthouse</name>
-			<description>You can't see anything in here because the light is
-				blinding.
+			<description>You can't see anything in here because the light is blinding.
 			</description>
 		</place>
 	</places>
