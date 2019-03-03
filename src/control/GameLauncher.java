@@ -20,6 +20,8 @@ import view.Output.options;
  */
 public class GameLauncher {
   
+  public static final String VERSION = "v1.2";
+  
   private static boolean debugging = true;
 
   /**

@@ -1,6 +1,7 @@
 package view;
 
 import java.util.List;
+import control.GameLauncher;
 import model.Character;
 import model.GameObject;
 import model.Obstacle;
@@ -392,6 +393,7 @@ public class Output {
   }
 
   public void credits() {
+    printString("Version " + GameLauncher.VERSION);
     printString("Project Manager: Felix Jan Thoma\n");
     printString("Creative Writer: Simone Maag\n");
     printString("Level Designer: Tim Hendrik Lehmeier\n");
