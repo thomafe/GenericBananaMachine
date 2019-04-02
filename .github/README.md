@@ -16,7 +16,7 @@ The `src/control/GameLauncher.java` class contains the main.
 ## Questions and Feedback
 
 If you have any questions, feedback or ideas feel free to open an Issue in this project. 
-You can write a message to the the owner of theis repository as well, if you wann get personal ;)
+You can write a message to the the owner of this repository as well, if you wann get personal ;)
 
 Looking forward to what you have to say.
 
@@ -29,4 +29,4 @@ If you want to contriubute or notice any inconsistencys, feel free to contact me
 
 For more detailed information please take a look at our little wiki.
 
-Thanks for reading and have fun gobsmacking adventure!
+Thanks for reading and have fun on your gobsmacking adventure!
