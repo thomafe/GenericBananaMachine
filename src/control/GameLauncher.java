@@ -19,9 +19,9 @@ import view.Output.options;
  *
  */
 public class GameLauncher {
-  
+
   public static final String VERSION = "v1.3";
-  
+
   private static boolean debugging = false;
 
   /**
@@ -33,7 +33,7 @@ public class GameLauncher {
    * Main Method.
    */
   public static void main(String[] args) {
-    
+
     for (String arg : args) {
       if (arg.equalsIgnoreCase("-d")) {
         startLevel("Debug");
@@ -45,7 +45,7 @@ public class GameLauncher {
     Input in = new Input(out);
 
     List<String> mainOptions =
-        new ArrayList<>(Arrays.asList("Start Game","Introduction", "Credits", "Exit Game"));
+        new ArrayList<>(Arrays.asList("Start Game", "Introduction", "Credits", "Exit Game"));
     String chosenOpt;
 
     do {
@@ -119,30 +119,25 @@ public class GameLauncher {
   private static Map<String, String> listAllLevels() {
     XmlParser parser = new XmlParser();
     Map<String, String> allLevels = new HashMap<>();
-    
+
     File levels;
     try {
       levels = new File(GameLauncher.class.getResource("../levels").toURI());
-      System.out.println(levels.getAbsolutePath());
+      
       for (File level : levels.listFiles()) {
-        System.out.println(level.getAbsolutePath());
         if (level.isFile()) {
           allLevels.put(parser.getStoryName(level.getAbsolutePath()), level.getName());
         }
         
       }
-    } catch (URISyntaxException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+    } catch (Exception e) {
+      System.out.println("Fatal: Could not localte levels");
+      System.exit(0);
     }
-    for (File level : levels.listFiles()) {
-      if (level.isFile()) {
-        allLevels.put(parser.getStoryName(level.getAbsolutePath()), level.getName());
-      }
-    }
+
     return allLevels;
   }
-  
+
   public static boolean isDebugging() {
     return debugging;
   }
